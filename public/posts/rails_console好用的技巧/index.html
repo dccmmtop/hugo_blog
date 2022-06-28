@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rails_console好用的技巧 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="rails_console好用的技巧" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails_console%E5%A5%BD%E7%94%A8%E7%9A%84%E6%8A%80%E5%B7%A7/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">rails_console好用的技巧</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/rails_console%E5%A5%BD%E7%94%A8%E7%9A%84%E6%8A%80%E5%B7%A7/" class="article-date">
+                <time datetime='2018-08-07T23:58:40.000&#43;00:00' itemprop="datePublished">2018-08-07</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>用 app 来调用 routes，比如 app.posts_path, app.topic_path(1)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>topics_path
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;/topics&#34;</span>
+irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>get(app<span style="color:#ff79c6">.</span>root_path)
+<span style="color:#ff79c6">......</span>
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">200</span>
+</code></pre></div><p>用 helper 来调用 Helper 方法，比如:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>link_to(<span style="color:#f1fa8c">&#34;Ruby China&#34;</span>, <span style="color:#f1fa8c">&#34;http://ruby-china.org&#34;</span>)
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;&lt;a href=</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">http://ruby-china.org</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">&gt;Ruby China&lt;/a&gt;&#34;</span>
+irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>truncate(<span style="color:#f1fa8c">&#34;Here is Ruby China.&#34;</span>, <span style="color:#f1fa8c">length</span>: <span style="color:#bd93f9">15</span>)
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;Here is Ruby...&#34;</span>
+</code></pre></div><p>使用 source_location 方法查看方法在那里定义的, 比如:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>instance_method(<span style="color:#f1fa8c">:destroy</span>)<span style="color:#ff79c6">.</span>source_location
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">30</span><span style="color:#ff79c6">]</span>
+irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>method(<span style="color:#f1fa8c">:destroy_all</span>)<span style="color:#ff79c6">.</span>source_location
+<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">239</span><span style="color:#ff79c6">]</span>
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents"></nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/ruby%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            ruby随机生成字符串
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/activerecord_store%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">ActiveRecord_Store用法示例&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+<script src="/js/fuse.min.js"></script>
+<script src="/js/fastsearch.js"></script>

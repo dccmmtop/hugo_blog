@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>同时连接内网和外网 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="同时连接内网和外网" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E5%92%8C%E5%A4%96%E7%BD%91/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">同时连接内网和外网</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E5%92%8C%E5%A4%96%E7%BD%91/" class="article-date">
+                <time datetime='2021-08-10T17:50:41.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>笔记本可以同时连接无线和有线，如果可以指定哪些ip使用无线，哪些ip地址可以使用有线，</p>
+<p>假设无线连接的是内网， 有线连接的是外网，可以设置静态路由，使访问不同的地址使用不同的网络</p>
+<h2 id="首先确定-本机-无线和有线-的网关">首先确定 本机 无线和有线 的网关：</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo ip route show
+</code></pre></div><p><img src="../../images/20200317214342764_584675177.png" alt=""></p>
+<p>如上图 wlp3s0 是我的无线设备，enp0s20f0u1 是有线设备， 可以把网线拔了来确定哪个是什么设备
+无线设备使用 192.168.1.1 作为网关
+有线设备使用 192.168.42.129 作为网关</p>
+<h2 id="设置路由">设置路由</h2>
+<p>假设 某公司的内网都是 10 开头的，</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ip route add 10.0.0.0/8 via 192.168.1.1 dev wlp3s0
+</code></pre></div><p>10.0.0.0/8 是DICP表示法，不懂可以使用 <a href="https://tool.chinaz.com/tools/subnetmask">站长工具</a> 计算</p>
+<p>此时在使用 <code>sudo ip route show</code> 查看路由表
+<img src="../../images/20200317215335165_1463504807.png" alt=""></p>
+<h3 id="永久生效">永久生效</h3>
+<p>上述方法只能临时生效，可以写成脚本开机自启<a href="arch%20%E6%B7%BB%E5%8A%A0rc.local%20%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF.md">arch 添加rc.local 实现开机自启</a></p>
+<p>本方法已在 arch 中验证 其他系统 大同小异，寻找 代替 ip route 的命令即可</p>
+<h1 id="win-下设置方法">win 下设置方法</h1>
+<ol>
+<li>
+<p>使用管理员打开 powershell</p>
+</li>
+<li>
+<p><code>ipconfig</code> 查看优先和无线的网关
+<img src="../../images/20201230142007265_24214.png" alt="">
+<img src="../../images/20201230142026482_18737.png" alt=""></p>
+</li>
+<li></li>
+</ol>
+<p><code>route -p add 40.0.0.0 mask 255.0.0.0 192.168.2.1</code> 添加 40 开头的ip 走内网</p>
+<p><code>route -p add 10.0.0.0 mask 255.0.0.0 192.168.2.1</code> 添加 10 开头的ip 走内网</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#首先确定-本机-无线和有线-的网关">首先确定 本机 无线和有线 的网关：</a></li>
+    <li><a href="#设置路由">设置路由</a>
+      <ul>
+        <li><a href="#永久生效">永久生效</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            arch添加rc.local 实现开机自启
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/git%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">git生成公钥&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

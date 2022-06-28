@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sqlx包的使用 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="sqlx包的使用" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/sqlx%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">sqlx包的使用</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/sqlx%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+                <time datetime='2021-11-16T22:07:23.000&#43;00:00' itemprop="datePublished">2021-11-16</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>sqlx是一个第三方库，它为database/sql包提供了一系列非常有用的扩展功能。</p>
+<p>因为sqlx和database/sql包使用的是相同的接口，所以sqlx能够很好地兼容使用database/sql包的程序， 除此之外，sqlx还提供了以下这些额外的功能：</p>
+<ul>
+<li>通过结构标签（struct tag）将数据库记录（即行）封装为结构、映射或者切片；</li>
+<li>为预处理语句提供具名参数支持。</li>
+</ul>
+<h2 id="表结构">表结构</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">create</span> <span style="color:#ff79c6">table</span> blog
+(
+    id         <span style="color:#8be9fd;font-style:italic">int</span> auto_increment
+        <span style="color:#ff79c6">primary</span> <span style="color:#ff79c6">key</span>,
+    title      <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
+    content    <span style="color:#8be9fd;font-style:italic">text</span>         <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
+    creator_id <span style="color:#8be9fd;font-style:italic">int</span>          <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>
+);
+</code></pre></div><h2 id="示例">示例</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> (
+    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+    _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
+    <span style="color:#f1fa8c">&#34;github.com/jmoiron/sqlx&#34;</span>
+)
+
+<span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
+    Id        <span style="color:#8be9fd">int</span>
+    Title     <span style="color:#8be9fd">string</span>
+    Content <span style="color:#8be9fd">string</span>
+    <span style="color:#6272a4">// 当属性与字段名不一致时，使用 struct_tag 进行映射
+</span><span style="color:#6272a4"></span>    Creator <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`db:&#34;creator_id&#34;`</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">var</span> db <span style="color:#ff79c6">*</span>sqlx.DB
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>(){
+    <span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+    db, err = sqlx.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>,<span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat?parseTime=true&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> (blog <span style="color:#ff79c6">*</span>Blog)<span style="color:#50fa7b">save</span>(){
+    result, err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">&#34;insert into blog(title, content, creator_id) values (?,?,?)&#34;</span>,blog.Title,blog.Content, blog.Creator)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+    <span style="color:#6272a4">// mysql 不支持返回插入后的自增Id,需要额外处理
+</span><span style="color:#6272a4"></span>    id, err <span style="color:#ff79c6">:=</span> result.<span style="color:#50fa7b">LastInsertId</span>()
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+    blog.Id =  <span style="color:#8be9fd;font-style:italic">int</span>(id)
+    <span style="color:#ff79c6">return</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">findById</span>(id <span style="color:#8be9fd">int</span>)(blog Blog){
+    blog = Blog{}
+    <span style="color:#6272a4">// StructScan 会自动赋值属性
+</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">QueryRowx</span>(<span style="color:#f1fa8c">&#34;select id, title, content, creator_id from blog where id = ?&#34;</span>, id).<span style="color:#50fa7b">StructScan</span>(<span style="color:#ff79c6">&amp;</span>blog)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+    <span style="color:#ff79c6">return</span>
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    blog <span style="color:#ff79c6">:=</span> Blog{
+        Title:     <span style="color:#f1fa8c">&#34;go语言学习&#34;</span>,
+        Content:   <span style="color:#f1fa8c">&#34;开启go编程之旅吧&#34;</span>,
+        Creator: <span style="color:#bd93f9">1</span>,
+    }
+    blog.<span style="color:#50fa7b">save</span>()
+    blog = <span style="color:#50fa7b">findById</span>(blog.Id)
+    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;blog: %v\n&#34;</span>, blog)
+}
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#表结构">表结构</a></li>
+    <li><a href="#示例">示例</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/gorm%E5%8C%85%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            gorm包使用
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/go%E4%B8%8Esql/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Go与SQL&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

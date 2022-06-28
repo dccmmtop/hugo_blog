@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>awk分组统计 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="awk分组统计" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/awk%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">awk分组统计</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/awk%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" class="article-date">
+                <time datetime='2022-05-10T15:51:00.000&#43;00:00' itemprop="datePublished">2022-05-10</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>Shell学习笔记：awk实现group by分组统计功能
+日常部分数据以 txt 的文件格式提供，为避免入库之后再进行统计的麻烦，故学习 shell 进行处理，减少工作量。</p>
+<p>1.样例数据</p>
+<h1 id="testtxt">test.txt</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">YD5Gxxx|6618151|6825449073|6476534190|36251|超级会员|0
+YD5Gxxx|8968336|1445546463|6476534190|36251|超级会员|0
+YD5Gxxx|2545939|6904742993|0858636804|36251|超级会员|80%以上
+YD5Gxxx|3200810|6896525523|6501574903|36251|普通|0
+YD5Gxxx|3378244|6926264463|6519442719|36251|超级会员|80%以上
+YD5Gxxx|8075700|6854827783|0858523344|36251|普通|80%以上
+YD5Gxxx|3368804|6934387193|0000487348|36251|超级会员|(0，50%]
+YD5Gxxx|2865288|6865082233|0859114957|36251|普通|(0，50%]
+YD5Gxxx|6655543|6930124273|6521876215|36251|超级会员|(0，50%]
+YD5Gxxx|2952781|6820973583|0858704189|36251|超级会员|0
+</code></pre></div><h3 id="每5行切分为一个文件">每5行切分为一个文件</h3>
+<p>通过 split -l 对文件进行切分。</p>
+<p><code>split -l 5 super_user.txt</code></p>
+<h3 id="分组统计">分组统计</h3>
+<p>实现分组，count[$6]++ 实现计数。</p>
+<p><code>awk -F '|' '{count[$6]++;} END {for(i in count) {print i count[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通3
+超级会员7
+</code></pre></div><p>根据第7列进行筛选之后，再按第6列进行分组统计。</p>
+<p><code>awk -F '|' '{if($7==&quot;0&quot;) {count[$6]++;}} END {for(i in count) {print i count[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通1
+超级会员3
+</code></pre></div><h3 id="分组求和">分组求和</h3>
+<p>对所有进行求和。</p>
+<p><code>awk -F '|' '{sum += $2} END {print sum}' test.txt</code></p>
+<p>分组一般使用x[$2]=x[$3]的方式来实现，其中x[$2]中的$2为要分的组，可以多个分组，x[$3]为要处理的值。</p>
+<h4 id="一次分组">一次分组</h4>
+<p><code>awk -F '|' '{x[$6] += $2} END {for(i in x){print i, x[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 14141798
+超级会员 34487798
+</code></pre></div><h4 id="二次分组">二次分组</h4>
+<p><code>awk -F '|' '{x[$6&quot;-&quot;$7] += $2} END {for(i in x){print i, x[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">超级会员-80%以上 5924183
+超级会员-0 18539268
+普通-(0，50%] 2865288
+超级会员-(0，50%] 10024347
+普通-0 3200810
+普通-80%以上 8075700
+格式化处理
+</code></pre></div><h3 id="分组求平均值">分组求平均值</h3>
+<p><code>awk -F '|' '{sum += $2} END {print &quot;Average = &quot;, sum/NR}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Average =  4.86296e+06
+</code></pre></div><p><code>awk -F '|' '{a[$6] += $2; ca[$6]++} END {for(i in a){print(i,a[i]/ca[i])}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 4.71393e+06
+超级会员 4.92683e+06
+</code></pre></div><h3 id="分组求最大最小">分组求最大最小</h3>
+<p><code>awk -F '|' 'BEGIN {max=0} {if($2&gt;max){max=$2}} END {print max}' test.txt</code></p>
+<h3 id="最大值">最大值</h3>
+<p><code>awk -F '|' '{if($2&gt;x[$6]){x[$6]=$2}} END {for(i in x) {print i, x[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 8075700
+超级会员 8968336
+</code></pre></div><h3 id="分组整理字符">分组整理字符</h3>
+<p><code>awk -F '|' '{x[$6]=x[$6]&quot;\n&quot;$2} END {for(i in x){print i &quot;:&quot; x[i]}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通:
+3200810
+8075700
+2865288
+超级会员:
+6618151
+8968336
+2545939
+3378244
+3368804
+6655543
+2952781
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#每5行切分为一个文件">每5行切分为一个文件</a></li>
+        <li><a href="#分组统计">分组统计</a></li>
+        <li><a href="#分组求和">分组求和</a></li>
+        <li><a href="#分组求平均值">分组求平均值</a></li>
+        <li><a href="#分组求最大最小">分组求最大最小</a></li>
+        <li><a href="#最大值">最大值</a></li>
+        <li><a href="#分组整理字符">分组整理字符</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/powershell%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            powershell配置
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/golnag%E6%8F%92%E4%BB%B6%E5%BC%8F%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E7%A7%8D%E6%A1%88%E4%BE%8B/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">golnag插件式开发的一种案例&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

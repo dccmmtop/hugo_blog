@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mongo创建文档 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Mongo创建文档" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Mongo创建文档</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3/" class="article-date">
+                <time datetime='2021-09-05T17:46:38.000&#43;00:00' itemprop="datePublished">2021-09-05</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="插入并保存文档">插入并保存文档</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.foo.insert<span style="color:#ff79c6">({</span><span style="color:#f1fa8c">&#34;bar&#34;</span>: <span style="color:#f1fa8c">&#34;baz&#34;</span><span style="color:#ff79c6">})</span>
+</code></pre></div><p>这个操作会给文档自动增加一个&quot;_id&quot;键（要是原来没有的话），然后将其保存到MongoDB中。</p>
+<h2 id="批量插入">批量插入</h2>
+<p>如果要向集合中插入多个文档，使用批量插入会快一些。使用批量插入，可以将一组文档传递给数据库。
+在shell中，可以使用batchInsert函数实现批量插入，它与insert函数非常像，只是它接受的是一个文档数组作为参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.foo.batchInsert<span style="color:#ff79c6">([{</span><span style="color:#f1fa8c">&#34;_id&#34;</span>: 1<span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span><span style="color:#f1fa8c">&#34;_id&#34;</span>: 2<span style="color:#ff79c6">}</span>, <span style="color:#ff79c6">{</span><span style="color:#f1fa8c">&#34;_id&#34;</span>: 3<span style="color:#ff79c6">}])</span>
+</code></pre></div><p>要是只导入原始数据（例如，从数据feed或者MySQL中导入），可以使用命令行工具，如mongoimport，而不是批量插入</p>
+<p>当前版本的MongoDB能接受的最大消息长度是48 MB，所以在一次批量插入中能插入的文档是有限制的。如果试图插入48 MB以上的数据，多数驱动程序会将这个批量插入请求拆分为多个48 MB的批量插入请求。具体可以查看所使用的驱动程序的相关文档。</p>
+<p>如果在执行批量插入的过程中有一个文档插入失败，那么在这个文档之前的所有文档都会成功插入到集合中，而这个文档以及之后的所有文档全部插入失败。</p>
+<p>在批量插入中遇到错误时，如果希望batchInsert忽略错误并且继续执行后续插入，可以使用continueOnError选项</p>
+<h2 id="插入校验">插入校验</h2>
+<ul>
+<li>检查文档的基本结构，如果没有&quot;_id&quot;字段，就自动增加一个。</li>
+<li>所有文档都必须小于16 MB（这个值是MongoDB设计者人为定的，未来有可能会增加）。作这样的限制主要是为了防止不良的模式设计，并且保证性能一致</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#插入并保存文档">插入并保存文档</a></li>
+    <li><a href="#批量插入">批量插入</a></li>
+    <li><a href="#插入校验">插入校验</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mongodb">mongoDB
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/elasticsearch%E8%AE%A4%E7%9F%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            ElasticSearch认知
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/mongo_shell%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Mongo_Shell基础操作&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MySQL 和 Redis 的数据一致性问题 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="MySQL 和 Redis 的数据一致性问题" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mysql%E5%92%8Credis%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">MySQL 和 Redis 的数据一致性问题</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/mysql%E5%92%8Credis%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" class="article-date">
+                <time datetime='2021-11-11T20:29:30.000&#43;00:00' itemprop="datePublished">2021-11-11</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="什么是数据的一致性">什么是数据的一致性</h2>
+<p>“数据一致”一般指的是：缓存中有数据，缓存的数据值 = 数据库中的值。</p>
+<p>但根据缓存中是有数据为依据，则”一致“可以包含两种情况：</p>
+<ol>
+<li>缓存中有数据，缓存的数据值 = 数据库中的值（需均为最新值，本文将“旧值的一致”归类为“不一致状态”）</li>
+<li>缓存中本没有数据，数据库中的值 = 最新值（有请求查询数据库时，会将数据写入缓存，则变为上面的“一致”状态）</li>
+</ol>
+<p>”数据不一致“：缓存的数据值 ≠ 数据库中的值；缓存或者数据库中存在旧值，导致其他线程读到旧数据</p>
+<h2 id="数据不一致情况及应对策略">数据不一致情况及应对策略</h2>
+<p>根据是否主动向缓存中写值，可以把缓存分成<strong>读写缓存</strong>和<strong>只读缓存</strong>。</p>
+<ul>
+<li>只读缓存：只在缓存进行数据查找，即使用 <strong>更新数据库+删除缓存</strong>策略；</li>
+<li>读写缓存：需要在缓存中对数据进行增删改查，即使用 <strong>更新数据库+更新缓存</strong>策略。</li>
+</ul>
+<h3 id="只读缓存更新数据库删除缓存">只读缓存（更新数据库+删除缓存）</h3>
+<ul>
+<li>新增数据时 ，写入数据库；访问数据时，缓存缺失，查数据库，更新缓存（始终是处于”数据一致“的状态，不会发生数据不一致性问题)</li>
+<li>更新（修改/删除）数据时 ，会有个时序问题：更新数据库与删除缓存的顺序（这个过程会发生数据不一致性问题）, 如下图</li>
+</ul>
+<p><img src="../../images/20211111203911324_16009.png" alt="">
+在更新数据的过程中，可能会有如下问题：</p>
+<ul>
+<li>
+<p>无并发请求下，其中一个操作失败的情况</p>
+</li>
+<li>
+<p>并发请求下，其他线程可能会读到旧值
+因此，要想达到数据一致性，需要保证两点：</p>
+</li>
+<li>
+<p>无并发请求下，保证 A 和 B 步骤都能成功执行</p>
+</li>
+<li>
+<p>并发请求下，在 A 和 B 步骤的间隔中，避免或消除其他线程的影响</p>
+</li>
+</ul>
+<p>接下来，我们针对有/无并发场景，进行分析并使用不同的策略。</p>
+<h4 id="a-无并发情况">A. 无并发情况</h4>
+<p>无并发请求下，在更新数据库和删除缓存值的过程中，因为操作被拆分成两步，那么就很有可能存在“步骤 1 成功，步骤 2 失败” 的情况发生（由于单线程中步骤 1 和步骤 2 是串行执行的，不太可能会发生 “步骤 2 成功，步骤 1 失败” 的情况）。</p>
+<p><strong>先删除缓存，再更新数据库,如图</strong></p>
+<p><img src="../../images/20211111204300636_1319.png" alt="">
+<strong>先更新数据库，再删除缓存</strong></p>
+<p><img src="../../images/20211111204351096_19068.png" alt=""></p>
+<p>两种方案执行情况对比:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">执行时序</th>
+<th style="text-align:left">潜在问题</th>
+<th style="text-align:left">结果</th>
+<th style="text-align:left">是否存在一致性问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">先删除缓存，在更新数据库</td>
+<td style="text-align:left">删除缓存成功，更新数据库失败</td>
+<td style="text-align:left">请求无法命中缓存，读取数据库旧值</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">先更新数据库,后删除缓存</td>
+<td style="text-align:left">更新数据库成功，删除缓存失败</td>
+<td style="text-align:left">请求命中缓存，读取到旧值</td>
+<td style="text-align:left">是</td>
+</tr>
+</tbody>
+</table>
+<p>解决策略：</p>
+<p>a.消息队列+异步重试</p>
+<p>无论使用哪一种执行时序，可以在执行步骤 1 时，将步骤 2 的请求写入消息队列，当步骤 2 失败时，就可以使用重试策略，对失败操作进行 “补偿”。
+如图:</p>
+<p><img src="../../images/20211111205658905_25697.png" alt=""></p>
+<p><strong>具体步骤如下：</strong></p>
+<ol>
+<li>把要删除缓存值或者是要更新数据库值操作生成消息，暂存到消息队列中（例如使用 Kafka 消息队列）；</li>
+<li>当删除缓存值或者是更新数据库值操作成功时，把这些消息从消息队列中去除（丢弃），以免重复操作；</li>
+<li>当删除缓存值或者是更新数据库值操作失败时，执行失败策略，重试服务从消息队列中重新读取（消费）这些消息，然后再次进行删除或更新；</li>
+<li>删除或者更新失败时，需要再次进行重试，重试超过的一定次数，向业务层发送报错信息</li>
+</ol>
+<p><strong>b.订阅 Binlog 变更日志</strong></p>
+<ul>
+<li>创建更新缓存服务，接收数据变更的 MQ 消息，然后消费消息，更新/删除 Redis 中的缓存数据；</li>
+<li>使用 Binlog 实时更新/删除 Redis 缓存。利用 Canal，即将负责更新缓存的服务伪装成一个 MySQL 的从节点，从 MySQL 接收 Binlog，解析 Binlog 之后，得到实时的数据变更信息，然后根据变更信息去更新/删除 Redis 缓存；</li>
+<li>MQ+Canal 策略，将 Canal Server 接收到的 Binlog 数据直接投递到 MQ 进行解耦，使用 MQ 异步消费 Binlog 日志，以此进行数据同步；</li>
+<li>不管用 MQ/Canal 或者 MQ+Canal 的策略来异步更新缓存，对整个更新服务的数据可靠性和实时性要求都比较高，如果产生数据丢失或者更新延时情况，会造成 MySQL 和 Redis 中的数据不一致。因此，使用这种策略时，需要考虑出现不同步问题时的降级或补偿方案。</li>
+</ul>
+<h4 id="b-高并发情况">B. 高并发情况</h4>
+<p>使用以上策略后，可以保证在单线程/无并发场景下的数据一致性。但是，在高并发场景下，由于数据库层面的读写并发，会引发的数据库与缓存数据不一致的问题（本质是后发生的读请求先返回了）</p>
+<p><strong>(1) 先删除缓存，再更新数据库</strong></p>
+<p>假设线程 A 删除缓存值后，由于网络延迟等原因导致未及更新数据库，而此时，线程 B 开始读取数据时会发现缓存缺失，进而去查询数据库。而当线程 B 从数据库读取完数据、更新了缓存后，线程 A 才开始更新数据库，此时，会导致缓存中的数据是旧值，而数据库中的是最新值，产生“数据不一致”。其本质就是，本应后发生的“B 线程-读请求” 先于 “A 线程-写请求” 执行并返回了。</p>
+<p>时序如下：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A</th>
+<th>线程B</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>删除数据X的缓存值</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>1. 读取缓存值X，缓存缺失，从数据库读取X值</td>
+<td>线程B读到旧值</td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>2. 将数据X值写入缓存</td>
+<td>导致其他线程读到旧值</td>
+</tr>
+<tr>
+<td>T4</td>
+<td>更新数据库中X的值</td>
+<td></td>
+<td>缓存时旧值，数据库是新值。数据不一致</td>
+</tr>
+</tbody>
+</table>
+<p><strong>解决方案</strong></p>
+<p>a.设置缓存过期时间 + 延时双删</p>
+<p>通过设置缓存过期时间，若发生上述淘汰缓存失败的情况，则在缓存过期后，读请求仍然可以从 DB 中读取最新数据并更新缓存，可减小数据不一致的影响范围。虽然在<strong>一定时间范围内数据有差异</strong>，但可以保证数据的<strong>最终一致性</strong>。</p>
+<p>此外，还可以通过延时双删进行保障：在线程 A 更新完数据库值以后，让它先 sleep 一小段时间，确保线程 B 能够先从数据库读取数据，再把缺失的数据写入缓存（此时有可能写入的是旧值），然后，线程 A 再进行删除，确保缓存中最终会将是最新的值。后续，其它线程读取数据时，发现缓存缺失，会从数据库中读取最新值</p>
+<p><strong>延时删除只是确保最终缓存中的值与数据库保持一致。不能防止中间的不一致</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">redis<span style="color:#ff79c6">.</span>delKey(X)
+db<span style="color:#ff79c6">.</span>update(X)
+Thread<span style="color:#ff79c6">.</span>sleep(N)
+redis<span style="color:#ff79c6">.</span>delKey(X)
+</code></pre></div><p>sleep 时间：在业务程序运行的时候，统计下线程读数据和写缓存的操作时间，以此为基础来进行估算(较难)</p>
+<p>注意：如果难以接受 sleep 这种写法，可以使用<strong>延时队列进行替代</strong>。</p>
+<p>先删除缓存值再更新数据库，有可能导致请求因缓存缺失而访问数据库，给数据库带来压力，也就是缓存穿透的问题。针对缓存穿透问题，可以用<strong>缓存空结果</strong>、<strong>布隆过滤器</strong>进行解决。</p>
+<p><strong>(2) 先更新数据库，再删除缓存</strong></p>
+<p>如果线程 A 更新了数据库中的值，但还没来得及删除缓存值，线程 B 就开始读取数据了，那么此时，线程 B 查询缓存时，发现缓存命中，就会直接从缓存中读取旧值。其本质也是，本应后发生的“B 线程-读请求” 先于 “A 线程-删除缓存” 执行并返回了。</p>
+<p>如下:</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A</th>
+<th>线程B</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>更新数据库中的数据X</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>读取数据X,命中缓存。读取旧值</td>
+<td>线程A尚未删除缓存。导致线程B读到旧值</td>
+</tr>
+<tr>
+<td>T3</td>
+<td>更新数据库中X的值</td>
+<td></td>
+<td>导致其他线程读到旧值</td>
+</tr>
+</tbody>
+</table>
+<p>或者，在”先更新数据库，再删除缓存”方案下，“读写分离 + 主从库延迟”也会导致不一致：</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A</th>
+<th>线程B</th>
+<th>MySQL集群</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td>更新主库X=2(原值 X=1)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>删除缓存</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>查询缓存，没有命中。查询从库，得到旧值 X=1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>将X=1写入缓存</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T5</td>
+<td></td>
+<td></td>
+<td>从库同步完成 X=2</td>
+<td>缓存中是旧值X=1,数据库(主+从)是新值 X=2。数据不一致</td>
+</tr>
+</tbody>
+</table>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li>a.延迟消息</li>
+</ul>
+<p>凭借经验发送「延迟消息」到队列中，延迟删除缓存，同时也要控制主从库延迟，尽可能降低不一致发生的概率</p>
+<ul>
+<li>b.订阅 binlog，异步删除</li>
+</ul>
+<p>通过数据库的 binlog 来异步淘汰 key，利用工具(canal)将 binlog 日志采集发送到 MQ 中，然后通过 ACK 机制确认处理删除缓存。</p>
+<ul>
+<li>c.删除消息写入数据库</li>
+</ul>
+<p>通过比对数据库中的数据，进行删除确认 先更新数据库再删除缓存，有可能导致请求因缓存缺失而访问数据库，给数据库带来压力，也就是缓存穿透的问题。针对缓存穿透问题，可以用缓存空结果、布隆过滤器进行解决。</p>
+<ul>
+<li>d.加锁</li>
+</ul>
+<p>更新数据时，加写锁；查询数据时，加读锁 保证两步操作的“原子性”，使得操作可以串行执行。“原子性”的本质是什么？不可分割只是外在表现，其本质是多个资源间有一致性的要求，操作的中间状态对外不可见。</p>
+<p><img src="../../images/20211111213759980_30901.png" alt=""></p>
+<h4 id="建议">建议：</h4>
+<p>优先使用“先更新数据库再删除缓存”的执行时序，原因主要有两个：</p>
+<ul>
+<li>先删除缓存值再更新数据库，有可能导致请求因缓存缺失而访问数据库，给数据库带来压力；</li>
+<li>业务应用中读取数据库和写缓存的时间有时不好估算，进而导致延迟双删中的 sleep 时间不好设置。</li>
+</ul>
+<h3 id="读写缓存更新数据库更新缓存">读写缓存（更新数据库+更新缓存）</h3>
+<p>读写缓存：<strong>增删改在缓存中进行，并采取相应的回写策略，同步数据到数据库中</strong></p>
+<ul>
+<li>
+<p>同步直写：使用事务，保证缓存和数据更新的原子性，并进行失败重试（如果 Redis 本身出现故障，会降低服务的性能和可用性）</p>
+</li>
+<li>
+<p>异步回写：写缓存时不同步写数据库，等到数据从缓存中淘汰时，再写回数据库（没写回数据库前，缓存发生故障，会造成数据丢失） 该策略在秒杀场中有见到过，业务层直接对缓存中的秒杀商品库存信息进行操作，一段时间后再回写数据库。</p>
+</li>
+</ul>
+<p>一致性：同步直写 &gt; 异步回写 因此，对于读写缓存，要保持数据强一致性的主要思路是：利用同步直写 同步直写也存在两个操作的时序问题：更新数据库和更新缓存</p>
+<h4 id="无并发情况">无并发情况</h4>
+<table>
+<thead>
+<tr>
+<th>执行顺序</th>
+<th>潜在问题</th>
+<th>结果</th>
+<th>是否存在一致性问题</th>
+<th>解决策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先更新缓存，后更新数据库</td>
+<td>缓存更新成功，数据库更新失败</td>
+<td>数据库为旧值</td>
+<td>是</td>
+<td>消息队列+重试机制</td>
+</tr>
+<tr>
+<td>先更新数据库，后更新缓存</td>
+<td>数据库更新成功，缓存更新失败</td>
+<td>请求命中缓存，读取缓存中的旧值</td>
+<td>是</td>
+<td>消息队列+重试机制；订阅Binlog日志</td>
+</tr>
+</tbody>
+</table>
+<h4 id="高并发情况">高并发情况</h4>
+<p>有一下四种情况</p>
+<table>
+<thead>
+<tr>
+<th>时序</th>
+<th>并发类型</th>
+<th>潜在问题</th>
+<th>影响程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先更新数据库，后更新缓存</td>
+<td>写+读 并发</td>
+<td>1. 线程A先更新数据库<br />2. 线程B读取数据，命中缓存，读取到旧值<br />3. 线程A更新缓存成功，后续请求会命中缓存，得到新值</td>
+<td>线程A未更新完缓存之前，这期间的读请求会读到短暂旧值。对业务影响短暂</td>
+</tr>
+<tr>
+<td>先更新缓存，后更新数据库</td>
+<td>写+读 并发</td>
+<td>1. 线程A先更新缓存成功<br />2. 线程B读取数据，此时线程B命中缓存，读取到最新值<br />3.线程A更新数据库成功</td>
+<td>虽然线程A还未更新完数据库，数据库与缓存会存在短暂的不一致。但在这之前进来的读请求都能命中缓存，获取到最新值，对业务影响较小</td>
+</tr>
+<tr>
+<td>先更新数据库，后更新缓存</td>
+<td>写+写 并发</td>
+<td>1.线程A,B同时更新同一条数据<br />2. 更新缓数据库的顺序是先A后B<br />3. 更新缓存的顺序是先B后A</td>
+<td>会导致数据库与缓存不一致。对业务影响较大</td>
+</tr>
+<tr>
+<td>先更新缓存，后更新数据库</td>
+<td>写+写 并发</td>
+<td>1.线程A,B同时更新同一条数据<br />2. 更新缓存的顺序是先A后B<br />3. 更新数据库的顺序是先B后A</td>
+<td>会导致数据库与缓存不一致。对业务影响较大</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>针对场景 1 和 2 的解决方案是：保存请求对缓存的读取记录，延时消息比较，发现不一致后，做业务补偿</p>
+</li>
+<li>
+<p>针对场景 3 和 4 的解决方案是：
+对于写请求，需要配合分布式锁使用。写请求进来时，针对同一个资源的修改操作，先加分布式锁，保证同一时间只有一个线程去更新数据库和缓存；没有拿到锁的线程把操作放入到队列中，延时处理。用这种方式保证多个线程操作同一资源的顺序性，以此保证一致性。
+如图：
+<img src="../../images/20211111220803184_30368.png" alt=""></p>
+</li>
+</ul>
+<p><strong>其中，分布式锁的实现可以使用以下策略：</strong></p>
+<ul>
+<li>乐观锁
+使用版本号、updatetime；缓存中，只允许高版本覆盖低版本</li>
+<li>Watach实现Redis乐观锁
+watch监控rediskey的状态值，创建redis事务，key+1，执行事务，key被修改过则回滚</li>
+<li>setnx
+获取锁：set/setnx；释放锁：del命令/Lua脚本</li>
+<li>Redisson分布式锁
+利用Redis的Hash结构作为储存单元，将业务指定的名称作为key，将随机UUID和线程ID作为field，最后将加锁的次数作为value来储存；线程安全</li>
+</ul>
+<h2 id="强一致性策略">强一致性策略</h2>
+<p>上述策略只能保证数据的最终一致性。要想做到强一致，最常见的方案是 2PC、3PC、Paxos、Raft 这类一致性协议，但它们的性能往往比较差，而且这些方案也比较复杂，还要考虑各种容错问题。如果业务层要求必须读取数据的强一致性，可以采取以下策略：</p>
+<p>（1）暂存并发读请求</p>
+<p>在更新数据库时，先在 Redis 缓存客户端暂存并发读请求，等数据库更新完、缓存值删除后，再读取数据，从而保证数据一致性。</p>
+<p>（2）串行化</p>
+<p>读写请求入队列，工作线程从队列中取任务来依次执行</p>
+<p>修改服务 Service 连接池，id 取模选取服务连接，能够保证同一个数据的读写都落在同一个后端服务上
+修改数据库 DB 连接池，id 取模选取 DB 连接，能够保证同一个数据的读写在数据库层面是串行的
+（3）使用 Redis 分布式读写锁</p>
+<p>将淘汰缓存与更新库表放入同一把写锁中，与其它读请求互斥，防止其间产生旧数据。读写互斥、写写互斥、读读共享，可满足读多写少的场景数据一致，也保证了并发性。并根据逻辑平均运行时间、响应超时时间来确定过期时间。</p>
+<h2 id="总结">总结</h2>
+<p><img src="../../images/20211111222206819_26974.png" alt=""></p>
+<h3 id="针对读写缓存时同步直写更新数据库更新缓存">针对读写缓存时：同步直写，更新数据库+更新缓存：</h3>
+<p><img src="../../images/20211111222248075_13333.png" alt=""></p>
+<h3 id="针对只读缓存时更新数据库删除缓存">针对只读缓存时：更新数据库+删除缓存：</h3>
+<p><img src="../../images/20211111222315560_29131.png" alt=""></p>
+<h3 id="较为通用的一致性策略拟定">较为通用的一致性策略拟定：</h3>
+<p>在并发场景下，使用 “更新数据库 + 更新缓存” 需要用分布式锁保证缓存和数据一致性，且可能存在”缓存资源浪费“和”机器性能浪费“的情况；一般推荐使用 “更新数据库 + 删除缓存” 的方案。如果根据需要，热点数据较多，可以使用 “更新数据库 + 更新缓存” 策略。</p>
+<p>在 “更新数据库 + 删除缓存” 的方案中，推荐使用推荐用 “先更新数据库，再删除缓存” 策略，因为先删除缓存可能会导致大量请求落到数据库，而且延迟双删的时间很难评估。在 “先更新数据库，再删除缓存” 策略中，可以使用“消息队列+重试机制” 的方案保证缓存的删除。并通过 “订阅 binlog” 进行缓存比对，加上一层保障。</p>
+<p>此外，需要通过初始化缓存预热、多数据源触发、延迟消息比对等策略进行辅助和补偿。【多种数据更新触发源：定时任务扫描，业务系统 MQ、binlog 变更 MQ，相互之间作为互补来保证数据不会漏更新】</p>
+<h2 id="数据一致性中需要注意的其他问题有哪些">数据一致性中需要注意的其他问题有哪些？</h2>
+<ul>
+<li>k-v 大小的合理设置
+Redis key 大小设计：由于网络的一次传输 MTU 最大为 1500 字节，所以为了保证高效的性能，建议单个 k-v 大小不超过 1KB，一次网络传输就能完成，避免多次网络交互；k-v 是越小性能越好Redis 热 key：（1） 当业务遇到单个读热 key，通过增加副本来提高读能力或是用 hashtag 把 key 存多份在多个分片中；（2）当业务遇到单个写热 key，需业务拆分这个 key 的功能，属于设计不合理- 当业务遇到热分片，即多个热 key 在同一个分片上导致单分片 cpu 高，可通过 hashtag 方式打散——[引自腾讯云技术分享]</li>
+<li>避免其他问题导致缓存服务器崩溃，进而简直导致数据一致性策略失效
+缓存穿透、缓存击穿、缓存雪崩、机器故障等问题：
+<img src="../../images/20211111222551006_1110.png" alt=""></li>
+</ul>
+<h2 id="方案选定的思路">方案选定的思路</h2>
+<p>确定缓存类型（读写/只读）
+确定一致性级别
+确定同步/异步方式
+选定缓存流程
+补充细节</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/GU3cbUkI84IMwttDz16P3w">https://mp.weixin.qq.com/s/GU3cbUkI84IMwttDz16P3w</a></li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是数据的一致性">什么是数据的一致性</a></li>
+    <li><a href="#数据不一致情况及应对策略">数据不一致情况及应对策略</a>
+      <ul>
+        <li><a href="#只读缓存更新数据库删除缓存">只读缓存（更新数据库+删除缓存）</a></li>
+        <li><a href="#读写缓存更新数据库更新缓存">读写缓存（更新数据库+更新缓存）</a></li>
+      </ul>
+    </li>
+    <li><a href="#强一致性策略">强一致性策略</a></li>
+    <li><a href="#总结">总结</a>
+      <ul>
+        <li><a href="#针对读写缓存时同步直写更新数据库更新缓存">针对读写缓存时：同步直写，更新数据库+更新缓存：</a></li>
+        <li><a href="#针对只读缓存时更新数据库删除缓存">针对只读缓存时：更新数据库+删除缓存：</a></li>
+        <li><a href="#较为通用的一致性策略拟定">较为通用的一致性策略拟定：</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据一致性中需要注意的其他问题有哪些">数据一致性中需要注意的其他问题有哪些？</a></li>
+    <li><a href="#方案选定的思路">方案选定的思路</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E6%9E%B6%E6%9E%84">架构
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/sql%E4%BC%98%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            SQL优化
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/ruby%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">ruby分布式锁&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

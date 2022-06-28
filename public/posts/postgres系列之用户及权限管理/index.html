@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>postgres系列之用户及权限管理 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="postgres系列之用户及权限管理" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/postgres%E7%B3%BB%E5%88%97%E4%B9%8B%E7%94%A8%E6%88%B7%E5%8F%8A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">postgres系列之用户及权限管理</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/postgres%E7%B3%BB%E5%88%97%E4%B9%8B%E7%94%A8%E6%88%B7%E5%8F%8A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" class="article-date">
+                <time datetime='2018-11-25T22:58:15.000&#43;00:00' itemprop="datePublished">2018-11-25</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>在初始化数据库系统时，有一个预定义的超级用户，这用户的名称与初始化该数据库的操作系统用户名相同，默认是 postgres，在这个超级用户连接数据库，然后创建出更多的用户。</p>
+<h3 id="创建用户和角色">创建用户和角色</h3>
+<p>创建用户与角色的语法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">ROLE</span> name [ [ <span style="color:#ff79c6">WITH</span>] <span style="color:#ff79c6">option</span> [ ... ] ]
+<span style="color:#ff79c6">//</span> 或
+
+<span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">ROLE</span> name [ [ <span style="color:#ff79c6">WITH</span>] <span style="color:#ff79c6">option</span> [ ... ] ]
+</code></pre></div><p>在 postgres 中，用户与角色是没有区别的，除了 &ldquo;CREATE USER&rdquo; 默认创建出来的用户具有登录（LOGIN）权限，而 &ldquo;CREATE ROLE&quot;创建出来的用户默认没有登录权限之外，没有任何不同。</p>
+<p>上面的 option 可以是以下内容：</p>
+<ul>
+<li>SUPERUSER | NOSUPERUSER: 表示创建出来的用户是否是超级用户，只能是超级用户才能创建超级用户。</li>
+<li>CREATEDB | NOCREATEDB: 指定创建出来的用户是否具有执行 &ldquo;CREATE DATABASE&quot;的权限</li>
+<li>CREATEROLE | NOCREATEROLE: 指定创建出来的用户是否具有创建其他角色的权限</li>
+<li>CREATEUSER | NOCREATEUSER: 指定创建出来的用户是否具有创建其他用户的权限</li>
+<li>INHERIT | NOINHERIT: 如果创建的用户拥有某一个或者某几个角色，这是若是指定 INHERIT，则表示用户自动拥有相应角色的权限，否则这个用户没有该角色的权限。</li>
+<li>LOGIN|NOLOGIN：指定创建出来的用户是否有“LOGIN 的权限，可以临时地禁止一个用户的“LOGIN”权限，这时这个用户就不能连接到数据库了。</li>
+<li>CONNECTION LIMIT connlimit：指定该用户可以使用的并发连接数量。默认值是-1， 表示没有限制</li>
+<li>[ENCRYPTED | UNENCRYPTED] PASSWORD &lsquo;password&rsquo;：用于控制存储在系统表里面的口令是否加密。</li>
+<li>VALID UNTIL &lsquo;timestamp&rsquo;：密码失效时间，如果不指定这个子句，那么口令将永远有效。</li>
+<li>IN ROLE rolename[，&hellip;]：指定用户成为哪些角色的成员，请注意没有任何选项可以把新角色添加为管理员，必须使用独立的 GRANT 命令来做这件事情。</li>
+<li>ROLE rolename[，&hellip;]：rolename 将成为这个新建的角色的成员。</li>
+<li>ADMIN rolename[,．．．]：rolename 将有这个新建角色的 WITH ADMIN OPTION 权限。</li>
+</ul>
+<h3 id="权限的管理">权限的管理</h3>
+<p>在数据库中，每个数据库的逻辑结构对象（包括数据库）都有一个所有者， 也就是说任何数据库对象都是属于某个用户的，所有者默认就拥有所有权限。所以不需要把 对象的权限再赋给所有者。这也很好理解，自己创建的数据库对象，自己当然有全部的权限 了。当然，所有者出于安全考虑也可以选择废弃一些自己的权限。在 PostsgreSQL 数据库中， 删除一个对象及任意修改它的权力都不能赋予别人，它是所有者固有的，不能被赋予或撤销。 所有者也隐含地拥有把操作该对象的权限赋给别人的权利。</p>
+<p>一个用户的权限分为两类，一类是在创建用户时就指定的权限，这些权限如下：</p>
+<ul>
+<li>超级用户的权限</li>
+<li>创建数据库的权限</li>
+<li>是否允许 LOGIN 的权限</li>
+</ul>
+<p>这些权限是创建用户时指定的，后面可使用 ALTER ROLE 命令来修改。
+还有一类权限，是由命令 GRANT 和 REVOKE 来管理的，这些权限如下：</p>
+<ul>
+<li>在数据库中创建模式(SCHEMA)</li>
+<li>允许在指定的数据库中创建临时表</li>
+<li>连接某个数据库</li>
+<li>在模式中创建数据库对象，如创建表、视图、函数等 在一些表中做 SELECT、UPDATE、INSERT、DELETE 等操作</li>
+<li>在一张表的具体列上进行 SELECT、UPDATE、INSERT 操作</li>
+<li>对序列进行查询（执行序列的 currval 函数）、使用（执行序列的 currval 函数和 nextval 函数）、更新等操作</li>
+<li>在声明表上创建触发器</li>
+<li>可以把表、索引等建到指定的表空间</li>
+</ul>
+<p>在使用时，需要分清楚上述两类权限，如果要给用户赋予创建数据库的权限，则需要使用“ALTER ROLE”命令，而要给用户赋予创建模式的权限时，需要使用“GRANT”命令。</p>
+<p>“ALTER ROLE”命令的格式如下：
+ALTER ROLE name [ [ WITH ] option] 命令中的&quot;option&rsquo;与“CREATEROLE”中的含义相同，这里就不再重复叙述了。</p>
+<h3 id="总结">总结</h3>
+<p>PostgreSQL 中的权限是按以下几个层次进行管理的：</p>
+<ul>
+<li>首先管理赋在用户特殊属性上的权限，如超级用户的权限、创建数据库的权限、创建 用户的权限、Login 的权限，等等。</li>
+<li>然后是在数据库中创建模式的权限。</li>
+<li>接着是在模式中创建数据库对象的权限，如创建表、创建索引，等等。</li>
+<li>之后是查询表、往表中插人数据、更新表、删除表中数据的权限。</li>
+<li>最后是操作表中某些字段的权限。</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#创建用户和角色">创建用户和角色</a></li>
+        <li><a href="#权限的管理">权限的管理</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/database">database
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/rails%E5%8F%91%E9%80%81qq%E9%82%AE%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            rails发送qq邮件的配置
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/ruby_heredoc%E7%9A%84%E7%94%A8%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">ruby_heredoc的用法&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

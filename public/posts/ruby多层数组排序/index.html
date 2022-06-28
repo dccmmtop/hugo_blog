@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ruby多层数组排序 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="ruby多层数组排序" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ruby%E5%A4%9A%E5%B1%82%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">ruby多层数组排序</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/ruby%E5%A4%9A%E5%B1%82%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F/" class="article-date">
+                <time datetime='2021-08-12T23:10:45.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>例子如下：</p>
+<p>用sort_by</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">order_weight_sort_by</span>(string)
+  string<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#34; &#34;</span>)<span style="color:#ff79c6">.</span>sort_by <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>a<span style="color:#ff79c6">|</span>
+      sum_a <span style="color:#ff79c6">=</span> a<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#34;&#34;</span>)<span style="color:#ff79c6">.</span>inject(<span style="color:#bd93f9">0</span>) { <span style="color:#ff79c6">|</span>mem, var<span style="color:#ff79c6">|</span> mem <span style="color:#ff79c6">+=</span> var<span style="color:#ff79c6">.</span>to_i }
+      first_number <span style="color:#ff79c6">=</span> a<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">].</span>to_i
+      <span style="color:#ff79c6">[</span>a<span style="color:#ff79c6">.</span>size, sum_a, first_number<span style="color:#ff79c6">]</span>
+  <span style="color:#ff79c6">end</span><span style="color:#ff79c6">.</span>join(<span style="color:#f1fa8c">&#34; &#34;</span>)
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>string = &ldquo;56 65 74 100 99 68 86 980 90&rdquo; 
+p order_weight_sort_by(string )
+结果是&quot;90 56 65 74 68 86 99 100 980&quot;</p>
+<p>上面的方法是先将字符串变成一个由数字字符串组成的数组。然后先按照字符串的长度进行排序，再按照字符串各数字之和进行排序，最后按照字符串的第一个数字大小进行排序。</p>
+<p>关键代码[a.size, sum_a, first_number]</p>
+<p>当最后是一个条件数组时，sort_by会按照该条件数组的顺序依次排序。</p>
+<p>用sort</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">order_weight_sort</span>(string)
+  string<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#34; &#34;</span>)<span style="color:#ff79c6">.</span>sort <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>a, b<span style="color:#ff79c6">|</span>
+      sum_a <span style="color:#ff79c6">=</span> a<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#34;&#34;</span>)<span style="color:#ff79c6">.</span>inject(<span style="color:#bd93f9">0</span>) { <span style="color:#ff79c6">|</span>mem, var<span style="color:#ff79c6">|</span> mem <span style="color:#ff79c6">+=</span> var<span style="color:#ff79c6">.</span>to_i }
+      first_number_a <span style="color:#ff79c6">=</span> a<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">].</span>to_i
+      size_a <span style="color:#ff79c6">=</span> a<span style="color:#ff79c6">.</span>size
+
+      sum_b <span style="color:#ff79c6">=</span> b<span style="color:#ff79c6">.</span>split(<span style="color:#f1fa8c">&#34;&#34;</span>)<span style="color:#ff79c6">.</span>inject(<span style="color:#bd93f9">0</span>) { <span style="color:#ff79c6">|</span>mem, var<span style="color:#ff79c6">|</span> mem <span style="color:#ff79c6">+=</span> var<span style="color:#ff79c6">.</span>to_i }
+      first_number_b <span style="color:#ff79c6">=</span> b<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">].</span>to_i
+      size_b <span style="color:#ff79c6">=</span> b<span style="color:#ff79c6">.</span>size
+
+      <span style="color:#ff79c6">[</span>size_a, sum_a, first_number_a<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">&lt;=&gt;</span> <span style="color:#ff79c6">[</span>size_b, sum_b, first_number_b<span style="color:#ff79c6">]</span>
+  <span style="color:#ff79c6">end</span><span style="color:#ff79c6">.</span>join(<span style="color:#f1fa8c">&#34; &#34;</span>)
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>string = &ldquo;56 65 74 100 99 68 86 980 90&rdquo; 
+p order_weight_sort(string )
+结果与上面是一样的。</p>
+<p>关键代码[size_a, sum_a, first_number_a] &lt;=&gt; [size_b, sum_b, first_number_b]</p>
+<p>这样看起来sort_by比sort简洁很多。
+确实sort_by只需要一个参数，而sort需要两个参数。但他们实现多层排序是一样的，最后都是用一个条件数组来表示。</p>
+<p>区别</p>
+<p>但sort要比sort_by灵活。因为最后的排序条件还可以这样写：</p>
+<p><code>[size_b, sum_a, first_number_b] &lt;=&gt; [size_a, sum_b, first_number_a]</code>
+这样就相当于先按长度倒序排列，然后再按照字符串各数字之和进行排序，最后再按照首个字符的大小倒序排列。</p>
+<p>作者：kamionayuki
+链接：http://www.jianshu.com/p/319d0174f246
+來源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents"></nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E6%B8%85%E9%99%A4sidekiq%E4%BB%BB%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            清除sidekiq任务
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">rails验证码&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

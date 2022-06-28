@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rails-自关联 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="rails-自关联" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails-%E8%87%AA%E5%85%B3%E8%81%94/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">rails-自关联</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/rails-%E8%87%AA%E5%85%B3%E8%81%94/" class="article-date">
+                <time datetime='2018-08-15T12:22:06.000&#43;00:00' itemprop="datePublished">2018-08-15</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>关于 Rails 的模型自关联有一个非常有意思的题目，大概是这样的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">lisa <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span><span style="color:#f1fa8c">:&#39;Lisa&#39;</span>)
+tom <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span><span style="color:#f1fa8c">:&#39;Tom&#39;</span>,<span style="color:#f1fa8c">parent_id</span>:lisa<span style="color:#ff79c6">.</span>id)
+andy <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span><span style="color:#f1fa8c">:&#39;Andy&#39;</span>,<span style="color:#f1fa8c">parent_id</span>:lisa<span style="color:#ff79c6">.</span>id)
+tom<span style="color:#ff79c6">.</span>parent<span style="color:#ff79c6">.</span>name <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;Lisa&#39;</span>
+lisa<span style="color:#ff79c6">.</span>children<span style="color:#ff79c6">.</span>map(<span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">:name</span>) <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;Tom&#39;</span>,<span style="color:#f1fa8c">&#39;Andy&#39;</span><span style="color:#ff79c6">]</span>
+
+thomas <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span>: <span style="color:#f1fa8c">&#39;Thomas&#39;</span>,<span style="color:#f1fa8c">parent_id</span>: tom<span style="color:#ff79c6">.</span>id)
+peter <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span><span style="color:#f1fa8c">:&#39;Peter&#39;</span>,<span style="color:#f1fa8c">parent_id</span>:tom<span style="color:#ff79c6">.</span>id)
+gavin <span style="color:#ff79c6">=</span> Person<span style="color:#ff79c6">.</span>create(<span style="color:#8be9fd;font-style:italic">name</span><span style="color:#f1fa8c">:&#39;Gavin&#39;</span>, <span style="color:#f1fa8c">parent_id</span>: andy<span style="color:#ff79c6">.</span>id)
+lisa<span style="color:#ff79c6">.</span>grandchildren<span style="color:#ff79c6">.</span>map(<span style="color:#ff79c6">&amp;</span><span style="color:#f1fa8c">:name</span>) <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;Thomas&#39;</span>,<span style="color:#f1fa8c">&#39;Peter&#39;</span>,<span style="color:#f1fa8c">&#39;Gavin&#39;</span><span style="color:#ff79c6">]</span>
+</code></pre></div><p>问如何定义 Person 模型来满足以上需求？</p>
+<p>题目考察了对模型自关联的理解，通过审题我们可以得出以下几点：</p>
+<ul>
+<li>Person 对象的 Parent 同样是 Person 对象（自关联）</li>
+<li>Person 对象对 Parent 是多对一关系</li>
+<li>Person 对象对 Children 是一对多关系</li>
+<li>Person 对象通过 Children 与 GrandChildren 建立了一对多关系
+在不考虑 GrandChildren 时，不难得出模型定义如下：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Person</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
+  belongs_to <span style="color:#f1fa8c">:parent</span>, <span style="color:#f1fa8c">class_name</span>: <span style="color:#f1fa8c">&#39;Person&#39;</span>, <span style="color:#f1fa8c">foreign_key</span>: <span style="color:#f1fa8c">&#39;parent_id&#39;</span>
+  has_many <span style="color:#f1fa8c">:children</span>, <span style="color:#f1fa8c">class_name</span>: <span style="color:#f1fa8c">&#39;Person&#39;</span>, <span style="color:#f1fa8c">foreign_key</span>: <span style="color:#f1fa8c">&#39;parent_id&#39;</span>
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>其中 Person 包含两个自关联关系：</p>
+<p>第一个就是非常常见的从子到父的关系，在 Person 对象创建时指定 parent_id 来指向父对象；
+第二个关系用来指定 Person 对象对应的所有子对象
+接下来更近一步，我们要找到 Person 对象子对象的子对象，换句话说：孙子对象。
+如我们上面的分析，Person 对象通过 Children 与 GrandChildren 建立了一对多关系，其代码表现为：</p>
+<p><code>has_many :grandchildren, :through =&gt; :children, :source =&gt; :children</code>
+:source 选项的官方文档说明如下：</p>
+<blockquote>
+<p>The :source option specifies the source association name for a has_many :through association. You only need to use this option if the name of the source association cannot be automatically inferred from the association name. —— rails guide</p>
+</blockquote>
+<p>在这里我们通过:source 选项告诉 Rails 在 children 对象上查找 children 关联关系。
+于是该题目完整的模型定义如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Person</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
+belongs_to <span style="color:#f1fa8c">:parent</span>, <span style="color:#f1fa8c">class_name</span>: <span style="color:#f1fa8c">&#39;Person&#39;</span>, <span style="color:#f1fa8c">foreign_key</span>: <span style="color:#f1fa8c">&#39;parent_id&#39;</span>
+has_many <span style="color:#f1fa8c">:children</span>, <span style="color:#f1fa8c">class_name</span>: <span style="color:#f1fa8c">&#39;Person&#39;</span>, <span style="color:#f1fa8c">foreign_key</span>: <span style="color:#f1fa8c">&#39;parent_id&#39;</span>
+has_many <span style="color:#f1fa8c">:grandchildren</span>, <span style="color:#f1fa8c">:through</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:children</span>, <span style="color:#f1fa8c">:source</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:children</span>
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p><img src="http://ogbkru1bq.bkt.clouddn.com/%E9%80%89%E5%8C%BA_124.png" alt=""></p>
+<blockquote>
+<p>作者：李小西 033</p>
+</blockquote>
+<blockquote>
+<p>链接：https://www.jianshu.com/p/076b5fec4dad</p>
+</blockquote>
+<blockquote>
+<p>來源：简书</p>
+</blockquote>
+<blockquote>
+<p>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+</blockquote>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents"></nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/ssh%E9%9A%A7%E9%81%93/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            SSH隧道
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/ruby%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">ruby随机生成字符串&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ruby_heredoc的用法 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="ruby_heredoc的用法" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ruby_heredoc%E7%9A%84%E7%94%A8%E6%B3%95/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">ruby_heredoc的用法</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/ruby_heredoc%E7%9A%84%E7%94%A8%E6%B3%95/" class="article-date">
+                <time datetime='2018-11-22T09:23:36.000&#43;00:00' itemprop="datePublished">2018-11-22</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="整理自ruby-chinahttpsruby-chinaorgtopics25983">整理自<a href="https://ruby-china.org/topics/25983">ruby-china</a></h2>
+<h3 id="基础的用法">基础的用法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">print_heredoc</span>
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&lt;&lt;EOF
+</span><span style="color:#f1fa8c"></span>this is the first line
+this is the second line
+EOF
+<span style="color:#ff79c6">end</span>
+
+print_heredoc
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">this is the first line
+this is the second line
+</code></pre></div><p>如果你觉得代码太难看（这根本不符合 Ruby 的风格），你可能会这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">print_heredoc</span>
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&lt;&lt;EOF
+</span><span style="color:#f1fa8c"></span>    this is the first line
+    this is the second line
+  EOF
+<span style="color:#ff79c6">end</span>
+
+print_heredoc
+</code></pre></div><p>你会发现高亮显示已经不对了，它还会报这样的一个错误：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">test.rb:6: can&#39;t find string &#34;EOF&#34; anywhere before EOF
+test.rb:2: syntax error, unexpected end-of-input, expecting tSTRING_CONTENT or tSTRING_DBEG or tSTRING_DVAR or tSTRING_END
+</code></pre></div><h3 id="可以缩进的用法">可以缩进的用法</h3>
+<p>希望代码写的漂亮一点的话，就得多做点工作，在第一个 EOF 前加上一个减号就 OK 了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">print_heredoc</span>
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&lt;&lt;-EOF
+</span><span style="color:#f1fa8c"></span>    this is the first line
+    this is the second line
+  EOF
+<span style="color:#ff79c6">end</span>
+
+print_heredoc
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">this is the first line
+this is the second line
+</code></pre></div><h3 id="ruby-23-引入一个新的语法">ruby 2.3 引入一个新的语法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">hello</span>
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#ff79c6">&lt;&lt;~</span>HEREDOC
+    I know I know
+    You will like it<span style="color:#ff79c6">.</span>
+  HEREDOC
+<span style="color:#ff79c6">end</span>
+
+hello
+</code></pre></div><p>完美输出:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">I know I know
+You will like it.
+</code></pre></div><h3 id="heredoc-的本质">heredoc 的本质</h3>
+<p>有下面一个方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">a_method</span>(string, integer)
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;the string is </span><span style="color:#f1fa8c">#{</span>string<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c"> and the integer is </span><span style="color:#f1fa8c">#{</span>integer<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>一般这么用这个方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a_method <span style="color:#f1fa8c">&#34;the string&#34;</span>, <span style="color:#bd93f9">1</span>
+</code></pre></div><p>如果想用 heredoc 呢？这里就需要说下那个<code>&lt;&lt;-EOF</code>到底是什么东西？其实<code>&lt;&lt;-EOF</code>只是个占位符，写上它以后，它就代表将要输入的字符串，这个字符串的判断是从<code>&lt;&lt;-EOF</code>的下一行开始计算，一直碰到只有<code>EOF</code>的一行（这一行只有一个<code>EOF</code>），这个字符串就这样计算出来的。如果上面的这个方法要用 heredoc 的话，就可以这样写：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a_method <span style="color:#f1fa8c">&lt;&lt;-EOF, 1
+</span><span style="color:#f1fa8c"></span>  this is the first line
+  this is the second line
+  EOF
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">the string is this is the first line
+this is the second line
+ <span style="color:#ff79c6">and</span> the integer is <span style="color:#bd93f9">1</span>
+</code></pre></div><p>可以看到，这个<code>&lt;&lt;-EOF</code>就好像一个实参一样，我们也可以把他完全当个实参来对待，它是个字符串，那么就可以调用字符串的方法，像这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a_method <span style="color:#f1fa8c">&lt;&lt;-EOF.gsub(&#34;\n&#34;, &#34;&#34;), 1
+</span><span style="color:#f1fa8c"></span>  this is the first line
+  this is the second line
+  EOF
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">the string is this is the first linethis is the second line and the integer is 1
+</code></pre></div><p>我们把它掰直了，哈哈。换个写法更能体现 heredoc 的本质：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a_method(<span style="color:#f1fa8c">&lt;&lt;-EOF.gsub(&#34;\n&#34;, &#34;&#34;), 1)
+</span><span style="color:#f1fa8c"></span>  this is the first line
+  this is the second line
+  EOF
+</code></pre></div><h3 id="heredoc-的小技巧">heredoc 的小技巧</h3>
+<p>那个<code>&lt;&lt;-EOF</code>为什么叫<code>EOF</code>，为什么不叫<code>ABC</code>，你可以试试，叫<code>ABC</code>也可以，但是末尾那个也要写 ABC，要保持配对。在有些编辑器（Atom，RubyMine）中甚至会根据占位符将 heredoc 中的内容高亮显示，比如可以写<code>&lt;&lt;-RUBY</code>, <code>&lt;&lt;-HTML</code>等等。</p>
+<p>假如前面的那个方法要传入两个字符串该怎么写呢？很简单：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">a_method <span style="color:#f1fa8c">&lt;&lt;-STR1, &lt;&lt;-STR2
+</span><span style="color:#f1fa8c"></span>  this is <span style="color:#ff79c6">for</span> STR1
+  STR1
+  this is <span style="color:#ff79c6">for</span> STR2
+  STR2
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">the string is this is for STR1
+ and the integer is   this is for STR2
+</code></pre></div><p>有一点点晕，解释一下。<code>&lt;&lt;-STR1</code>在前面，它就会一直找到只包含<code>STR1</code>的那一行，并把其中的内容替换掉<code>&lt;&lt;-STR1</code>，而<code>&lt;&lt;-STR2</code>在后面，它不会包括<code>&lt;&lt;-STR1</code>和<code>STR1</code>中的部分， 会一直找到只包含<code>STR2</code>的那一行，然后替换<code>&lt;&lt;-STR2</code>。只需记住是只包含占位符的一行，像<code>this is for STR1</code>中虽然包含<code>STR1</code>，但是这一行还有其他字符，heredoc 就不会在这一行结束，而是接着往下找。同时需要知道，虽然是占位符，但是可以调用字符串的方法，在 Rails5 中最近的一个 pull request 中 DHH 就用了很多 heredoc。不过我找了半天没找到，等以后找到再把链接付在这里。</p>
+<p>前面的输出结果中，大家一定发现一个问题，就是字符串的换行和行首的缩进，有时候你想要他们，有时候可不是，我们可以用<code>gsub</code>来替换。在 Rails 中已经有一个好用的方法了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>times <span style="color:#ff79c6">do</span>
+  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&lt;&lt;-STR.strip_heredoc
+</span><span style="color:#f1fa8c"></span>    this is the first line
+      this is the second line
+  STR
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">this is the first line
+  this is the second line
+this is the first line
+  this is the second line
+</code></pre></div><p>注意行首是没有空格的，和输入的格式保持了一致，很方便，实现也是很简单的，参考 github 吧，<a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/string/strip.rb#L22">strip.rb</a></p>
+<h3 id="那些太奇怪的写法">那些太奇怪的写法</h3>
+<p>其实还有很多奇怪的写法，比如下面这个：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#ff79c6">&lt;&lt;-</span><span style="color:#f1fa8c">&#34;I am the content&#34;</span>
+line <span style="color:#bd93f9">1</span>
+line <span style="color:#bd93f9">2</span>
+line <span style="color:#bd93f9">3</span>
+I am the content
+</code></pre></div><p>这是合法语法，但估计不会有人这么写，甚至有的编辑器都不能正常高亮显示它.</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#整理自ruby-chinahttpsruby-chinaorgtopics25983">整理自<a href="https://ruby-china.org/topics/25983">ruby-china</a></a>
+      <ul>
+        <li><a href="#基础的用法">基础的用法</a></li>
+        <li><a href="#可以缩进的用法">可以缩进的用法</a></li>
+        <li><a href="#ruby-23-引入一个新的语法">ruby 2.3 引入一个新的语法</a></li>
+        <li><a href="#heredoc-的本质">heredoc 的本质</a></li>
+        <li><a href="#heredoc-的小技巧">heredoc 的小技巧</a></li>
+        <li><a href="#那些太奇怪的写法">那些太奇怪的写法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/postgres%E7%B3%BB%E5%88%97%E4%B9%8B%E7%94%A8%E6%88%B7%E5%8F%8A%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            postgres系列之用户及权限管理
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/rails_%E5%A4%9A%E6%80%81%E5%85%B3%E8%81%94/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">rails_多态关联&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="超的博客" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/" />
+    
+<link href="https://dccmmtop.gitee.io/index.xml" rel="alternate" type="application/rss+xml" title="超的博客" />
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+<body>
+<div id="container">
+
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/">rails验证码</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/" class="article-date">
+                        <time datetime='2021-08-12T23:08:20.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    rails验证码 1.安装包 gem &#39;rucaptcha&#39; gem &#39;dalli&#39; 2.配置路由 （最新版本的不用配置路由） mount RuCaptcha::Engine =&gt; &#34;/rucaptcha&#34; 3.controller部分 def create @user = User.new(user_params) if verify_rucaptcha?(@user)&amp;&amp;@user.save ...... 4.view部分 &lt;div class=&#34;form-group &#34;&gt; &lt;%= rucaptcha_input_tag( class:&#39;form-control rucaptcha-text&#39;) %&gt; &lt;a href=&#34;#&#34; class=&#39;rucaptcha-image-box&#39;&gt;&lt;%= rucaptcha_image_tag(class:&#39;rucaptcha-image&#39;, alt: &#39;Captcha&#39;) %&gt;&lt;/a&gt; &lt;/div&gt; 5.实现点击图片刷新验证码 #
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%8F%82%E6%95%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E4%B8%8E%E7%AD%9B%E9%80%89%E8%B7%AF%E7%94%B1/">参数路由与路由冲突解决与筛选路由</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%8F%82%E6%95%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E4%B8%8E%E7%AD%9B%E9%80%89%E8%B7%AF%E7%94%B1/" class="article-date">
+                        <time datetime='2021-08-12T22:53:06.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    有时候我需要写一个页面能向show edit 那样可以接受参数的路由,弄了好久不知道怎样解决,今天恍然大悟 我们执行 rake routes 就会看到如下 wechat_nodes GET /wechat/nodes(.:format) wechat/nodes#index POST /wechat/nodes(.:format) wechat/nodes#create new_wechat_node GET /wechat/nodes/new(.:format) wechat/nodes#new edit_wechat_node GET /wechat/nodes/:id/edit(.:format) wechat/nodes#edit wechat_node GET /wechat/nodes/:id(.:format) wechat/nodes#show PATCH /wechat/nodes/:id(.:format) wechat/nodes#update PUT /wechat/nodes/:id(.:format) wechat/nodes#update DELETE /wechat/nodes/:id(.:format) wechat/nodes#destroy 这是使用resource
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%8F%82%E6%95%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E4%B8%8E%E7%AD%9B%E9%80%89%E8%B7%AF%E7%94%B1/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%B7%BB%E5%8A%A0%E5%88%97/">存储过程添加列</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%B7%BB%E5%8A%A0%E5%88%97/" class="article-date">
+                        <time datetime='2021-08-10T18:19:22.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    存储过程添加列 create procedure add_col( in model_name text, in col_name text, in col_info text, out result text ) begin if not exists( select * from information_schema.COLUMNS where TABLE_NAME = model_name and COLUMN_NAME = col_name) then set @ddl=CONCAT(&#39;alter table &#39;, model_name, &#39; add column &#39;, col_name, col_info); prepare stmt from @ddl; execute stmt; set result = &#39;success&#39;; else set result = &#39;exists&#39;; end if; end; set @result = &#39;&#39;; call add_col(&#39;zyb_employee&#39;,&#39;senior_1 &#39;,&#39;tinyint(1) NULL DEFAULT 0 COMMENT &#34;是否是高级用户，0 不是 1 是&#
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%B7%BB%E5%8A%A0%E5%88%97/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">MySQL隔离级别</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" class="article-date">
+                        <time datetime='2021-08-10T18:17:48.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    MySQL隔离级别 隔离级别是针对数据库 ACID 中的I(隔离性)来说的 原子性 一致性 隔离性 持久性 隔离性 通常来说，一个事务所做的修改，在最终提交以前，对其他事务是不可见的，为什么是 “通常来说”，因为这种特性和隔离
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/mysql%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">mysql慢日志</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" class="article-date">
+                        <time datetime='2021-08-10T18:16:04.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    开启慢日志 在 MySQL 中，慢查询日志默认为OFF状态，通过如下命令进行查看： show variables like &quot;slow_query_log&quot;; 通过如下命令进行设置为 ON 状态： set global slow_query_log = &quot;ON&quot;; 日志存储位置 其中slow_query_log_file属性，表示慢查询日志存储位置，
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/ubuntu%E5%AE%89%E8%A3%85mysql%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/">Ubuntu 安装 mysql 及配置远程访问</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/ubuntu%E5%AE%89%E8%A3%85mysql%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/" class="article-date">
+                        <time datetime='2021-08-10T18:12:14.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    安装 sudo apt-get install mysql-server mysql-client 配置远程可连接 你想myuser使用mypassword（密码）从任何主机连接到mysql服务器的话。 mysql&gt;GRANT ALL PRIVILEGES ON *.* TO &#39;用户名&#39;@&#39;%&#39;IDENTIFIED BY &
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/ubuntu%E5%AE%89%E8%A3%85mysql%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%88%86%E6%9E%90nginx%E6%97%A5%E5%BF%97/">分析nginx日志</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%88%86%E6%9E%90nginx%E6%97%A5%E5%BF%97/" class="article-date">
+                        <time datetime='2021-08-10T18:10:24.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    GoAccess的多种展示方式 goaccess有多种数据可视化的方式,分别为: 命令行输出格式化数据 利用access.log生成静态的可视化数据 生成实时可视化数据 注意，如果是编译安装且选择了 –enabl
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%88%86%E6%9E%90nginx%E6%97%A5%E5%BF%97/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/nginx">nginx
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/">arch添加rc.local 实现开机自启</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" class="article-date">
+                        <time datetime='2021-08-10T17:55:56.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    现在有需求，想要开机就运行一些东西，方法有两个，一个是桌面级的启动，一个是系统级的启动 桌面级别，就是进入桌面后，自动打开一些软件 系统级别就是再没有进入桌面就运行一些东西。 先谈桌面级的，比如 gnome，
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E5%92%8C%E5%A4%96%E7%BD%91/">同时连接内网和外网</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E5%92%8C%E5%A4%96%E7%BD%91/" class="article-date">
+                        <time datetime='2021-08-10T17:50:41.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    笔记本可以同时连接无线和有线，如果可以指定哪些ip使用无线，哪些ip地址可以使用有线， 假设无线连接的是内网， 有线连接的是外网，可以设置静态路由，使访问不同的地址使用不同的网络 首先确定 本机 无线和有线 的网
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E5%92%8C%E5%A4%96%E7%BD%91/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/git%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/">git生成公钥</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/git%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/" class="article-date">
+                        <time datetime='2021-08-10T17:50:06.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Git配置多个SSH-Key 当有多个git账号时，比如： a. 一个gitee，用于公司内部的工作开发； b. 一个github，用于自己进行一些开发活动； 解决方法 生成一个公司用的SSH-Key $ ssh-keygen -t rsa -C &#39;xxxxx@company.com&#39; -f ~/.ssh/gitee_id_rsa 生
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/git%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/git">git
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%88%B6%E4%BD%9Cdocset%E6%96%87%E6%A1%A3/">制作docSet文档</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%88%B6%E4%BD%9Cdocset%E6%96%87%E6%A1%A3/" class="article-date">
+                        <time datetime='2021-08-10T17:33:16.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    docSet 文档可用于 zeal dash 软件中。 zeal 在win 下 和 Linux 均有可用版本 dash 则只在 Mac 可用 制作 dcocSet 文档主要分 3 步 镜像文档网站 做镜像网站就是把整个网站爬下来，并且把 css 和 js 图片等静态资源文件转换成本地的路径， 主要使用工具是 wget 以 vue 中
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%88%B6%E4%BD%9Cdocset%E6%96%87%E6%A1%A3/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/">忽略改动</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/" class="article-date">
+                        <time datetime='2021-08-10T17:10:57.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    git 库中已经有文件被跟踪，如何忽略本地改动后的跟踪 放入到.gitinore 并没有什么用，还是会显示改动，是否要提交，看着很烦 忽略本地文件，且不会对线上库里的文件造成影响，执行此命令: git update-index --assume-unchanged filename 如果想撤销忽
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/git">git
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E4%BD%BF%E7%94%A8tmux/">Linux tmux 安装及配置</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E4%BD%BF%E7%94%A8tmux/" class="article-date">
+                        <time datetime='2021-08-10T11:21:12.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    为什么要使用tmux? 对我个人而言，tmux 对我最大的吸引力就是 多窗口，以及会话的保持与恢复，我可以很方便的切换窗口，以及快速恢复工作环境 安装 我使用的是源码安装， 下载源码 下载链接 解压 进入到解压目录，执
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E4%BD%BF%E7%94%A8tmux/"></a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/">修改时区</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/" class="article-date">
+                        <time datetime='2021-08-10T11:18:51.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Linux修改时区的正确方法 CentOS和Ubuntu的时区文件是/etc/localtime，但是在CentOS7以后localtime以及变成了一个链接文件 [root@centos7 ~]# ll /etc/localtime lrwxrwxrwx 1 root root 33 Oct 12 11:01 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Shanghai 如果采用直
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/"></a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/ssh%E6%85%A2/">ssh慢</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/ssh%E6%85%A2/" class="article-date">
+                        <time datetime='2021-08-10T10:48:44.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    在目标机器中修改/etc/ssh/sshd_conf文件 将UseDNS 的缺省值由yes修改为no，并重启ssh
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/ssh%E6%85%A2/"></a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+
+        
+
+<nav id="page-nav">
+    
+    <a href="../../page/4/" rel="prev" class="extend prev">&laquo; </a>
+    
+    
+    
+    <a href="../../">1</a>
+    
+    
+    
+    <a href="../../page/2/">2</a>
+    
+    
+    
+    <a href="../../page/3/">3</a>
+    
+    
+    
+    <a href="../../page/4/">4</a>
+    
+    
+    
+    <span class="page-number current">5</span>
+    
+    
+    
+    <a href="../../page/6/">6</a>
+    
+    
+    
+    <a href="../../page/7/">7</a>
+    
+    
+    
+    <a href="../../page/8/">8</a>
+    
+    
+
+    
+    <a href="../../page/6/" rel="next" class="extend next"> &raquo;</a>
+    
+</nav>
+
+
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

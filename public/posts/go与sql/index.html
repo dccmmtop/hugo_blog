@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go与SQL // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Go与SQL" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E4%B8%8Esql/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Go与SQL</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/go%E4%B8%8Esql/" class="article-date">
+                <time datetime='2021-11-13T22:21:13.000&#43;00:00' itemprop="datePublished">2021-11-13</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="连接数据库">连接数据库</h2>
+<p>sq1.DB结构是一个数据库句柄（handle），它代表的是一个包含了零个或任意多个数据库连接的连接池（pool），这个连接池由sql包管理。程序可以通过调用Open函数，并将相应的数据库驱动名字（driver name）以及数据源名字（data source name）传递给该函数来建立与数据库的连接。</p>
+<p>比如，在下面展示的例子中，程序使用的是mysql驱动。数据源名字是一个特定于数据库驱动的字符串，它会告诉驱动应该如何与数据库进行连接。</p>
+<p>Open函数在执行之后会返回一个指向sq1.DB结构的指针作为结果。Open函数在执行时，不会真正的与数据库连接，甚至不会检查参数.</p>
+<p>Open函数真正的作用是设置好连接数据库所需要的结构，并以惰性的方式，等真正需要的时候才建立与数据库连接</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">var</span> Db <span style="color:#ff79c6">*</span>sql.DB
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>() {
+	<span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+	Db, err = sql.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>, <span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat&#34;</span>)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		log.<span style="color:#50fa7b">Fatal</span>(err)
+	}
+	<span style="color:#ff79c6">return</span>
+}
+</code></pre></div><h2 id="创建用户">创建用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> User <span style="color:#8be9fd;font-style:italic">struct</span> {
+	Id <span style="color:#8be9fd">int64</span>
+	Uuid <span style="color:#8be9fd">string</span>
+	Name <span style="color:#8be9fd">string</span>
+	Email <span style="color:#8be9fd">string</span>
+	Password <span style="color:#8be9fd">string</span>
+	CreatedAt time.Time
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> (u <span style="color:#ff79c6">*</span>User) <span style="color:#50fa7b">Create</span>() (err <span style="color:#8be9fd">error</span>) {
+	statement <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;insert into users(uuid,name,email,password, created_at) value(?,?,?,?,?)&#34;</span>
+	<span style="color:#6272a4">// 预编译
+</span><span style="color:#6272a4"></span>	stmt, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Prepare</span>(statement)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		<span style="color:#ff79c6">return</span>  err
+	}
+	<span style="color:#ff79c6">defer</span> stmt.<span style="color:#50fa7b">Close</span>()
+	<span style="color:#6272a4">// 加密密码
+</span><span style="color:#6272a4"></span>	u.Password = <span style="color:#50fa7b">Encrypt</span>(u.Password)
+	<span style="color:#6272a4">// 生成UUID
+</span><span style="color:#6272a4"></span>	u.Uuid = <span style="color:#50fa7b">CreateUUID</span>()
+	u.CreatedAt = time.<span style="color:#50fa7b">Now</span>()
+	<span style="color:#6272a4">// 执行
+</span><span style="color:#6272a4"></span>	result, err <span style="color:#ff79c6">:=</span> stmt.<span style="color:#50fa7b">Exec</span>(u.Uuid,u.Name,u.Email,u.Password,u.CreatedAt)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		<span style="color:#ff79c6">return</span> err
+	}
+	<span style="color:#6272a4">// 返回插入后的自增ID
+</span><span style="color:#6272a4"></span>	u.Id, err = result.<span style="color:#50fa7b">LastInsertId</span>()
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;创建用户返回Id错误: &#34;</span>,err)
+		<span style="color:#ff79c6">return</span> err
+	}
+	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, fmt.<span style="color:#50fa7b">Sprintf</span>(<span style="color:#f1fa8c">&#34;%v&#34;</span>,<span style="color:#ff79c6">*</span>u))
+	userJson, err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">Marshal</span>(<span style="color:#ff79c6">*</span>u)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		<span style="color:#ff79c6">return</span> err
+	}
+	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(userJson))
+	<span style="color:#ff79c6">return</span>
+}
+</code></pre></div><h2 id="查询用户">查询用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 根据ID查询用户
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">FindUserById</span>(id <span style="color:#8be9fd">int64</span>)(u User, err <span style="color:#8be9fd">error</span>) {
+	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, `name`, email, password, created_at from users where id = ?&#34;</span>
+	u = User{}
+  <span style="color:#6272a4">// scan 将查询出来的每一列赋值给对应的属性
+</span><span style="color:#6272a4"></span>	err = Db.<span style="color:#50fa7b">QueryRow</span>(sql, id).<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>u.Id, <span style="color:#ff79c6">&amp;</span>u.Uuid, <span style="color:#ff79c6">&amp;</span>u.Name, <span style="color:#ff79c6">&amp;</span>u.Email, <span style="color:#ff79c6">&amp;</span>u.Password, <span style="color:#ff79c6">&amp;</span>u.CreatedAt)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询用户错误: &#34;</span>, err)
+		<span style="color:#ff79c6">return</span>
+	}
+	<span style="color:#ff79c6">return</span>
+}
+</code></pre></div><h2 id="获取多个对象">获取多个对象</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Thread <span style="color:#8be9fd;font-style:italic">struct</span> {
+	Id <span style="color:#8be9fd">int64</span>
+	Uuid   <span style="color:#8be9fd">string</span>
+	UserId <span style="color:#8be9fd">int64</span>
+	Topic <span style="color:#8be9fd">string</span>
+	CreatedAt time.Time
+}
+
+<span style="color:#6272a4">// 获取用户发布多个帖子
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ThreadsList</span>(userId <span style="color:#8be9fd">int64</span>)(threads []Thread){
+	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, user_id, topic,created_at from threads where user_id = ? order by created_at desc&#34;</span>
+	rows, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Query</span>(sql,userId)
+	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询 threads 错误, 返回空数据,err:&#34;</span>, err)
+		<span style="color:#ff79c6">return</span>
+	}
+	<span style="color:#ff79c6">defer</span> rows.<span style="color:#50fa7b">Close</span>()
+	<span style="color:#ff79c6">for</span> rows.<span style="color:#50fa7b">Next</span>() {
+		thread <span style="color:#ff79c6">:=</span> Thread{}
+		err <span style="color:#ff79c6">:=</span> rows.<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>thread.Id,<span style="color:#ff79c6">&amp;</span>thread.Uuid,<span style="color:#ff79c6">&amp;</span>thread.UserId,<span style="color:#ff79c6">&amp;</span>thread.Topic,<span style="color:#ff79c6">&amp;</span>thread.CreatedAt)
+		<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+			util.Danger.<span style="color:#50fa7b">Println</span>(err)
+			<span style="color:#ff79c6">continue</span>
+		}
+		threads = <span style="color:#8be9fd;font-style:italic">append</span>(threads,thread)
+	}
+
+	<span style="color:#ff79c6">return</span>
+}
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#连接数据库">连接数据库</a></li>
+    <li><a href="#创建用户">创建用户</a></li>
+    <li><a href="#查询用户">查询用户</a></li>
+    <li><a href="#获取多个对象">获取多个对象</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/sqlx%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            sqlx包的使用
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/sql%E4%BC%98%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">SQL优化&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

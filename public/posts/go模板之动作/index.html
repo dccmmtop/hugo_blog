@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go模板之动作 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Go模板之动作" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E6%A8%A1%E6%9D%BF%E4%B9%8B%E5%8A%A8%E4%BD%9C/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Go模板之动作</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/go%E6%A8%A1%E6%9D%BF%E4%B9%8B%E5%8A%A8%E4%BD%9C/" class="article-date">
+                <time datetime='2021-11-02T22:44:33.000&#43;00:00' itemprop="datePublished">2021-11-02</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>Go的模板动作就是嵌入模板的命令</p>
+<h2 id="条件动作">条件动作</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">{{ <span style="color:#ff79c6">if</span> arg }}
+some content
+{{ <span style="color:#ff79c6">else</span> }}
+other content
+{{ end }}
+</code></pre></div><h2 id="迭代动作">迭代动作</h2>
+<p>迭代动作可以对数组，切片，映射，或者通道进行迭代, 在迭代循环内部， 点(.) 会被设置正在当前迭代内容
+<img src="../../images/20211102225150894_9416.png" alt=""></p>
+<h2 id="设置动作">设置动作</h2>
+<p>设置动作允许为指定的范围的点(.) 设置指定的值。减少重复代码
+<img src="../../images/20211102231416052_22952.png" alt=""></p>
+<h2 id="包含动作">包含动作</h2>
+<p>包含动作（include action）允许用户在一个模板里面包含另一个模板，从而构建出嵌套的模板。
+包含动作的格式为{{ template &ldquo;name&rdquo; arg }}，其中name参数为被包含模板的名字。没有特别指定名称时，就是文件名， arg 是参数名
+<img src="../../images/20211102233152861_9410.png" alt=""></p>
+<h2 id="参数变量和管道">参数、变量和管道</h2>
+<ul>
+<li>
+<p>参数
+一个参数（argument）就是模板中的一个值。它可以是布尔值、整数、字符串等字面量，也可以是结构、结构中的一个字段或者数组中的一个键。除此之外，参数还可以是一个变量、一个方法（这个方法必须只返回一个值，或者只返回一个值和一个错误）或者一个函数。最后，参数也可以是一个点（.），用于表示处理器向模板引擎传递的数据。</p>
+</li>
+<li>
+<p>变量
+除了参数之外，用户还可以在动作中设置变量。变量以美元符号（$）开头，就像这样：
+<img src="../../images/20211102234016032_1463.png" alt="">
+在这个例子中，点（.）是一个映射，而动作range在迭代这个映射的时候，会将变量$key和$value分别初始化为当前被迭代映射元素的键和值。</p>
+</li>
+<li>
+<p>管道
+模板中的管道（pipeline）是多个有序地串联起来的参数、函数和方法，它的工作方式和语法跟Unix的管道也非常相似：
+<code>{{p1 | p2 | p3}}</code> 这里的p1,p2和p3可以是参数或者函数。
+管道允许用户将<strong>一个参数的输出传递给下一个参数</strong>，而各个参数之间则使用 | 分隔。
+<img src="../../images/20211102234613288_2442.png" alt=""></p>
+</li>
+</ul>
+<h2 id="函数">函数</h2>
+<p>Go的模板引擎函数都是受限制的：尽管这些函数可以接受任意多个参数作为输入，但它们只能返回一个值，或者返回一个值和一个错误。
+为了创建一个自定义模板函数，需要：</p>
+<ol>
+<li>创建一个名为FuncMap的映射，并将映射的键设置为函数的名字，而映射的值则设置为实际定义的函数</li>
+<li>将FuncMap 与模板绑定</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> (
+    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+    <span style="color:#f1fa8c">&#34;html/template&#34;</span>
+    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+    <span style="color:#f1fa8c">&#34;time&#34;</span>
+)
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    server <span style="color:#ff79c6">:=</span> http.Server{
+        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+    }
+    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/testFuncMap&#34;</span>, testFuncMap)
+    server.<span style="color:#50fa7b">ListenAndServe</span>()
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">testFuncMap</span>(w http.ResponseWriter, re <span style="color:#ff79c6">*</span>http.Request) {
+    funcMap <span style="color:#ff79c6">:=</span> template.FuncMap{
+        <span style="color:#f1fa8c">&#34;fdate&#34;</span>: formatDate,
+    }
+    t  <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;testFuncMap.tmpl&#34;</span>).<span style="color:#50fa7b">Funcs</span>(funcMap)
+    <span style="color:#6272a4">// 前后模板的名字必须相同
+</span><span style="color:#6272a4"></span>    t, err <span style="color:#ff79c6">:=</span> t.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./testFuncMap.tmpl&#34;</span>)
+   <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+       fmt.<span style="color:#50fa7b">Println</span>(err)
+       <span style="color:#ff79c6">return</span>
+   }
+   err = t.<span style="color:#50fa7b">Execute</span>(w,time.<span style="color:#50fa7b">Now</span>())
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        fmt.<span style="color:#50fa7b">Println</span>(err)
+        <span style="color:#ff79c6">return</span>
+    }
+
+}
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">formatDate</span>(t time.Time) <span style="color:#8be9fd">string</span>{
+    layout <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;2006-01-02&#34;</span>
+    <span style="color:#ff79c6">return</span> t.<span style="color:#50fa7b">Format</span>(layout)
+}
+
+</code></pre></div><ul>
+<li>模板文件</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#ff79c6">head</span>&gt;
+    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
+&lt;/<span style="color:#ff79c6">head</span>&gt;
+&lt;<span style="color:#ff79c6">body</span>&gt;
+the date/time is {{. | fdate}}
+&lt;/<span style="color:#ff79c6">body</span>&gt;
+&lt;/<span style="color:#ff79c6">html</span>&gt;
+</code></pre></div><ul>
+<li>结果</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
+&lt;<span style="color:#ff79c6">head</span>&gt;
+    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
+    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
+&lt;/<span style="color:#ff79c6">head</span>&gt;
+&lt;<span style="color:#ff79c6">body</span>&gt;
+the date/time is 2021-11-08
+&lt;/<span style="color:#ff79c6">body</span>&gt;
+&lt;/<span style="color:#ff79c6">html</span>&gt;
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#条件动作">条件动作</a></li>
+    <li><a href="#迭代动作">迭代动作</a></li>
+    <li><a href="#设置动作">设置动作</a></li>
+    <li><a href="#包含动作">包含动作</a></li>
+    <li><a href="#参数变量和管道">参数、变量和管道</a></li>
+    <li><a href="#函数">函数</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/go%E6%A8%A1%E6%9D%BF%E4%B9%8B%E4%B8%8A%E4%B8%8B%E6%84%9F%E7%9F%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Go模板之上下文感知
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/go%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Go的模板引擎&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

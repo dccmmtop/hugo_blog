@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>powershell配置 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="powershell配置" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/powershell%E9%85%8D%E7%BD%AE/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">powershell配置</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/powershell%E9%85%8D%E7%BD%AE/" class="article-date">
+                <time datetime='2022-05-13T17:28:48.000&#43;00:00' itemprop="datePublished">2022-05-13</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h3 id="安装powershell">安装powershell</h3>
+<p><a href="https://github.com/PowerShell/PowerShell/releases">下载地址</a></p>
+<h3 id="安装scoop">安装scoop</h3>
+<p>打开powershell 执行</p>
+<ol>
+<li>修改策略
+<code>set-executionpolicy remotesigned -s cu</code></li>
+<li>安装scoop
+<code>iex (new-object net.webclient).downloadstring('https://get.scoop.sh')</code></li>
+</ol>
+<h3 id="自动补全">自动补全</h3>
+<p>PSReadLine 在 V5 或以上版本中自带</p>
+<p>命令 <code>$profile</code> 可见看见配置文件的路径，如果没有此文件，新建即可</p>
+<p>打配置文件 <code>notepad $profile</code>,输入一下内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Import-Module PSReadLine
+<span style="color:#6272a4"># Shows navigable menu of all options when hitting Tab</span>
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+
+<span style="color:#6272a4"># Autocompleteion for Arrow keys</span>
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+Set-PSReadLineOption -ShowToolTips
+Set-PSReadLineOption -PredictionSource History
+
+<span style="color:#6272a4">#Set the color for Prediction (auto-suggestion)</span>
+Set-PSReadLineOption -Colors @<span style="color:#ff79c6">{</span>
+  <span style="color:#8be9fd;font-style:italic">Command</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Magenta&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Number</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Member</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Operator</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Type</span>               <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Variable</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Parameter</span>          <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">ContinuationPrompt</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">Default</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+  <span style="color:#8be9fd;font-style:italic">InlinePrediction</span>   <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGray&#39;</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><h3 id="oh-my-posh">oh-my-posh</h3>
+<p>Oh My Posh是一个定制的提示引擎，适用于任何能够使用函数或变量调整提示字符串的shell。</p>
+<p><strong>安装</strong></p>
+<p><code>scoop install oh-my-posh</code></p>
+<p><strong>配置</strong></p>
+<p>在配置文件 <code>$profile</code> 输入：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">oh-my-posh init pwsh --config ~<span style="color:#f1fa8c">\s</span>coop<span style="color:#f1fa8c">\a</span>pps<span style="color:#f1fa8c">\o</span>h-my-posh<span style="color:#f1fa8c">\c</span>urrent<span style="color:#f1fa8c">\t</span>hemes<span style="color:#f1fa8c">\r</span>obbyrussel.omp.json | Invoke-Expression
+</code></pre></div><h3 id="get-childitemcolor">Get-ChildItemColor</h3>
+<p><strong>安装</strong></p>
+<p><code>Install-Module -AllowClobber Get-ChildItemColor -Scope CurrentUser</code></p>
+<p><strong>配置:</strong></p>
+<p>在配置文件 <code>$profile</code> 输入：</p>
+<p><code>Import-Module Get-ChildItemColor</code></p>
+<h3 id="完整配置">完整配置</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">oh-my-posh init pwsh --config C:\Users\Administrator\scoop\apps\oh-my-posh\current\themes\robbyrussel.omp.json | Invoke-Expression
+
+Import-Module PSReadLine
+# Shows navigable menu of all options when hitting Tab
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+
+# Autocompleteion for Arrow keys
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+Set-PSReadLineOption -ShowToolTips
+Set-PSReadLineOption -PredictionSource History
+
+#Set the color for Prediction (auto-suggestion)
+Set-PSReadLineOption -Colors @{
+  Command            = &#39;Magenta&#39;
+  Number             = &#39;DarkBlue&#39;
+  Member             = &#39;DarkBlue&#39;
+  Operator           = &#39;DarkBlue&#39;
+  Type               = &#39;DarkBlue&#39;
+  Variable           = &#39;DarkGreen&#39;
+  Parameter          = &#39;DarkGreen&#39;
+  ContinuationPrompt = &#39;DarkBlue&#39;
+  Default            = &#39;DarkBlue&#39;
+  InlinePrediction   = &#39;DarkGray&#39;
+}
+
+
+
+Import-Module Get-ChildItemColor
+#Set-Alias ll Get-ChildItem -option AllScope
+#Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
+
+Function vim {F:\Neovim\bin\nvim.exe $args}
+
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装powershell">安装powershell</a></li>
+        <li><a href="#安装scoop">安装scoop</a></li>
+        <li><a href="#自动补全">自动补全</a></li>
+        <li><a href="#oh-my-posh">oh-my-posh</a></li>
+        <li><a href="#get-childitemcolor">Get-ChildItemColor</a></li>
+        <li><a href="#完整配置">完整配置</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/powershell">powershell
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E5%BA%94%E7%AD%94%E9%98%9F%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            RabbitMQ应答队列
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/awk%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">awk分组统计&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

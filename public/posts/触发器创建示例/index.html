@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>触发器创建示例 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="触发器创建示例" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E8%A7%A6%E5%8F%91%E5%99%A8%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">触发器创建示例</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E8%A7%A6%E5%8F%91%E5%99%A8%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B/" class="article-date">
+                <time datetime='2019-03-30T09:15:25.000&#43;00:00' itemprop="datePublished">2019-03-30</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <blockquote>
+<p>摘抄自 《posrgreSQL 修炼之道 从小工到专家》</p>
+</blockquote>
+<p>触发器（trigger）是一种由事件自动触发执行的特殊的存储过程，这些事件可以是对一个表进行 INSERT,UPDATE,DELETE 等操作</p>
+<p>触发器经常用于加强数据库的完整性约束和业务规则上的约束等</p>
+<h3 id="创建触发器">创建触发器</h3>
+<p>创建触发器的语法如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> [ <span style="color:#ff79c6">CONSTRAINT</span> ] <span style="color:#ff79c6">TRIGGER</span> name { <span style="color:#ff79c6">BEFORE</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">AFTER</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">INSTEAD</span> <span style="color:#ff79c6">OF</span> } { event [ <span style="color:#ff79c6">OR</span> ... ] }
+    <span style="color:#ff79c6">ON</span> <span style="color:#ff79c6">table_name</span>
+    [ <span style="color:#ff79c6">FROM</span> referenced_table_name ]
+    [ <span style="color:#ff79c6">NOT</span> <span style="color:#ff79c6">DEFERRABLE</span> <span style="color:#ff79c6">|</span> [ <span style="color:#ff79c6">DEFERRABLE</span> ] [ <span style="color:#ff79c6">INITIALLY</span> <span style="color:#ff79c6">IMMEDIATE</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">INITIALLY</span> <span style="color:#ff79c6">DEFERRED</span> ] ]
+    [ <span style="color:#ff79c6">REFERENCING</span> { { <span style="color:#ff79c6">OLD</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">NEW</span> } <span style="color:#ff79c6">TABLE</span> [ <span style="color:#ff79c6">AS</span> ] transition_relation_name } [ ... ] ]
+    [ <span style="color:#ff79c6">FOR</span> [ <span style="color:#ff79c6">EACH</span> ] { <span style="color:#ff79c6">ROW</span> <span style="color:#ff79c6">|</span> <span style="color:#ff79c6">STATEMENT</span> } ]
+    [ <span style="color:#ff79c6">WHEN</span> ( condition ) ]
+    <span style="color:#ff79c6">EXECUTE</span> <span style="color:#ff79c6">PROCEDURE</span> function_name ( arguments )
+</code></pre></div><h3 id="创建触发器的步骤">创建触发器的步骤</h3>
+<ul>
+<li>创建执行函数</li>
+</ul>
+<p>先为触发器创建一个执行函数，此函数的返回类型为触发器类型，然后即可创建相应的触发器</p>
+<p>下面使用一个例子来讲解触发器的使用，假设有一张学生表（student），和一张考试成绩表（score）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> student(
+    student_no <span style="color:#8be9fd;font-style:italic">int</span> <span style="color:#ff79c6">primary</span> <span style="color:#ff79c6">key</span>,
+    student_name <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">40</span>),
+    age <span style="color:#8be9fd;font-style:italic">int</span>
+)
+
+<span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> score(
+    student_no <span style="color:#8be9fd;font-style:italic">int</span>,
+    chinese_no <span style="color:#8be9fd;font-style:italic">int</span>,
+    math_score <span style="color:#8be9fd;font-style:italic">int</span>,
+    test_date <span style="color:#8be9fd;font-style:italic">date</span>
+)
+</code></pre></div><p>如果想删除学生表的一条记录时，把这个学生在成绩表中的成绩也删除掉，这时就可以使用触发器。先建触发器的执行函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">OR</span> <span style="color:#ff79c6">REPLACE</span> <span style="color:#ff79c6">FUNCTION</span> student_delete_trigger()
+<span style="color:#ff79c6">RETURNS</span> <span style="color:#ff79c6">TRIGGER</span> <span style="color:#ff79c6">AS</span> $$
+<span style="color:#ff79c6">BEGIN</span>
+    <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> score <span style="color:#ff79c6">WHERE</span> student_no <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">OLD</span>.student_no;
+    <span style="color:#ff79c6">RETURN</span> <span style="color:#ff79c6">OLD</span>;
+<span style="color:#ff79c6">END</span>;
+$$
+<span style="color:#ff79c6">LANGUAGE</span> plpgsql;
+</code></pre></div><ul>
+<li>创建触发器</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TRIGGER</span> delete_student_trigger
+    <span style="color:#ff79c6">AFTER</span> <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">ON</span> student
+    <span style="color:#ff79c6">FOR</span> <span style="color:#ff79c6">EACH</span> <span style="color:#ff79c6">ROW</span> <span style="color:#ff79c6">EXECUTE</span> <span style="color:#ff79c6">PROCEDURE</span> student_delete_trigger();
+</code></pre></div><h3 id="测试">测试</h3>
+<p>按照上面的语句创建好触发器后还需要相应的测试，先插入一些测试数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> student <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">&#39;张三&#39;</span>, <span style="color:#bd93f9">14</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> student <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">&#39;李四&#39;</span>, <span style="color:#bd93f9">13</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> student <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">&#39;王二&#39;</span>, <span style="color:#bd93f9">15</span>);
+
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">85</span>, <span style="color:#bd93f9">75</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-05-23&#39;</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">89</span>, <span style="color:#bd93f9">73</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-09-18&#39;</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">68</span>, <span style="color:#bd93f9">83</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-05-23&#39;</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">73</span>, <span style="color:#bd93f9">85</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-09-18&#39;</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">72</span>, <span style="color:#bd93f9">79</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-05-23&#39;</span>);
+<span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> score <span style="color:#ff79c6">VALUES</span>(<span style="color:#bd93f9">3</span>, <span style="color:#bd93f9">78</span>, <span style="color:#bd93f9">82</span>, <span style="color:#8be9fd;font-style:italic">date</span> <span style="color:#f1fa8c">&#39;2013-05-23&#39;</span>);
+</code></pre></div><p>现在把学好为 3 的学生 “王二” 从表 &ldquo;student&rdquo; 删掉：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">FROM</span> stduent <span style="color:#ff79c6">WHERE</span> student_no <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">3</span>;
+</code></pre></div><p>这时可以查询成绩表 &lsquo;score&rsquo; 可以发现学号（student_no ） 为 3 的学生成绩记录也被删除掉了</p>
+<h3 id="语句级触发器与行级触发器">语句级触发器与行级触发器</h3>
+<h4 id="语句级触发器">语句级触发器</h4>
+<p>语句级触发器是指执行每个 SQL 时，只执行一次，行级触发器是指每行就会执行一次。一个修改 0 行的操作任然会导致合适的语句级触发器被执行。下面来看看相应的示例。</p>
+<p>假设对 student 的更新情况记录 log。可以为 student 建一张 log 表，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> log_student(
+    update_time timetamp, <span style="color:#6272a4">--操作的时间
+</span><span style="color:#6272a4"></span>    db_user <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">40</span>), <span style="color:#6272a4">--操作的数据库用户名
+</span><span style="color:#6272a4"></span>    opr_type <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">6</span>), <span style="color:#6272a4">--操作类型：insert delete udate
+</span><span style="color:#6272a4"></span>);
+</code></pre></div><p>创建记录 log 的触发器函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FUNCTION</span> log_student_trigger()
+<span style="color:#ff79c6">RETURNS</span> <span style="color:#ff79c6">trigger</span> <span style="color:#ff79c6">AS</span>
+$$
+<span style="color:#ff79c6">BEGIN</span>
+    <span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">INTO</span> log_student <span style="color:#ff79c6">values</span>(now(), <span style="color:#ff79c6">user</span>, TG_OP);
+    <span style="color:#ff79c6">RETURN</span> <span style="color:#ff79c6">NULL</span>;
+<span style="color:#ff79c6">END</span>;
+$$
+<span style="color:#ff79c6">LANGUAGE</span> <span style="color:#f1fa8c">&#34;plpgsql&#34;</span>;
+</code></pre></div><p>上面函数中的 &ldquo;TG_OP&rdquo; 是触发器中的特殊变量，代表 DML 操作类型。</p>
+<p>然后在 student 表上创建一个语句级触发器：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TRIGGER</span> log_student_trigger
+    <span style="color:#ff79c6">AFTER</span> <span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">OR</span> <span style="color:#ff79c6">UPDATE</span> <span style="color:#ff79c6">OR</span> <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">ON</span> student
+    <span style="color:#ff79c6">FOR</span> <span style="color:#ff79c6">STATEMENT</span>
+    <span style="color:#ff79c6">EXECUTE</span> <span style="color:#ff79c6">PROCEDURE</span> log_student_trigger();
+</code></pre></div><ul>
+<li>删除触发器</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">drop</span> <span style="color:#ff79c6">trigger</span> log_student_log <span style="color:#ff79c6">on</span> student;
+</code></pre></div><p><strong>语句级触发器即使在没有更新到数据时，也会被触发</strong></p>
+<h4 id="行级触发器">行级触发器</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TRIGGER</span> log_student_trigger_2
+    <span style="color:#ff79c6">AFTER</span> <span style="color:#ff79c6">INSERT</span> <span style="color:#ff79c6">OR</span> <span style="color:#ff79c6">UPDATE</span> <span style="color:#ff79c6">OR</span> <span style="color:#ff79c6">DELETE</span> <span style="color:#ff79c6">ON</span> student
+    <span style="color:#ff79c6">FOR</span> <span style="color:#ff79c6">ROW</span>
+    <span style="color:#ff79c6">EXECUTE</span> <span style="color:#ff79c6">PROCEDURE</span> log_student_trigger();
+</code></pre></div><p><strong>行级触发器即使在没有更新到数据时，不会被触发</strong></p>
+<h3 id="before-触发器和-after-触发器">BEFORE 触发器和 AFTER 触发器</h3>
+<p>通常，语句级别的 &ldquo;before&rdquo; 触发器是在语句开始做任何事之前被触发，而语句级别的&quot;after&quot; 触发器是在语句结束时才触发的。行级别的&quot;before&quot; 触发器是在对特定行进行操作之前触发的，而行级别的 &ldquo;after&rdquo; 触发器是在语句结束时才触发的，但是它会在任何语句级别的 &ldquo;after&rdquo; 触发器被触发之前触发</p>
+<p>BEFORE 触发器可以直接修改 &ldquo;NEW&rdquo; 值以改变实际更新的值，具体例子如下：</p>
+<p>先建一个触发器函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">FUNCTION</span> student_new_name_trigger()
+<span style="color:#ff79c6">RETURNS</span> <span style="color:#ff79c6">trigger</span> <span style="color:#ff79c6">AS</span> <span style="color:#f1fa8c">&#39;
+</span><span style="color:#f1fa8c">BEGIN
+</span><span style="color:#f1fa8c">    NEW.student_name = NEW.student_name || NEW.student_no;
+</span><span style="color:#f1fa8c">    RETURN NEW;
+</span><span style="color:#f1fa8c">END;
+</span><span style="color:#f1fa8c">&#39;</span>
+<span style="color:#ff79c6">LANGUAGE</span> <span style="color:#f1fa8c">&#34;plpgsql&#34;</span>;
+</code></pre></div><p>这个函数的作用是，插入或者更新时，在 &ldquo;student_name&rdquo; 后面加上 &ldquo;student_no&rdquo; 学号。也就是直接修改 &ldquo;NEW.student_name&rdquo; ,语句如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">NEW</span>.student_name <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">NEW</span>.student_name<span style="color:#ff79c6">||</span><span style="color:#ff79c6">NEW</span>.student_no
+</code></pre></div><p>在这中情况下只能使用 BEFORE 触发器，因为 BEFORE 触发器是在更新数据之前触发的，所以这时修改了&quot;NEW.student_name&quot;, 后面实际更新到数据库中的值就变成了 &ldquo;student_name||student_no&rdquo;</p>
+<p>如果使用了 AFTER ，则修改 &ldquo;NEW&rdquo; 是没用的</p>
+<h3 id="删除触发器">删除触发器</h3>
+<p>删除触发器的语法如下：</p>
+<p>DROP TRIGGER [ IF EXISTS ] name ON table [CASCADE | RESTRICT ];</p>
+<p>其中的语法说明如下。</p>
+<ul>
+<li>IF EXISTS: 如果指定的触发器不存在，那么发出一个 notice 而不是跑出一个错误</li>
+<li>CASCADE: 级联删除依赖此触发器的对象</li>
+<li>RESTRICT: 这是默认值，如果有任何依赖对象存在，那么拒绝删除</li>
+</ul>
+<p>**在 PostgresSQL 中要在删除触发器的语法中指定 &ldquo;ON table&rdquo;，而在其他一些数据库的语发可能直接是 &ldquo;DROP TRIGGER name&rdquo; **</p>
+<p><strong>删除触发器时，触发器的函数不会被删除。不过，当表删除时，表上的触发器也会被删除</strong></p>
+<h3 id="触发器的行为">触发器的行为</h3>
+<p>触发器函数与返回值。<strong>语句级触发器总是返回 NULL</strong>。 即必须显式的在触发器函数中写上 &ldquo;RETURN NULL&rdquo;, 如果没有写，将导致出错。</p>
+<p>对于 &ldquo;BEFORE&rdquo; 和 &ldquo;INSTEAD OF&rdquo; 这类行级触发器函数来说，如果返回的是 NULL， 则表示忽略对当前行的操作，如果返回的是非 NULL 行，对与 INSERT 和 UPDATE 来说，返回的行将成为被插入的行或将要是更新的行。</p>
+<p>对于　 AFTER 这类行级触发器来说，其返回值将会被忽略。</p>
+<p>如果同一时间上有多个触发器，则将按触发器名字的顺序来触发。　如果是　&ldquo;BEFORE&rdquo; 和　&ldquo;INTEAD OF&rdquo; 行级触发器，每个触发器所返回的行（可能已经被修改）将成为下一个触发器的输入，如果&quot;BEFORE&quot; 和　&ldquo;INSTEAD OF&rdquo; 行级触发器返回的内容为空，那么该行上的其他行级触发器也不会被触发。</p>
+<h3 id="触发器函数中的特殊变量">触发器函数中的特殊变量</h3>
+<p>当把一个 PL/pgSQL 函数当做触发器函数调用的时候，系统会在顶层生命字段里自动创建几个特殊变量，比如在之前的几个例子当中　&ldquo;NEW&rdquo;, &ldquo;OLD&rdquo;, &ldquo;TG_OP&rdquo;, 变量等。可以使用的变量如下这些：</p>
+<ul>
+<li>
+<p>NEW: 该变量为 INSERT/UPDATE 操作触发的行级触发器中存储的新数据行，数据类型是　&ldquo;RECORD&rdquo; ,在语句级别的触发器里没有分配次变量，　 DELETE 操作触发的行级触发器中也没有分配此变量</p>
+</li>
+<li>
+<p>OLD：数据类型是 record。在 update、delete 操作触发时存储旧的数据行。</p>
+</li>
+<li>
+<p>TG_NAME：数据类型是 name。触发器名称。</p>
+</li>
+<li>
+<p>TG_WHEN：内容为&quot;BEFORE&quot;或“AFTER”，可以用来判断是 BEFORE 触发器还是 AFTER 触发器。</p>
+</li>
+<li>
+<p>TG_LEVEL：内容为“ROW”或“STATEMENT”，可以用来判断是语句级触发器还是行级触发器。</p>
+</li>
+<li>
+<p>TG_OP：内容为“INSERT”、“UPDATE”、“DELETE”、“TRUNCATE”，用于指定 DML 语句类型。</p>
+</li>
+<li>
+<p>TG_RELID：触发器所在表的 oid。</p>
+</li>
+<li>
+<p>TG_TABLE_NAME：触发器所在表的表名称。</p>
+</li>
+<li>
+<p>TG_SCHEMA_NAME：触发器所在表的模式。</p>
+</li>
+<li>
+<p>TG_NARGS：在创建触发器语句中赋予触发器过程的参数个数。</p>
+</li>
+<li>
+<p>TG_ARGV[]：text 类型的一个数组。创建触发器语句中指定的参数。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#创建触发器">创建触发器</a></li>
+        <li><a href="#创建触发器的步骤">创建触发器的步骤</a></li>
+        <li><a href="#测试">测试</a></li>
+        <li><a href="#语句级触发器与行级触发器">语句级触发器与行级触发器</a></li>
+        <li><a href="#before-触发器和-after-触发器">BEFORE 触发器和 AFTER 触发器</a></li>
+        <li><a href="#删除触发器">删除触发器</a></li>
+        <li><a href="#触发器的行为">触发器的行为</a></li>
+        <li><a href="#触发器函数中的特殊变量">触发器函数中的特殊变量</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/sql">SQL
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E8%A7%A6%E5%8F%91%E5%99%A8">触发器
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/rails%E8%BF%9E%E6%8E%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Rails连接多个数据库
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/rails5%E4%B8%AD%E7%9A%84autoload%E5%92%8Ceager_load/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Rails5中的autoload和eager_load&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

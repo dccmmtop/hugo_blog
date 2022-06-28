@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rails重写字段 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="rails重写字段" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails%E9%87%8D%E5%86%99%E5%AD%97%E6%AE%B5/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">rails重写字段</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/rails%E9%87%8D%E5%86%99%E5%AD%97%E6%AE%B5/" class="article-date">
+                <time datetime='2018-08-20T18:09:07.000&#43;00:00' itemprop="datePublished">2018-08-20</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>在 rails 中,model 的属性是默认的可读可写的，有时我们需要重写某个字段的访问器。当查询某个字段的值时，需要进行其他操作；</p>
+<p>如： 当查询<code>recommand_code</code>的值时，若存在，则返回，若不存在则创建一个包含大写字母和数字的 6 为随机字符串</p>
+<p>主要是 <code>read_attribute()</code> 和 <code>write_attribute()</code> 的用法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span>
+  <span style="color:#6272a4">#  重写 recommand_code 字段</span>
+  _code <span style="color:#ff79c6">=</span> read_attribute(<span style="color:#f1fa8c">:recommand_code</span>)
+   <span style="color:#6272a4"># _code  = self.recommand_code   错误，会引起无限递归</span>
+  <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>block<span style="color:#ff79c6">.</span>empty?
+    <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code<span style="color:#ff79c6">=</span><span style="color:#ff79c6">nil</span>;
+    <span style="color:#ff79c6">return</span>
+  <span style="color:#ff79c6">end</span>
+  <span style="color:#ff79c6">return</span> _code <span style="color:#ff79c6">if</span> _code
+  <span style="color:#ff79c6">loop</span> <span style="color:#ff79c6">do</span>
+    _code <span style="color:#ff79c6">=</span>  ((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span>  (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
+    <span style="color:#ff79c6">break</span> <span style="color:#ff79c6">if</span> User<span style="color:#ff79c6">.</span>find_by_recommand_code(_code)<span style="color:#ff79c6">.</span>nil?
+  <span style="color:#ff79c6">end</span>
+  <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">nil</span>;
+  <span style="color:#ff79c6">return</span> _code
+<span style="color:#ff79c6">end</span>
+
+<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span><span style="color:#ff79c6">=</span>(value)
+  write_attribute(<span style="color:#f1fa8c">:recommand_code</span>,value)
+<span style="color:#ff79c6">end</span>
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents"></nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E7%94%A8ruby%E7%BC%96%E5%86%99vim%E8%84%9A%E6%9C%AC/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            用ruby编写vim脚本
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/ssh%E9%9A%A7%E9%81%93/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">SSH隧道&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

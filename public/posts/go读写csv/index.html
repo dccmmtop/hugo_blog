@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go读写CSV // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Go读写CSV" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E8%AF%BB%E5%86%99csv/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Go读写CSV</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/go%E8%AF%BB%E5%86%99csv/" class="article-date">
+                <time datetime='2021-11-09T22:47:15.000&#43;00:00' itemprop="datePublished">2021-11-09</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>对Go语言来说，CSV文件可以通过encoding/csv包进行操作，下面通过这个包来读写CSV文件。</p>
+<p>由于程序在接下来的代码中立即就要对写入的posts.csv文件进行读取，而刚刚写入的数据有可能还滞留在缓冲区中，所以程序必须调用写入器的Flush方法来保证缓冲区中的所有数据都已经被正确地写入文件里面了。</p>
+<p>读取CSV文件的方法和写人文件的方法类似。首先，程序会打开文件，并通过将文件传递给NewReader函数来创建出一个读取器（reader），接着，程序会将读取器的FieldsPer Record字段的值设置为负数，这样的话，即使读取器在读取时发现记录（record）里面缺少了某些字段，读取进程也不会被中断。</p>
+<p>反之，如果FieldsPerRecord字段的值为正数，那么这个值就是用户要求从每条记录里面读取出的字段数量，当读取器从CsV文件里面读取出的字段数量少于这个值时，Go就会抛出一个错误。</p>
+<p>最后，<strong>如果FieldsPerRecord字段的值为0，那么读取器就会将读取到的第一条记录的字段数量用作FieldsPerRecord的值。</strong></p>
+<p>在设置好FieldsPerRecord字段之后，程序会调用读取器的ReadAl1方法，一次性地读取文件中包含的所有记录；但如果文件的体积较大，用户也可以通过读取器提供的其他方法，以每次一条记录的方式读取文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> (
+    <span style="color:#f1fa8c">&#34;encoding/csv&#34;</span>
+    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+    <span style="color:#f1fa8c">&#34;os&#34;</span>
+    <span style="color:#f1fa8c">&#34;strconv&#34;</span>
+)
+
+<span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
+    Id <span style="color:#8be9fd">int</span>
+    Content <span style="color:#8be9fd">string</span>
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    csvFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;testCsv.csv&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+    <span style="color:#ff79c6">defer</span> csvFile.<span style="color:#50fa7b">Close</span>()
+    csvWriter <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewWriter</span>(csvFile)
+
+    allPost <span style="color:#ff79c6">:=</span> []Blog{
+        {Id: <span style="color:#bd93f9">1</span>, Content: <span style="color:#f1fa8c">&#34;昨夜西风凋敝树&#34;</span>},
+        {Id: <span style="color:#bd93f9">2</span>, Content: <span style="color:#f1fa8c">&#34;忽如一夜春风来&#34;</span>},
+        {Id: <span style="color:#bd93f9">3</span>, Content: <span style="color:#f1fa8c">&#34;千树万树梨花开&#34;</span>},
+        {Id: <span style="color:#bd93f9">4</span>, Content: <span style="color:#f1fa8c">&#34;卷我屋上三重茅&#34;</span>},
+    }
+
+    <span style="color:#ff79c6">for</span> _, blog <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> allPost {
+        csvWriter.<span style="color:#50fa7b">Write</span>([]<span style="color:#8be9fd">string</span>{strconv.<span style="color:#50fa7b">Itoa</span>(blog.Id), blog.Content})
+    }
+    csvWriter.<span style="color:#50fa7b">Flush</span>()
+
+    <span style="color:#6272a4">// 读取csv
+</span><span style="color:#6272a4"></span>    file,err  <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;./testCsv.csv&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#ff79c6">nil</span>)
+    }
+    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
+
+    csvReader <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewReader</span>(file)
+    <span style="color:#6272a4">// 设置每行至少的列数,遇到少于此数的行数会报错。-1 代表不检查列数
+</span><span style="color:#6272a4"></span>    csvReader.FieldsPerRecord = <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
+    record, err <span style="color:#ff79c6">:=</span> csvReader.<span style="color:#50fa7b">ReadAll</span>()
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+    }
+
+    <span style="color:#8be9fd;font-style:italic">var</span> posts []Blog
+    <span style="color:#ff79c6">for</span> _, item <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> record {
+        id ,_ <span style="color:#ff79c6">:=</span> strconv.<span style="color:#50fa7b">ParseInt</span>(item[<span style="color:#bd93f9">0</span>],<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">0</span>)
+        post <span style="color:#ff79c6">:=</span> Blog{Id: <span style="color:#8be9fd;font-style:italic">int</span>(id), Content: item[<span style="color:#bd93f9">1</span>]}
+        posts = <span style="color:#8be9fd;font-style:italic">append</span>(posts,post)
+    }
+    fmt.<span style="color:#50fa7b">Println</span>(posts[<span style="color:#bd93f9">0</span>])
+}
+
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents"></nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/ruby%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            ruby分布式锁
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E5%B9%82%E7%AD%89%E8%AE%BE%E8%AE%A1/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">幂等设计&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

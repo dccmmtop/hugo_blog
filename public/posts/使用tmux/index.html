@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Linux tmux 安装及配置 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Linux tmux 安装及配置" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E4%BD%BF%E7%94%A8tmux/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Linux tmux 安装及配置</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E4%BD%BF%E7%94%A8tmux/" class="article-date">
+                <time datetime='2021-08-10T11:21:12.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="为什么要使用tmux">为什么要使用tmux?</h2>
+<p>对我个人而言，tmux 对我最大的吸引力就是 多窗口，以及会话的保持与恢复，我可以很方便的切换窗口，以及快速恢复工作环境</p>
+<p><img src="../../images/20201115235423565_18140.png" alt=""></p>
+<h2 id="安装">安装</h2>
+<p>我使用的是源码安装，</p>
+<ol>
+<li>下载源码 <a href="https://github.com/tmux/tmux/releases/tag/3.1c">下载链接</a></li>
+<li>解压</li>
+<li>进入到解压目录，执行 <code>./configure --prefix=/usr/local/tmux3.1c &amp;&amp; make</code>  然后执行 <code>sudo make install</code>
+我个人喜欢指定目录，方便日后卸载，或切换版本,中间可能会有缺少依赖包的错误，根据错误提示信息取网上搜索对应的包安装即可，其实linux发展到现在，很多错误提示信息都非常详细，英语不好的可以翻译下，就知道失败的原因了，有时反而比直接复制错误信息取网上搜索快的多。</li>
+<li>此时已经安装完毕，可执行文件在 <code>/usr/lcoal/tmux3.1c/bin/tmux</code>,</li>
+<li>可以在 <code>/usr/bin/</code> 下创建 tmux 的软链，或者直接在 <code>~/.bash_profile</code> 文件中编写  <code>alias tmux='/usr/local/tmux3.1c/tmux'</code> 然后在终端执行
+<code>source ~/.bash_profile</code> 就可以让配置文件生效了。</li>
+</ol>
+<h2 id="配置及安装插件">配置及安装插件</h2>
+<p>下面是我的配置文件,以及说明</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">##-- bindkeys --#</span>
+<span style="color:#6272a4">### 修改前缀键为  ctrl a</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g prefix ^a
+unbind ^b
+<span style="color:#8be9fd;font-style:italic">bind</span> a send-prefix
+
+<span style="color:#6272a4"># 窗口切换 我设置的键位和 vim 相通 </span>
+<span style="color:#6272a4"># ctrl + j 上一个窗口</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> -n C-j previous-window
+<span style="color:#6272a4"># ctrl + k 下一个窗口</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> -n C-k next-window
+
+
+
+
+<span style="color:#6272a4"># 设置松开鼠标不会自动跳到屏幕底部，这个特性需要稍微高一点的版本才支持</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g mouse on
+unbind -T copy-mode-vi MouseDragEnd1Pane
+
+
+
+<span style="color:#6272a4"># 快速加载配置文件，不用重启 tmux</span>
+bind-key r source-file ~/.tmux.conf <span style="color:#f1fa8c">\;</span> display-message <span style="color:#f1fa8c">&#34;tmux.conf reloaded&#34;</span>
+
+<span style="color:#6272a4"># 下面是底部状态栏的配置，个人不喜欢花里胡哨，简单够用即可</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g message-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>        <span style="color:#6272a4"># tomorrow night blue, base3</span>
+
+<span style="color:#8be9fd;font-style:italic">set</span> -g status-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>   <span style="color:#6272a4"># tomorrow night blue, base3</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g status-left <span style="color:#f1fa8c">&#34;#[bg=#0087ff] ❐ Hi!&#34;</span>       <span style="color:#6272a4"># blue</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g status-left-length <span style="color:#bd93f9">400</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g status-right <span style="color:#f1fa8c">&#34;&#34;</span>
+<span style="color:#6272a4">#set -g status-right &#34;#[bg=red] %Y-%m-%d %H:%M &#34;</span>
+<span style="color:#6272a4">#set -g status-right-length 600</span>
+
+<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-separator <span style="color:#f1fa8c">&#34;|&#34;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-style <span style="color:#f1fa8c">&#34;bg=red&#34;</span> <span style="color:#6272a4"># red</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-last-style <span style="color:#f1fa8c">&#34;fg=red&#34;</span>
+
+
+<span style="color:#6272a4"># split window</span>
+unbind %
+<span style="color:#6272a4"># 水平分隔窗口 快捷键是 prefix \ (我的前缀是 ctrl + A)</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> <span style="color:#f1fa8c">\\</span> split-window -h
+unbind <span style="color:#f1fa8c">&#39;&#34;&#39;</span>
+<span style="color:#6272a4"># 垂直分隔窗口 快捷键是 prefix -</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> - split-window -v
+
+<span style="color:#6272a4"># select pane 面板之间跳转</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> k selectp -U <span style="color:#6272a4"># above (prefix k)</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> j selectp -D <span style="color:#6272a4"># below (prefix j)</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> h selectp -L <span style="color:#6272a4"># left (prefix h)</span>
+<span style="color:#8be9fd;font-style:italic">bind</span> l selectp -R <span style="color:#6272a4"># right (prefix l)</span>
+
+
+<span style="color:#6272a4"># 下面是插件部分</span>
+<span style="color:#6272a4"># 用来保存会话 和 回复会话的 </span>
+<span style="color:#6272a4"># 保存会话快捷键是 prefix + ctrl + s (对应我的就是   ctrl + A ctrl + s 中间不要松开 ctrl 键)</span>
+<span style="color:#6272a4"># 恢复会话： prefix + ctrl + r</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-resurrect&#39;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-restore <span style="color:#f1fa8c">&#39;on&#39;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-save-bash-history <span style="color:#f1fa8c">&#39;on&#39;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-capture-pane-contents <span style="color:#f1fa8c">&#39;on&#39;</span>
+<span style="color:#6272a4"># 设置保存 vim 的工作状态</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-strategy-vim <span style="color:#f1fa8c">&#39;session&#39;</span>
+<span style="color:#6272a4"># 每隔60秒自动保存一次</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-save-interval <span style="color:#f1fa8c">&#39;60&#39;</span>
+
+<span style="color:#6272a4"># 鼠标选中即复制的插件</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-yank&#39;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @yank_action <span style="color:#f1fa8c">&#39;copy-pipe&#39;</span>
+<span style="color:#8be9fd;font-style:italic">set</span> -g @yank_with_mouse on
+
+<span style="color:#6272a4">#  安装插件的插件</span>
+<span style="color:#6272a4"># ctrl + I   即自动下载插件安装。</span>
+run <span style="color:#f1fa8c">&#39;~/.tmux/plugins/tpm/tpm&#39;</span> 
+</code></pre></div><h3 id="结束">结束！</h3>
+<p>有任何问题，欢迎下面留言，或者加我好友讨论哟！或者请我吃个糖果 (<em>^_^</em>)
+<img src="https://img2020.cnblogs.com/blog/732353/202011/732353-20201116004141080-394973585.png" alt="">
+<img src="https://img2020.cnblogs.com/blog/732353/202011/732353-20201116004339596-1722299368.png" alt=""></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要使用tmux">为什么要使用tmux?</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#配置及安装插件">配置及安装插件</a>
+      <ul>
+        <li><a href="#结束">结束！</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            忽略改动
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">修改时区&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

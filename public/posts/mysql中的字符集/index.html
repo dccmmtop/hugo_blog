@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mysql中的字符集 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="mysql中的字符集" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mysql%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">mysql中的字符集</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/mysql%E4%B8%AD%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86/" class="article-date">
+                <time datetime='2022-04-13T00:22:41.000&#43;00:00' itemprop="datePublished">2022-04-13</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="什么是字符集什么是排序规则">什么是字符集，什么是排序规则</h2>
+<p>字符集是只从二进制编码到某类字符符号的映射，该字符集的排序规则简称校对，
+如 ASCII码，一个字节就可以表示一个英文字母，参照ASCII码表</p>
+<h3 id="为什么需要字符集">为什么需要字符集</h3>
+<p>因为人类无法直接理解二进制所表示的含义，需要转换</p>
+<h3 id="多字节字符集">多字节字符集</h3>
+<p>一个字符占用超过一个字节的字符集叫做多字节字符集
+例如 UTF-8</p>
+<h3 id="常见字符集">常见字符集</h3>
+<p>1，ASCII码：一个英文字母（不分大小写）占一个字节的空间，一个中文汉字占两个字节的空间。</p>
+<p>2，UTF-8编码：一个英文字符等于一个字节，一个中文（含繁体）等于三个字节。中文标点占三个字节，英文标点占一个字节</p>
+<p>3，Unicode编码：一个英文等于两个字节，一个中文（含繁体）等于两个字节。中文标点占两个字节，英文标点占两个字节</p>
+<h2 id="mysql-为什么提供那么多的字符集为什么不统一使用utf-8">MySQL 为什么提供那么多的字符集，为什么不统一使用UTF-8</h2>
+<p><strong>为了性能</strong></p>
+<p>在某些情况下可以节省空间，提高效率，例如某个字段只有阿拉伯语，直接使用 cp1256 字符集，该字符集只需一个字节就可以存下所有阿拉伯字符。
+如果使用UTF-8字符集，会消耗更多的空间</p>
+<h2 id="mysql-是如何设置字符集的">MySQL 是如何设置字符集的</h2>
+<h3 id="创建对象时建库建表建列">创建对象时（建库、建表、建列）</h3>
+<p>库 &gt; 表 &gt; 列，每个范围上都有自己的字符集设置，采用的时继承关系。如果没有明确指定字符集，则继承上一级的。</p>
+<h3 id="客户端和服务器通信时">客户端和服务器通信时</h3>
+<ul>
+<li>服务器端总是假设客户端是按照character set client设置的字符来传输数据和SQL语句的。</li>
+<li>当服务器收到客户端的SQL语句时，它先将其转换成字符集character_set_connection。它还使用这个设置来决定如何将数据转换成字符串。</li>
+<li>当服务器端返回数据或者错误信息给客户端时，它会将其转换成character_set_result。
+如图：
+<img src="../../images/20220413004252689_24144.png" alt=""></li>
+</ul>
+<h3 id="mysql-如何比较字符串大小">MySQL 如何比较字符串大小</h3>
+<p>先将字符串转换成相同的字符集，如果字符集不兼容，会抛出错误，在MySQL 5.0 及以后，这个转换动作是自动进行的。</p>
+<h2 id="字符集对查询的影响">字符集对查询的影响</h2>
+<h3 id="可能无法使用索引排序退化到文件排序">可能无法使用索引排序，退化到文件排序</h3>
+<p>只有排序查询要求的字符集与保存到服务器上数据的字符集相同的时候，才会使用索引排序。
+例子：film 表有字段 title, 使用的是 utf8_general_ci 排序规则。现有查询要求 title 字段按照 utf8_bin 排序
+<img src="../../images/20220413225706589_21716.png" alt="">
+这中情况下无法使用索引排序，只能用 文件排序</p>
+<h3 id="可能无法使用索引进行关联表">可能无法使用索引进行关联表</h3>
+<p>为了适应各种字符集，MySQL在查询的时候可能会进行字符集转换，例如，在使用不同字符集的列去关联两张表的时候，mysql会尝试转换其中一个列的字符集，这和在列外面封装一个函数一样，会让mysql无法使用该列上的索引</p>
+<h2 id="对字符长度的处理">对字符长度的处理</h2>
+<p>UTF-8 是一种多字节编码，一个字符所占的空间可能是 1、2、3个字节(不是固定的)。但是在MySQL内部，通常使用固定的空间来存储，这样做的目的是希望总是保证缓存中有足够的空间来存储字符串，例如一个 UTF-8的char(10)需要30个字节。
+<code>LENGTH()</code> &gt;= <code>CHAR_LENGTH()</code>,  <code>LENGTH()</code> 计算字节长度， <code>CHAR_LENGTH()</code> 返回字符的个数</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是字符集什么是排序规则">什么是字符集，什么是排序规则</a>
+      <ul>
+        <li><a href="#为什么需要字符集">为什么需要字符集</a></li>
+        <li><a href="#多字节字符集">多字节字符集</a></li>
+        <li><a href="#常见字符集">常见字符集</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql-为什么提供那么多的字符集为什么不统一使用utf-8">MySQL 为什么提供那么多的字符集，为什么不统一使用UTF-8</a></li>
+    <li><a href="#mysql-是如何设置字符集的">MySQL 是如何设置字符集的</a>
+      <ul>
+        <li><a href="#创建对象时建库建表建列">创建对象时（建库、建表、建列）</a></li>
+        <li><a href="#客户端和服务器通信时">客户端和服务器通信时</a></li>
+        <li><a href="#mysql-如何比较字符串大小">MySQL 如何比较字符串大小</a></li>
+      </ul>
+    </li>
+    <li><a href="#字符集对查询的影响">字符集对查询的影响</a>
+      <ul>
+        <li><a href="#可能无法使用索引排序退化到文件排序">可能无法使用索引排序，退化到文件排序</a></li>
+        <li><a href="#可能无法使用索引进行关联表">可能无法使用索引进行关联表</a></li>
+      </ul>
+    </li>
+    <li><a href="#对字符长度的处理">对字符长度的处理</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../about/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            你好!陌生人
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">最长无重复子串&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

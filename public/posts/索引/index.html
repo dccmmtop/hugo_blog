@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>索引 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="索引" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E7%B4%A2%E5%BC%95/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">索引</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E7%B4%A2%E5%BC%95/" class="article-date">
+                <time datetime='2021-08-12T23:13:39.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="唯一索引">唯一索引</h2>
+<p>唯一索引是索引具有的一种属性，让索引具备唯一性，确保这张表中，该条索引数据不会重复出现。在每一次insert和update操作时，都会进行索引的唯一性校验，保证该索引的字段组合在表中唯一。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.containers.createIndex<span style="color:#ff79c6">({</span>name: 1<span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
+db.packages.createIndex<span style="color:#ff79c6">({</span> appId: 1, version: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
+</code></pre></div><p>知识点一：</p>
+<blockquote>
+<p>创建索引时,1表示按升序存储,-1表示按降序存储。</p>
+</blockquote>
+<p>知识点二:</p>
+<blockquote>
+<p>Mongo提供两种建索引的方式foreground和background。
+前台操作，它会阻塞用户对数据的读写操作直到index构建完毕；
+后台模式，不阻塞数据读写操作，独立的后台线程异步构建索引，此时仍然允许对数据的读写操作。
+创建索引时一定要写{background: true}
+创建索引时一定要写{background: true}
+创建索引时一定要写{background: true}</p>
+</blockquote>
+<h2 id="复合索引">复合索引</h2>
+<p>概念：指的是将多个键组合到一起创建索引，终极目的是加速匹配多个键的查询。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.flights.createIndex<span style="color:#ff79c6">({</span> flight: 1, price: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>background: true<span style="color:#ff79c6">})</span>
+</code></pre></div><h2 id="内嵌索引">内嵌索引</h2>
+<p>可以在嵌套的文档上建立索引，方式与建立正常索引完全一致。</p>
+<p>个人信息表结构如下,包含了省市区三级的地址信息，如果想要给城市（city）添加索引，其实就和正常添索引一样</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.personInfos.createIndex<span style="color:#ff79c6">({</span>“address.city”:1<span style="color:#ff79c6">})</span>
+</code></pre></div><h2 id="数组索引">数组索引</h2>
+<p>MongoDB支持对数组建立索引，这样就可以高效的搜索数组中的特定元素。</p>
+<p>知识点四：</p>
+<blockquote>
+<p>但是！对数组建立索引的代价是非常高的，他实际上是会对数组中的每一项都单独建立索引，就相当于假设数组中有十项，那么就会在原基础上，多出十倍的索引大小。如果有一百个一千个呢？
+所以在mongo中是禁止对两个数组添加复合索引的，对两个数组添加索引那么索引大小将是爆炸增长，所以谨记在心。
+过期索引（TTL）
+可以针对某个时间字段，指定文档的过期时间（经过指定时间后过期 或 在某个时间点过期）</p>
+</blockquote>
+<h2 id="哈希索引hashed-index">哈希索引（Hashed Index）</h2>
+<p>是指按照某个字段的hash值来建立索引，hash索引只能满足字段完全匹配的查询，不能满足范围查询等</p>
+<h2 id="地理位置索引geospatial-index">地理位置索引（Geospatial Index）</h2>
+<p>能很好的解决一些场景，比如『查找附近的美食』、『查找附近的加油站』等</p>
+<h2 id="文本索引text-index">文本索引（Text Index）</h2>
+<p>能解决快速文本查找的需求，比如，日志平台，相对日志关键词查找，如果通过正则来查找的话效率极低，这时就可以通过文本索引的形式来进行查找</p>
+<h1 id="explain查询计划">Explain查询计划</h1>
+<p>提到查的慢，二话不说直接看查询计划好么？具体每一个字段的含义我就不做赘述了很容易查到，我截取winningPlan的部分和大家一起看一下。WinningPlan就是在查询计划中胜出的方案，那肯定就有被淘汰的方案，是在rejectPlan里。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">// 查询计划中的winningPlan部分
+<span style="color:#f1fa8c">&#34;winningPlan&#34;</span>: {
+	<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;FETCH&#34;</span>,
+	<span style="color:#ff79c6">&#34;filter&#34;</span>: {
+		<span style="color:#ff79c6">&#34;createdAt&#34;</span>: {
+			<span style="color:#ff79c6">&#34;$gte&#34;</span>: ISODate(<span style="color:#f1fa8c">&#34;2019-07-22T12:00:44.000Z&#34;</span>)
+		}
+	},
+	<span style="color:#ff79c6">&#34;inputStage&#34;</span>: {
+		<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;IXSCAN&#34;</span>,
+		<span style="color:#ff79c6">&#34;keyPattern&#34;</span>: {
+			<span style="color:#ff79c6">&#34;load&#34;</span>: <span style="color:#bd93f9">1</span>
+		},
+		<span style="color:#ff79c6">&#34;indexName&#34;</span>: <span style="color:#f1fa8c">&#34;load_1&#34;</span>,
+		<span style="color:#ff79c6">&#34;isMultiKey&#34;</span>: <span style="color:#ff79c6">false</span>,
+		<span style="color:#ff79c6">&#34;multiKeyPaths&#34;</span>: {
+			<span style="color:#ff79c6">&#34;load&#34;</span>: []
+		},
+		<span style="color:#ff79c6">&#34;isUnique&#34;</span>: <span style="color:#ff79c6">false</span>,
+		<span style="color:#ff79c6">&#34;isSparse&#34;</span>: <span style="color:#ff79c6">false</span>,
+		<span style="color:#ff79c6">&#34;isPartial&#34;</span>: <span style="color:#ff79c6">false</span>,
+		<span style="color:#ff79c6">&#34;indexVersion&#34;</span>: <span style="color:#bd93f9">2</span>,
+		<span style="color:#ff79c6">&#34;direction&#34;</span>: <span style="color:#f1fa8c">&#34;backward&#34;</span>,
+		<span style="color:#ff79c6">&#34;indexBounds&#34;</span>: {
+			<span style="color:#ff79c6">&#34;load&#34;</span>: [
+				<span style="color:#f1fa8c">&#34;[MaxKey, MinKey]&#34;</span>
+			]
+		}
+	}
+},
+</code></pre></div><ul>
+<li>知识点六：</li>
+</ul>
+<blockquote>
+<p>explain 结果将查询计划以阶段树的形式呈现。
+每个阶段将其结果（文档或索引键）传递给父节点。
+中间节点操纵由子节点产生的文档或索引键。
+根节点是MongoDB从中派生结果集的最后阶段。
+对于新人一定要特别注意：在看查询结果的阶段树的时候一定一定是从最里层一层一层往外看的，不是直接顺着读下来的。</p>
+</blockquote>
+<ul>
+<li>知识点七：</li>
+</ul>
+<blockquote>
+<p>在查询计划中出现了很多stage，下面列举的经常出现的stage以及他的含义：
+COLLSCAN：全表扫描
+IXSCAN：索引扫描
+FETCH：根据前面扫描到的位置抓取完整文档
+SORT：进行内存排序，最终返回结果
+SORT_KEY_GENERATOR：获取每一个文档排序所用的键值
+LIMIT：使用limit限制返回数
+SKIP：使用skip进行跳过
+IDHACK：针对_id进行查询
+COUNTSCAN：count不使用用Index进行count时的stage返回
+COUNT_SCAN：count使用了Index进行count时的stage返回
+TEXT：使用全文索引进行查询时候的stage返回</p>
+</blockquote>
+<h3 id="最期望看到的查询组合">最期望看到的查询组合</h3>
+<p>Fetch+IDHACK
+Fetch+ixscan
+Limit+（Fetch+ixscan）
+PROJECTION+ixscan
+最不期望看到的查询组合
+COLLSCAN（全表扫）
+SORT（使用sort但是无index）
+COUNTSCAN（不使用索引进行count）</p>
+<h2 id="最左前缀原则">最左前缀原则</h2>
+<p>假定索引(a，b，c) 它可能满足的查询如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">1. a
+
+2. a，b
+
+3. a，b，c
+
+4. a，c [该组合只能用a部分]
+
+5. a, c, b [cb在查询时会被优化换位置]
+</code></pre></div><p><strong>显然，最左前缀的核心是查询条件字段必须含有索引第一个字段</strong></p>
+<p>最左值尽可能用最精确过滤性最好的值，不要用那种可能会用于范围模糊查询，用于排序的字段</p>
+<h2 id="效率极低的操作符">效率极低的操作符</h2>
+<p>$where和$exists：这两个操作符，完全不能使用索引。
+$ne和$not:通常来说取反和不等于,可以使用索引，但是效率极低，不是很有效，往往也会退化成扫描全表。
+$nin:不包含，这个操作符也总是会全表扫描
+对于管道中的索引，也很容易出现意外，只有在管道最开始时的match sort可以使用到索引，一旦发生过project投射，group分组，lookup表关联，unwind打散等操作后，就完全无法使用索引。
+索引设计和优化原则
+最后祭出李丹老师的索引设计和优化原则</p>
+<ul>
+<li>
+<p>1.主键的设置
+业务无关、显示指定、递增属性</p>
+</li>
+<li>
+<p>2.数据区分度</p>
+</li>
+</ul>
+<p>原则上区分度高的字段优先做索引字段，如果是组合索引优先放前面</p>
+<ul>
+<li>3.字段更新频率</li>
+</ul>
+<p>频繁更新的字段是否做索引字段需要综合考虑对业务的影响及查询的代价</p>
+<ul>
+<li>4.前缀索引问题</li>
+</ul>
+<p>需要注意的是因前缀索引只包含部分值因此无法通过前缀索引优化排序</p>
+<ul>
+<li>5.适当冗余设计</li>
+</ul>
+<p>对于存储较长字符串字段可额外增加字段存储原字段计算(如hash)后的值</p>
+<p>创建索引时只需要对额外字段创建索引即可</p>
+<ul>
+<li>6.避免无效索引</li>
+</ul>
+<p>通常类似表已经含有主键ID就无需再创建额外唯一性的ID索引</p>
+<ul>
+<li>7.查询覆盖率</li>
+</ul>
+<p>设计一个索引我们需要考虑尽量覆盖更多的查询场景</p>
+<ul>
+<li>8.控制字段数</li>
+</ul>
+<p>如果你设计的索引例如含有7、8个字段通常需要考虑设计是否合理</p>
+<h2 id="优化原则">优化原则</h2>
+<ul>
+<li>1.减少网络带宽</li>
+</ul>
+<p>按需返回所需字段、尽量避免返回大字段</p>
+<ul>
+<li>2.减少内存计算</li>
+</ul>
+<p>减少无必要中间结果存储、减少内存计算</p>
+<ul>
+<li>3.减少磁盘IO</li>
+</ul>
+<p>添加合适的索引、关注SQL改写</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#唯一索引">唯一索引</a></li>
+    <li><a href="#复合索引">复合索引</a></li>
+    <li><a href="#内嵌索引">内嵌索引</a></li>
+    <li><a href="#数组索引">数组索引</a></li>
+    <li><a href="#哈希索引hashed-index">哈希索引（Hashed Index）</a></li>
+    <li><a href="#地理位置索引geospatial-index">地理位置索引（Geospatial Index）</a></li>
+    <li><a href="#文本索引text-index">文本索引（Text Index）</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#最期望看到的查询组合">最期望看到的查询组合</a></li>
+      </ul>
+    </li>
+    <li><a href="#最左前缀原则">最左前缀原则</a></li>
+    <li><a href="#效率极低的操作符">效率极低的操作符</a></li>
+    <li><a href="#优化原则">优化原则</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mongo">mongo
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/count1%E4%B8%8Ecountx%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            count(1)与count(x)的区别
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E5%BC%80%E5%90%AF%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">开启查询日志&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

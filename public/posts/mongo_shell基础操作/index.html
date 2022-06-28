@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mongo_Shell基础操作 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Mongo_Shell基础操作" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mongo_shell%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Mongo_Shell基础操作</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/mongo_shell%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" class="article-date">
+                <time datetime='2021-09-05T17:36:12.000&#43;00:00' itemprop="datePublished">2021-09-05</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="运行shell">运行shell</h2>
+<p>MongoDB自带JavaScript shell，可在shell中使用命令行与MongoDB实例交互。
+shell是一个功能完备的JavaScript解释器，可运行任意JavaScript程序
+<img src="../../images/20210905170547117_9936.png" alt="">
+另外，可充分利用JavaScript的标准库:
+<img src="../../images/20210905170738187_10914.png" alt=""></p>
+<p>再者，可定义和调用JavaScript函数：[插图]
+需要注意，可使用多行命令。shell会检测输入的JavaScript语句是否完整，如没写完可在下一行接着写。在某行连续三次按下回车键可取消未输入完成的命令，并退回到＞-提示符。
+<img src="../../images/20210905170749701_29880.png" alt=""></p>
+<ul>
+<li>
+<p>启动mongo shell时不连接到任何mongod有时很方便。通过&ndash;nodb参数启动shell，启动时就不会连接任何数据库,启动mongo shell时不连接到任何mongod有时很方便。通过&ndash;nodb参数启动shell，启动时就不会连接任何数据库
+<img src="../../images/20210905172248239_31045.png" alt=""></p>
+</li>
+<li>
+<p>可以通过db.help()查看数据库级别的帮助，使用db.foo.help()查看集合级别的帮助。</p>
+</li>
+<li>
+<p>如果想知道一个函数是做什么用的，可以直接在shell输入函数名（函数名后不要输入小括号），这样就可以看到相应函数的JavaScript实现代码。例如，如果想知道update函数的工作机制，或者是记不清参数的顺序，就可以像下面这样做：
+<img src="../../images/20210905172413255_21869.png" alt=""></p>
+</li>
+</ul>
+<h3 id="使用shell执行脚本">使用shell执行脚本</h3>
+<p>如果希望使用指定的主机/端口上的mongod运行脚本，需要先指定地址，然后再跟上脚本文件的名称
+<img src="../../images/20210905172523695_10413.png" alt=""></p>
+<p>也可以使用load()函数，从交互式shell中运行脚本：
+<img src="../../images/20210905172623972_11122.png" alt=""></p>
+<p>在脚本中可以访问db变量，以及其他全局变量。然而，shell辅助函数（比如&quot;usedb&quot;和&quot;show collections&quot;）不可以在文件中使用。这些辅助函数都有对应的JavaScript函数</p>
+<p><img src="../../images/20210905173128485_21127.png" alt=""></p>
+<h3 id="编辑复合变量">编辑复合变量</h3>
+<p>shell的多行支持是非常有限的：不可以编辑之前的行。如果编辑到第15行时发现第1行有个错误，那会让人非常懊恼。因此，对于大块的代码或者是对象，你可能更愿意在编辑器中编辑。为了方便地调用编辑器，可以在shell中设置EDITOR变量（也可以在环境变量中设置）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">EDITOR</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/usr/bin/vim&#34;</span>
+</code></pre></div><p>现在，如果想要编辑一个变量，可以使用&quot;edit变量名&quot;这个命令，比如：
+<img src="../../images/20210905174006655_8272.png" alt=""></p>
+<p>用户主目录下创建一个名为.mongorc.js的文件,在.mongorc.js文件中添加一行内容，EDITOR=&ldquo;编辑器路径&rdquo;;，以后就不必单独设置EDITOR变量了。</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#运行shell">运行shell</a>
+      <ul>
+        <li><a href="#使用shell执行脚本">使用shell执行脚本</a></li>
+        <li><a href="#编辑复合变量">编辑复合变量</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E5%88%9B%E5%BB%BA%E6%96%87%E6%A1%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Mongo创建文档
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/mongodb%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">MongoDB基础&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

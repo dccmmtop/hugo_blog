@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>利用cookie实现闪现消息 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="利用cookie实现闪现消息" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%88%A9%E7%94%A8cookie%E5%AE%9E%E7%8E%B0%E9%97%AA%E7%8E%B0%E6%B6%88%E6%81%AF/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">利用cookie实现闪现消息</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E5%88%A9%E7%94%A8cookie%E5%AE%9E%E7%8E%B0%E9%97%AA%E7%8E%B0%E6%B6%88%E6%81%AF/" class="article-date">
+                <time datetime='2021-10-28T23:20:50.000&#43;00:00' itemprop="datePublished">2021-10-28</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>为了向用户报告某个动作的执行情况，应用程序有时候会向用户展示一条简短的通知消息，
+比如说，如果一个用户尝试在论坛上发表一篇帖子，但是这篇帖子因为某种原因而发表失败了，那么论坛应该向这个用户展示一条帖子发布失败的消息。
+这种通知消息应该出现在用户当前所在的页面，但是在通常情况下，用户在访问这个页面时却不应该看到这样的消息。因此程序实际上要做的是在某个条件被满足时，才在页面上显示一条临时出现的消息，这样用户在刷新页面之后就不会再看见相同的消息了-我们把这种临时出现的消息称为闪现消息（flash message）</p>
+<p>实现闪现消息的方法有很多种，但最常用的方法是把这些消息存储在页面刷新时就会被移除的会话cookie里面</p>
+<h2 id="添加闪现消息到cookie">添加闪现消息到cookie</h2>
+<p>setMessage处理器函数的定义跟之前展示过的setCookie处理器函数的定义非常相似，主要的区别在于setMessage对消息使用了Base64URL编码，以此来满足响应首部对cookie值的URL编码要求。在设置cookie时，如果cookie的值没有包含诸如空格或者百分号这样的特殊字符，那么不对它进行编码也是可以的；但是因为在发送闪现消息时，消息本身通常会包含诸如空格这样的字符，所以对cookie的值进行编码就成了一件必不可少的事情了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
+    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
+        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+        <span style="color:#6272a4">// 必须对 cookie 进行url编码
+</span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
+    }
+    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
+}
+</code></pre></div><h2 id="展示闪现消息">展示闪现消息</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 展示闪现消息
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
+            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
+            <span style="color:#ff79c6">return</span>
+        }
+    }
+
+    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
+</span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
+        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
+    }
+    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
+    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
+}
+</code></pre></div><p>这个函数首先会尝试获取指定的cookie，如果没有找到该cookie，它就会把变量err设置成一个http.ErrNoCookie值，并向浏览器返回一条&quot;No message found&quot;消息。如果找到了这个cookie，那么它必须完成以下两个操作</p>
+<ol>
+<li>创建一个同名的cookie，将它的MaxAge值设置为负数，并且将Expires值也设置成一个已经过去的时间；</li>
+<li>使用SetCookie方法将刚刚创建的同名cookie发送至客户端。</li>
+</ol>
+<p>初看上去，这两个操作的目的似乎是要替换已经存在的cookie，但实际上，因为新cookie的MaxAge值为负数，并且Expires值也是一个已经过去的时间，所以这样做实际上就是要完全地移除这个cookie。在设置完新cookie之后，程序会对存储在旧cookie中的消息进行解码，并通过响应返回这条消息。</p>
+<h2 id="完整代码">完整代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> (
+    <span style="color:#f1fa8c">&#34;encoding/base64&#34;</span>
+    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+    <span style="color:#f1fa8c">&#34;time&#34;</span>
+)
+
+<span style="color:#6272a4">/**
+</span><span style="color:#6272a4"> * 利用cookie实现闪现消息
+</span><span style="color:#6272a4"> */</span>
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+    server <span style="color:#ff79c6">:=</span> http.Server{
+        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+    }
+    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;setMessage&#34;</span>,setMessage)
+    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;showMessage&#34;</span>,showMessage)
+    server.<span style="color:#50fa7b">ListenAndServe</span>()
+}
+
+<span style="color:#6272a4">// 展示闪现消息
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
+    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
+            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
+            <span style="color:#ff79c6">return</span>
+        }
+    }
+
+    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
+</span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
+        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
+    }
+    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
+    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
+    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
+        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+        <span style="color:#6272a4">// 必须对 cookie 进行url编码
+</span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
+    }
+    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
+}
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#添加闪现消息到cookie">添加闪现消息到cookie</a></li>
+    <li><a href="#展示闪现消息">展示闪现消息</a></li>
+    <li><a href="#完整代码">完整代码</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/go%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Go的模板引擎
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">解析请求头和请求体&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

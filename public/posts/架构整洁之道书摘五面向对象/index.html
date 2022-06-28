@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>架构整洁之道书摘五——面向对象 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="架构整洁之道书摘五——面向对象" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E4%B9%A6%E6%91%98%E4%BA%94%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">架构整洁之道书摘五——面向对象</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E4%B9%A6%E6%91%98%E4%BA%94%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="article-date">
+                <time datetime='2022-05-02T23:29:24.000&#43;00:00' itemprop="datePublished">2022-05-02</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>譬如封装（encapsulation）、继承（inheritance）、多态（polymorphism）。其隐含意思就是说面向对象编程是这三项的有机组合，或者任何一种支持面向对象的编程语言必须支持这三个特性。</p>
+<h3 id="封装">封装</h3>
+<p>通过采用封装特性，我们可以把一组相关联的数据和函数圈起来，使圈外面的代码只能看见部分函数，数据则完全不可见。</p>
+<p>而C++作为一种面向对象编程语言，反而破坏了C的完美封装性。</p>
+<p>C++通过在编程语言层面引入public、private、protected这些关键词，部分维护了封装性。但所有这些都是为了解决编译器自身的技术实现问题而引入的hack——编译器由于技术实现原因必须在头文件中看到成员变量的定义。</p>
+<p>而Java和C#则彻底抛弃了头文件与实现文件分离的编程方式，这其实进一步削弱了封装性。因为在这些语言中，我们是无法区分一个类的声明和定义的。
+由于上述原因，我们很难说强封装是面向对象编程的必要条件。而事实上，有很多面向对象编程语言[3]对封装性并没有强制性的要求。
+面向对象编程在应用上确实会要求程序员尽量避免破坏数据的封装性。但实际情况是，那些声称自己提供面向对象编程支持的编程语言，相对于C这种完美封装的语言而言，其封装性都被削弱了，而不是加强了。</p>
+<h3 id="继承">继承</h3>
+<p>既然面向对象编程语言并没有提供更好的封装性，那么在继承性方面又如何呢？</p>
+<p>嗯，其实也就一般般吧。简而言之，继承的主要作用是让我们可以在某个作用域内对外部定义的某一组变量与函数进行覆盖。这事实上也是C程序员[4]早在面向对象编程语言发明之前就一直在做的事了。</p>
+<p>虽然面向对象编程在继承性方面并没有开创出新，但是的确在数据结构的伪装性上提供了相当程度的便利性。</p>
+<p>回顾一下到目前为止的分析，面向对象编程在封装性上得0分，在继承性上勉强可以得0.5分（满分为1）。</p>
+<h3 id="多态">多态</h3>
+<p>在面向编程对象语言被发明之前，我们所使用的编程语言能支持多态吗？
+答案是肯定的，请注意看下面这段用C语言编写的copy程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">＜stdio.h＞</span><span style="color:#ff79c6">
+</span><span style="color:#ff79c6"></span><span style="color:#8be9fd">void</span> copy（）{
+  <span style="color:#8be9fd">int</span> c；
+  <span style="color:#ff79c6">while</span> （（c<span style="color:#ff79c6">=</span>getchar（））<span style="color:#ff79c6">!=</span> EOF）
+  putchar（c）；
+}
+</code></pre></div><p>在上述程序中，函数getchar（）主要负责从STDIN中读取数据。但是STDIN究竟指代的是哪个设备呢？同样的道理，putchar（）主要负责将数据写入STDOUT，而STDOUT又指代的是哪个设备呢？很显然，这类函数其实就具有多态性，因为它们的行为依赖于STDIN和STDOUT的具体类型。</p>
+<p>这里的STDIN和STDOUT与Java中的接口类似，各种设备都有各自的实现。当然，这个C程序中是没有接口这个概念的，那么getchar（）这个调用的动作是如何真正传递到设备驱动程序中，从而读取到具体内容的呢？
+其实很简单，UNIX操作系统强制要求每个IO设备都要提供open、close、read、write和seek这5个标准函数。[6]也就是说，每个IO设备驱动程序对这5种函数的实现在函数调用上必须保持一致</p>
+<p>getchar（）只是调用了STDIN所指向的FILE数据结构体中的read函数指针指向的函数。</p>
+<p><strong>换句话说，getchar（）只是调用了STDIN所指向的FILE数据结构体中的read函数指针指向的函数。</strong></p>
+<p>当然了，<strong>面向对象编程语言虽然在多态上并没有理论创新，但它们也确实让多态变得更安全、更便于使用了。</strong>
+用函数指针显式实现多态的问题就在于函数指针的危险性。毕竟，函数指针的调用依赖于一系列需要人为遵守的约定。程序员必须严格按照固定约定来初始化函数指针，并同样严格地按照约定来调用这些指针。只要有一个程序员没有遵守这些约定，整个程序就会产生极其难以跟踪和消除的Bug。</p>
+<h4 id="依赖反转">依赖反转</h4>
+<p>在安全和便利的多态支持出现之前，软件是什么样子的。下面有一个典型的调用树的例子，main函数调用了一些高层函数，这些高层函数又调用了一些中层函数，这些中层函数又继续调用了一些底层函数。在这里，源代码层面的依赖不可避免地要跟随程序的控制流。如下图</p>
+<p><img src="../../images/20220503162854018_6817.png" alt=""></p>
+<p>如你所见，main函数为了调用高层函数，它就必须能够看到这个函数所在的模块。在C中，我们会通过#include来实现，在Java中则通过import来实现，而在C#中则用的是using语句。总之，每个函数的调用方都必须要引用被调用方所在的模块。
+显然，这样做就导致了我们在<strong>软件架构上别无选择</strong>。在这里，<strong>系统行为决定了控制流，而控制流则决定了源代码依赖关系。</strong></p>
+<p>但一旦我们使用了多态，情况就不一样了，如下图</p>
+<p><img src="../../images/20220503163621299_30200.png" alt=""></p>
+<p>模块HL1调用了ML1模块中的F（）函数，这里的调用是通过源代码级别的接口来实现的。当然在程序实际运行时，接口这个概念是不存在的，HL1会调用ML1中的F（）函数[。</p>
+<p>请注意模块ML1和接口I在源代码上的依赖关系（或者叫继承关系），该关系的方向和控制流正好是相反的，我们称之为依赖反转</p>
+<p>当某个组件的源代码需要修改时，仅仅需要重新部署该组件，不需要更改其他组件，这就是独立部署能力。
+如果系统中的所有组件都可以独立部署，那它们就可以由不同的团队并行开发，这就是所谓的独立开发能力。</p>
+<h3 id="总结">总结</h3>
+<p>面向对象编程到底是什么？业界在这个问题上存在着很多不同的说法和意见。然而对一个软件架构师来说，其含义应该是非常明确的：<strong>面向对象编程就是以多态为手段来对源代码中的依赖关系进行控制的能力，这种能力让软件架构师可以构建出某种插件式架构，让高层策略性组件与底层实现性组件相分离，底层组件可以被编译成插件，实现独立于高层组件的开发和部署。</strong></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#封装">封装</a></li>
+        <li><a href="#继承">继承</a></li>
+        <li><a href="#多态">多态</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E6%9E%B6%E6%9E%84">架构
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E4%B9%A6%E6%91%98%E5%85%AD%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            架构整洁之道书摘六——函数式编程
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E6%9E%B6%E6%9E%84%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93%E4%B9%A6%E6%91%98%E5%9B%9B%E7%BB%93%E6%9E%84%E5%8C%96%E7%BC%96%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">架构整洁之道书摘四——结构化编程&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

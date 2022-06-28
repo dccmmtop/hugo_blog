@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSH隧道 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="SSH隧道" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ssh%E9%9A%A7%E9%81%93/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">SSH隧道</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/ssh%E9%9A%A7%E9%81%93/" class="article-date">
+                <time datetime='2018-08-19T17:04:28.000&#43;00:00' itemprop="datePublished">2018-08-19</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>在开发微信公众号或小程序的时候，由于微信平台规则的限制，部分接口需要通过线上域名才能正常访问。但我们一般都会在本地开发，因为这能快速的看到源码修改后的运行结果。但当涉及到需要调用微信接口时，由于不和你在同一个局域网中的用户是无法访问你的本地开发机的，就必须把修改后的代码重新发布到线上域名所在的服务器才能去验证结果。每次修改都重新发布很繁琐也很浪费时间。</p>
+<p>本文将教你如何通过 SSH 隧道把本地服务映射到外网，以方便调试，通常把这种方法叫内网穿透。</p>
+<p>阅读完本文后，你能解决以下常见问题：</p>
+<ul>
+<li>开发微信公众号等应用时把本地服务映射到外网，加速调试流程；</li>
+<li>把你正在开发的本地服务分享给互联网上其它人访问体验；</li>
+<li>在任何地方通过互联网控制你家中在局域网里的电脑；</li>
+</ul>
+<h3 id="最终目的">最终目的</h3>
+<p>把运行在本地开发机上的 HTTP 服务映射到外网，让全世界都能通过外网 IP 服务到你本地开发机上的 HTTP 服务。例如你本地的 HTTP 服务监听在 127.0.0.1:8080，你有一台公网 IP 为 12.34.56.78 的服务器，通过本文介绍的方法，可以让全世界的用户通过 http://12.34.56.78:8080 访问到你本地开发机上的 HTTP 服务。</p>
+<p>总结成一句话就是：<strong>把内网端口映射到外网。</strong></p>
+<h3 id="前提条件">前提条件</h3>
+<p>为了把内网服务映射到外网，以下资源为必须的：</p>
+<ol>
+<li>一台有外网 IP 的服务器；</li>
+<li>能在本地开发机上通过 ssh 登入到外网服务器。</li>
+</ol>
+<p>要满足以上条件很简单：</p>
+<ul>
+<li>对于条件 1：购买一台低配 Linux 服务器，推荐国外的 DigitalOcean；</li>
+<li>对于条件 2：对于 Mac、Linux 开发机是内置了 ssh 客户端的，对于 Windows 可以安装 Cygwin。</li>
+</ul>
+<h3 id="实现原理">实现原理</h3>
+<p>要实现把内网端口映射到外网，最简单的方式就是通过 SSH 隧道。</p>
+<p>SSH 隧道就像一根管道，能把任何 2 台机器连接在一起，把发送到其中一台机器的数据通过管道传输到另一台机器。假如已经通过 SSH 隧道把本地开发机和外网服务器连接在了一起，外网服务器端监听在 12.34.56.78:8080，那么所有发给 12.34.56.78:8080 的数据都会通过 SSH 隧道原封不动地传输给本地开发机的 127.0.0.1:8080，如图所示：</p>
+<p><img src="http://ogbkru1bq.bkt.clouddn.com/%E9%80%89%E5%8C%BA_148.png" alt=""></p>
+<p>也就是说，去访问 12.34.56.78:8080 就像是访问本地开发机的 127.0.0.1:8080，本地开发机上的 8080 端口被映射到了外网服务器上的 8080 端口。</p>
+<p>如果你的外网服务器 IP 配置了域名解析，例如 yourdomin.com 会通过 DNS 解析为 12.34.56.78，那么也可以通过 yourdomin.com:8080 去访问本地开发机上的服务。</p>
+<p>这样就做到了访问外网地址时其实是本地服务返回的结果。</p>
+<p>通过 SSH 隧道传输数据时，数据会被加密，就算中间被劫持，黑客也无法得到数据的原内容。</p>
+<p>所以 SSH 隧道还有一个功能就是保证数据传输的安全性。</p>
+<h3 id="实现步骤">实现步骤</h3>
+<p>把本地开机和外网服务器通过 SSH 隧道连接起来就和在本地开发机 SSH 登入远程登入到外网服务器一样简单。</p>
+<p>先来回顾以下 SSH 远程登入命令，假如想在本地远程登入到 12.34.56.78，可以在本地开发机上执行以下命令：</p>
+<p><code>ssh username@12.34.56.78</code></p>
+<p>而实现 SSH 隧道只需在本地开发机上执行：</p>
+<p><code>ssh -R 8080:127.0.0.1:8080 username@12.34.56.78</code></p>
+<p>可以看出实现 SSH 隧道的命令相对于 SSH 登入多出来 -R 8080:127.0.0.1:8080，多出的这部分的含义是：</p>
+<p>在远程机器(12.34.56.78)上启动 TCP 8080 端口监听着，再把远程机器(12.34.56.78)上 8080 端口映射到本地的 127.0.0.1:8080。</p>
+<p>执行完以上命令后，就可以通过 12.34.56.78:8080 去访问本地的 127.0.0.1:8080 了。</p>
+<p>通常把这种技术叫做 SSH 远程端口转发(remote forwarding)。</p>
+<p>其实不限于只能把本地开发机上运行的服务映射到外网服务器上去，还可以把任何本地开发机可以访问的服务映射到外网服务器上去。例如在本地开发机上能访问 github.com:80，在本地开发机上执行：</p>
+<p><code>ssh -R 8080:github.com:80 username@12.34.56.78</code></p>
+<p>就能通过 12.34.56.78:8080 去访问 github.com:80 了。</p>
+<p>保持运行</p>
+<p>在执行完上面介绍的 SSH 隧道命令后，你会发现登入到了外网服务器上去了，如果你登出外网服务器，就会发现 12.34.56.78:8080 无法访问了。导致这个问题的原因是你登出外网服务器时，在外网服务器上本次操作对应的 SSH 进程也跟着退出了，而这个退出的进程曾负责监听在 8080 端口进行转发操作。</p>
+<p>为了让 SSH 隧道一直保持在后台执行，有以下方法。</p>
+<p>通过 SSH 自带的参数</p>
+<p>SSH 还支持这些参数：</p>
+<ul>
+<li>N 参数：表示只连接远程主机，不打开远程 shell；</li>
+<li>T 参数：表示不为这个连接分配 TTY；</li>
+<li>f 参数：表示连接成功后，转入后台运行；</li>
+</ul>
+<p>因此要让 SSH 隧道一直保持在后台执行，可以通过以下命令：</p>
+<p><code>ssh -NTf -R 8080:127.0.0.1:8080 username@12.34.56.78</code></p>
+<h3 id="通过-autossh">通过 AutoSSH</h3>
+<p>SSH 隧道是不稳定的，在网络恶劣的情况下可能随时断开。如果断开就需要手动去本地开发机再次向外网服务器发起连接。</p>
+<p>AutoSSH 能让 SSH 隧道一直保持执行，他会启动一个 SSH 进程，并监控该进程的健康状况；当 SSH 进程崩溃或停止通信时，AutoSSH 将重启动 SSH 进程。</p>
+<p>使用 AutoSSH 只需在本地开发机上安装 AutoSSH ，方法如下：</p>
+<ul>
+<li>Mac 系统：brew install autossh；</li>
+<li>Linux 系统：apt-get install autossh；</li>
+</ul>
+<p>安装成功后，在本地开发机上执行：</p>
+<p><code>autossh -N -R 8080:127.0.0.1:8080 username@12.34.56.78</code></p>
+<p>就能完成和上面一样的效果，但本方法能保持 SSH 隧道一直运行。</p>
+<p>可以看出这行命令和上面的区别在于把 ssh 换成了 autossh，并且少了 -f 参数，原因是 autossh 默认会转入后台运行。</p>
+<p>常见问题</p>
+<p>如果你遇到通过以上方法成功启动 SSH 隧道后，还是无法访问 12.34.56.78:8080，那么很有可能是外网服务器上的 SSH 没有配置对。为此你需要去外网服务器上修改 /etc/ssh/sshd_config 文件如下：</p>
+<p><code>GatewayPorts yes</code></p>
+<p>这个选项的意思是，SSH 隧道监听的服务的 IP 是对外开放的 0.0.0.0，而不是只对本机的 127.0.0.1。不开 GatewayPorts 的后果是不能通过 12.34.56.78:8080 访问，只能在外网服务器上通过 127.0.0.1:8080 服务到本地开发机的服务。</p>
+<p>修改好配置文件后，你还需要重启 sshd 服务来加载新的配置，命令如下：</p>
+<p><code>service sshd restart</code></p>
+<p>如果使用以上方法还是无法访问 12.34.56.78:8080，请检查你外网服务器的防火墙配置，确保 8080 端口是对外开放的。</p>
+<p>其它代替方案</p>
+<p>除了 SSH 隧道能实现内网穿透外，还有以下常用方法。</p>
+<h3 id="frp">frp</h3>
+<p>frp 是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp, http, https 协议。</p>
+<p>frp 有以下特性：</p>
+<ul>
+<li>frp 比 SSH 隧道功能更多，配置项更多；</li>
+<li>frp 也需要一台外网服务器，并且需要在外网服务器上安装 frps，在本地开发机上安装 frpc；</li>
+</ul>
+<h3 id="ngrok">ngrok</h3>
+<p>ngrok 是一个商用的内网穿透工具，它有以下特点：</p>
+<ul>
+<li>不需要有外网服务器，因为 ngrok 会为你提供；</li>
+<li>只需要在本地开发机安装 ngrok 客户端，和注册 ngrok 账户；</li>
+<li>按照服务收费；</li>
+</ul>
+<p>这些代替方案的缺点在于都需要再额外安装其它工具，没有 SSH 隧道来的直接。</p>
+<p>想了解更多可以访问它们的主页。</p>
+<p><a href="https://github.com/gwuhaolin/blog/issues/11">阅读原文</a></p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#最终目的">最终目的</a></li>
+        <li><a href="#前提条件">前提条件</a></li>
+        <li><a href="#实现原理">实现原理</a></li>
+        <li><a href="#实现步骤">实现步骤</a></li>
+        <li><a href="#通过-autossh">通过 AutoSSH</a></li>
+        <li><a href="#frp">frp</a></li>
+        <li><a href="#ngrok">ngrok</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/rails%E9%87%8D%E5%86%99%E5%AD%97%E6%AE%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            rails重写字段
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/rails-%E8%87%AA%E5%85%B3%E8%81%94/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">rails-自关联&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

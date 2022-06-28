@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>whenever使用方式 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="whenever使用方式" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/whenever%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">whenever使用方式</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/whenever%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+                <time datetime='2019-10-31T22:04:20.000&#43;00:00' itemprop="datePublished">2019-10-31</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>根据项目的进展，我们需要实现后台进行定时读取信息的功能，而最关键的实现部分是周期性功能，根据调研，决定使用whenever来实现这一功能。</p>
+<p>github：<a href="https://link.jianshu.com?t=https://github.com/javan/whenever">https://github.com/javan/whenever</a></p>
+<h4 id="开发前需要明确的问题">开发前需要明确的问题</h4>
+<ul>
+<li>whenever是怎样一种周期性机制？</li>
+<li>whenever能为我们提供什么功能？</li>
+<li>whenever为周期性任务提供了哪些控制方式？</li>
+</ul>
+<p>问题解决</p>
+<p>whenever周期性机制</p>
+<p>我们来看一下github上面是怎么说的：</p>
+<p>Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs.</p>
+<p>意思就是说，whenever是一个ruby gem，但同时它是基于cron jobs的。</p>
+<p>那么什么是cron jobs呢？我们来看一下维基百科的定义：</p>
+<h4 id="cron">Cron</h4>
+<p>crontab命令常见于<a href="https://link.jianshu.com?t=https://wikipedia.kfd.me/wiki/Unix">Unix</a>和<a href="https://link.jianshu.com?t=https://wikipedia.kfd.me/wiki/%E7%B1%BBUnix">类Unix</a>的<a href="https://link.jianshu.com?t=https://wikipedia.kfd.me/wiki/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">操作系统</a>之中，用于设置周期性被执行的指令。该命令从标准输入设备读取指令，并将其存放于“crontab”文件中，以供之后读取和执行。该词来源于<a href="https://link.jianshu.com?t=https://wikipedia.kfd.me/wiki/%E5%B8%8C%E8%85%8A%E8%AF%AD">希腊语</a>chronos（χρόνος），原意是时间。</p>
+<p>通常，crontab储存的指令被<a href="https://link.jianshu.com?t=https://wikipedia.kfd.me/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B">守护进程</a>激活，crond常常在后台运行，每一分钟检查是否有预定的作业需要执行。这类作业一般称为cron jobs。</p>
+<p>也就是说，crontab是在unix和类unix系统中用来实现周期性功能的指令。在网上搜一下，我们就会看到很多crontab指令相关的语法。</p>
+<p>根据上述的分析，我们可以得出这样的结论：</p>
+<p>whenever事实上是一个cron翻译器，它将rails中的ruby代码翻译成cron脚本，从而将周期性的任务交给cron来执行。 这样，通过whenever我们可以使用ruby语言来写周期性任务代码，在ruby层控制代码，而不需要与shell脚本进行切换；另一方面，我们会发现，由于cron命令的强大，它的语法也因此变得很复杂，通过whenever，我们可以很方便的实现周期性任务。</p>
+<h4 id="一个十分简单的demo">一个十分简单的demo</h4>
+<p>1.添加whenever(Gemfile)</p>
+<p><code>gem 'whenever', :require =&gt;false</code></p>
+<p>2.生成config/schedule.rb文件</p>
+<p>执行命令：</p>
+<p><code>wheneverize</code></p>
+<p>3.添加自己的周期性任务</p>
+<p>在<code>config/schedule.rb</code>文件中添加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">set <span style="color:#f1fa8c">:environment</span>, <span style="color:#f1fa8c">:development</span>
+every <span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>minutes <span style="color:#ff79c6">do</span>  
+  runner <span style="color:#f1fa8c">&#34;Timetest.mytime&#34;</span>
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>其中，<code>set :environment, :development</code>是设置执行任务时的环境，默认情况下环境为<code>production</code></p>
+<p>上述代码实现的是每两分钟读取当前时间并存入到数据库的功能。其中，runner方法执行的方法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">classTimetest <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">self</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">mytime</span>
+  a <span style="color:#ff79c6">=</span> Timetest<span style="color:#ff79c6">.</span>new
+  a<span style="color:#ff79c6">.</span>time_now <span style="color:#ff79c6">=</span> Time<span style="color:#ff79c6">.</span>now
+  a<span style="color:#ff79c6">.</span>save
+ <span style="color:#ff79c6">end</span>
+<span style="color:#ff79c6">end</span>
+</code></pre></div><p>这样，在rails中实现whenever的代码就算是写完了，真的是简单到不行啊！（实在忍不住感慨一句）</p>
+<p>下面就要执行周期性任务了。</p>
+<p>4.执行周期性任务</p>
+<p>在rails工程文件夹下进行一下操作</p>
+<ul>
+<li>更新schedule.rb中的任务到cronjob中</li>
+</ul>
+<p><code>whenever -i</code></p>
+<p>可以看到这样的打印结果：</p>
+<p><code>[write]crontabfileupdated</code></p>
+<ul>
+<li>执行周期性任务</li>
+</ul>
+<p><code>whenever -w</code></p>
+<p>可以看到：</p>
+<p><code>[write]crontabfilewritten</code></p>
+<p>此时我们的周期性任务便在后台运行了，此时查看我们的任务：</p>
+<p><code>crontab -l</code></p>
+<p>可以看到以下打印：</p>
+<p># Begin Whenever generated tasks for:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/home/vito/rails/test_of_rails/test_rails/config/schedule.rb0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58 * * * * /bin/bash -l -c <span style="color:#f1fa8c">&#39;cd /home/vito/rails/test_of_rails/test_rails &amp;&amp; bundle exec bin/rails runner -e development &#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;Timetest.mytime&#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;&#39;</span><span style="color:#6272a4"># End Whenever generated tasks for: /home/vito/rails/test_of_rails/test_rails/config/schedule.rb</span>
+</code></pre></div><p>这样，我们的周期性任务就算是在顺利执行了。</p>
+<p>需要注意的一点是运行时crontab的环境（rails和crontab环境不匹配时whenever无法执行），一般调试时多使用的是development环境，而不设置时默认的是production环境，如果你使用<code>crontab -l</code>发现是production环境，可以使用</p>
+<p><code>crontab -e</code></p>
+<p>直接修改为development，或者直接将-e production删掉即可。</p>
+<p>经过上述流程，我们便可以成功地实现周期性任务了。如果此时你发现自己的周期性任务还是没有执行，那你就得好好看看你自己的任务代码了，很可能是执行的任务代码本身有问题，而与whenever的实现没有太大的关系了。</p>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            去除重复行
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/vim%E4%B8%AD%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%B2%98%E8%B4%B4%E5%92%8C%E5%A4%8D%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">vim中与系统的粘贴和复制&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

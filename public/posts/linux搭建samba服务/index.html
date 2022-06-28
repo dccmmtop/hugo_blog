@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Linux搭建samba服务 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Linux搭建samba服务" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/linux%E6%90%AD%E5%BB%BAsamba%E6%9C%8D%E5%8A%A1/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Linux搭建samba服务</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/linux%E6%90%AD%E5%BB%BAsamba%E6%9C%8D%E5%8A%A1/" class="article-date">
+                <time datetime='2022-01-19T11:27:26.000&#43;00:00' itemprop="datePublished">2022-01-19</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="安装-samba">安装 samba</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install samba
+</code></pre></div><h2 id="修改配置文件">修改配置文件</h2>
+<p>修改配置文件 <code>vim  /etc/samba/smb.conf</code> 添加要共享的目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">[opt]   <span style="color:#6272a4"># 被共享目录的别名</span>
+        path = /home/dccmmtop/opt <span style="color:#6272a4"># 要共享的目录</span>
+        browseable = yes
+        writable = yes <span style="color:#6272a4"># 可以写入</span>
+        valid users = dccmmtop <span style="color:#6272a4"># 用户，该用户要有目录的权限</span>
+        create mode=0777
+        directory mode=0777
+        force create mode=0777
+        force directory mode=0777
+</code></pre></div><h2 id="添加用户">添加用户</h2>
+<p>将用户 dccmmtop 设置为可以登录 samba</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">smbpasswd -a dccmmtop    // 设置 dccmmtop 的samba服务密码，可与用户密码相同
+smbpasswd -e dccmmtop    // 启用samba用户，显示Enable则成功
+</code></pre></div><h2 id="关闭网络防火墙或添加端口">关闭网络防火墙或添加端口</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl stop firewalld.service
+</code></pre></div><p>或者开放端口</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>139/tcp --permanent
+sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>445/tcp --permanent
+sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>137/udp --permanent
+sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>138/udp --permanent
+
+sudo firewall-cmd --reload
+sudo systemctl restart firewalld.service
+</code></pre></div><h2 id="关闭selinux">关闭SELinux</h2>
+<p>安全增强型Linux（SELinux）是一个Linux内核的功能，它提供支持访问控制的安全政策保护机制
+打开 <code>/etc/selinux/config</code> ,将 <code>SELINUX</code> 设置为 disabled
+<img src="../../images/20220119113856746_8804.png" alt=""></p>
+<p>重启生效</p>
+<h3 id="临时修改">临时修改</h3>
+<p>执行命令 <code>setenforce 0</code> 临时关闭SELinux</p>
+<p>运行命令getenforce，验证SELinux状态为disabled，表明SELinux已关闭。</p>
+<h2 id="重启服务">重启服务</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl restart smb.service // 不报错说明没问题
+</code></pre></div><h2 id="windows-挂载">windows 挂载</h2>
+<p>开启windows SMB 服务，如下
+<img src="../../images/20220119114500881_12441.png" alt="">
+映射网络位置
+<img src="../../images/20220119114540876_19929.png" alt="">
+<img src="../../images/20220119114715202_10474.png" alt="">
+之后输入上面设置的用户名密码就可以了</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装-samba">安装 samba</a></li>
+    <li><a href="#修改配置文件">修改配置文件</a></li>
+    <li><a href="#添加用户">添加用户</a></li>
+    <li><a href="#关闭网络防火墙或添加端口">关闭网络防火墙或添加端口</a></li>
+    <li><a href="#关闭selinux">关闭SELinux</a>
+      <ul>
+        <li><a href="#临时修改">临时修改</a></li>
+      </ul>
+    </li>
+    <li><a href="#重启服务">重启服务</a></li>
+    <li><a href="#windows-挂载">windows 挂载</a></li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/select%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            select用法示例
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/%E6%9E%84%E5%BB%BAdocker%E7%8E%AF%E5%A2%83%E5%BC%80%E5%8F%91rails/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">构建docker环境开发Rails&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

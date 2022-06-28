@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go单元测试 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="Go单元测试" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
+    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.86.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">Go单元测试</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="article-date">
+                <time datetime='2021-11-23T23:21:17.000&#43;00:00' itemprop="datePublished">2021-11-23</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="概念">概念</h2>
+<p>测试是编程工作中非常重要的一环，但很多人却忽视了这一点，又或者只是把测试看作是一种可有可无的补充手段。Go语言提供了一些基本的测试功能，这些功能初看上去可能会显得非常原始，但正如将要介绍的那样，这些工具实际上已经能够满足程序员对自动测试的需要了。</p>
+<p>除了Go语言内置的testing包之外，还会介绍check和Ginkgo这两个流行的Go测试包，它们提供的功能比testing包更为丰富。</p>
+<h2 id="testing">testing</h2>
+<p>testing包需要与go test命令以及源代码中所有以-test.go后缀结尾的测试文件一同使用。尽管Go并没有强制要求，但一般来说，测试文件的名字都会与被测试源码文件的名字相对应。</p>
+<p>举个例子，对于源码文件server.go，我们可以创建出一个名为server-test.go的测试文件，这个测试文件包含我们想对server.go进行的所有测试。另外需要注意的一点是，被测试的源码文件和测试文件必须位于同一个包之内。</p>
+<p>为了测试源代码，用户需要在测试文件中创建具有以下格式的测试函数，其中xxx可以是任意英文字母以及数字的组合，但是首字符必须是大写的英文字母：</p>
+<p><code>func TestXxx（*testing.T）{..}</code></p>
+<p>在测试函数的内部，用户可以使用Error，Fail等一系列方法表示测试失败。当用户在终端里面执行go test命令的时候，所有符合上述格式的测试函数就会被执行。如果一个测试在执行的时候没有任何失败，就认为通过了测试</p>
+<p>一般来说，一个单元通常会与程序中的一个函数或者一个方法相对应，但这并不是必须的。程序中的一个部分能否独立地进行测试，是评判这个部分能否被归纳为“单元”的一个重要指标。</p>
+<h3 id="检测错误">检测错误</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
+        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
+    }
+
+    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
+        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
+    }
+
+}
+</code></pre></div><p>testing.T 有几个常用的方法:</p>
+<ul>
+<li>Log 将给定的文本记录到错误日志里， 与 <code>fmt.Println</code> 类似</li>
+<li>Logf 根据给定的格式,将文本记录到错误日志，与 <code>fmt.Printf</code> 类似</li>
+<li>Fail 将测试函数标记已失败，但允许测试函数继续执行</li>
+<li>FailNow 将测试函数标记已失败，并停止执行测试函数</li>
+</ul>
+<p>除此之外。还提供了其他便利的方法
+<img src="../../images/20211123234755565_19990.png" alt="">
+Error 先执行 Log 函数，再执行 Fail 函数, 其他3个类似</p>
+<h3 id="执行">执行</h3>
+<p><code>go test</code> 这条命令会执行当前目录中名字以_test.go为后缀的所有文件。结果如下</p>
+<p><img src="../../images/20211123235654454_4363.png" alt=""></p>
+<p><code>go test</code> 输出很精简, 可以加 -v 参数使输出内容更详细, -cover 获知测试用例对代码的覆盖率</p>
+<p><img src="../../images/20211123235922167_25222.png" alt=""></p>
+<h3 id="跳过测试用例">跳过测试用例</h3>
+<h4 id="skip">Skip</h4>
+<p>在进行测试驱动开发（test-driven development，TDD）的时候，通常会让测试用例持续地失败，直到函数被真正地实现出来为止；</p>
+<p>但是，为了避免测试用例在函数尚未实现之前一直打印烦人的失败信息，用户也可以使用testing.T 结构提供的skip函数，暂时跳过指定的测试用例。</p>
+<p>此外，如果某个测试用例的执行时间非常长，我们也可以在实施完整性检查（sanity check）的时候，使用Skip函数跳过该测试用例。</p>
+<p>示例代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+   <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
+</span><span style="color:#6272a4"></span>   t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
+}
+</code></pre></div><p>再次执行测试：
+<img src="../../images/20211124000145307_29055.png" alt=""></p>
+<h4 id="short">Short</h4>
+<p>除了可以直接跳过整个测试用例，用户还可以通过向go test命令传入短暂标志 <code>-short</code>，并在测试用例中使用某些条件逻辑来跳过测试中的指定部分。
+注意，这种做法跟在go test命令中通过选项来选择性地执行指定的测试不一样：选择性执行只会执行指定的测试，并跳过其他所有测试，而<code>-short</code>标志则会根据用户编写测试代码的方式，跳过测试中的指定部分或者跳过整个测试用例。</p>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+    <span style="color:#6272a4">// 如果带有 -short 参数
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
+        t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
+    }
+    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+</code></pre></div><p><img src="../../images/20211124000620614_4789.png" alt=""></p>
+<h3 id="并行测试">并行测试</h3>
+<p>正如之前所说，单元测试的目的是独立地进行测试。尽管有些时候，测试套件会因为内部存在依赖关系而无法独立地进行单元测试，但是只要单元测试可以独立地进行，用户就可以通过并行地运行测试用例来提升测试的速度了</p>
+<p>testing 通过 Parallel 方法实现并行</p>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+    t.<span style="color:#50fa7b">Parallel</span>()
+    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+    t.<span style="color:#50fa7b">Parallel</span>()
+    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+    t.<span style="color:#50fa7b">Parallel</span>()
+    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+    }
+</code></pre></div><p>通过 -parallel n 控制可以同时运行几个单元测试
+<img src="../../images/20211124221111564_7362.png" alt=""></p>
+<h3 id="基准测试">基准测试</h3>
+<p>Go 的 testing 包支持两种测试，一种是上面的功能测试，还一种就是检验程序的性能的基准测试</p>
+<ul>
+<li>基准测试用例也许要放到以 _test.go 结尾的文件中</li>
+<li>基准测试函数需要符合 func BenchmarkXXXX(b *testing.B) {&hellip;} 格式</li>
+<li>测试用例的迭代次数是Go自行决定的</li>
+<li>使用 go test -bench . 执行本目录下的所有基准测试</li>
+</ul>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 基准测试
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
+        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+    }
+
+</code></pre></div><p>结果:
+<img src="../../images/20211125232832543_24448.png" alt="">
+执行了 21745 次。花费了 55310 纳秒，即 55 毫秒</p>
+<h3 id="完整代码">完整代码</h3>
+<p>json文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">1</span>,
+  <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Hello world!&#34;</span>,
+  <span style="color:#ff79c6">&#34;author&#34;</span>:{
+    <span style="color:#ff79c6">&#34;id&#34;</span>:<span style="color:#bd93f9">2</span>,
+    <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Sau Sheong&#34;</span>
+  },
+  <span style="color:#ff79c6">&#34;comments&#34;</span>: [
+    {
+      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">3</span>,
+      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Have a great day!&#34;</span>,
+      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Adam&#34;</span>
+    },
+    {
+      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">4</span>,
+      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;How are you today?&#34;</span>,
+      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Betty&#34;</span>
+    }
+  ]
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
+
+<span style="color:#ff79c6">import</span> (
+    <span style="color:#f1fa8c">&#34;testing&#34;</span>
+    <span style="color:#f1fa8c">&#34;time&#34;</span>
+)
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
+        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
+    }
+
+    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
+        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
+    }
+
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+   t.<span style="color:#50fa7b">Parallel</span>()
+   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+   t.<span style="color:#50fa7b">Parallel</span>()
+   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+   t.<span style="color:#50fa7b">Parallel</span>()
+   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+ <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
+</span><span style="color:#6272a4"></span> t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
+}
+
+<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+   <span style="color:#6272a4">// 如果带有 -short 参数
+</span><span style="color:#6272a4"></span>   <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
+       t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
+   }
+   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
+}
+
+<span style="color:#6272a4">// 基准测试
+</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
+    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
+        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+    }
+}
+</code></pre></div>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#概念">概念</a></li>
+    <li><a href="#testing">testing</a>
+      <ul>
+        <li><a href="#检测错误">检测错误</a></li>
+        <li><a href="#执行">执行</a></li>
+        <li><a href="#跳过测试用例">跳过测试用例</a></li>
+        <li><a href="#并行测试">并行测试</a></li>
+        <li><a href="#基准测试">基准测试</a></li>
+        <li><a href="#完整代码">完整代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    <a href="../../posts/go%E6%B1%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            Go池
+        </div>
+    </a>
+    
+    
+    <a href="../../posts/go%E5%86%99%E5%85%A5json/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">Go写入json&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>
