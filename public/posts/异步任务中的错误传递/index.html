@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%E4%BC%A0%E9%80%92/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF%E4%BC%A0%E9%80%92/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -111,56 +111,56 @@
             <p>并发编程下，如何将goroutine中发生的错误传递给其他程序，从而进行优雅的处理呢，
 一种解决方案是,将异步任务中产生的错误写入通道中，在另一个程序中读取该通道，从而实现通信，二次处理错误信息</p>
 <p>例子</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
-	<span style="color:#f1fa8c">&#34;log&#34;</span>
-	<span style="color:#f1fa8c">&#34;net/http&#34;</span>
-	<span style="color:#f1fa8c">&#34;sync&#34;</span>
-)
-
-<span style="color:#6272a4">// 错误信息的封装
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> Result <span style="color:#8be9fd;font-style:italic">struct</span> {
-	Error    <span style="color:#8be9fd">error</span>
-	Response <span style="color:#ff79c6">*</span>http.Response
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-	<span style="color:#6272a4">// 又不可达的链接，会触发错误
-</span><span style="color:#6272a4"></span>	urls <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">string</span>{<span style="color:#f1fa8c">&#34;http://10.102.49.2/web_client/#/main&#34;</span>, <span style="color:#f1fa8c">&#34;http://10.102.204.36/console-acp/workspace/eop~region-k1~eop-uat8/deployment/detail/eop-dpl-cir-u6&#34;</span>, <span style="color:#f1fa8c">&#34;http://123.com&#34;</span>}
-	<span style="color:#ff79c6">for</span> result <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> <span style="color:#50fa7b">checkStatus</span>(urls) {
-		<span style="color:#ff79c6">if</span> result.Error <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-			<span style="color:#6272a4">// 在此进行错误处理
-</span><span style="color:#6272a4"></span>			fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Error: %v\n&#34;</span>, result.Error)
-			<span style="color:#ff79c6">continue</span>
-		}
-		fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Response: %v\n&#34;</span>, result.Response)
-	}
-
-}
-
-<span style="color:#6272a4">// 将任务的处理结果放入通道中，并返回
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">checkStatus</span>(urls []<span style="color:#8be9fd">string</span>) <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> Result {
-	results <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> Result)
-	<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
-		<span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(results)
-		<span style="color:#8be9fd;font-style:italic">var</span> wg sync.WaitGroup
-		<span style="color:#ff79c6">for</span> _, url <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> urls {
-			log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;visist: &#34;</span>, url)
-			wg.<span style="color:#50fa7b">Add</span>(<span style="color:#bd93f9">1</span>)
-			<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>(url <span style="color:#8be9fd">string</span>) {
-				<span style="color:#ff79c6">defer</span> wg.<span style="color:#50fa7b">Done</span>()
-				resp, err <span style="color:#ff79c6">:=</span> http.<span style="color:#50fa7b">Get</span>(url)
-				<span style="color:#6272a4">// 将结果写入通道
-</span><span style="color:#6272a4"></span>				results <span style="color:#ff79c6">&lt;-</span> Result{Error: err, Response: resp}
-			}(url)
-		}
-		wg.<span style="color:#50fa7b">Wait</span>()
-	}()
-	<span style="color:#ff79c6">return</span> results
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;sync&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 错误信息的封装
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">type</span> Result <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>	Error    <span style="color:#8be9fd">error</span>
+</span></span><span style="display:flex;"><span>	Response <span style="color:#ff79c6">*</span>http.Response
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 又不可达的链接，会触发错误
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	urls <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd">string</span>{<span style="color:#f1fa8c">&#34;http://10.102.49.2/web_client/#/main&#34;</span>, <span style="color:#f1fa8c">&#34;http://10.102.204.36/console-acp/workspace/eop~region-k1~eop-uat8/deployment/detail/eop-dpl-cir-u6&#34;</span>, <span style="color:#f1fa8c">&#34;http://123.com&#34;</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> result <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> <span style="color:#50fa7b">checkStatus</span>(urls) {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> result.Error <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#6272a4">// 在此进行错误处理
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>			fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Error: %v\n&#34;</span>, result.Error)
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Response: %v\n&#34;</span>, result.Response)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 将任务的处理结果放入通道中，并返回
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">checkStatus</span>(urls []<span style="color:#8be9fd">string</span>) <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> Result {
+</span></span><span style="display:flex;"><span>	results <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> Result)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(results)
+</span></span><span style="display:flex;"><span>		<span style="color:#8be9fd;font-style:italic">var</span> wg sync.WaitGroup
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">for</span> _, url <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> urls {
+</span></span><span style="display:flex;"><span>			log.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;visist: &#34;</span>, url)
+</span></span><span style="display:flex;"><span>			wg.<span style="color:#50fa7b">Add</span>(<span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>(url <span style="color:#8be9fd">string</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#ff79c6">defer</span> wg.<span style="color:#50fa7b">Done</span>()
+</span></span><span style="display:flex;"><span>				resp, err <span style="color:#ff79c6">:=</span> http.<span style="color:#50fa7b">Get</span>(url)
+</span></span><span style="display:flex;"><span>				<span style="color:#6272a4">// 将结果写入通道
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>				results <span style="color:#ff79c6">&lt;-</span> Result{Error: err, Response: resp}
+</span></span><span style="display:flex;"><span>			}(url)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		wg.<span style="color:#50fa7b">Wait</span>()
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> results
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -180,7 +180,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

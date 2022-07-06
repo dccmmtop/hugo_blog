@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E8%AF%BB%E5%86%99csv/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E8%AF%BB%E5%86%99csv/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,65 +114,64 @@
 <p>反之，如果FieldsPerRecord字段的值为正数，那么这个值就是用户要求从每条记录里面读取出的字段数量，当读取器从CsV文件里面读取出的字段数量少于这个值时，Go就会抛出一个错误。</p>
 <p>最后，<strong>如果FieldsPerRecord字段的值为0，那么读取器就会将读取到的第一条记录的字段数量用作FieldsPerRecord的值。</strong></p>
 <p>在设置好FieldsPerRecord字段之后，程序会调用读取器的ReadAl1方法，一次性地读取文件中包含的所有记录；但如果文件的体积较大，用户也可以通过读取器提供的其他方法，以每次一条记录的方式读取文件。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;encoding/csv&#34;</span>
-    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-    <span style="color:#f1fa8c">&#34;os&#34;</span>
-    <span style="color:#f1fa8c">&#34;strconv&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
-    Id <span style="color:#8be9fd">int</span>
-    Content <span style="color:#8be9fd">string</span>
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    csvFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;testCsv.csv&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    <span style="color:#ff79c6">defer</span> csvFile.<span style="color:#50fa7b">Close</span>()
-    csvWriter <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewWriter</span>(csvFile)
-
-    allPost <span style="color:#ff79c6">:=</span> []Blog{
-        {Id: <span style="color:#bd93f9">1</span>, Content: <span style="color:#f1fa8c">&#34;昨夜西风凋敝树&#34;</span>},
-        {Id: <span style="color:#bd93f9">2</span>, Content: <span style="color:#f1fa8c">&#34;忽如一夜春风来&#34;</span>},
-        {Id: <span style="color:#bd93f9">3</span>, Content: <span style="color:#f1fa8c">&#34;千树万树梨花开&#34;</span>},
-        {Id: <span style="color:#bd93f9">4</span>, Content: <span style="color:#f1fa8c">&#34;卷我屋上三重茅&#34;</span>},
-    }
-
-    <span style="color:#ff79c6">for</span> _, blog <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> allPost {
-        csvWriter.<span style="color:#50fa7b">Write</span>([]<span style="color:#8be9fd">string</span>{strconv.<span style="color:#50fa7b">Itoa</span>(blog.Id), blog.Content})
-    }
-    csvWriter.<span style="color:#50fa7b">Flush</span>()
-
-    <span style="color:#6272a4">// 读取csv
-</span><span style="color:#6272a4"></span>    file,err  <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;./testCsv.csv&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#ff79c6">nil</span>)
-    }
-    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
-
-    csvReader <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewReader</span>(file)
-    <span style="color:#6272a4">// 设置每行至少的列数,遇到少于此数的行数会报错。-1 代表不检查列数
-</span><span style="color:#6272a4"></span>    csvReader.FieldsPerRecord = <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
-    record, err <span style="color:#ff79c6">:=</span> csvReader.<span style="color:#50fa7b">ReadAll</span>()
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-
-    <span style="color:#8be9fd;font-style:italic">var</span> posts []Blog
-    <span style="color:#ff79c6">for</span> _, item <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> record {
-        id ,_ <span style="color:#ff79c6">:=</span> strconv.<span style="color:#50fa7b">ParseInt</span>(item[<span style="color:#bd93f9">0</span>],<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">0</span>)
-        post <span style="color:#ff79c6">:=</span> Blog{Id: <span style="color:#8be9fd;font-style:italic">int</span>(id), Content: item[<span style="color:#bd93f9">1</span>]}
-        posts = <span style="color:#8be9fd;font-style:italic">append</span>(posts,post)
-    }
-    fmt.<span style="color:#50fa7b">Println</span>(posts[<span style="color:#bd93f9">0</span>])
-}
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;encoding/csv&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;strconv&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>    Id <span style="color:#8be9fd">int</span>
+</span></span><span style="display:flex;"><span>    Content <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    csvFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;testCsv.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> csvFile.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>    csvWriter <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewWriter</span>(csvFile)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    allPost <span style="color:#ff79c6">:=</span> []Blog{
+</span></span><span style="display:flex;"><span>        {Id: <span style="color:#bd93f9">1</span>, Content: <span style="color:#f1fa8c">&#34;昨夜西风凋敝树&#34;</span>},
+</span></span><span style="display:flex;"><span>        {Id: <span style="color:#bd93f9">2</span>, Content: <span style="color:#f1fa8c">&#34;忽如一夜春风来&#34;</span>},
+</span></span><span style="display:flex;"><span>        {Id: <span style="color:#bd93f9">3</span>, Content: <span style="color:#f1fa8c">&#34;千树万树梨花开&#34;</span>},
+</span></span><span style="display:flex;"><span>        {Id: <span style="color:#bd93f9">4</span>, Content: <span style="color:#f1fa8c">&#34;卷我屋上三重茅&#34;</span>},
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> _, blog <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> allPost {
+</span></span><span style="display:flex;"><span>        csvWriter.<span style="color:#50fa7b">Write</span>([]<span style="color:#8be9fd">string</span>{strconv.<span style="color:#50fa7b">Itoa</span>(blog.Id), blog.Content})
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    csvWriter.<span style="color:#50fa7b">Flush</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 读取csv
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    file,err  <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;./testCsv.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(<span style="color:#ff79c6">nil</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">defer</span> file.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    csvReader <span style="color:#ff79c6">:=</span> csv.<span style="color:#50fa7b">NewReader</span>(file)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 设置每行至少的列数,遇到少于此数的行数会报错。-1 代表不检查列数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    csvReader.FieldsPerRecord = <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>    record, err <span style="color:#ff79c6">:=</span> csvReader.<span style="color:#50fa7b">ReadAll</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">var</span> posts []Blog
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> _, item <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">range</span> record {
+</span></span><span style="display:flex;"><span>        id ,_ <span style="color:#ff79c6">:=</span> strconv.<span style="color:#50fa7b">ParseInt</span>(item[<span style="color:#bd93f9">0</span>],<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">0</span>)
+</span></span><span style="display:flex;"><span>        post <span style="color:#ff79c6">:=</span> Blog{Id: <span style="color:#8be9fd;font-style:italic">int</span>(id), Content: item[<span style="color:#bd93f9">1</span>]}
+</span></span><span style="display:flex;"><span>        posts = <span style="color:#8be9fd;font-style:italic">append</span>(posts,post)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Println</span>(posts[<span style="color:#bd93f9">0</span>])
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -192,7 +191,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

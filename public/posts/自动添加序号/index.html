@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -112,27 +112,27 @@
 <p>给一段文字自动添加序号，要求本行的序号可以根据上一行的序号自动增一，若上一行没有序号，则从 1 开始</p>
 <h3 id="实现">实现</h3>
 <p>用 ruby 编写 vim 脚本非常容易实现</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#6272a4">&#34; 每行的前面添加序号，根据上一行序号自动递增，若上一行没有序号，则从1开始</span>
-<span style="color:#ff79c6">function</span>! num#add_num()
-ruby &lt;&lt; EOF
-  def get_current_line()
-    count = <span style="color:#bd93f9">0</span>
-<span style="color:#6272a4">    &#34; 得到当前缓冲区</span>
-    cb = Vim::Buffer.current
-<span style="color:#6272a4">    &#34; 得到上一行的行号</span>
-    previousLine = cb.line_number - <span style="color:#bd93f9">1</span>
-<span style="color:#6272a4">    &#34; 如果行号存在，并且以数字开头</span>
-    <span style="color:#ff79c6">if</span> previousLine &gt;= <span style="color:#bd93f9">1</span> &amp;&amp; cb[previousLine] =~ <span style="color:#f1fa8c">/^\d+/</span>
-<span style="color:#6272a4">    &#34; 得到上一行的序号</span>
-      count = $&amp;.to_i
-    end
-<span style="color:#6272a4">    &#34; 修改本行内容</span>
-    cb.line = <span style="color:#f1fa8c">&#34;#{count + 1}. #{line}&#34;</span>
-  end
-get_current_line()
-EOF
-<span style="color:#ff79c6">endfunction</span>
-</code></pre></div><h3 id="添加自定义命令">添加自定义命令</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#6272a4">&#34; 每行的前面添加序号，根据上一行序号自动递增，若上一行没有序号，则从1开始</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span>! num#add_num()
+</span></span><span style="display:flex;"><span>ruby &lt;&lt; EOF
+</span></span><span style="display:flex;"><span>  def get_current_line()
+</span></span><span style="display:flex;"><span>    count = <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">    &#34; 得到当前缓冲区</span>
+</span></span><span style="display:flex;"><span>    cb = Vim::Buffer.current
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">    &#34; 得到上一行的行号</span>
+</span></span><span style="display:flex;"><span>    previousLine = cb.line_number - <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">    &#34; 如果行号存在，并且以数字开头</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> previousLine &gt;= <span style="color:#bd93f9">1</span> &amp;&amp; cb[previousLine] =~ <span style="color:#f1fa8c">/^\d+/</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">    &#34; 得到上一行的序号</span>
+</span></span><span style="display:flex;"><span>      count = $&amp;.to_i
+</span></span><span style="display:flex;"><span>    end
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">    &#34; 修改本行内容</span>
+</span></span><span style="display:flex;"><span>    cb.line = <span style="color:#f1fa8c">&#34;#{count + 1}. #{line}&#34;</span>
+</span></span><span style="display:flex;"><span>  end
+</span></span><span style="display:flex;"><span>get_current_line()
+</span></span><span style="display:flex;"><span>EOF
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">endfunction</span>
+</span></span></code></pre></div><h3 id="添加自定义命令">添加自定义命令</h3>
 <p>在<code>.vimrc</code>中，添加如下一行</p>
 <p><code>command! -range=% AddNum :&lt;line1&gt;,&lt;line2&gt; cal num#add_num()</code>
 关于自定义命令请查看这篇文章：<a href="https://dccmm.world/topics/vim%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4">vim 添加自定义命令</a></p>
@@ -169,7 +169,7 @@ EOF
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                     </a>
                 </li>
                 

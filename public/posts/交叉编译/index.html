@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,26 +110,26 @@
         <div class="article-entry" itemprop="articleBody">
             <h2 id="1mac下编译linux-windows">1.Mac下编译Linux, Windows</h2>
 <h3 id="linux">Linux</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>linux <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
-</code></pre></div><h3 id="windows">Windows</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>windows <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
-</code></pre></div><p>如: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o helloworld-windows helloworld.go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>linux <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
+</span></span></code></pre></div><h3 id="windows">Windows</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>windows <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
+</span></span></code></pre></div><p>如: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o helloworld-windows helloworld.go</p>
 <h2 id="2linux下编译mac-windows">2.Linux下编译Mac, Windows</h2>
 <h3 id="mac">Mac</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>darwin <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
-</code></pre></div><h3 id="windows-1">Windows</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>windows <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
-</code></pre></div><h2 id="3windows下编译mac-linux">3.Windows下编译Mac, Linux</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>darwin <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
+</span></span></code></pre></div><h3 id="windows-1">Windows</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>windows <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64 go build filename.go
+</span></span></code></pre></div><h2 id="3windows下编译mac-linux">3.Windows下编译Mac, Linux</h2>
 <h3 id="mac-1">Mac</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">SET <span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
-SET <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>darwin
-SET <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64
-go build filename.go
-</code></pre></div><h3 id="linux-1">Linux</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">SET <span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
-SET <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>linux
-SET <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64
-</code></pre></div><p>go build filename.go</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>darwin
+</span></span><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64
+</span></span><span style="display:flex;"><span>go build filename.go
+</span></span></code></pre></div><h3 id="linux-1">Linux</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">CGO_ENABLED</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">GOOS</span><span style="color:#ff79c6">=</span>linux
+</span></span><span style="display:flex;"><span>SET <span style="color:#8be9fd;font-style:italic">GOARCH</span><span style="color:#ff79c6">=</span>amd64
+</span></span></code></pre></div><p>go build filename.go</p>
 
         </div>
 

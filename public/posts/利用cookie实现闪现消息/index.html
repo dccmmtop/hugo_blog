@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%88%A9%E7%94%A8cookie%E5%AE%9E%E7%8E%B0%E9%97%AA%E7%8E%B0%E6%B6%88%E6%81%AF/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%88%A9%E7%94%A8cookie%E5%AE%9E%E7%8E%B0%E9%97%AA%E7%8E%B0%E6%B6%88%E6%81%AF/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,93 +114,93 @@
 <p>实现闪现消息的方法有很多种，但最常用的方法是把这些消息存储在页面刷新时就会被移除的会话cookie里面</p>
 <h2 id="添加闪现消息到cookie">添加闪现消息到cookie</h2>
 <p>setMessage处理器函数的定义跟之前展示过的setCookie处理器函数的定义非常相似，主要的区别在于setMessage对消息使用了Base64URL编码，以此来满足响应首部对cookie值的URL编码要求。在设置cookie时，如果cookie的值没有包含诸如空格或者百分号这样的特殊字符，那么不对它进行编码也是可以的；但是因为在发送闪现消息时，消息本身通常会包含诸如空格这样的字符，所以对cookie的值进行编码就成了一件必不可少的事情了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
-    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
-        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
-        <span style="color:#6272a4">// 必须对 cookie 进行url编码
-</span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
-    }
-    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
-}
-</code></pre></div><h2 id="展示闪现消息">展示闪现消息</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 展示闪现消息
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
-            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
-            <span style="color:#ff79c6">return</span>
-        }
-    }
-
-    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
-</span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
-        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
-        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
-        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
-    }
-    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
-}
-</code></pre></div><p>这个函数首先会尝试获取指定的cookie，如果没有找到该cookie，它就会把变量err设置成一个http.ErrNoCookie值，并向浏览器返回一条&quot;No message found&quot;消息。如果找到了这个cookie，那么它必须完成以下两个操作</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
+</span></span><span style="display:flex;"><span>    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
+</span></span><span style="display:flex;"><span>        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// 必须对 cookie 进行url编码
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="展示闪现消息">展示闪现消息</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 展示闪现消息
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
+</span></span><span style="display:flex;"><span>            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
+</span></span><span style="display:flex;"><span>        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+</span></span><span style="display:flex;"><span>        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>这个函数首先会尝试获取指定的cookie，如果没有找到该cookie，它就会把变量err设置成一个http.ErrNoCookie值，并向浏览器返回一条&quot;No message found&quot;消息。如果找到了这个cookie，那么它必须完成以下两个操作</p>
 <ol>
 <li>创建一个同名的cookie，将它的MaxAge值设置为负数，并且将Expires值也设置成一个已经过去的时间；</li>
 <li>使用SetCookie方法将刚刚创建的同名cookie发送至客户端。</li>
 </ol>
 <p>初看上去，这两个操作的目的似乎是要替换已经存在的cookie，但实际上，因为新cookie的MaxAge值为负数，并且Expires值也是一个已经过去的时间，所以这样做实际上就是要完全地移除这个cookie。在设置完新cookie之后，程序会对存储在旧cookie中的消息进行解码，并通过响应返回这条消息。</p>
 <h2 id="完整代码">完整代码</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;encoding/base64&#34;</span>
-    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
-    <span style="color:#f1fa8c">&#34;time&#34;</span>
-)
-
-<span style="color:#6272a4">/**
-</span><span style="color:#6272a4"> * 利用cookie实现闪现消息
-</span><span style="color:#6272a4"> */</span>
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    server <span style="color:#ff79c6">:=</span> http.Server{
-        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
-    }
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;setMessage&#34;</span>,setMessage)
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;showMessage&#34;</span>,showMessage)
-    server.<span style="color:#50fa7b">ListenAndServe</span>()
-}
-
-<span style="color:#6272a4">// 展示闪现消息
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
-            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
-            <span style="color:#ff79c6">return</span>
-        }
-    }
-
-    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
-</span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
-        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
-        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
-        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
-    }
-    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
-    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
-        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
-        <span style="color:#6272a4">// 必须对 cookie 进行url编码
-</span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
-    }
-    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;encoding/base64&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"> * 利用cookie实现闪现消息
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    server <span style="color:#ff79c6">:=</span> http.Server{
+</span></span><span style="display:flex;"><span>        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;setMessage&#34;</span>,setMessage)
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;showMessage&#34;</span>,showMessage)
+</span></span><span style="display:flex;"><span>    server.<span style="color:#50fa7b">ListenAndServe</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 展示闪现消息
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">showMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    msg, err <span style="color:#ff79c6">:=</span> r.<span style="color:#50fa7b">Cookie</span>(<span style="color:#f1fa8c">&#34;flash&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">==</span> http.ErrNoCookie {
+</span></span><span style="display:flex;"><span>            fmt.<span style="color:#50fa7b">Fprintln</span>(w, <span style="color:#f1fa8c">&#34;not found message&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 使cookie过期，让浏览器删除cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    cookie <span style="color:#ff79c6">:=</span> http.Cookie{
+</span></span><span style="display:flex;"><span>        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+</span></span><span style="display:flex;"><span>        MaxAge: <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>        Expires: time.<span style="color:#50fa7b">Unix</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">0</span>),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">SetCookie</span>(w, <span style="color:#ff79c6">&amp;</span>cookie)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w, msg)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">setMessage</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    msg <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">byte</span>(<span style="color:#f1fa8c">&#34;创建失败，缺少必填字段!&#34;</span>)
+</span></span><span style="display:flex;"><span>    cookie <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">&amp;</span>http.Cookie{
+</span></span><span style="display:flex;"><span>        Name: <span style="color:#f1fa8c">&#34;flash&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// 必须对 cookie 进行url编码
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        Value: base64.URLEncoding.<span style="color:#50fa7b">EncodeToString</span>(msg),
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">SetCookie</span>(w, cookie)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -226,7 +226,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

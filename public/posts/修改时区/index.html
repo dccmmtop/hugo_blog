@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,15 +114,15 @@ CentOS和Ubuntu的时区文件是/etc/localtime，但是在CentOS7以后localtim
 lrwxrwxrwx 1 root root 33 Oct 12 11:01 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Shanghai
 如果采用直接cp的方法修改系统时区，那么就会把它所链接的文件修改掉，例如把美国的时区文件内容修改成了上海的时区内容，有可能会导致有些编程语言或程序在读取系统时区的时候发生错误，因此正确的修改方法是：</p>
 <p>CentOS6、Ubuntu16</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-</code></pre></div><p>CentOS7、RHEL7、Scientific Linux 7、Oracle Linux 7
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></div><p>CentOS7、RHEL7、Scientific Linux 7、Oracle Linux 7
 最好的方法是使用timedatectl命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> timedatectl list-timezones |grep Shanghai    <span style="color:#6272a4">#查找中国时区的完整名称</span>
-</code></pre></div><p>Asia/Shanghai</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> timedatectl list-timezones |grep Shanghai    <span style="color:#6272a4">#查找中国时区的完整名称</span>
+</span></span></code></pre></div><p>Asia/Shanghai</p>
 <p>timedatectl set-timezone Asia/Shanghai    #其他时区以此类推</p>
 <h2 id="或者直接手动创建软链接验证过">或者直接手动创建软链接(验证过)</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</span></span></code></pre></div>
         </div>
 
         

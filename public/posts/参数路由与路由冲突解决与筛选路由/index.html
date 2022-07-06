@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%8F%82%E6%95%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E4%B8%8E%E7%AD%9B%E9%80%89%E8%B7%AF%E7%94%B1/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%8F%82%E6%95%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%E4%B8%8E%E7%AD%9B%E9%80%89%E8%B7%AF%E7%94%B1/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,45 +110,44 @@
         <div class="article-entry" itemprop="articleBody">
             <p>有时候我需要写一个页面能向show edit 那样可以接受参数的路由,弄了好久不知道怎样解决,今天恍然大悟</p>
 <p>我们执行 <code>rake routes</code> 就会看到如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">                     wechat_nodes GET      <span style="color:#f1fa8c">/wechat/no</span>des(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                                  wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#index</span>
-                                  POST     <span style="color:#f1fa8c">/wechat/no</span>des(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                                  wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#create</span>
-                  new_wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#ff79c6">new</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#new</span>
-                 edit_wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">/</span>edit(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                         wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#edit</span>
-                      wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#show</span>
-                                  PATCH    <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#update</span>
-                                  PUT      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#update</span>
-                                  DELETE   <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#destroy</span>
-
-</code></pre></div><p>这是使用resources 生成一些路由,我们可以模仿写出自己的路由</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>                     wechat_nodes GET      <span style="color:#f1fa8c">/wechat/no</span>des(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                                  wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#index</span>
+</span></span><span style="display:flex;"><span>                                  POST     <span style="color:#f1fa8c">/wechat/no</span>des(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                                  wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#create</span>
+</span></span><span style="display:flex;"><span>                  new_wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#ff79c6">new</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#new</span>
+</span></span><span style="display:flex;"><span>                 edit_wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">/</span>edit(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                         wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#edit</span>
+</span></span><span style="display:flex;"><span>                      wechat_node GET      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#show</span>
+</span></span><span style="display:flex;"><span>                                  PATCH    <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#update</span>
+</span></span><span style="display:flex;"><span>                                  PUT      <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#update</span>
+</span></span><span style="display:flex;"><span>                                  DELETE   <span style="color:#f1fa8c">/wechat/no</span>des<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)                              wechat<span style="color:#ff79c6">/</span>nodes<span style="color:#6272a4">#destroy</span>
+</span></span></code></pre></div><p>这是使用resources 生成一些路由,我们可以模仿写出自己的路由</p>
 <p>我们看最后一列的内容,  对于show 来说 他的格式为<code>/wechat/nodes/:id</code> 再看edit 他的格式是<code>/wechat/nodes/:id/edit</code></p>
 <p>加入我们要想写一个/wechat/node/edit/34/topic/23 类似的路由,我们可以直接这样写</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resources nodes <span style="color:#ff79c6">do</span> 
-  collection <span style="color:#ff79c6">do</span> 
-    get <span style="color:#f1fa8c">&#39;edit/:id/topic/:node_id&#39;</span>, <span style="color:#f1fa8c">to</span>: <span style="color:#f1fa8c">&#39;nodes#topic&#39;</span> , <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">&#39;topic_edit&#39;</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这里为什么会有一个<code>as</code>呢,因为没有<code>as</code>和其后面的名称的话,这样是没有前面的路由信息的.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>resources nodes <span style="color:#ff79c6">do</span> 
+</span></span><span style="display:flex;"><span>  collection <span style="color:#ff79c6">do</span> 
+</span></span><span style="display:flex;"><span>    get <span style="color:#f1fa8c">&#39;edit/:id/topic/:node_id&#39;</span>, <span style="color:#f1fa8c">to</span>: <span style="color:#f1fa8c">&#39;nodes#topic&#39;</span> , <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">&#39;topic_edit&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这里为什么会有一个<code>as</code>呢,因为没有<code>as</code>和其后面的名称的话,这样是没有前面的路由信息的.</p>
 <h3 id="筛选路由-路由冲突的解决方案">筛选路由-路由冲突的解决方案</h3>
 <p>Rails项目有一个Article模型,对应ArticlesController控制器,其路由设置如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resources <span style="color:#f1fa8c">:articles</span> <span style="color:#ff79c6">do</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这样它的CRUD路径就都自动创建出来了 ;)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>resources <span style="color:#f1fa8c">:articles</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这样它的CRUD路径就都自动创建出来了 ;)</p>
 <p>现在我想再添加一个对Article模型搜索的页面,那么首先要在控制器中添加对应的search方法:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">search</span>   
-  render <span style="color:#f1fa8c">text</span>:<span style="color:#f1fa8c">&#34;hello search!!!&#34;</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>然后在Article默认路由集合后面添加一行新路由:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">search</span>   
+</span></span><span style="display:flex;"><span>  render <span style="color:#f1fa8c">text</span>:<span style="color:#f1fa8c">&#34;hello search!!!&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>然后在Article默认路由集合后面添加一行新路由:</p>
 <p><code>get &quot;articles/search&quot;,to:&quot;articles#search&quot;</code>1</p>
 <p>现在我们访问一下articles/search页面,咦?怎么出错了:</p>
 <p><img src="http://img.blog.csdn.net/20170310112802687?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbXlkbw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>仔细看出错信息,原来Article之前的show路由恰恰可以匹配新的search路由,只不过原来的:id变成了search这个字符串哦.这就是为什么报Couldn’t find Article with id=search的原因了!</p>
 <p>下面给出解决,我们只需要先禁用默认的show路由:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resources <span style="color:#f1fa8c">:articles</span>,<span style="color:#f1fa8c">except</span>:<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:show</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">do</span>    
-  resources <span style="color:#f1fa8c">:comments</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>然后再生成一条筛选路由即可,所谓筛选路由就是对该路由内容进行细粒度匹配的方法:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">get <span style="color:#f1fa8c">&#34;articles/:id&#34;</span>,<span style="color:#f1fa8c">to</span>:<span style="color:#f1fa8c">&#34;articles#show&#34;</span>,<span style="color:#f1fa8c">constraints</span>:{<span style="color:#8be9fd;font-style:italic">id</span><span style="color:#f1fa8c">:/</span>\d<span style="color:#ff79c6">+/</span>}
-</code></pre></div><p>路由都是从上之下依次匹配的,如果上面一条被匹配则路由匹配结束!这里只匹配id为数字的articles/xxx路径,所以search就会默认被忽略从而被后面search正确的路由所匹配!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>resources <span style="color:#f1fa8c">:articles</span>,<span style="color:#f1fa8c">except</span>:<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:show</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">do</span>    
+</span></span><span style="display:flex;"><span>  resources <span style="color:#f1fa8c">:comments</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>然后再生成一条筛选路由即可,所谓筛选路由就是对该路由内容进行细粒度匹配的方法:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>get <span style="color:#f1fa8c">&#34;articles/:id&#34;</span>,<span style="color:#f1fa8c">to</span>:<span style="color:#f1fa8c">&#34;articles#show&#34;</span>,<span style="color:#f1fa8c">constraints</span>:{<span style="color:#8be9fd;font-style:italic">id</span><span style="color:#f1fa8c">:/</span>\d<span style="color:#ff79c6">+/</span>}
+</span></span></code></pre></div><p>路由都是从上之下依次匹配的,如果上面一条被匹配则路由匹配结束!这里只匹配id为数字的articles/xxx路径,所以search就会默认被忽略从而被后面search正确的路由所匹配!</p>
 
         </div>
 
@@ -177,7 +176,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

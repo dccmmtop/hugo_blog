@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E6%9C%80%E9%95%BF%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -113,65 +113,62 @@
 r 向右移动，记录每个字符的最后一次出现的位置 m
 如果当前字符在 m 中存在,并且重复字符出现的位置在l右侧,让l移动到重复字符的下一个位置,跳过重复的字符
 r每次移动时，计算r与l的距离,记录最大值</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">lengthOfLongestSubstring</span>(s <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">int</span> {
-	c <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s)
-	size <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">len</span>(c)
-	<span style="color:#ff79c6">if</span> size <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1</span> {
-		<span style="color:#ff79c6">return</span> size
-	}
-	l, r, maxLen, k <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>
-	ok <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">false</span>
-
-	m <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">rune</span>]<span style="color:#8be9fd">int</span>, size)
-	<span style="color:#ff79c6">for</span> ; r &lt; size; r<span style="color:#ff79c6">++</span> {
-
-		<span style="color:#ff79c6">if</span> k, ok = m[c[r]]; ok <span style="color:#ff79c6">&amp;&amp;</span> k <span style="color:#ff79c6">&gt;=</span> l {
-			l = k <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
-		}
-		<span style="color:#ff79c6">if</span> r<span style="color:#ff79c6">-</span>l<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span> &gt; maxLen {
-			maxLen = r <span style="color:#ff79c6">-</span> l <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
-		}
-		m[c[r]] = r
-	}
-	<span style="color:#ff79c6">return</span> maxLen
-}
-
-</code></pre></div><h3 id="第二种">第二种</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">lengthOfLongestSubstring</span>(s <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">int</span> {
+</span></span><span style="display:flex;"><span>	c <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s)
+</span></span><span style="display:flex;"><span>	size <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">len</span>(c)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> size <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> size
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	l, r, maxLen, k <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>	ok <span style="color:#ff79c6">:=</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	m <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">map</span>[<span style="color:#8be9fd">rune</span>]<span style="color:#8be9fd">int</span>, size)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> ; r &lt; size; r<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> k, ok = m[c[r]]; ok <span style="color:#ff79c6">&amp;&amp;</span> k <span style="color:#ff79c6">&gt;=</span> l {
+</span></span><span style="display:flex;"><span>			l = k <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> r<span style="color:#ff79c6">-</span>l<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span> &gt; maxLen {
+</span></span><span style="display:flex;"><span>			maxLen = r <span style="color:#ff79c6">-</span> l <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		m[c[r]] = r
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> maxLen
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="第二种">第二种</h3>
 <p>速度与第一种差不多，但内存占用少</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">lengthOfLongestSubstring</span>(s <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">int</span> {
-	c <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s)
-	size <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">len</span>(c)
-	<span style="color:#ff79c6">if</span> size <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1</span> {
-		<span style="color:#ff79c6">return</span> size
-	}
-	l, r, maxLen <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>
-
-	<span style="color:#6272a4">// 标记字符最后一次出现的位置,不可以使用默认0值，因为下标是从0开始的
-</span><span style="color:#6272a4"></span>	m <span style="color:#ff79c6">:=</span> [<span style="color:#bd93f9">128</span>]<span style="color:#8be9fd">int</span>{}
-	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">128</span>; i<span style="color:#ff79c6">++</span> {
-		m[i] = <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
-	}
-	<span style="color:#ff79c6">for</span> ; r &lt; size; r<span style="color:#ff79c6">++</span> {
-
-		<span style="color:#6272a4">// 当出现重复字符时，左标记跳到该字符的下一个位置
-</span><span style="color:#6272a4"></span>		l = <span style="color:#50fa7b">max</span>(l, m[c[r]]<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>)
-		<span style="color:#6272a4">// 记录窗口最大长度
-</span><span style="color:#6272a4"></span>		maxLen = <span style="color:#50fa7b">max</span>(maxLen, r<span style="color:#ff79c6">-</span>l<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>)
-		<span style="color:#6272a4">// 记录字符出现的位置
-</span><span style="color:#6272a4"></span>		m[c[r]] = r
-	}
-	<span style="color:#ff79c6">return</span> maxLen
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">max</span>(a <span style="color:#8be9fd">int</span>, b <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
-	<span style="color:#ff79c6">if</span> a &gt; b {
-		<span style="color:#ff79c6">return</span> a
-	}
-	<span style="color:#ff79c6">return</span> b
-}
-
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">lengthOfLongestSubstring</span>(s <span style="color:#8be9fd">string</span>) <span style="color:#8be9fd">int</span> {
+</span></span><span style="display:flex;"><span>	c <span style="color:#ff79c6">:=</span> []<span style="color:#8be9fd;font-style:italic">rune</span>(s)
+</span></span><span style="display:flex;"><span>	size <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">len</span>(c)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> size <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> size
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	l, r, maxLen <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>, <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 标记字符最后一次出现的位置,不可以使用默认0值，因为下标是从0开始的
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	m <span style="color:#ff79c6">:=</span> [<span style="color:#bd93f9">128</span>]<span style="color:#8be9fd">int</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">128</span>; i<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>		m[i] = <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> ; r &lt; size; r<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// 当出现重复字符时，左标记跳到该字符的下一个位置
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		l = <span style="color:#50fa7b">max</span>(l, m[c[r]]<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// 记录窗口最大长度
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		maxLen = <span style="color:#50fa7b">max</span>(maxLen, r<span style="color:#ff79c6">-</span>l<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// 记录字符出现的位置
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		m[c[r]] = r
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> maxLen
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">max</span>(a <span style="color:#8be9fd">int</span>, b <span style="color:#8be9fd">int</span>) <span style="color:#8be9fd">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> a &gt; b {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> a
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> b
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -200,12 +197,12 @@ r每次移动时，计算r与l的距离,记录最大值</p>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E7%AE%97%E6%B3%95">算法
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E7%AE%97%E6%B3%95">算法
                     </a>
                 </li>
                 

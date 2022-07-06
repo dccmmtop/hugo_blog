@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails_action_cable%E4%BD%BF%E7%94%A8/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails_action_cable%E4%BD%BF%E7%94%A8/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,117 +114,117 @@
 <li>bundle install</li>
 </ol>
 <h3 id="修改-cableyml">修改 cable.yml</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#ff79c6">development</span>:
-  <span style="color:#ff79c6">adapter</span>: redis
-</code></pre></div><h3 id="生成订阅">生成订阅</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ff79c6">development</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">adapter</span>: redis
+</span></span></code></pre></div><h3 id="生成订阅">生成订阅</h3>
 <p><code>rails g channel block speak</code></p>
 <h3 id="连接设置">连接设置</h3>
 <blockquote>
 <p>连接是客户端-服务器通信的基础。每当服务器接受一个 WebSocket，就会实例化一个连接对象。所有频道订阅（channel subscription）都是在继承连接对象的基础上创建的。连接本身并不处理身份验证和授权之外的任何应用逻辑。WebSocket 连接的客户端被称为连接用户（connection consumer）。每当用户新打开一个浏览器标签、窗口或设备，对应地都会新建一个用户-连接对（consumer-connection pair）。 连接是 ApplicationCable::Connection 类的实例。对连接的授权就是在这个类中完成的，对于能够识别的用户，才会继续建立连接。</p>
 </blockquote>
 <p>例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">module</span> ApplicationCable
-  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Connection</span> <span style="color:#ff79c6">&lt;</span> ActionCable<span style="color:#ff79c6">::</span>Connection<span style="color:#ff79c6">::</span>Base
-    identified_by <span style="color:#f1fa8c">:current_user</span>
-
-    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">connect</span>
-      <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>current_user <span style="color:#ff79c6">=</span> find_verified_user
-    <span style="color:#ff79c6">end</span>
-
-    <span style="color:#ff79c6">private</span>
-      <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">find_verified_user</span>
-        <span style="color:#ff79c6">if</span> cu_user <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#8be9fd;font-style:italic">id</span>: cookies<span style="color:#ff79c6">.</span>signed<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_id</span><span style="color:#ff79c6">]</span>)
-          cu_user
-        <span style="color:#ff79c6">else</span>
-          reject_unauthorized_connection
-        <span style="color:#ff79c6">end</span>
-      <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>action cable 中不能使用 session，我们可以用 cookie 来验证用户。下面在 SessionHelper 中加入 cookie，方便 action cable 使用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">module</span> SessionsHelper
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">log_in</span>(user)
-    session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> user<span style="color:#ff79c6">.</span>address
-    user <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#f1fa8c">address</span>: session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span>)
-    <span style="color:#ff79c6">if</span> user
-      cookies<span style="color:#ff79c6">.</span>permanent<span style="color:#ff79c6">.</span>signed<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_id</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> user<span style="color:#ff79c6">.</span>id
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">current_user</span>
-    <span style="color:#8be9fd;font-style:italic">@current_user</span> <span style="color:#ff79c6">||=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#f1fa8c">address</span>: session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span>)
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">logged_in?</span>
-    <span style="color:#ff79c6">!</span>current_user<span style="color:#ff79c6">.</span>nil?
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">log_out</span>
-    session<span style="color:#ff79c6">.</span>delete(<span style="color:#f1fa8c">:user_address</span>)
-    <span style="color:#8be9fd;font-style:italic">@current_user</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">nil</span>
-    cookies<span style="color:#ff79c6">.</span>delete(<span style="color:#f1fa8c">:user_id</span>)
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><h3 id="订阅">订阅</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coffee" data-lang="coffee"><span style="color:#8be9fd;font-style:italic">App.block = </span>App.cable.subscriptions.create <span style="color:#8be9fd;font-style:italic">channel: </span><span style="color:#f1fa8c">&#34;BlockChannel&#34;</span>,
-  <span style="color:#8be9fd;font-style:italic">connected: </span><span style="color:#50fa7b">-&gt;</span>
-    <span style="color:#6272a4"># Called when the subscription is ready for use on the server
-</span><span style="color:#6272a4"></span>
-  <span style="color:#8be9fd;font-style:italic">disconnected: </span><span style="color:#50fa7b">-&gt;</span>
-    <span style="color:#6272a4"># Called when the subscription has been terminated by the server
-</span><span style="color:#6272a4"></span>
-  <span style="color:#8be9fd;font-style:italic">received: </span><span style="color:#50fa7b">(data) -&gt;</span>
-    alert(data)
-</code></pre></div><p>上述<code>channel: 'BlockChannel'</code>是必须的，声明像哪个频道订阅</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">module</span> ApplicationCable
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Connection</span> <span style="color:#ff79c6">&lt;</span> ActionCable<span style="color:#ff79c6">::</span>Connection<span style="color:#ff79c6">::</span>Base
+</span></span><span style="display:flex;"><span>    identified_by <span style="color:#f1fa8c">:current_user</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">connect</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>current_user <span style="color:#ff79c6">=</span> find_verified_user
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">private</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">find_verified_user</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> cu_user <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#8be9fd;font-style:italic">id</span>: cookies<span style="color:#ff79c6">.</span>signed<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_id</span><span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>          cu_user
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>          reject_unauthorized_connection
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>action cable 中不能使用 session，我们可以用 cookie 来验证用户。下面在 SessionHelper 中加入 cookie，方便 action cable 使用</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">module</span> SessionsHelper
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">log_in</span>(user)
+</span></span><span style="display:flex;"><span>    session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> user<span style="color:#ff79c6">.</span>address
+</span></span><span style="display:flex;"><span>    user <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#f1fa8c">address</span>: session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> user
+</span></span><span style="display:flex;"><span>      cookies<span style="color:#ff79c6">.</span>permanent<span style="color:#ff79c6">.</span>signed<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_id</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> user<span style="color:#ff79c6">.</span>id
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">current_user</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@current_user</span> <span style="color:#ff79c6">||=</span> User<span style="color:#ff79c6">.</span>find_by(<span style="color:#f1fa8c">address</span>: session<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:user_address</span><span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">logged_in?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">!</span>current_user<span style="color:#ff79c6">.</span>nil?
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">log_out</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#ff79c6">.</span>delete(<span style="color:#f1fa8c">:user_address</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@current_user</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">nil</span>
+</span></span><span style="display:flex;"><span>    cookies<span style="color:#ff79c6">.</span>delete(<span style="color:#f1fa8c">:user_id</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="订阅">订阅</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-coffee" data-lang="coffee"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">App.block = </span>App.cable.subscriptions.create <span style="color:#8be9fd;font-style:italic">channel: </span><span style="color:#f1fa8c">&#34;BlockChannel&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">connected: </span><span style="color:#50fa7b">-&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Called when the subscription is ready for use on the server
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">disconnected: </span><span style="color:#50fa7b">-&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Called when the subscription has been terminated by the server
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">received: </span><span style="color:#50fa7b">(data) -&gt;</span>
+</span></span><span style="display:flex;"><span>    alert(data)
+</span></span></code></pre></div><p>上述<code>channel: 'BlockChannel'</code>是必须的，声明像哪个频道订阅</p>
 <h3 id="处理订阅">处理订阅</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">BlockChannel</span> <span style="color:#ff79c6">&lt;</span> ApplicationCable<span style="color:#ff79c6">::</span>Channel
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">subscribed</span>
-    <span style="color:#6272a4"># 设置可以向哪些订阅者发布信息</span>
-    stream_from current_user<span style="color:#ff79c6">.</span>address
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unsubscribed</span>
-    <span style="color:#6272a4"># Any cleanup needed when channel is unsubscribed</span>
-  <span style="color:#ff79c6">end</span>
-</code></pre></div><h3 id="测试">测试</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">BlockChannel</span> <span style="color:#ff79c6">&lt;</span> ApplicationCable<span style="color:#ff79c6">::</span>Channel
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">subscribed</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 设置可以向哪些订阅者发布信息</span>
+</span></span><span style="display:flex;"><span>    stream_from current_user<span style="color:#ff79c6">.</span>address
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unsubscribed</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># Any cleanup needed when channel is unsubscribed</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="测试">测试</h3>
 <p>在 rails console 中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4"># 向用户22发送一条通知</span>
-ActionCable<span style="color:#ff79c6">.</span>server<span style="color:#ff79c6">.</span>broadcast User<span style="color:#ff79c6">.</span>find(<span style="color:#bd93f9">22</span>)<span style="color:#ff79c6">.</span>address, <span style="color:#f1fa8c">data</span>: <span style="color:#bd93f9">22</span>
-</code></pre></div><h2 id="关于-action-cable-的部署">关于 action cable 的部署</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4"># 向用户22发送一条通知</span>
+</span></span><span style="display:flex;"><span>ActionCable<span style="color:#ff79c6">.</span>server<span style="color:#ff79c6">.</span>broadcast User<span style="color:#ff79c6">.</span>find(<span style="color:#bd93f9">22</span>)<span style="color:#ff79c6">.</span>address, <span style="color:#f1fa8c">data</span>: <span style="color:#bd93f9">22</span>
+</span></span></code></pre></div><h2 id="关于-action-cable-的部署">关于 action cable 的部署</h2>
 <h3 id="cableyml">cable.yml</h3>
 <p>action cable 默认为“异步”适配器，当涉及多个进程时，它不起作用。因此，您需要配置 Action Cable 以使用其他适配器，例如 Redis 或 PostgreSQL。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#ff79c6">production</span>:
-  <span style="color:#ff79c6">adapter</span>: redis
-  <span style="color:#ff79c6">url</span>: redis://localhost:6379
-
-<span style="color:#ff79c6">staging</span>:
-  <span style="color:#ff79c6">adapter</span>: redis
-  <span style="color:#ff79c6">url</span>: redis://localhost:6379
-
-<span style="color:#ff79c6">local</span>: <span style="color:#ff79c6">&amp;local</span>
-  <span style="color:#ff79c6">adapter</span>: redis
-  <span style="color:#ff79c6">url</span>: redis://localhost:6379
-
-<span style="color:#ff79c6">development</span>: <span style="color:#ff79c6">*local</span>
-<span style="color:#ff79c6">test</span>: <span style="color:#ff79c6">*local</span>
-</code></pre></div><p>不要忘记启动 redis</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ff79c6">production</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">adapter</span>: redis
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">url</span>: redis://localhost:6379
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">staging</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">adapter</span>: redis
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">url</span>: redis://localhost:6379
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">local</span>: <span style="color:#ff79c6">&amp;local</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">adapter</span>: redis
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">url</span>: redis://localhost:6379
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">development</span>: <span style="color:#ff79c6">*local</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">test</span>: <span style="color:#ff79c6">*local</span>
+</span></span></code></pre></div><p>不要忘记启动 redis</p>
 <h3 id="在和-rails-相同的主机和端口使用-action-cable">在和 rails 相同的主机和端口使用 action cable</h3>
 <p>下面是 Rails 推荐的默认设置，也是最简单的设置.它的工作原理是将 ActionCable.server 挂载到 config / routes.rb 中的某个路径。这样，您的 Action Cable 服务器将在与您的应用程序相同的主机和端口上运行，但在子 URI 下运行。</p>
 <p>在 router.rb 文件中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">mount ActionCable<span style="color:#ff79c6">.</span>server <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;/cable&#39;</span>
-</code></pre></div><p>你需要配置一个 <code>location</code>块 配置 cable 的请求,像下面这样：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#ff79c6">server</span> {
-    <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">80</span>;
-    <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">www.foo.com</span>;
-    <span style="color:#ff79c6">root</span> <span style="color:#f1fa8c">/path-to-your-app/public</span>;
-    <span style="color:#ff79c6">passenger_enabled</span> on;
-
-    <span style="color:#6272a4">### INSERT THIS!!! ###
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">location</span> <span style="color:#f1fa8c">/cable</span> {
-        <span style="color:#ff79c6">passenger_force_max_concurrent_requests_per_process</span> <span style="color:#bd93f9">0</span>;
-    }
-}
-</code></pre></div><p>为了应用的性能，必须添加<code>passenger_force_max_concurrent_requests_per_process 0</code>的配置，关于这个配置的详解请看 <a href="https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_force_max_concurrent_requests_per_process">文档</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>mount ActionCable<span style="color:#ff79c6">.</span>server <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;/cable&#39;</span>
+</span></span></code></pre></div><p>你需要配置一个 <code>location</code>块 配置 cable 的请求,像下面这样：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#ff79c6">server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">listen</span> <span style="color:#bd93f9">80</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">server_name</span> <span style="color:#f1fa8c">www.foo.com</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">root</span> <span style="color:#f1fa8c">/path-to-your-app/public</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">passenger_enabled</span> on;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">### INSERT THIS!!! ###
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">location</span> <span style="color:#f1fa8c">/cable</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">passenger_force_max_concurrent_requests_per_process</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>为了应用的性能，必须添加<code>passenger_force_max_concurrent_requests_per_process 0</code>的配置，关于这个配置的详解请看 <a href="https://www.phusionpassenger.com/library/config/nginx/reference/#passenger_force_max_concurrent_requests_per_process">文档</a></p>
 <blockquote>
 <p>本文内容整理自 ruby-china 和 <a href="https://www.phusionpassenger.com/library/config/nginx/action_cable_integration/">passenger 的配置文档</a></p>
 </blockquote>
@@ -268,7 +268,7 @@ ActionCable<span style="color:#ff79c6">.</span>server<span style="color:#ff79c6"
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

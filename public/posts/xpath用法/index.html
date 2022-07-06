@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/xpath%E7%94%A8%E6%B3%95/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/xpath%E7%94%A8%E6%B3%95/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -300,8 +300,8 @@
 </tbody>
 </table>
 <h3 id="class-check">Class check</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//div<span style="color:#ff79c6">[</span>contains<span style="color:#ff79c6">(</span>concat<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39; &#39;</span>,normalize-space<span style="color:#ff79c6">(</span>@class<span style="color:#ff79c6">)</span>,<span style="color:#f1fa8c">&#39; &#39;</span><span style="color:#ff79c6">)</span>,<span style="color:#f1fa8c">&#39; foobar &#39;</span><span style="color:#ff79c6">)]</span>
-</code></pre></div><p>Xpath doesn’t have the “check if part of space-separated list” operator, so this is the workaround (<a href="http://pivotallabs.com/xpath-css-class-matching/">source</a>).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>contains<span style="color:#ff79c6">(</span>concat<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39; &#39;</span>,normalize-space<span style="color:#ff79c6">(</span>@class<span style="color:#ff79c6">)</span>,<span style="color:#f1fa8c">&#39; &#39;</span><span style="color:#ff79c6">)</span>,<span style="color:#f1fa8c">&#39; foobar &#39;</span><span style="color:#ff79c6">)]</span>
+</span></span></code></pre></div><p>Xpath doesn’t have the “check if part of space-separated list” operator, so this is the workaround (<a href="http://pivotallabs.com/xpath-css-class-matching/">source</a>).</p>
 <h2 id="httpsdevhintsioxpathexpressionsexpressions"><a href="https://devhints.io/xpath#expressions">#</a>Expressions</h2>
 <h3 id="steps-and-axes">Steps and axes</h3>
 <table>
@@ -374,83 +374,83 @@
 </table>
 <p>Separate your steps with <code>/</code>. Use two (<code>//</code>) if you don’t want to select direct children.</p>
 <h3 id="steps">Steps</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//div
-//div<span style="color:#ff79c6">[</span>@name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;box&#39;</span><span style="color:#ff79c6">]</span>
-//<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;link&#39;</span><span style="color:#ff79c6">]</span>
-</code></pre></div><p>A step may have an element name (<code>div</code>) and <a href="https://devhints.io/xpath#predicate">predicates</a> (<code>[...]</code>). Both are optional. They can also be these other things:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//a/text<span style="color:#ff79c6">()</span>     <span style="color:#6272a4">#=&gt; &#34;Go home&#34;</span>
-//a/@href      <span style="color:#6272a4">#=&gt; &#34;index.html&#34;</span>
-//a/*          <span style="color:#6272a4">#=&gt; All a&#39;s child elements</span>
-</code></pre></div><h2 id="httpsdevhintsioxpathpredicatespredicates"><a href="https://devhints.io/xpath#predicates">#</a>Predicates</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//div
+</span></span><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>@name<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;box&#39;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;link&#39;</span><span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>A step may have an element name (<code>div</code>) and <a href="https://devhints.io/xpath#predicate">predicates</a> (<code>[...]</code>). Both are optional. They can also be these other things:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//a/text<span style="color:#ff79c6">()</span>     <span style="color:#6272a4">#=&gt; &#34;Go home&#34;</span>
+</span></span><span style="display:flex;"><span>//a/@href      <span style="color:#6272a4">#=&gt; &#34;index.html&#34;</span>
+</span></span><span style="display:flex;"><span>//a/*          <span style="color:#6272a4">#=&gt; All a&#39;s child elements</span>
+</span></span></code></pre></div><h2 id="httpsdevhintsioxpathpredicatespredicates"><a href="https://devhints.io/xpath#predicates">#</a>Predicates</h2>
 <h3 id="predicates">Predicates</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//div<span style="color:#ff79c6">[</span>true<span style="color:#ff79c6">()]</span>
-//div<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span><span style="color:#ff79c6">]</span>
-//div<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span><span style="color:#ff79c6">][</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;top&#34;</span><span style="color:#ff79c6">]</span>
-</code></pre></div><p>Restricts a nodeset only if some condition is true. They can be chained.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>true<span style="color:#ff79c6">()]</span>
+</span></span><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span><span style="color:#ff79c6">][</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;top&#34;</span><span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>Restricts a nodeset only if some condition is true. They can be chained.</p>
 <h3 id="operators">Operators</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Comparison</span>
-//a<span style="color:#ff79c6">[</span>@id <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;xyz&#34;</span><span style="color:#ff79c6">]</span>
-//a<span style="color:#ff79c6">[</span>@id !<span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;xyz&#34;</span><span style="color:#ff79c6">]</span>
-//a<span style="color:#ff79c6">[</span>@price &gt; 25<span style="color:#ff79c6">]</span>
-<span style="color:#6272a4"># Logic (and/or)</span>
-//div<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span> and position<span style="color:#ff79c6">()=</span>2<span style="color:#ff79c6">]</span>
-//div<span style="color:#ff79c6">[(</span>x and y<span style="color:#ff79c6">)</span> or not<span style="color:#ff79c6">(</span>z<span style="color:#ff79c6">)]</span>
-</code></pre></div><p>Use comparison and logic operators to make conditionals.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Comparison</span>
+</span></span><span style="display:flex;"><span>//a<span style="color:#ff79c6">[</span>@id <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;xyz&#34;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//a<span style="color:#ff79c6">[</span>@id !<span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;xyz&#34;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//a<span style="color:#ff79c6">[</span>@price &gt; 25<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Logic (and/or)</span>
+</span></span><span style="display:flex;"><span>//div<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;head&#34;</span> and position<span style="color:#ff79c6">()=</span>2<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//div<span style="color:#ff79c6">[(</span>x and y<span style="color:#ff79c6">)</span> or not<span style="color:#ff79c6">(</span>z<span style="color:#ff79c6">)]</span>
+</span></span></code></pre></div><p>Use comparison and logic operators to make conditionals.</p>
 <h3 id="using-nodes">Using nodes</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># Use them inside functions</span>
-//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
-//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;hide&#39;</span><span style="color:#ff79c6">])</span> &gt; 0<span style="color:#ff79c6">]</span>
-<span style="color:#6272a4"># This returns `&lt;ul&gt;` that has a `&lt;li&gt;` child</span>
-//ul<span style="color:#ff79c6">[</span>li<span style="color:#ff79c6">]</span>
-</code></pre></div><p>You can use nodes inside predicates.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># Use them inside functions</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;hide&#39;</span><span style="color:#ff79c6">])</span> &gt; 0<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># This returns `&lt;ul&gt;` that has a `&lt;li&gt;` child</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>li<span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>You can use nodes inside predicates.</p>
 <h3 id="indexing">Indexing</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//a<span style="color:#ff79c6">[</span>1<span style="color:#ff79c6">]</span>                  <span style="color:#6272a4"># first &lt;a&gt;</span>
-//a<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>             <span style="color:#6272a4"># last &lt;a&gt;</span>
-//ol/li<span style="color:#ff79c6">[</span>2<span style="color:#ff79c6">]</span>              <span style="color:#6272a4"># second &lt;li&gt;</span>
-//ol/li<span style="color:#ff79c6">[</span>position<span style="color:#ff79c6">()=</span>2<span style="color:#ff79c6">]</span>   <span style="color:#6272a4"># same as above</span>
-//ol/li<span style="color:#ff79c6">[</span>position<span style="color:#ff79c6">()</span>&gt;1<span style="color:#ff79c6">]</span>   <span style="color:#6272a4"># :not(:first-child)</span>
-</code></pre></div><p>Use <code>[]</code> with a number, or <code>last()</code> or <code>position()</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//a<span style="color:#ff79c6">[</span>1<span style="color:#ff79c6">]</span>                  <span style="color:#6272a4"># first &lt;a&gt;</span>
+</span></span><span style="display:flex;"><span>//a<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>             <span style="color:#6272a4"># last &lt;a&gt;</span>
+</span></span><span style="display:flex;"><span>//ol/li<span style="color:#ff79c6">[</span>2<span style="color:#ff79c6">]</span>              <span style="color:#6272a4"># second &lt;li&gt;</span>
+</span></span><span style="display:flex;"><span>//ol/li<span style="color:#ff79c6">[</span>position<span style="color:#ff79c6">()=</span>2<span style="color:#ff79c6">]</span>   <span style="color:#6272a4"># same as above</span>
+</span></span><span style="display:flex;"><span>//ol/li<span style="color:#ff79c6">[</span>position<span style="color:#ff79c6">()</span>&gt;1<span style="color:#ff79c6">]</span>   <span style="color:#6272a4"># :not(:first-child)</span>
+</span></span></code></pre></div><p>Use <code>[]</code> with a number, or <code>last()</code> or <code>position()</code>.</p>
 <h3 id="chaining-order">Chaining order</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">a<span style="color:#ff79c6">[</span>1<span style="color:#ff79c6">][</span>@href<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;/&#39;</span><span style="color:#ff79c6">]</span>
-a<span style="color:#ff79c6">[</span>@href<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;/&#39;</span><span style="color:#ff79c6">][</span>1<span style="color:#ff79c6">]</span>
-</code></pre></div><p>Order is significant, these two are different.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>a<span style="color:#ff79c6">[</span>1<span style="color:#ff79c6">][</span>@href<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;/&#39;</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>a<span style="color:#ff79c6">[</span>@href<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;/&#39;</span><span style="color:#ff79c6">][</span>1<span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>Order is significant, these two are different.</p>
 <h3 id="nesting-predicates">Nesting predicates</h3>
-<pre><code>//section[//h1[@id='hi']]
+<pre tabindex="0"><code>//section[//h1[@id=&#39;hi&#39;]]
 </code></pre><p>This returns <code>&lt;section&gt;</code> if it has an <code>&lt;h1&gt;</code> descendant with <code>id='hi'</code>.</p>
 <h2 id="httpsdevhintsioxpathfunctionsfunctions"><a href="https://devhints.io/xpath#functions">#</a>Functions</h2>
 <h3 id="node-functions">Node functions</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">name<span style="color:#ff79c6">()</span>                     <span style="color:#6272a4"># //[starts-with(name(), &#39;h&#39;)]</span>
-text<span style="color:#ff79c6">()</span>                     <span style="color:#6272a4"># //button[text()=&#34;Submit&#34;]</span>
-                           <span style="color:#6272a4"># //button/text()</span>
-lang<span style="color:#ff79c6">(</span>str<span style="color:#ff79c6">)</span>
-namespace-uri<span style="color:#ff79c6">()</span>
-count<span style="color:#ff79c6">()</span>                    <span style="color:#6272a4"># //table[count(tr)=1]</span>
-position<span style="color:#ff79c6">()</span>                 <span style="color:#6272a4"># //ol/li[position()=2]</span>
-</code></pre></div><h3 id="boolean-functions">Boolean functions</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">not<span style="color:#ff79c6">(</span>expr<span style="color:#ff79c6">)</span>                  <span style="color:#6272a4"># button[not(starts-with(text(),&#34;Submit&#34;))]</span>
-</code></pre></div><h3 id="string-functions">String functions</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">contains<span style="color:#ff79c6">()</span>                 <span style="color:#6272a4"># font[contains(@class,&#34;head&#34;)]</span>
-starts-with<span style="color:#ff79c6">()</span>              <span style="color:#6272a4"># font[starts-with(@class,&#34;head&#34;)]</span>
-ends-with<span style="color:#ff79c6">()</span>                <span style="color:#6272a4"># font[ends-with(@class,&#34;head&#34;)]</span>
-concat<span style="color:#ff79c6">(</span>x,y<span style="color:#ff79c6">)</span>
-substring<span style="color:#ff79c6">(</span>str, start, len<span style="color:#ff79c6">)</span>
-substring-before<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;01/02&#34;</span>, <span style="color:#f1fa8c">&#34;/&#34;</span><span style="color:#ff79c6">)</span>  <span style="color:#6272a4">#=&gt; 01</span>
-substring-after<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;01/02&#34;</span>, <span style="color:#f1fa8c">&#34;/&#34;</span><span style="color:#ff79c6">)</span>   <span style="color:#6272a4">#=&gt; 02</span>
-translate<span style="color:#ff79c6">()</span>
-normalize-space<span style="color:#ff79c6">()</span>
-string-length<span style="color:#ff79c6">()</span>
-</code></pre></div><h3 id="type-conversion">Type conversion</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">string<span style="color:#ff79c6">()</span>
-number<span style="color:#ff79c6">()</span>
-boolean<span style="color:#ff79c6">()</span>
-</code></pre></div><h2 id="httpsdevhintsioxpathaxes-1axes"><a href="https://devhints.io/xpath#axes-1">#</a>Axes</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>name<span style="color:#ff79c6">()</span>                     <span style="color:#6272a4"># //[starts-with(name(), &#39;h&#39;)]</span>
+</span></span><span style="display:flex;"><span>text<span style="color:#ff79c6">()</span>                     <span style="color:#6272a4"># //button[text()=&#34;Submit&#34;]</span>
+</span></span><span style="display:flex;"><span>                           <span style="color:#6272a4"># //button/text()</span>
+</span></span><span style="display:flex;"><span>lang<span style="color:#ff79c6">(</span>str<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>namespace-uri<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>count<span style="color:#ff79c6">()</span>                    <span style="color:#6272a4"># //table[count(tr)=1]</span>
+</span></span><span style="display:flex;"><span>position<span style="color:#ff79c6">()</span>                 <span style="color:#6272a4"># //ol/li[position()=2]</span>
+</span></span></code></pre></div><h3 id="boolean-functions">Boolean functions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>not<span style="color:#ff79c6">(</span>expr<span style="color:#ff79c6">)</span>                  <span style="color:#6272a4"># button[not(starts-with(text(),&#34;Submit&#34;))]</span>
+</span></span></code></pre></div><h3 id="string-functions">String functions</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>contains<span style="color:#ff79c6">()</span>                 <span style="color:#6272a4"># font[contains(@class,&#34;head&#34;)]</span>
+</span></span><span style="display:flex;"><span>starts-with<span style="color:#ff79c6">()</span>              <span style="color:#6272a4"># font[starts-with(@class,&#34;head&#34;)]</span>
+</span></span><span style="display:flex;"><span>ends-with<span style="color:#ff79c6">()</span>                <span style="color:#6272a4"># font[ends-with(@class,&#34;head&#34;)]</span>
+</span></span><span style="display:flex;"><span>concat<span style="color:#ff79c6">(</span>x,y<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>substring<span style="color:#ff79c6">(</span>str, start, len<span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>substring-before<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;01/02&#34;</span>, <span style="color:#f1fa8c">&#34;/&#34;</span><span style="color:#ff79c6">)</span>  <span style="color:#6272a4">#=&gt; 01</span>
+</span></span><span style="display:flex;"><span>substring-after<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;01/02&#34;</span>, <span style="color:#f1fa8c">&#34;/&#34;</span><span style="color:#ff79c6">)</span>   <span style="color:#6272a4">#=&gt; 02</span>
+</span></span><span style="display:flex;"><span>translate<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>normalize-space<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>string-length<span style="color:#ff79c6">()</span>
+</span></span></code></pre></div><h3 id="type-conversion">Type conversion</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>string<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>number<span style="color:#ff79c6">()</span>
+</span></span><span style="display:flex;"><span>boolean<span style="color:#ff79c6">()</span>
+</span></span></code></pre></div><h2 id="httpsdevhintsioxpathaxes-1axes"><a href="https://devhints.io/xpath#axes-1">#</a>Axes</h2>
 <h3 id="using-axes">Using axes</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//ul/li                       <span style="color:#6272a4"># ul &gt; li</span>
-//ul/child::li                <span style="color:#6272a4"># ul &gt; li (same)</span>
-//ul/following-sibling::li    <span style="color:#6272a4"># ul ~ li</span>
-//ul/descendant-or-self::li   <span style="color:#6272a4"># ul li</span>
-//ul/ancestor-or-self::li     <span style="color:#6272a4"># $(&#39;ul&#39;).closest(&#39;li&#39;)</span>
-</code></pre></div><p>Steps of an expression are separated by <code>/</code>, usually used to pick child nodes. That’s not always true: you can specify a different “axis” with <code>::</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//ul/li                       <span style="color:#6272a4"># ul &gt; li</span>
+</span></span><span style="display:flex;"><span>//ul/child::li                <span style="color:#6272a4"># ul &gt; li (same)</span>
+</span></span><span style="display:flex;"><span>//ul/following-sibling::li    <span style="color:#6272a4"># ul ~ li</span>
+</span></span><span style="display:flex;"><span>//ul/descendant-or-self::li   <span style="color:#6272a4"># ul li</span>
+</span></span><span style="display:flex;"><span>//ul/ancestor-or-self::li     <span style="color:#6272a4"># $(&#39;ul&#39;).closest(&#39;li&#39;)</span>
+</span></span></code></pre></div><p>Steps of an expression are separated by <code>/</code>, usually used to pick child nodes. That’s not always true: you can specify a different “axis” with <code>::</code>.</p>
 <table>
 <thead>
 <tr>
@@ -470,26 +470,26 @@ boolean<span style="color:#ff79c6">()</span>
 </tbody>
 </table>
 <h3 id="child-axis">Child axis</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># both the same</span>
-//ul/li/a
-//child::ul/child::li/child::a
-</code></pre></div><p><code>child::</code> is the default axis. This makes <code>//a/b/c</code> work.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># both the same</span>
-<span style="color:#6272a4"># this works because `child::li` is truthy, so the predicate succeeds</span>
-//ul<span style="color:#ff79c6">[</span>li<span style="color:#ff79c6">]</span>
-//ul<span style="color:#ff79c6">[</span>child::li<span style="color:#ff79c6">]</span>
-<span style="color:#6272a4"># both the same</span>
-//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
-//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>child::li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
-</code></pre></div><h3 id="descendant-or-self-axis">Descendant-or-self axis</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># both the same</span>
-//div//h4
-//div/descendant-or-self::h4
-</code></pre></div><p><code>//</code> is short for the <code>descendant-or-self::</code> axis.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># both the same</span>
-//ul//<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>
-//ul/descendant-or-self::<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>
-</code></pre></div><h3 id="other-axes">Other axes</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># both the same</span>
+</span></span><span style="display:flex;"><span>//ul/li/a
+</span></span><span style="display:flex;"><span>//child::ul/child::li/child::a
+</span></span></code></pre></div><p><code>child::</code> is the default axis. This makes <code>//a/b/c</code> work.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># both the same</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># this works because `child::li` is truthy, so the predicate succeeds</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>li<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>child::li<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># both the same</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>//ul<span style="color:#ff79c6">[</span>count<span style="color:#ff79c6">(</span>child::li<span style="color:#ff79c6">)</span> &gt; 2<span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><h3 id="descendant-or-self-axis">Descendant-or-self axis</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># both the same</span>
+</span></span><span style="display:flex;"><span>//div//h4
+</span></span><span style="display:flex;"><span>//div/descendant-or-self::h4
+</span></span></code></pre></div><p><code>//</code> is short for the <code>descendant-or-self::</code> axis.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4"># both the same</span>
+</span></span><span style="display:flex;"><span>//ul//<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>
+</span></span><span style="display:flex;"><span>//ul/descendant-or-self::<span style="color:#ff79c6">[</span>last<span style="color:#ff79c6">()]</span>
+</span></span></code></pre></div><h3 id="other-axes">Other axes</h3>
 <table>
 <thead>
 <tr>
@@ -568,27 +568,27 @@ boolean<span style="color:#ff79c6">()</span>
 </table>
 <p>There are other axes you can use.</p>
 <h3 id="unions">Unions</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//a | //span
-</code></pre></div><p>Use <code>|</code> to join two expressions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//a | //span
+</span></span></code></pre></div><p>Use <code>|</code> to join two expressions.</p>
 <h2 id="httpsdevhintsioxpathmore-examplesmore-examples"><a href="https://devhints.io/xpath#more-examples">#</a>More examples</h2>
 <h3 id="examples">Examples</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//*                 <span style="color:#6272a4"># all elements</span>
-count<span style="color:#ff79c6">(</span>//*<span style="color:#ff79c6">)</span>          <span style="color:#6272a4"># count all elements</span>
-<span style="color:#ff79c6">(</span>//h1<span style="color:#ff79c6">)[</span>1<span style="color:#ff79c6">]</span>/text<span style="color:#ff79c6">()</span>    <span style="color:#6272a4"># text of the first h1 heading</span>
-//li<span style="color:#ff79c6">[</span>span<span style="color:#ff79c6">]</span>          <span style="color:#6272a4"># find a &lt;li&gt; with an &lt;span&gt; inside it</span>
-                    <span style="color:#6272a4"># ...expands to //li[child::span]</span>
-//ul/li/..          <span style="color:#6272a4"># use .. to select a parent</span>
-</code></pre></div><h3 id="find-a-parent">Find a parent</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//section<span style="color:#ff79c6">[</span>h1<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;section-name&#39;</span><span style="color:#ff79c6">]]</span>
-</code></pre></div><p>Finds a <code>&lt;section&gt;</code> that directly contains <code>h1#section-name</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//section<span style="color:#ff79c6">[</span>//h1<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;section-name&#39;</span><span style="color:#ff79c6">]]</span>
-</code></pre></div><p>Finds a <code>&lt;section&gt;</code> that contains <code>h1#section-name</code>. (Same as above, but uses descendant-or-self instead of child)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//*                 <span style="color:#6272a4"># all elements</span>
+</span></span><span style="display:flex;"><span>count<span style="color:#ff79c6">(</span>//*<span style="color:#ff79c6">)</span>          <span style="color:#6272a4"># count all elements</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">(</span>//h1<span style="color:#ff79c6">)[</span>1<span style="color:#ff79c6">]</span>/text<span style="color:#ff79c6">()</span>    <span style="color:#6272a4"># text of the first h1 heading</span>
+</span></span><span style="display:flex;"><span>//li<span style="color:#ff79c6">[</span>span<span style="color:#ff79c6">]</span>          <span style="color:#6272a4"># find a &lt;li&gt; with an &lt;span&gt; inside it</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#6272a4"># ...expands to //li[child::span]</span>
+</span></span><span style="display:flex;"><span>//ul/li/..          <span style="color:#6272a4"># use .. to select a parent</span>
+</span></span></code></pre></div><h3 id="find-a-parent">Find a parent</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//section<span style="color:#ff79c6">[</span>h1<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;section-name&#39;</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div><p>Finds a <code>&lt;section&gt;</code> that directly contains <code>h1#section-name</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//section<span style="color:#ff79c6">[</span>//h1<span style="color:#ff79c6">[</span>@id<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;section-name&#39;</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div><p>Finds a <code>&lt;section&gt;</code> that contains <code>h1#section-name</code>. (Same as above, but uses descendant-or-self instead of child)</p>
 <h3 id="closest">Closest</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./ancestor-or-self::<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;box&#34;</span><span style="color:#ff79c6">]</span>
-</code></pre></div><p>Works like jQuery’s <code>$().closest('.box')</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./ancestor-or-self::<span style="color:#ff79c6">[</span>@class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;box&#34;</span><span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>Works like jQuery’s <code>$().closest('.box')</code>.</p>
 <h3 id="attributes">Attributes</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">//item<span style="color:#ff79c6">[</span>@price &gt; 2*@discount<span style="color:#ff79c6">]</span>
-</code></pre></div><p>Finds <code>&lt;item&gt;</code> and check its attributes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>//item<span style="color:#ff79c6">[</span>@price &gt; 2*@discount<span style="color:#ff79c6">]</span>
+</span></span></code></pre></div><p>Finds <code>&lt;item&gt;</code> and check its attributes</p>
 
         </div>
 
@@ -666,7 +666,7 @@ count<span style="color:#ff79c6">(</span>//*<span style="color:#ff79c6">)</span>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/xpath">xpath
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/xpath">xpath
                     </a>
                 </li>
                 

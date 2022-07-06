@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E5%86%99%E5%85%A5json/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E5%86%99%E5%85%A5json/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -117,83 +117,83 @@
 <p>流程如下:
 <img src="../../images/20211118232135035_30702.png" alt=""></p>
 <h2 id="示例">示例</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;encoding/json&#34;</span>
-    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-    <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
-    <span style="color:#f1fa8c">&#34;os&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">type</span> Post <span style="color:#8be9fd;font-style:italic">struct</span> {
-    <span style="color:#6272a4">// 处理对象属性与json字段的映射关系
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果对象属性与json字段名称相同。可以省略
-</span><span style="color:#6272a4"></span>    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
-    Content <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;content&#34;`</span>
-    Author Author  <span style="color:#f1fa8c">`json:&#34;author&#34;`</span>
-    Comments []Comment <span style="color:#f1fa8c">`json:&#34;comments&#34;`</span>
-}
-<span style="color:#8be9fd;font-style:italic">type</span> Author <span style="color:#8be9fd;font-style:italic">struct</span> {
-    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
-    Name <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;name&#34;`</span>
-}
-
-<span style="color:#8be9fd;font-style:italic">type</span> Comment <span style="color:#8be9fd;font-style:italic">struct</span> {
-    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
-    Content <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;content&#34;`</span>
-    Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;author&#34;`</span>
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    post <span style="color:#ff79c6">:=</span> Post{
-        Id: <span style="color:#bd93f9">1</span>,
-        Content: <span style="color:#f1fa8c">&#34;Hello World&#34;</span>,
-        Author: Author{
-            Id: <span style="color:#bd93f9">2</span>,
-            Name: <span style="color:#f1fa8c">&#34;dc1&#34;</span>,
-        },
-        Comments: []Comment{
-            {
-                Id: <span style="color:#bd93f9">3</span>,
-                Content: <span style="color:#f1fa8c">&#34;Have a great day&#34;</span>,
-                Author: <span style="color:#f1fa8c">&#34;Adam&#34;</span>,
-            },
-            {
-                Id: <span style="color:#bd93f9">4</span>,
-                Content: <span style="color:#f1fa8c">&#34;How are you today&#34;</span>,
-                Author: <span style="color:#f1fa8c">&#34;Betty&#34;</span>,
-            },
-        },
-    }
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;post: %v\n&#34;</span>, post)
-    <span style="color:#6272a4">// 将 json 结构封装为由字节切片组成的Json数据
-</span><span style="color:#6272a4"></span>    output, err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">MarshalIndent</span>(<span style="color:#ff79c6">&amp;</span>post,<span style="color:#f1fa8c">&#34;&#34;</span>,<span style="color:#f1fa8c">&#34;\t\t&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    <span style="color:#6272a4">// 将数据写入文件中
-</span><span style="color:#6272a4"></span>    err = ioutil.<span style="color:#50fa7b">WriteFile</span>(<span style="color:#f1fa8c">&#34;post.json&#34;</span>,output,<span style="color:#bd93f9">0666</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-
-
-    <span style="color:#6272a4">// 使用Encoder将结构编码到文件中
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 创建用于储存json的文件
-</span><span style="color:#6272a4"></span>    jsonFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;./post1.json&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    <span style="color:#6272a4">// 创建解码器
-</span><span style="color:#6272a4"></span>    encoder <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">NewEncoder</span>(jsonFile)
-    <span style="color:#6272a4">// 把结构编码到json文件中
-</span><span style="color:#6272a4"></span>    err = encoder.<span style="color:#50fa7b">Encode</span>(<span style="color:#ff79c6">&amp;</span>post)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;encoding/json&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Post <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 处理对象属性与json字段的映射关系
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果对象属性与json字段名称相同。可以省略
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
+</span></span><span style="display:flex;"><span>    Content <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;content&#34;`</span>
+</span></span><span style="display:flex;"><span>    Author Author  <span style="color:#f1fa8c">`json:&#34;author&#34;`</span>
+</span></span><span style="display:flex;"><span>    Comments []Comment <span style="color:#f1fa8c">`json:&#34;comments&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Author <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
+</span></span><span style="display:flex;"><span>    Name <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;name&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Comment <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>    Id <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`json:&#34;id&#34;`</span>
+</span></span><span style="display:flex;"><span>    Content <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;content&#34;`</span>
+</span></span><span style="display:flex;"><span>    Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`json:&#34;author&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    post <span style="color:#ff79c6">:=</span> Post{
+</span></span><span style="display:flex;"><span>        Id: <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>        Content: <span style="color:#f1fa8c">&#34;Hello World&#34;</span>,
+</span></span><span style="display:flex;"><span>        Author: Author{
+</span></span><span style="display:flex;"><span>            Id: <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>            Name: <span style="color:#f1fa8c">&#34;dc1&#34;</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        Comments: []Comment{
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Id: <span style="color:#bd93f9">3</span>,
+</span></span><span style="display:flex;"><span>                Content: <span style="color:#f1fa8c">&#34;Have a great day&#34;</span>,
+</span></span><span style="display:flex;"><span>                Author: <span style="color:#f1fa8c">&#34;Adam&#34;</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                Id: <span style="color:#bd93f9">4</span>,
+</span></span><span style="display:flex;"><span>                Content: <span style="color:#f1fa8c">&#34;How are you today&#34;</span>,
+</span></span><span style="display:flex;"><span>                Author: <span style="color:#f1fa8c">&#34;Betty&#34;</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;post: %v\n&#34;</span>, post)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 将 json 结构封装为由字节切片组成的Json数据
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    output, err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">MarshalIndent</span>(<span style="color:#ff79c6">&amp;</span>post,<span style="color:#f1fa8c">&#34;&#34;</span>,<span style="color:#f1fa8c">&#34;\t\t&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 将数据写入文件中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    err = ioutil.<span style="color:#50fa7b">WriteFile</span>(<span style="color:#f1fa8c">&#34;post.json&#34;</span>,output,<span style="color:#bd93f9">0666</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 使用Encoder将结构编码到文件中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 创建用于储存json的文件
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    jsonFile, err <span style="color:#ff79c6">:=</span> os.<span style="color:#50fa7b">Create</span>(<span style="color:#f1fa8c">&#34;./post1.json&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 创建解码器
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    encoder <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">NewEncoder</span>(jsonFile)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 把结构编码到json文件中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    err = encoder.<span style="color:#50fa7b">Encode</span>(<span style="color:#ff79c6">&amp;</span>post)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -217,7 +217,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

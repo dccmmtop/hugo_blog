@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E9%98%B2%E6%AD%A2goroutine%E6%B3%84%E9%9C%B2%E7%9A%84%E4%B8%80%E8%88%AC%E6%9C%BA%E5%88%B6/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E9%98%B2%E6%AD%A2goroutine%E6%B3%84%E9%9C%B2%E7%9A%84%E4%B8%80%E8%88%AC%E6%9C%BA%E5%88%B6/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -115,50 +115,50 @@ goroutine 便无法释放其所占的内存空间</p>
 <h3 id="一般解决方案">一般解决方案:</h3>
 <p>由父goroutine告知子goroutine终止时机</p>
 <p>准则: <strong>父 goroutine 创建子 goroutine,那么父要确保子能够停止</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
-	<span style="color:#f1fa8c">&#34;math/rand&#34;</span>
-	<span style="color:#f1fa8c">&#34;time&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-	done <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd;font-style:italic">interface</span>{})
-	randStream <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">newRandStream</span>(done)
-	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;3 random ints:&#34;</span>)
-	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>; i <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">3</span>; i<span style="color:#ff79c6">++</span> {
-		fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%d: %d\n&#34;</span>, i, <span style="color:#ff79c6">&lt;-</span>randStream)
-	}
-	<span style="color:#6272a4">// 通知子goroutine停止
-</span><span style="color:#6272a4"></span>	<span style="color:#8be9fd;font-style:italic">close</span>(done)
-
-	<span style="color:#6272a4">// 模拟正在运行的工作
-</span><span style="color:#6272a4"></span>	time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#6272a4">// 生产者
-</span><span style="color:#6272a4">// 只在生产者作用域内声明 chan, 并在内部进行写入逻辑，然后返回只读的通道, 防止在生产者外部向该通道中写入数据
-</span><span style="color:#6272a4">// 维护了该通道的纯净
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">newRandStream</span>(done <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd;font-style:italic">interface</span>{}) <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span> {
-	randStream <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>)
-	<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
-		<span style="color:#6272a4">// 当此goroutine结束时，打印。如果是main groutine 终止时，导致该goroutine终止，则不会打印
-</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;newRandStream closure existed&#34;</span>)
-		<span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(randStream)
-		<span style="color:#ff79c6">for</span> {
-			<span style="color:#ff79c6">select</span> {
-			<span style="color:#ff79c6">case</span> randStream <span style="color:#ff79c6">&lt;-</span> rand.<span style="color:#50fa7b">Int</span>():
-			<span style="color:#ff79c6">case</span> <span style="color:#ff79c6">&lt;-</span>done:
-				<span style="color:#6272a4">// 接收到关闭信号,避免通道泄露
-</span><span style="color:#6272a4"></span>				<span style="color:#ff79c6">return</span>
-			}
-		}
-	}()
-	<span style="color:#6272a4">// 有一个隐式转换，将可读可写的 randStream 转换成只读的
-</span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">return</span> randStream
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;math/rand&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>	done <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd;font-style:italic">interface</span>{})
+</span></span><span style="display:flex;"><span>	randStream <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">newRandStream</span>(done)
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;3 random ints:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">1</span>; i <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">3</span>; i<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;%d: %d\n&#34;</span>, i, <span style="color:#ff79c6">&lt;-</span>randStream)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 通知子goroutine停止
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#8be9fd;font-style:italic">close</span>(done)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 模拟正在运行的工作
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 生产者
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// 只在生产者作用域内声明 chan, 并在内部进行写入逻辑，然后返回只读的通道, 防止在生产者外部向该通道中写入数据
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// 维护了该通道的纯净
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">newRandStream</span>(done <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd;font-style:italic">interface</span>{}) <span style="color:#ff79c6">&lt;-</span><span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span> {
+</span></span><span style="display:flex;"><span>	randStream <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>(<span style="color:#8be9fd;font-style:italic">chan</span> <span style="color:#8be9fd">int</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">go</span> <span style="color:#8be9fd;font-style:italic">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// 当此goroutine结束时，打印。如果是main groutine 终止时，导致该goroutine终止，则不会打印
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">defer</span> fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;newRandStream closure existed&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">defer</span> <span style="color:#8be9fd;font-style:italic">close</span>(randStream)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">for</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">select</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">case</span> randStream <span style="color:#ff79c6">&lt;-</span> rand.<span style="color:#50fa7b">Int</span>():
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">case</span> <span style="color:#ff79c6">&lt;-</span>done:
+</span></span><span style="display:flex;"><span>				<span style="color:#6272a4">// 接收到关闭信号,避免通道泄露
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>				<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 有一个隐式转换，将可读可写的 randStream 转换成只读的
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">return</span> randStream
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -187,7 +187,7 @@ goroutine 便无法释放其所占的内存空间</p>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

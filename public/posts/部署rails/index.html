@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E9%83%A8%E7%BD%B2rails/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E9%83%A8%E7%BD%B2rails/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -125,129 +125,129 @@
 <li>
 <p>添加权限</p>
 <p>在 root 用户下，打开<code>/etc/sudoers</code>文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># This file MUST be edited with the &#39;visudo&#39; command as root.</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># Please consider adding local content in /etc/sudoers.d/ instead of</span>
-<span style="color:#6272a4"># directly modifying this file.</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># See the man page for details on how to write a sudoers file.</span>
-<span style="color:#6272a4">#</span>
-Defaults        env_reset
-Defaults        mail_badpass
-Defaults        <span style="color:#8be9fd;font-style:italic">secure_path</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin&#34;</span>
-
-<span style="color:#6272a4"># Host alias specification</span>
-
-<span style="color:#6272a4"># User alias specification</span>
-
-<span style="color:#6272a4"># Cmnd alias specification</span>
-
-<span style="color:#6272a4"># User privilege specification</span>
-root    <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL
-deploy  <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL <span style="color:#6272a4"># 添加这一行，使deploy具有使用sudo的权限</span>
-
-<span style="color:#6272a4"># Members of the admin group may gain root privileges</span>
-%admin <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL<span style="color:#ff79c6">)</span> ALL
-
-<span style="color:#6272a4"># Allow members of group sudo to execute any command</span>
-%sudo   <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL
-
-<span style="color:#6272a4"># See sudoers(5) for more information on &#34;#include&#34; directives:</span>
-
-<span style="color:#6272a4">#includedir /etc/sudoers.d</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># This file MUST be edited with the &#39;visudo&#39; command as root.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Please consider adding local content in /etc/sudoers.d/ instead of</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># directly modifying this file.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># See the man page for details on how to write a sudoers file.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span>Defaults        env_reset
+</span></span><span style="display:flex;"><span>Defaults        mail_badpass
+</span></span><span style="display:flex;"><span>Defaults        <span style="color:#8be9fd;font-style:italic">secure_path</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Host alias specification</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># User alias specification</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Cmnd alias specification</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># User privilege specification</span>
+</span></span><span style="display:flex;"><span>root    <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL
+</span></span><span style="display:flex;"><span>deploy  <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL <span style="color:#6272a4"># 添加这一行，使deploy具有使用sudo的权限</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Members of the admin group may gain root privileges</span>
+</span></span><span style="display:flex;"><span>%admin <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL<span style="color:#ff79c6">)</span> ALL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Allow members of group sudo to execute any command</span>
+</span></span><span style="display:flex;"><span>%sudo   <span style="color:#8be9fd;font-style:italic">ALL</span><span style="color:#ff79c6">=(</span>ALL:ALL<span style="color:#ff79c6">)</span> ALL
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># See sudoers(5) for more information on &#34;#include&#34; directives:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#includedir /etc/sudoers.d</span>
+</span></span></code></pre></div></li>
 </ul>
 <h3 id="ruby-安装">ruby 安装</h3>
 <ul>
 <li>
 <p>安装<code>rbenv</code> <a href="https://ruby-china.org/wiki/rbenv-guide">教程来源</a>
 <code>sudo deploy</code>回到 deploy 下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-<span style="color:#6272a4"># 用来编译安装 ruby</span>
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-<span style="color:#6272a4"># 用来管理 gemset, 可选, 因为有 bundler 也没什么必要</span>
-git clone git://github.com/jamis/rbenv-gemset.git  ~/.rbenv/plugins/rbenv-gemset
-<span style="color:#6272a4"># 通过 rbenv update 命令来更新 rbenv 以及所有插件, 推荐</span>
-git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
-<span style="color:#6272a4"># 使用 Ruby China 的镜像安装 Ruby, 国内用户推荐</span>
-git clone git://github.com/AndorChen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror
-</code></pre></div><p>然后把下面的代码放到  <code>~/.bashrc</code>  里</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$HOME</span><span style="color:#f1fa8c">/.rbenv/bin:</span><span style="color:#8be9fd;font-style:italic">$PATH</span><span style="color:#f1fa8c">&#34;</span>
-<span style="color:#8be9fd;font-style:italic">eval</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">$(</span>rbenv init -<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">&#34;</span>
-</code></pre></div><p>然后重开一个终端就可以执行 rbenv 了.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 用来编译安装 ruby</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 用来管理 gemset, 可选, 因为有 bundler 也没什么必要</span>
+</span></span><span style="display:flex;"><span>git clone git://github.com/jamis/rbenv-gemset.git  ~/.rbenv/plugins/rbenv-gemset
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 通过 rbenv update 命令来更新 rbenv 以及所有插件, 推荐</span>
+</span></span><span style="display:flex;"><span>git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 使用 Ruby China 的镜像安装 Ruby, 国内用户推荐</span>
+</span></span><span style="display:flex;"><span>git clone git://github.com/AndorChen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror
+</span></span></code></pre></div><p>然后把下面的代码放到  <code>~/.bashrc</code>  里</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">export</span> <span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#8be9fd;font-style:italic">$HOME</span><span style="color:#f1fa8c">/.rbenv/bin:</span><span style="color:#8be9fd;font-style:italic">$PATH</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">eval</span> <span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">$(</span>rbenv init -<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">&#34;</span>
+</span></span></code></pre></div><p>然后重开一个终端就可以执行 rbenv 了.</p>
 </li>
 <li>
 <p>安装 ruby</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rbenv install --list  <span style="color:#6272a4"># 列出所有 ruby 版本</span>
-rbenv install 2.5.0     <span style="color:#6272a4"># 安装 2.5.0</span>
-</code></pre></div><p>安转过程可能出现缺少依赖的错误，可参考<a href="https://gist.github.com/sandyxu/8aceec7e436a6ab9621f">这篇文章解决</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rbenv install --list  <span style="color:#6272a4"># 列出所有 ruby 版本</span>
+</span></span><span style="display:flex;"><span>rbenv install 2.5.0     <span style="color:#6272a4"># 安装 2.5.0</span>
+</span></span></code></pre></div><p>安转过程可能出现缺少依赖的错误，可参考<a href="https://gist.github.com/sandyxu/8aceec7e436a6ab9621f">这篇文章解决</a>
 一般解决办法:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6 libreadline6-dev zlib1g zlib1g-dev
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6 libreadline6-dev zlib1g zlib1g-dev
+</span></span></code></pre></div></li>
 <li>
 <p>验证安装是否成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rbenv versions               <span style="color:#6272a4"># 列出安装的版本</span>
-rbenv version                <span style="color:#6272a4"># 列出正在使用的版本</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rbenv versions               <span style="color:#6272a4"># 列出安装的版本</span>
+</span></span><span style="display:flex;"><span>rbenv version                <span style="color:#6272a4"># 列出正在使用的版本</span>
+</span></span></code></pre></div></li>
 <li>
 <p>设置版本</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rbenv global 2.5.0      <span style="color:#6272a4"># 默认使用 2.5.0</span>
-rbenv shell 2.5.0       <span style="color:#6272a4"># 当前的 shell 使用 2.5.0, 会设置一个 `RBENV_VERSION` 环境变量</span>
-rbenv <span style="color:#8be9fd;font-style:italic">local</span> jruby-1.7.3      <span style="color:#6272a4"># 当前目录使用 jruby-1.7.3, 会生成一个 `.rbenv-version` 文件</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rbenv global 2.5.0      <span style="color:#6272a4"># 默认使用 2.5.0</span>
+</span></span><span style="display:flex;"><span>rbenv shell 2.5.0       <span style="color:#6272a4"># 当前的 shell 使用 2.5.0, 会设置一个 `RBENV_VERSION` 环境变量</span>
+</span></span><span style="display:flex;"><span>rbenv <span style="color:#8be9fd;font-style:italic">local</span> jruby-1.7.3      <span style="color:#6272a4"># 当前目录使用 jruby-1.7.3, 会生成一个 `.rbenv-version` 文件</span>
+</span></span></code></pre></div></li>
 <li>
 <p>last</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rbenv rehash                 <span style="color:#6272a4"># 每当切换 ruby 版本和执行 bundle install 之后必须执行这个命令</span>
-rbenv which irb              <span style="color:#6272a4"># 列出 irb 这个命令的完整路径</span>
-rbenv whence irb             <span style="color:#6272a4"># 列出包含 irb 这个命令的版本</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rbenv rehash                 <span style="color:#6272a4"># 每当切换 ruby 版本和执行 bundle install 之后必须执行这个命令</span>
+</span></span><span style="display:flex;"><span>rbenv which irb              <span style="color:#6272a4"># 列出 irb 这个命令的完整路径</span>
+</span></span><span style="display:flex;"><span>rbenv whence irb             <span style="color:#6272a4"># 列出包含 irb 这个命令的版本</span>
+</span></span></code></pre></div></li>
 <li>
 <p>安装<code>bundle</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gem install bundle
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gem install bundle
+</span></span></code></pre></div></li>
 <li>
 <p>安装<code>rails</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gem install rails
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gem install rails
+</span></span></code></pre></div></li>
 <li>
 <p>安装 nodejs</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+</span></span><span style="display:flex;"><span>sudo apt-get install -y nodejs
+</span></span></code></pre></div></li>
 </ul>
 <h3 id="数据库">数据库</h3>
 <p>使用 postgresql 数据库<a href="https://www.postgresql.org/download/linux/ubuntu/">教程来源</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install postgresql
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install postgresql
+</span></span></code></pre></div><ul>
 <li>
 <p>新建数据库用户</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo -i -u postgres  //切换到数据库的超级管理员
-psql                 //进入数据库控制台
-create user deploy with password <span style="color:#f1fa8c">&#39;xxxx&#39;</span>; //新建一个deploy用户，密码是xxx
-alter role deploy with createdb; //使deploy用户具有创建数据库的权限
-alter role deploy with login；//使deploy用户具有登录数据库的权限
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo -i -u postgres  //切换到数据库的超级管理员
+</span></span><span style="display:flex;"><span>psql                 //进入数据库控制台
+</span></span><span style="display:flex;"><span>create user deploy with password <span style="color:#f1fa8c">&#39;xxxx&#39;</span>; //新建一个deploy用户，密码是xxx
+</span></span><span style="display:flex;"><span>alter role deploy with createdb; //使deploy用户具有创建数据库的权限
+</span></span><span style="display:flex;"><span>alter role deploy with login；//使deploy用户具有登录数据库的权限
+</span></span></code></pre></div></li>
 <li>
 <p>注意：</p>
 <p>在后面安装 pg gem 时，可能会出现<code>You need to install postgresql-server-dev-X.Y for building a server-side extension or libpq-dev for building a client-side applic ation</code>错误,依次执行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install python-psycopg2
-sudo apt-get install libpq-dev
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install python-psycopg2
+</span></span><span style="display:flex;"><span>sudo apt-get install libpq-dev
+</span></span></code></pre></div></li>
 </ul>
 <h3 id="nginx-passenger-安装">nginx passenger 安装</h3>
 <p><a href="https://www.phusionpassenger.com/library/install/nginx/install/oss/xenial/">这里很详细了</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install -y dirmngr gnupg
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
-sudo apt-get install -y apt-transport-https ca-certificates
-sudo sh -c <span style="color:#f1fa8c">&#39;echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main &gt; /etc/apt/sources.list.d/passenger.list&#39;</span>
-sudo apt-get update
-sudo apt-get install -y nginx-extras passenger
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install -y dirmngr gnupg
+</span></span><span style="display:flex;"><span>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
+</span></span><span style="display:flex;"><span>sudo apt-get install -y apt-transport-https ca-certificates
+</span></span><span style="display:flex;"><span>sudo sh -c <span style="color:#f1fa8c">&#39;echo deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main &gt; /etc/apt/sources.list.d/passenger.list&#39;</span>
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get install -y nginx-extras passenger
+</span></span></code></pre></div><ul>
 <li>
 <p>passenger 的配置</p>
 <p>nginx 安装以后，打开<code>/etc/nginx/passenger.conf</code>会看到</p>
-<pre><code class="language-conf" data-lang="conf">passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+<pre tabindex="0"><code class="language-conf" data-lang="conf">passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
 passenger_ruby /home/deploy/.rbenv/shims/ruby; //这里需要修改ruby的安装路径
 </code></pre><p><code>which ruby</code> 可以查看 ruby 的路径</p>
 </li>
@@ -256,172 +256,172 @@ passenger_ruby /home/deploy/.rbenv/shims/ruby; //这里需要修改ruby的安装
 <ul>
 <li>
 <p>安装必要的包</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">group <span style="color:#f1fa8c">:development</span> <span style="color:#ff79c6">do</span>
-gem <span style="color:#f1fa8c">&#39;capistrano&#39;</span>
-gem <span style="color:#f1fa8c">&#39;capistrano-bundler&#39;</span>
-gem <span style="color:#f1fa8c">&#39;capistrano-rails&#39;</span>
-gem <span style="color:#f1fa8c">&#39;capistrano-rbenv&#39;</span>
-<span style="color:#6272a4"># Add this if you&#39;re using rvm</span>
-<span style="color:#6272a4"># gem &#39;capistrano-rvm&#39;</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>group <span style="color:#f1fa8c">:development</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;capistrano&#39;</span>
+</span></span><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;capistrano-bundler&#39;</span>
+</span></span><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;capistrano-rails&#39;</span>
+</span></span><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;capistrano-rbenv&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Add this if you&#39;re using rvm</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># gem &#39;capistrano-rvm&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div></li>
 <li>
 <p><code>cap install</code></p>
 </li>
 <li>
 <p>我的 capfile 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4"># Load DSL and set up stages</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/setup&#34;</span>
-
-<span style="color:#6272a4"># Include default deployment tasks</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/deploy&#34;</span>
-
-<span style="color:#6272a4"># Load the SCM plugin appropriate to your project:</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># require &#34;capistrano/scm/hg&#34;</span>
-<span style="color:#6272a4"># install_plugin Capistrano::SCM::Hg</span>
-<span style="color:#6272a4"># or</span>
-<span style="color:#6272a4"># require &#34;capistrano/scm/svn&#34;</span>
-<span style="color:#6272a4"># install_plugin Capistrano::SCM::Svn</span>
-<span style="color:#6272a4"># or</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/scm/git&#34;</span>
-install_plugin Capistrano<span style="color:#ff79c6">::</span>SCM<span style="color:#ff79c6">::</span>Git
-
-<span style="color:#6272a4"># Include tasks from other gems included in your Gemfile</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># For documentation on these, see for example:</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/rvm</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/rbenv</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/chruby</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/bundler</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/rails</span>
-<span style="color:#6272a4">#   https://github.com/capistrano/passenger</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># require &#34;capistrano/rvm&#34;</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rbenv&#34;</span>
-<span style="color:#6272a4"># require &#34;capistrano/chruby&#34;</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/bundler&#34;</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rails/assets&#34;</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rails/migrations&#34;</span>
-<span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/passenger&#34;</span>
-set <span style="color:#f1fa8c">:rbenv_type</span>, <span style="color:#f1fa8c">:user</span>
-set <span style="color:#f1fa8c">:rbenv_ruby</span>, <span style="color:#f1fa8c">&#39;2.5.0&#39;</span>
-
-<span style="color:#6272a4"># Load custom tasks from `lib/capistrano/tasks` if you have any defined</span>
-Dir<span style="color:#ff79c6">.</span>glob(<span style="color:#f1fa8c">&#34;lib/capistrano/tasks/*.rake&#34;</span>)<span style="color:#ff79c6">.</span>each { <span style="color:#ff79c6">|</span>r<span style="color:#ff79c6">|</span> import r }
-</code></pre></div><p>我的 deploy.rb 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4"># config valid for current version and patch releases of Capistrano</span>
-lock <span style="color:#f1fa8c">&#34;~&gt; 3.10.2&#34;</span>
-
-set <span style="color:#f1fa8c">:application</span>, <span style="color:#f1fa8c">&#34;script_blog&#34;</span>
-set <span style="color:#f1fa8c">:repo_url</span>, <span style="color:#f1fa8c">&#34;https://github.com/dccmmtop/script_blog.git&#34;</span>
-<span style="color:#6272a4"># Default branch is :master</span>
-<span style="color:#6272a4"># ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp</span>
-
-<span style="color:#6272a4"># Default deploy_to directory is /var/www/my_app_name</span>
-set <span style="color:#f1fa8c">:deploy_to</span>, <span style="color:#f1fa8c">&#34;/home/deploy/scrit_blog&#34;</span>
-
-<span style="color:#6272a4"># Default value for :format is :airbrussh.</span>
-<span style="color:#6272a4"># set :format, :airbrussh</span>
-
-<span style="color:#6272a4"># You can configure the Airbrussh format using :format_options.</span>
-<span style="color:#6272a4"># These are the defaults.</span>
-<span style="color:#6272a4"># set :format_options, command_output: true, log_file: &#34;log/capistrano.log&#34;, color: :auto, truncate: :auto</span>
-
-<span style="color:#6272a4"># Default value for :pty is false</span>
-<span style="color:#6272a4"># set :pty, true</span>
-
-<span style="color:#6272a4"># Default value for :linked_files is []</span>
-<span style="color:#6272a4"># 在服务器&lt;project-name&gt;/share/config/ 下，要手动新建这两个文件，</span>
-append <span style="color:#f1fa8c">:linked_files</span>, <span style="color:#f1fa8c">&#34;config/database.yml&#34;</span>,<span style="color:#f1fa8c">&#34;config/secrets.yml&#34;</span>
-
-<span style="color:#6272a4"># Default value for linked_dirs is []</span>
-append <span style="color:#f1fa8c">:linked_dirs</span>, <span style="color:#f1fa8c">&#34;log&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/pids&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/cache&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/sockets&#34;</span>, <span style="color:#f1fa8c">&#34;public/system&#34;</span>
-
-<span style="color:#6272a4"># Default value for default_env is {}</span>
-<span style="color:#6272a4"># set :default_env, { path: &#34;/opt/ruby/bin:$PATH&#34; }</span>
-
-<span style="color:#6272a4"># Default value for local_user is ENV[&#39;USER&#39;]</span>
-<span style="color:#6272a4"># set :local_user, -&gt; { `git config user.name`.chomp }</span>
-
-<span style="color:#6272a4"># Default value for keep_releases is 5</span>
-<span style="color:#6272a4"># set :keep_releases, 5</span>
-
-<span style="color:#6272a4"># Uncomment the following to require manually verifying the host key before first deploy.</span>
-<span style="color:#6272a4"># set :ssh_options, verify_host_key: :secure</span>
-</code></pre></div><p>注意<code>append :linked_files, &quot;config/database.yml&quot;,&quot;config/secrets.yml&quot;</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4"># Load DSL and set up stages</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/setup&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Include default deployment tasks</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/deploy&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Load the SCM plugin appropriate to your project:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># require &#34;capistrano/scm/hg&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># install_plugin Capistrano::SCM::Hg</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># or</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># require &#34;capistrano/scm/svn&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># install_plugin Capistrano::SCM::Svn</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># or</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/scm/git&#34;</span>
+</span></span><span style="display:flex;"><span>install_plugin Capistrano<span style="color:#ff79c6">::</span>SCM<span style="color:#ff79c6">::</span>Git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Include tasks from other gems included in your Gemfile</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For documentation on these, see for example:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/rvm</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/rbenv</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/chruby</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/bundler</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/rails</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   https://github.com/capistrano/passenger</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># require &#34;capistrano/rvm&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rbenv&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># require &#34;capistrano/chruby&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/bundler&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rails/assets&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/rails/migrations&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#34;capistrano/passenger&#34;</span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:rbenv_type</span>, <span style="color:#f1fa8c">:user</span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:rbenv_ruby</span>, <span style="color:#f1fa8c">&#39;2.5.0&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Load custom tasks from `lib/capistrano/tasks` if you have any defined</span>
+</span></span><span style="display:flex;"><span>Dir<span style="color:#ff79c6">.</span>glob(<span style="color:#f1fa8c">&#34;lib/capistrano/tasks/*.rake&#34;</span>)<span style="color:#ff79c6">.</span>each { <span style="color:#ff79c6">|</span>r<span style="color:#ff79c6">|</span> import r }
+</span></span></code></pre></div><p>我的 deploy.rb 文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4"># config valid for current version and patch releases of Capistrano</span>
+</span></span><span style="display:flex;"><span>lock <span style="color:#f1fa8c">&#34;~&gt; 3.10.2&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:application</span>, <span style="color:#f1fa8c">&#34;script_blog&#34;</span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:repo_url</span>, <span style="color:#f1fa8c">&#34;https://github.com/dccmmtop/script_blog.git&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default branch is :master</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default deploy_to directory is /var/www/my_app_name</span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:deploy_to</span>, <span style="color:#f1fa8c">&#34;/home/deploy/scrit_blog&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for :format is :airbrussh.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :format, :airbrussh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You can configure the Airbrussh format using :format_options.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># These are the defaults.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :format_options, command_output: true, log_file: &#34;log/capistrano.log&#34;, color: :auto, truncate: :auto</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for :pty is false</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :pty, true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for :linked_files is []</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 在服务器&lt;project-name&gt;/share/config/ 下，要手动新建这两个文件，</span>
+</span></span><span style="display:flex;"><span>append <span style="color:#f1fa8c">:linked_files</span>, <span style="color:#f1fa8c">&#34;config/database.yml&#34;</span>,<span style="color:#f1fa8c">&#34;config/secrets.yml&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for linked_dirs is []</span>
+</span></span><span style="display:flex;"><span>append <span style="color:#f1fa8c">:linked_dirs</span>, <span style="color:#f1fa8c">&#34;log&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/pids&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/cache&#34;</span>, <span style="color:#f1fa8c">&#34;tmp/sockets&#34;</span>, <span style="color:#f1fa8c">&#34;public/system&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for default_env is {}</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :default_env, { path: &#34;/opt/ruby/bin:$PATH&#34; }</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for local_user is ENV[&#39;USER&#39;]</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :local_user, -&gt; { `git config user.name`.chomp }</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Default value for keep_releases is 5</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :keep_releases, 5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Uncomment the following to require manually verifying the host key before first deploy.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># set :ssh_options, verify_host_key: :secure</span>
+</span></span></code></pre></div><p>注意<code>append :linked_files, &quot;config/database.yml&quot;,&quot;config/secrets.yml&quot;</code></p>
 <p><code>database.yml</code>和<code>secrets.yml</code>是手动在,<code>share/config/</code>目录下新建的，一个是连接数据库的相关信息，一个是安全验证相关信息。我的部署目录是<code>scriot_blog/</code> 就新建 <code>script_blog/share/config/</code> 目录</p>
 <p>同时新建以上两个文件。</p>
 <p>database.yml</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#ff79c6">production</span>:
-<span style="color:#ff79c6">adapter</span>: postgresql
-<span style="color:#ff79c6">pool</span>: &lt;%= ENV.fetch(&#34;RAILS_MAX_THREADS&#34;) { 5 } %&gt;
-<span style="color:#ff79c6">timeout</span>: <span style="color:#bd93f9">5000</span>
-<span style="color:#ff79c6">database</span>: production_blog
-<span style="color:#ff79c6">username</span>: <span style="color:#f1fa8c">&#39;xxx&#39;</span>
-<span style="color:#ff79c6">password</span>: <span style="color:#f1fa8c">&#39;xxx&#39;</span>
-</code></pre></div><p>secrets.yml</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#ff79c6">production</span>:
-<span style="color:#ff79c6">secret_key_base</span>: xxxxxx
-</code></pre></div><p>其中<code>secret_key_base</code>的值是在本地项目下 执行<code>rake secret</code> 命令生成的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ff79c6">production</span>:
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">adapter</span>: postgresql
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">pool</span>: &lt;%= ENV.fetch(&#34;RAILS_MAX_THREADS&#34;) { 5 } %&gt;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">timeout</span>: <span style="color:#bd93f9">5000</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">database</span>: production_blog
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">username</span>: <span style="color:#f1fa8c">&#39;xxx&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">password</span>: <span style="color:#f1fa8c">&#39;xxx&#39;</span>
+</span></span></code></pre></div><p>secrets.yml</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ff79c6">production</span>:
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">secret_key_base</span>: xxxxxx
+</span></span></code></pre></div><p>其中<code>secret_key_base</code>的值是在本地项目下 执行<code>rake secret</code> 命令生成的。</p>
 </li>
 <li>
 <p>deploy/production.rb</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4"># server-based syntax</span>
-<span style="color:#6272a4"># ======================</span>
-<span style="color:#6272a4"># Defines a single server with a list of roles and multiple properties.</span>
-<span style="color:#6272a4"># You can define all roles on a single server, or split them:</span>
-
-<span style="color:#6272a4"># server &#34;39.108.138.149&#34;, user: &#34;root&#34;, roles: %w{app db web}, my_property: :my_value</span>
-server <span style="color:#f1fa8c">&#34;xxxx服务器的ip&#34;</span>, <span style="color:#f1fa8c">user</span>: <span style="color:#f1fa8c">&#34;deploy&#34;</span>, <span style="color:#f1fa8c">roles</span>: <span style="color:#f1fa8c">%w{app db web}</span>
-<span style="color:#6272a4"># server &#34;example.com&#34;, user: &#34;deploy&#34;, roles: %w{app web}, other_property: :other_value</span>
-<span style="color:#6272a4"># server &#34;db.example.com&#34;, user: &#34;deploy&#34;, roles: %w{db}</span>
-<span style="color:#6272a4"># role-based syntax</span>
-<span style="color:#6272a4"># ==================</span>
-
-<span style="color:#6272a4"># Defines a role with one or multiple servers. The primary server in each</span>
-<span style="color:#6272a4"># group is considered to be the first unless any hosts have the primary</span>
-<span style="color:#6272a4"># property set. Specify the username and a domain or IP for the server.</span>
-<span style="color:#6272a4"># Don&#39;t use `:all`, it&#39;s a meta role.</span>
-
-<span style="color:#6272a4"># role :app, %w{deploy@example.com}, my_property: :my_value</span>
-<span style="color:#6272a4"># role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value</span>
-<span style="color:#6272a4"># role :db,  %w{deploy@example.com}</span>
-
-<span style="color:#6272a4"># Configuration</span>
-<span style="color:#6272a4"># =============</span>
-<span style="color:#6272a4"># You can set any configuration variable like in config/deploy.rb</span>
-<span style="color:#6272a4"># These variables are then only loaded and set in this stage.</span>
-<span style="color:#6272a4"># For available Capistrano configuration variables see the documentation page.</span>
-<span style="color:#6272a4"># http://capistranorb.com/documentation/getting-started/configuration/</span>
-<span style="color:#6272a4"># Feel free to add new variables to customise your setup.</span>
-
-<span style="color:#6272a4"># Custom SSH Options</span>
-<span style="color:#6272a4"># ==================</span>
-<span style="color:#6272a4"># You may pass any option but keep in mind that net/ssh understands a</span>
-<span style="color:#6272a4"># limited set of options, consult the Net::SSH documentation.</span>
-<span style="color:#6272a4"># http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start</span>
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># Global options</span>
-<span style="color:#6272a4"># --------------</span>
-set <span style="color:#f1fa8c">:ssh_options</span>, {
-<span style="color:#f1fa8c">keys</span>: <span style="color:#f1fa8c">%w(/home/deploy/.ssh/id_rsa)</span>,
-<span style="color:#f1fa8c">port</span>: xxx
-<span style="color:#6272a4"># forward_agent: false,</span>
-<span style="color:#6272a4"># auth_methods: %w(password)</span>
-}
-<span style="color:#6272a4">#</span>
-<span style="color:#6272a4"># The server-based syntax can be used to override options:</span>
-<span style="color:#6272a4"># ------------------------------------</span>
-<span style="color:#6272a4"># server &#34;example.com&#34;,</span>
-<span style="color:#6272a4">#   user: &#34;user_name&#34;,</span>
-<span style="color:#6272a4">#     keys: %w(/home/user_name/.ssh/id_rsa),</span>
-<span style="color:#6272a4">#     forward_agent: false,</span>
-<span style="color:#6272a4">#     auth_methods: %w(publickey password)</span>
-<span style="color:#6272a4">#     # password: &#34;please use keys&#34;</span>
-<span style="color:#6272a4">#   }</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4"># server-based syntax</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ======================</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Defines a single server with a list of roles and multiple properties.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You can define all roles on a single server, or split them:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># server &#34;39.108.138.149&#34;, user: &#34;root&#34;, roles: %w{app db web}, my_property: :my_value</span>
+</span></span><span style="display:flex;"><span>server <span style="color:#f1fa8c">&#34;xxxx服务器的ip&#34;</span>, <span style="color:#f1fa8c">user</span>: <span style="color:#f1fa8c">&#34;deploy&#34;</span>, <span style="color:#f1fa8c">roles</span>: <span style="color:#f1fa8c">%w{app db web}</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># server &#34;example.com&#34;, user: &#34;deploy&#34;, roles: %w{app web}, other_property: :other_value</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># server &#34;db.example.com&#34;, user: &#34;deploy&#34;, roles: %w{db}</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># role-based syntax</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ==================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Defines a role with one or multiple servers. The primary server in each</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># group is considered to be the first unless any hosts have the primary</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># property set. Specify the username and a domain or IP for the server.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Don&#39;t use `:all`, it&#39;s a meta role.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># role :app, %w{deploy@example.com}, my_property: :my_value</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># role :db,  %w{deploy@example.com}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Configuration</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># =============</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You can set any configuration variable like in config/deploy.rb</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># These variables are then only loaded and set in this stage.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># For available Capistrano configuration variables see the documentation page.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># http://capistranorb.com/documentation/getting-started/configuration/</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Feel free to add new variables to customise your setup.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Custom SSH Options</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ==================</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># You may pass any option but keep in mind that net/ssh understands a</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># limited set of options, consult the Net::SSH documentation.</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Global options</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># --------------</span>
+</span></span><span style="display:flex;"><span>set <span style="color:#f1fa8c">:ssh_options</span>, {
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">keys</span>: <span style="color:#f1fa8c">%w(/home/deploy/.ssh/id_rsa)</span>,
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">port</span>: xxx
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># forward_agent: false,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># auth_methods: %w(password)</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># The server-based syntax can be used to override options:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># server &#34;example.com&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   user: &#34;user_name&#34;,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#     keys: %w(/home/user_name/.ssh/id_rsa),</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#     forward_agent: false,</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#     auth_methods: %w(publickey password)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#     # password: &#34;please use keys&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#   }</span>
+</span></span></code></pre></div></li>
 </ul>
 <h3 id="最后">最后</h3>
 <p>本地执行<code>cap production deploy</code></p>
@@ -458,12 +458,12 @@ set <span style="color:#f1fa8c">:ssh_options</span>, {
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E9%83%A8%E7%BD%B2">部署
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E9%83%A8%E7%BD%B2">部署
                     </a>
                 </li>
                 

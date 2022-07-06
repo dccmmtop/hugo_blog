@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/linux%E6%90%AD%E5%BB%BAsamba%E6%9C%8D%E5%8A%A1/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/linux%E6%90%AD%E5%BB%BAsamba%E6%9C%8D%E5%8A%A1/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,33 +109,33 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h2 id="安装-samba">安装 samba</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install samba
-</code></pre></div><h2 id="修改配置文件">修改配置文件</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yum install samba
+</span></span></code></pre></div><h2 id="修改配置文件">修改配置文件</h2>
 <p>修改配置文件 <code>vim  /etc/samba/smb.conf</code> 添加要共享的目录</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">[opt]   <span style="color:#6272a4"># 被共享目录的别名</span>
-        path = /home/dccmmtop/opt <span style="color:#6272a4"># 要共享的目录</span>
-        browseable = yes
-        writable = yes <span style="color:#6272a4"># 可以写入</span>
-        valid users = dccmmtop <span style="color:#6272a4"># 用户，该用户要有目录的权限</span>
-        create mode=0777
-        directory mode=0777
-        force create mode=0777
-        force directory mode=0777
-</code></pre></div><h2 id="添加用户">添加用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span>[opt]   <span style="color:#6272a4"># 被共享目录的别名</span>
+</span></span><span style="display:flex;"><span>        path = /home/dccmmtop/opt <span style="color:#6272a4"># 要共享的目录</span>
+</span></span><span style="display:flex;"><span>        browseable = yes
+</span></span><span style="display:flex;"><span>        writable = yes <span style="color:#6272a4"># 可以写入</span>
+</span></span><span style="display:flex;"><span>        valid users = dccmmtop <span style="color:#6272a4"># 用户，该用户要有目录的权限</span>
+</span></span><span style="display:flex;"><span>        create mode=0777
+</span></span><span style="display:flex;"><span>        directory mode=0777
+</span></span><span style="display:flex;"><span>        force create mode=0777
+</span></span><span style="display:flex;"><span>        force directory mode=0777
+</span></span></code></pre></div><h2 id="添加用户">添加用户</h2>
 <p>将用户 dccmmtop 设置为可以登录 samba</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">smbpasswd -a dccmmtop    // 设置 dccmmtop 的samba服务密码，可与用户密码相同
-smbpasswd -e dccmmtop    // 启用samba用户，显示Enable则成功
-</code></pre></div><h2 id="关闭网络防火墙或添加端口">关闭网络防火墙或添加端口</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl stop firewalld.service
-</code></pre></div><p>或者开放端口</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>139/tcp --permanent
-sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>445/tcp --permanent
-sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>137/udp --permanent
-sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>138/udp --permanent
-
-sudo firewall-cmd --reload
-sudo systemctl restart firewalld.service
-</code></pre></div><h2 id="关闭selinux">关闭SELinux</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>smbpasswd -a dccmmtop    // 设置 dccmmtop 的samba服务密码，可与用户密码相同
+</span></span><span style="display:flex;"><span>smbpasswd -e dccmmtop    // 启用samba用户，显示Enable则成功
+</span></span></code></pre></div><h2 id="关闭网络防火墙或添加端口">关闭网络防火墙或添加端口</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl stop firewalld.service
+</span></span></code></pre></div><p>或者开放端口</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>139/tcp --permanent
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>445/tcp --permanent
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>137/udp --permanent
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --zone<span style="color:#ff79c6">=</span>public --add-port<span style="color:#ff79c6">=</span>138/udp --permanent
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo firewall-cmd --reload
+</span></span><span style="display:flex;"><span>sudo systemctl restart firewalld.service
+</span></span></code></pre></div><h2 id="关闭selinux">关闭SELinux</h2>
 <p>安全增强型Linux（SELinux）是一个Linux内核的功能，它提供支持访问控制的安全政策保护机制
 打开 <code>/etc/selinux/config</code> ,将 <code>SELINUX</code> 设置为 disabled
 <img src="../../images/20220119113856746_8804.png" alt=""></p>
@@ -144,8 +144,8 @@ sudo systemctl restart firewalld.service
 <p>执行命令 <code>setenforce 0</code> 临时关闭SELinux</p>
 <p>运行命令getenforce，验证SELinux状态为disabled，表明SELinux已关闭。</p>
 <h2 id="重启服务">重启服务</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl restart smb.service // 不报错说明没问题
-</code></pre></div><h2 id="windows-挂载">windows 挂载</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>systemctl restart smb.service // 不报错说明没问题
+</span></span></code></pre></div><h2 id="windows-挂载">windows 挂载</h2>
 <p>开启windows SMB 服务，如下
 <img src="../../images/20220119114500881_12441.png" alt="">
 映射网络位置
@@ -186,7 +186,7 @@ sudo systemctl restart firewalld.service
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
                     </a>
                 </li>
                 

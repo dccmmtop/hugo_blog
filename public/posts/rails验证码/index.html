@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails%E9%AA%8C%E8%AF%81%E7%A0%81/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,29 +110,28 @@
         <div class="article-entry" itemprop="articleBody">
             <h2 id="rails验证码">rails验证码</h2>
 <p>1.安装包</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">gem <span style="color:#f1fa8c">&#39;rucaptcha&#39;</span>
-gem <span style="color:#f1fa8c">&#39;dalli&#39;</span>
-</code></pre></div><p>2.配置路由  （最新版本的不用配置路由）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">mount RuCaptcha<span style="color:#ff79c6">::</span>Engine <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;/rucaptcha&#34;</span>
-</code></pre></div><p>3.controller部分</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">create</span>
-    <span style="color:#8be9fd;font-style:italic">@user</span> <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>new(user_params)
-    <span style="color:#ff79c6">if</span>  verify_rucaptcha?(<span style="color:#8be9fd;font-style:italic">@user</span>)<span style="color:#ff79c6">&amp;&amp;</span><span style="color:#8be9fd;font-style:italic">@user</span><span style="color:#ff79c6">.</span>save
-    <span style="color:#ff79c6">......</span>
-</code></pre></div><p>4.view部分</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">&lt;</span>div class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;form-group &#34;</span><span style="color:#ff79c6">&gt;</span>
-     <span style="color:#ff79c6">&lt;</span><span style="color:#f1fa8c">%= rucaptcha_input_tag( class:&#39;form-control rucaptcha-text&#39;) %&gt;
-</span><span style="color:#f1fa8c">     &lt;a href=</span><span style="color:#f1fa8c">&#34;#&#34;</span> class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;rucaptcha-image-box&#39;</span><span style="color:#ff79c6">&gt;&lt;%=</span> rucaptcha_image_tag(<span style="color:#f1fa8c">class</span>:<span style="color:#f1fa8c">&#39;rucaptcha-image&#39;</span>, <span style="color:#f1fa8c">alt</span>: <span style="color:#f1fa8c">&#39;Captcha&#39;</span>) <span style="color:#f1fa8c">%&gt;&lt;/a&gt;</span>
-  <span style="color:#ff79c6">&lt;</span><span style="color:#f1fa8c">/div&gt;
-</span></code></pre></div><p>5.实现点击图片刷新验证码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-coffee" data-lang="coffee"> <span style="color:#6272a4">#点击验证码刷新
-</span><span style="color:#6272a4"></span>  $(<span style="color:#f1fa8c">&#34;.rucaptcha-image&#34;</span>).click <span style="color:#50fa7b">-&gt;</span>
-    <span style="color:#8be9fd;font-style:italic">img = </span>$(<span style="color:#ff79c6">this</span>)
-    <span style="color:#8be9fd;font-style:italic">currentSrc = </span>img.attr(<span style="color:#f1fa8c">&#39;src&#39;</span>);
-    img.attr(<span style="color:#f1fa8c">&#39;src&#39;</span>, currentSrc.split(<span style="color:#f1fa8c">&#39;?&#39;</span>)[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;?&#39;</span> <span style="color:#ff79c6">+</span> (<span style="color:#ff79c6">new</span> <span style="color:#8be9fd;font-style:italic">Date</span>()).getTime());
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;rucaptcha&#39;</span>
+</span></span><span style="display:flex;"><span>gem <span style="color:#f1fa8c">&#39;dalli&#39;</span>
+</span></span></code></pre></div><p>2.配置路由  （最新版本的不用配置路由）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>mount RuCaptcha<span style="color:#ff79c6">::</span>Engine <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;/rucaptcha&#34;</span>
+</span></span></code></pre></div><p>3.controller部分</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">create</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@user</span> <span style="color:#ff79c6">=</span> User<span style="color:#ff79c6">.</span>new(user_params)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>  verify_rucaptcha?(<span style="color:#8be9fd;font-style:italic">@user</span>)<span style="color:#ff79c6">&amp;&amp;</span><span style="color:#8be9fd;font-style:italic">@user</span><span style="color:#ff79c6">.</span>save
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">......</span>
+</span></span></code></pre></div><p>4.view部分</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>  <span style="color:#ff79c6">&lt;</span>div class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;form-group &#34;</span><span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">&lt;</span><span style="color:#f1fa8c">%= rucaptcha_input_tag( class:&#39;form-control rucaptcha-text&#39;) %&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">     &lt;a href=</span><span style="color:#f1fa8c">&#34;#&#34;</span> class<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;rucaptcha-image-box&#39;</span><span style="color:#ff79c6">&gt;&lt;%=</span> rucaptcha_image_tag(<span style="color:#f1fa8c">class</span>:<span style="color:#f1fa8c">&#39;rucaptcha-image&#39;</span>, <span style="color:#f1fa8c">alt</span>: <span style="color:#f1fa8c">&#39;Captcha&#39;</span>) <span style="color:#f1fa8c">%&gt;&lt;/a&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&lt;</span><span style="color:#f1fa8c">/div&gt;
+</span></span></span></code></pre></div><p>5.实现点击图片刷新验证码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-coffee" data-lang="coffee"><span style="display:flex;"><span> <span style="color:#6272a4">#点击验证码刷新
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  $(<span style="color:#f1fa8c">&#34;.rucaptcha-image&#34;</span>).click <span style="color:#50fa7b">-&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">img = </span>$(<span style="color:#ff79c6">this</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">currentSrc = </span>img.attr(<span style="color:#f1fa8c">&#39;src&#39;</span>);
+</span></span><span style="display:flex;"><span>    img.attr(<span style="color:#f1fa8c">&#39;src&#39;</span>, currentSrc.split(<span style="color:#f1fa8c">&#39;?&#39;</span>)[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">+</span> <span style="color:#f1fa8c">&#39;?&#39;</span> <span style="color:#ff79c6">+</span> (<span style="color:#ff79c6">new</span> <span style="color:#8be9fd;font-style:italic">Date</span>()).getTime());
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -156,7 +155,7 @@ gem <span style="color:#f1fa8c">&#39;dalli&#39;</span>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

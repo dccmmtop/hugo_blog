@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RabbitMQ集群部署 // 超的博客</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    
+
+        <meta property="og:title" content="RabbitMQ集群部署" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rabbitmq%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" />
+    
+
+     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    
+
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
+    
+
+    <meta name="generator" content="Hugo 0.101.0" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="../../posts/">文章</a>
+                
+                <a class="main-nav-link" href="../../tags/">标签</a>
+                
+                <a class="main-nav-link" href="../../about/">关于</a>
+                
+                <a class="main-nav-link" id="search" >
+                  <input id="inputSearch" placeholder="search">
+                  <svg t="1634282825021" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2401" width="15" height="15"><path d="M1005.312 914.752l-198.528-198.464A448 448 0 1 0 0 448a448 448 0 0 0 716.288 358.784l198.4 198.4a64 64 0 1 0 90.624-90.432zM448 767.936A320 320 0 1 1 448 128a320 320 0 0 1 0 640z" fill="#262626" p-id="2402"></path></svg></a>
+      
+      
+      
+      
+      
+      
+      
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">搜索结果</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body searchResults">
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">RabbitMQ集群部署</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="../../posts/rabbitmq%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/" class="article-date">
+                <time datetime='2022-07-04T22:27:10.000&#43;00:00' itemprop="datePublished">2022-07-04</time>
+            </a>
+            
+            
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>本文采用docker-compose 的方式部署 rabbitMQ集群</p>
+<h3 id="docker-composeyml">docker-compose.yml</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">rabbitmq</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: rabbitMQ
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: rabbitmq:3.7.7-management
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 注意 hostname（本地域名）, rabbitMQ集群之间的通信就是靠此寻址的。物理机部署时也可以使用固定IP</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hostname</span>: rabbitmq
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_NODE_PORT</span>: <span style="color:#bd93f9">5672</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># 指定虚拟主机的名称</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_VHOST</span>: my_vhost
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_USER</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_PASS</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># 指定 erlang_cookie, 集群中的所有节点的值必须保持一致， erlang 使用该值作为通信的密钥</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_ERLANG_COOKIE</span>: rabbitmq_erlang_cookie
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#bd93f9">15672</span>:<span style="color:#bd93f9">15672</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - ./data/rabbit:/var/lib/rabbitmq
+</span></span><span style="display:flex;"><span>      - ./conf:/etc/rabbitmq
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">rabbitmq1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: rabbitMQ_1
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: rabbitmq:3.7.7-management
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hostname</span>: rabbitmq1
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_NODE_PORT</span>: <span style="color:#bd93f9">5672</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_VHOST</span>: my_vhost
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_USER</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_PASS</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_ERLANG_COOKIE</span>: rabbitmq_erlang_cookie
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#bd93f9">15673</span>:<span style="color:#bd93f9">15672</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - ./data/rabbit_1:/var/lib/rabbitmq
+</span></span><span style="display:flex;"><span>      - ./conf:/etc/rabbitmq
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">rabbitmq2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">restart</span>: always
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">container_name</span>: rabbitMQ_2
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: rabbitmq:3.7.7-management
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">hostname</span>: rabbitmq2
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_NODE_PORT</span>: <span style="color:#bd93f9">5672</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_VHOST</span>: my_vhost
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_USER</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_DEFAULT_PASS</span>: admin
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">RABBITMQ_ERLANG_COOKIE</span>: rabbitmq_erlang_cookie
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#bd93f9">15674</span>:<span style="color:#bd93f9">15672</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">volumes</span>:
+</span></span><span style="display:flex;"><span>      - ./data/rabbit_2:/var/lib/rabbitmq
+</span></span><span style="display:flex;"><span>      - ./conf:/etc/rabbitmq
+</span></span></code></pre></div><h4 id="集群节点之间如何通信">集群节点之间如何通信</h4>
+<p>如上配置所示，我们并没有像之前的服务那样，使用 link 明确的标识与其他服务的链接关系。那么这是如何让 3 个节点互相通信的呢？</p>
+<p>原来docker 1.0 版本之后，会内置一个域名服务器，可以进入容器内部查看 <code>/etc/reslv.conf</code> 文件，会发现 <code>nameserver 127.0.0.11</code> 配置。
+这就是默认域名解析服务器的地址。我们在配置文件中指定了 <code>hostname</code> 的值,在容器启动的时候，就会向域名服务器注册信息，域名服务器会记域名与该机器ip的对应关系，后面我们在容器中使用 hostname 去访问其他服务时，便会通过域名服务器找到对应的IP是什么，从而访问该服务</p>
+<h3 id="目录结构">目录结构</h3>
+<p>如上配置所示， 分别使用 <code>./data/rabbit</code> <code>./data/rabbit_1</code> <code>./data/rabbit_2</code> 作为每个节点的数据卷
+使用 <code>./conf</code> 作为配置文件的卷
+所以有如下目录结构</p>
+<p><img src="../../images/20220704223907831_32327.png" alt=""></p>
+<p>其中 <code>rabbitmq.conf</code> 配置如下</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">loopback_users.guest = false
+listeners.tcp.default = 5672
+default_pass = admin
+default_user = admin
+default_vhost = my_vhost
+hipe_compile = false
+management.listener.port = 15672
+management.listener.ssl = false
+
+# 下面配置针对 rabbitmq-mqtt 插件, 没有开启mqtt插件的，忽略
+mqtt.default_user = mqtt_user
+mqtt.default_pass = Aa111111
+mqtt.allow_anonymous = true
+mqtt.vhost = my_vhost
+</code></pre><p>enabled_plugins 配置如下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>[rabbitmq_management,rabbitmq_mqtt,rabbitmq_web_mqtt].
+</span></span></code></pre></div><p>开启了 web 端管理界面，mqtt 、 mqtt_web 插件</p>
+<h3 id="启动容器">启动容器</h3>
+<p>检查配置正确后，启动容器</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker-compose up -d
+</span></span></code></pre></div><h3 id="集群配置">集群配置</h3>
+<p>可以分别进入三个容器内部检查容器日志，确定全部启动成功后，进入 rabbitMQ_1 容器中，执行</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rabbitmqctl stop_app
+</span></span></code></pre></div><p>该命令会停止当前容器中的rabbitMQ 服务，rabbitMQ 是使用 erlang 语言编写的， rabbitMQ 自然要运行在 erlang 虚拟中，就像 java class 运行在 jvm 虚拟机中一样的道理。 所以上面的命令只是停止 rabbitMQ服务，erlang 虚拟机仍然在运行着。</p>
+<p>现在我们将 rabbitMQ 作为主节点， rabbitMQ_1, rabbitMQ_2 作为从节点，把 rabbtitMQ_1 加入 rabbitMQ 中:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rabbitmqctl join_cluster rabbit@rabbitmq <span style="color:#6272a4"># rabbitmq 就是你的域名或ip地址, 前面的 rabbit@ 是固定写法</span>
+</span></span></code></pre></div><p>等待命令成功执行后，再执行如下命令启动 rabbit 服务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rabbitmqctl start_app
+</span></span></code></pre></div><p>然后可以执行 <code>rabbitmqctl cluser_status</code> 查看节点运行状态， rabbitMQ_2 容器中重复上述步骤即可</p>
+<p>集群状态如下:</p>
+<p><img src="../../images/20220704230802953_29630.png" alt=""></p>
+<p>可以看到集群中已经由三个磁盘节点了。</p>
+<p>至于为什么叫磁盘节点，先按下不表，下篇文章再探讨， 下面我们先看一下如何让一个节点从集群中全身而退。</p>
+<h3 id="退出集群">退出集群</h3>
+<p>在节点上执行如下命令，即可安全的让节点退出集群</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rabbitmqctl stop_app
+</span></span><span style="display:flex;"><span>rabbitmqctl reset
+</span></span><span style="display:flex;"><span>rabbitmqctl start_app
+</span></span></code></pre></div><p>这里的关键命令是 <code>rabbitmqctl reset</code>, 此命令清空节点状态，并将其恢复到空白状态，执行此命令时，节点会和集群中其他节点通信，告诉它们，我马上要退出集群了，这一步非常重要，不然其他节点以为当前节点是因为故障而断开的，并期望某一天一定会再回来的，同时阻止其他新的节点加入集群，直到该节点恢复。 所以当要离开集群时，务必先要重设节点状态!!!</p>
+<p>如下:</p>
+<p><img src="../../images/20220706233801653_7525.png" alt=""></p>
+<p>从集群移除后，可以看到该节点已经称为独立节点了</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3></h3>
+            <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#docker-composeyml">docker-compose.yml</a></li>
+        <li><a href="#目录结构">目录结构</a></li>
+        <li><a href="#启动容器">启动容器</a></li>
+        <li><a href="#集群配置">集群配置</a></li>
+        <li><a href="#退出集群">退出集群</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rabbitmq">rabbitMQ
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    
+<nav id="article-nav">
+    
+    
+    <a href="../../posts/%E5%BA%94%E7%AD%94%E9%98%9F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">RabbitMQ应答队列&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+
+
+</article>
+
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 dc
+            <br />
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos" target="_blank">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

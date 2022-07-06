@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/powershell%E9%85%8D%E7%BD%AE/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/powershell%E9%85%8D%E7%BD%AE/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -122,82 +122,81 @@
 <p>PSReadLine 在 V5 或以上版本中自带</p>
 <p>命令 <code>$profile</code> 可见看见配置文件的路径，如果没有此文件，新建即可</p>
 <p>打配置文件 <code>notepad $profile</code>,输入一下内容</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Import-Module PSReadLine
-<span style="color:#6272a4"># Shows navigable menu of all options when hitting Tab</span>
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-
-<span style="color:#6272a4"># Autocompleteion for Arrow keys</span>
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-
-Set-PSReadLineOption -ShowToolTips
-Set-PSReadLineOption -PredictionSource History
-
-<span style="color:#6272a4">#Set the color for Prediction (auto-suggestion)</span>
-Set-PSReadLineOption -Colors @<span style="color:#ff79c6">{</span>
-  <span style="color:#8be9fd;font-style:italic">Command</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Magenta&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Number</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Member</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Operator</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Type</span>               <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Variable</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Parameter</span>          <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">ContinuationPrompt</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">Default</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">InlinePrediction</span>   <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGray&#39;</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></div><h3 id="oh-my-posh">oh-my-posh</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Import-Module PSReadLine
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Shows navigable menu of all options when hitting Tab</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Autocompleteion for Arrow keys</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -ShowToolTips
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -PredictionSource History
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#Set the color for Prediction (auto-suggestion)</span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -Colors @<span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Command</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;Magenta&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Number</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Member</span>             <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Operator</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Type</span>               <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Variable</span>           <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Parameter</span>          <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGreen&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">ContinuationPrompt</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">Default</span>            <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkBlue&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">InlinePrediction</span>   <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;DarkGray&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><h3 id="oh-my-posh">oh-my-posh</h3>
 <p>Oh My Posh是一个定制的提示引擎，适用于任何能够使用函数或变量调整提示字符串的shell。</p>
 <p><strong>安装</strong></p>
 <p><code>scoop install oh-my-posh</code></p>
 <p><strong>配置</strong></p>
 <p>在配置文件 <code>$profile</code> 输入：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">oh-my-posh init pwsh --config ~<span style="color:#f1fa8c">\s</span>coop<span style="color:#f1fa8c">\a</span>pps<span style="color:#f1fa8c">\o</span>h-my-posh<span style="color:#f1fa8c">\c</span>urrent<span style="color:#f1fa8c">\t</span>hemes<span style="color:#f1fa8c">\r</span>obbyrussel.omp.json | Invoke-Expression
-</code></pre></div><h3 id="get-childitemcolor">Get-ChildItemColor</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>oh-my-posh init pwsh --config ~<span style="color:#f1fa8c">\s</span>coop<span style="color:#f1fa8c">\a</span>pps<span style="color:#f1fa8c">\o</span>h-my-posh<span style="color:#f1fa8c">\c</span>urrent<span style="color:#f1fa8c">\t</span>hemes<span style="color:#f1fa8c">\r</span>obbyrussel.omp.json | Invoke-Expression
+</span></span></code></pre></div><h3 id="get-childitemcolor">Get-ChildItemColor</h3>
 <p><strong>安装</strong></p>
 <p><code>Install-Module -AllowClobber Get-ChildItemColor -Scope CurrentUser</code></p>
 <p><strong>配置:</strong></p>
 <p>在配置文件 <code>$profile</code> 输入：</p>
 <p><code>Import-Module Get-ChildItemColor</code></p>
 <h3 id="完整配置">完整配置</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">oh-my-posh init pwsh --config C:\Users\Administrator\scoop\apps\oh-my-posh\current\themes\robbyrussel.omp.json | Invoke-Expression
-
-Import-Module PSReadLine
-# Shows navigable menu of all options when hitting Tab
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-
-# Autocompleteion for Arrow keys
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-
-Set-PSReadLineOption -ShowToolTips
-Set-PSReadLineOption -PredictionSource History
-
-#Set the color for Prediction (auto-suggestion)
-Set-PSReadLineOption -Colors @{
-  Command            = &#39;Magenta&#39;
-  Number             = &#39;DarkBlue&#39;
-  Member             = &#39;DarkBlue&#39;
-  Operator           = &#39;DarkBlue&#39;
-  Type               = &#39;DarkBlue&#39;
-  Variable           = &#39;DarkGreen&#39;
-  Parameter          = &#39;DarkGreen&#39;
-  ContinuationPrompt = &#39;DarkBlue&#39;
-  Default            = &#39;DarkBlue&#39;
-  InlinePrediction   = &#39;DarkGray&#39;
-}
-
-
-
-Import-Module Get-ChildItemColor
-#Set-Alias ll Get-ChildItem -option AllScope
-#Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
-
-Function vim {F:\Neovim\bin\nvim.exe $args}
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>oh-my-posh init pwsh --config C:\Users\Administrator\scoop\apps\oh-my-posh\current\themes\robbyrussel.omp.json | Invoke-Expression
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Import-Module PSReadLine
+</span></span><span style="display:flex;"><span># Shows navigable menu of all options when hitting Tab
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Autocompleteion for Arrow keys
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+</span></span><span style="display:flex;"><span>Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -ShowToolTips
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -PredictionSource History
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>#Set the color for Prediction (auto-suggestion)
+</span></span><span style="display:flex;"><span>Set-PSReadLineOption -Colors @{
+</span></span><span style="display:flex;"><span>  Command            = &#39;Magenta&#39;
+</span></span><span style="display:flex;"><span>  Number             = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  Member             = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  Operator           = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  Type               = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  Variable           = &#39;DarkGreen&#39;
+</span></span><span style="display:flex;"><span>  Parameter          = &#39;DarkGreen&#39;
+</span></span><span style="display:flex;"><span>  ContinuationPrompt = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  Default            = &#39;DarkBlue&#39;
+</span></span><span style="display:flex;"><span>  InlinePrediction   = &#39;DarkGray&#39;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Import-Module Get-ChildItemColor
+</span></span><span style="display:flex;"><span>#Set-Alias ll Get-ChildItem -option AllScope
+</span></span><span style="display:flex;"><span>#Set-Alias ls Get-ChildItemColorFormatWide -option AllScope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Function vim {F:\Neovim\bin\nvim.exe $args}
+</span></span></code></pre></div>
         </div>
 
         
@@ -230,7 +229,7 @@ Function vim {F:\Neovim\bin\nvim.exe $args}
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/powershell">powershell
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/powershell">powershell
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mongodb%E5%9F%BA%E7%A1%80/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/mongodb%E5%9F%BA%E7%A1%80/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -115,13 +115,13 @@ MongoDB的一个实例可以拥有多个相互独立的数据库（database）�
 <h2 id="文档">文档</h2>
 <p>MongoDB而且区分大小写，
 下面两个文档是不同的</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#ff79c6">&#34;foo&#34;</span>: <span style="color:#bd93f9">3</span>
-}
-{
-  <span style="color:#ff79c6">&#34;Foo&#34;</span>: <span style="color:#bd93f9">3</span>
-}
-</code></pre></div><p>文档中的键/值对是有序的：{&ldquo;x&rdquo; : 1, &ldquo;y&rdquo;:2}与{&ldquo;y&rdquo;: 2, &ldquo;x&rdquo;: 1}是不同的。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;foo&#34;</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;Foo&#34;</span>: <span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>文档中的键/值对是有序的：{&ldquo;x&rdquo; : 1, &ldquo;y&rdquo;:2}与{&ldquo;y&rdquo;: 2, &ldquo;x&rdquo;: 1}是不同的。
 通常，字段顺序并不重要，无须让数据库模式依赖特定的字段顺序（MongoDB会对字段重新排序）。在某些特殊情况下，字段顺序变得非常重要，</p>
 <h2 id="集合">集合</h2>
 <p>文档中的键/值对是有序的：{&ldquo;x&rdquo; : 1, &ldquo;y&rdquo;:2}与{&ldquo;y&rdquo;: 2, &ldquo;x&rdquo;: 1}是不同的。通常，字段顺序并不重要，无须让数据库模式依赖特定的字段顺序（MongoDB会对字段重新排序）。在某些特殊情况下，字段顺序变得非常重要，</p>
@@ -150,7 +150,7 @@ MongoDB的一个实例可以拥有多个相互独立的数据库（database）�
 <h3 id="命名-1">命名</h3>
 <ul>
 <li>集合名不能以“system.”开头，这是为系统集合保留的前缀。例如，system.users这个集合保存着数据库的用户信息，而system.namespaces集合保存着所有数据库集合的信息。</li>
-<li>用户创建的集合不能在集合名中包含保留字符’$'。因为某些系统生成的集合中包含$，很多驱动程序确实支持在集合名里包含该字符。除非你要访问这种系统创建的集合，否则不应该在集合名中包含$。</li>
+<li>用户创建的集合不能在集合名中包含保留字符’$&rsquo;。因为某些系统生成的集合中包含$，很多驱动程序确实支持在集合名里包含该字符。除非你要访问这种系统创建的集合，否则不应该在集合名中包含$。</li>
 </ul>
 <h3 id="子集合">子集合</h3>
 <p>组织集合的一种惯例是使用“.”分隔不同命名空间的子集合。例如，一个具有博客功能的应用可能包含两个集合，分别是blog.posts和blog.authors</p>
@@ -185,9 +185,9 @@ find和findOne可以接受一个查询文档作为限定条件。这样就可以
 <p>使用update修改博客文章。update接受（至少）两个参数：第一个是限定条件（用于匹配待更新的文档），第二个是新的文档</p>
 <p>例子:
 修改变量post，增加&quot;comments&quot;键：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">post.comment <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[]</span>
-db.blog.update<span style="color:#ff79c6">({</span>title: <span style="color:#f1fa8c">&#34;my blog&#34;</span><span style="color:#ff79c6">}</span>,post<span style="color:#ff79c6">)</span>
-</code></pre></div><h2 id="删除">删除</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>post.comment <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[]</span>
+</span></span><span style="display:flex;"><span>db.blog.update<span style="color:#ff79c6">({</span>title: <span style="color:#f1fa8c">&#34;my blog&#34;</span><span style="color:#ff79c6">}</span>,post<span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><h2 id="删除">删除</h2>
 <p>使用remove方法可将文档从数据库中永久删除。如果没有使用任何参数，它会将集合内的所有文档全部删除。它可以接受一个作为限定条件的文档作为参数
 <img src="../../images/20210905171817287_13829.png" alt=""></p>
 
@@ -231,7 +231,7 @@ db.blog.update<span style="color:#ff79c6">({</span>title: <span style="color:#f1
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mongodb">mongoDB
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mongodb">mongoDB
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E7%94%A8ruby%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E7%94%A8ruby%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -112,23 +112,23 @@
 <ol>
 <li>返回标准输出</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`ls`</span>
-<span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-</code></pre></div><p>Result of above code is</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ruby main.rb
-output is lab.rb
-</code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`ls`</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span></code></pre></div><p>Result of above code is</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ruby main.rb
+</span></span><span style="display:flex;"><span>output is lab.rb
+</span></span></code></pre></div><ol start="2">
 <li>反引号执行系统命令时，会把异常抛给主线程</li>
 </ol>
 <p>反引号会从主进程新开一个进程执行命令，如果子进程发生异常，会传递给主进程，如果主进程没有对异常进行处理，主进程就会终止。</p>
 <p>下面的例子中 执行一个‘xxxxx’非法的命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`xxxx`</span>
-<span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-</code></pre></div><p>执行结果：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ruby main.rb
-main.rb:1:in <span style="color:#f1fa8c">``</span><span style="color:#f1fa8c">&#39;: No such file or directory - xxxxxxx (Errno::ENOENT)
-</span><span style="color:#f1fa8c">	from main.rb:1:in `&lt;main&gt;&#39;</span>
-</code></pre></div><ol start="3">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`xxxx`</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span></code></pre></div><p>执行结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ruby main.rb
+</span></span><span style="display:flex;"><span>main.rb:1:in <span style="color:#f1fa8c">``</span><span style="color:#f1fa8c">&#39;: No such file or directory - xxxxxxx (Errno::ENOENT)
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">	from main.rb:1:in `&lt;main&gt;&#39;</span>
+</span></span></code></pre></div><ol start="3">
 <li>阻塞进程</li>
 </ol>
 <p>主进程会一直等待反引号中的子进程结束</p>
@@ -136,27 +136,27 @@ main.rb:1:in <span style="color:#f1fa8c">``</span><span style="color:#f1fa8c">&#
 <li>检查命令的执行状态</li>
 </ol>
 <p>使用 <code>$?.success?</code> 来检查命令的执行状态</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`ls`</span>
-<span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-<span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#8be9fd;font-style:italic">$?</span><span style="color:#ff79c6">.</span>success?
-</code></pre></div><p>结果:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ruby main.rb
-output is lab.rb
-main.rb
-<span style="color:#8be9fd;font-style:italic">true</span>
-</code></pre></div><ol start="5">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">`ls`</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#8be9fd;font-style:italic">$?</span><span style="color:#ff79c6">.</span>success?
+</span></span></code></pre></div><p>结果:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ruby main.rb
+</span></span><span style="display:flex;"><span>output is lab.rb
+</span></span><span style="display:flex;"><span>main.rb
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">true</span>
+</span></span></code></pre></div><ol start="5">
 <li>允许使用字符串插值</li>
 </ol>
 <p>例子：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ls&#39;</span>
-<span style="color:#f1fa8c">`</span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>
-</code></pre></div><ol start="6">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ls&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">`</span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">`</span>
+</span></span></code></pre></div><ol start="6">
 <li><code>x%</code></li>
 </ol>
 <p><code>x%</code> 和反引号一样，它可以使用不同的分隔符</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">%x[ ls ]</span>
-output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">%x{ ls }</span>
-</code></pre></div><h3 id="system">system</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">%x[ ls ]</span>
+</span></span><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">%x{ ls }</span>
+</span></span></code></pre></div><h3 id="system">system</h3>
 <p>system 也可以执行系统命令，他和反引号有点相像。</p>
 <ol>
 <li>
@@ -167,101 +167,101 @@ output <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">%x{ ls }
 </li>
 </ol>
 <p>system 不会向主进程传递异常。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">output <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#39;xxxxxxx&#39;</span>)
-<span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-</code></pre></div><p>结果：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ruby main.rb
-output is
-</code></pre></div><ol start="3">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>output <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#39;xxxxxxx&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;output is </span><span style="color:#f1fa8c">#{</span>output<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span></code></pre></div><p>结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ruby main.rb
+</span></span><span style="display:flex;"><span>output is
+</span></span></code></pre></div><ol start="3">
 <li>检查命令的执行状态</li>
 </ol>
 <p>如果命令成功执行，则系统返回true（退出状态为零）。对于非零退出状态，它返回false, 如果命令执行失败，返回nil</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;command that does not exist&#34;</span>)  <span style="color:#6272a4">#=&gt; nil</span>
-<span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;ls&#34;</span>)                           <span style="color:#6272a4">#=&gt; true</span>
-<span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;ls | grep foo&#34;</span>)                <span style="color:#6272a4">#=&gt; false</span>
-</code></pre></div><h3 id="exec">exec</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;command that does not exist&#34;</span>)  <span style="color:#6272a4">#=&gt; nil</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;ls&#34;</span>)                           <span style="color:#6272a4">#=&gt; true</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">system</span>(<span style="color:#f1fa8c">&#34;ls | grep foo&#34;</span>)                <span style="color:#6272a4">#=&gt; false</span>
+</span></span></code></pre></div><h3 id="exec">exec</h3>
 <p>exec 会替换掉当前进程，请看下面的例子：</p>
-<p>在 irb 中执行exec(&lsquo;ls&rsquo;)：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ irb
-e1.9.3-p194 :001 &gt; exec<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39;ls&#39;</span><span style="color:#ff79c6">)</span>
-lab.rb  main.rb
-
-nsingh ~/dev/lab 1.9.3
-$
-</code></pre></div><p>可以发现，执行完exec(&ldquo;ls&rdquo;)命令以后，已经退出irb，回到shell。</p>
+<p>在 irb 中执行exec(&rsquo;ls&rsquo;)：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ irb
+</span></span><span style="display:flex;"><span>e1.9.3-p194 :001 &gt; exec<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39;ls&#39;</span><span style="color:#ff79c6">)</span>
+</span></span><span style="display:flex;"><span>lab.rb  main.rb
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nsingh ~/dev/lab 1.9.3
+</span></span><span style="display:flex;"><span>$
+</span></span></code></pre></div><p>可以发现，执行完exec(&ldquo;ls&rdquo;)命令以后，已经退出irb，回到shell。</p>
 <p>由于exec替换了当前进程，因此如果操作成功，则不会返回任何内容。如果操作失败，则引发<code>SystemCallError</code></p>
 <h3 id="sh">sh</h3>
 <p>sh实际上是在呼叫系统, FileUtils在rake中添加了此方法。它允许以简单的方式检查命令的退出状态。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;rake&#39;</span>
-sh <span style="color:#f1fa8c">%w(xxxxx)</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>ok, res<span style="color:#ff79c6">|</span>
-   <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">!</span>ok
-     <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#39;the operation failed&#39;</span>
-   <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><h3 id="popen3">popen3</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;rake&#39;</span>
+</span></span><span style="display:flex;"><span>sh <span style="color:#f1fa8c">%w(xxxxx)</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>ok, res<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">!</span>ok
+</span></span><span style="display:flex;"><span>     <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#39;the operation failed&#39;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="popen3">popen3</h3>
 <p>如果你要捕获stdout和stderr，那么你应该使用popen3，因为这个方法允许你与stdin，stdout和stderr进行交互。</p>
 <p>我想以编程方式执行git push heroku master，我想捕获输出。这是我的代码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
-cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;git push heroku master&#39;</span>
-Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
-  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;stdout is:&#34;</span> <span style="color:#ff79c6">+</span> stdout<span style="color:#ff79c6">.</span>read
-  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;stderr is:&#34;</span> <span style="color:#ff79c6">+</span> stderr<span style="color:#ff79c6">.</span>read
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">stdout is:
-stderr is:
------&gt; Heroku receiving push
------&gt; Ruby/Rails app detected
------&gt; Installing dependencies using Bundler version 1.2.1
-</code></pre></div><p>这里需要注意的重要一点是，当我执行程序ruby lab.rb时，我的终端在前10秒内没有看到任何输出。然后我将整个输出视为一个转储。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
+</span></span><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;git push heroku master&#39;</span>
+</span></span><span style="display:flex;"><span>Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;stdout is:&#34;</span> <span style="color:#ff79c6">+</span> stdout<span style="color:#ff79c6">.</span>read
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;stderr is:&#34;</span> <span style="color:#ff79c6">+</span> stderr<span style="color:#ff79c6">.</span>read
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>stdout is:
+</span></span><span style="display:flex;"><span>stderr is:
+</span></span><span style="display:flex;"><span>-----&gt; Heroku receiving push
+</span></span><span style="display:flex;"><span>-----&gt; Ruby/Rails app detected
+</span></span><span style="display:flex;"><span>-----&gt; Installing dependencies using Bundler version 1.2.1
+</span></span></code></pre></div><p>这里需要注意的重要一点是，当我执行程序ruby lab.rb时，我的终端在前10秒内没有看到任何输出。然后我将整个输出视为一个转储。
 另外需要注意的是，heroku正在将所有这些输出写入stderr而不是stdout。</p>
 <p>所以我们应该捕获来自heroku的输出，因为它正在流式传输而不是在处理结束时将整个输出转储为一个单个的字符串块。</p>
 <p>这是修改后的代码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
-cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;git push heroku master&#39;</span>
-Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
-  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stderr<span style="color:#ff79c6">.</span>gets
-    <span style="color:#8be9fd;font-style:italic">puts</span> line
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>现在，当我使用ruby lab.rb执行上述命令时，我会逐步获得终端输出，就好像我输入了git push heroku master一样。 这是捕获流输出的另一个例子。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
-cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
-Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
-  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stdout<span style="color:#ff79c6">.</span>gets
-    <span style="color:#8be9fd;font-style:italic">puts</span> line
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>在上面的例子中，您将在终端上获得ping的输出，就像您在终端上键入ping <a href="http://www.google.com">www.google.com</a>一样。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
+</span></span><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;git push heroku master&#39;</span>
+</span></span><span style="display:flex;"><span>Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stderr<span style="color:#ff79c6">.</span>gets
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">puts</span> line
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>现在，当我使用ruby lab.rb执行上述命令时，我会逐步获得终端输出，就好像我输入了git push heroku master一样。 这是捕获流输出的另一个例子。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
+</span></span><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
+</span></span><span style="display:flex;"><span>Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stdout<span style="color:#ff79c6">.</span>gets
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">puts</span> line
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>在上面的例子中，您将在终端上获得ping的输出，就像您在终端上键入ping <a href="https://www.google.com">www.google.com</a>一样。</p>
 <p>现在让我们看看如何检查命令是否成功</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
-cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
-Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
-  exit_status <span style="color:#ff79c6">=</span> wait_thr<span style="color:#ff79c6">.</span>value
-  <span style="color:#ff79c6">unless</span> exit_status<span style="color:#ff79c6">.</span>success?
-    <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#34;FAILED !!! </span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><h3 id="popen2e">popen2e</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
+</span></span><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
+</span></span><span style="display:flex;"><span>Open3<span style="color:#ff79c6">.</span>popen3(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout, stderr, wait_thr<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>  exit_status <span style="color:#ff79c6">=</span> wait_thr<span style="color:#ff79c6">.</span>value
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">unless</span> exit_status<span style="color:#ff79c6">.</span>success?
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#34;FAILED !!! </span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h3 id="popen2e">popen2e</h3>
 <p>popen2e类似于popen3，但合并了标准输出和标准错误。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
-cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
-Open3<span style="color:#ff79c6">.</span>popen2e(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout_err, wait_thr<span style="color:#ff79c6">|</span>
-  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stdout_err<span style="color:#ff79c6">.</span>gets
-    <span style="color:#8be9fd;font-style:italic">puts</span> line
-  <span style="color:#ff79c6">end</span>
-
-  exit_status <span style="color:#ff79c6">=</span> wait_thr<span style="color:#ff79c6">.</span>value
-  <span style="color:#ff79c6">unless</span> exit_status<span style="color:#ff79c6">.</span>success?
-    <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#34;FAILED !!! </span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>在所有其他领域，此方法与popen3类似。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">require</span> <span style="color:#f1fa8c">&#39;open3&#39;</span>
+</span></span><span style="display:flex;"><span>cmd <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ping www.google.com&#39;</span>
+</span></span><span style="display:flex;"><span>Open3<span style="color:#ff79c6">.</span>popen2e(cmd) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>stdin, stdout_err, wait_thr<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">while</span> line <span style="color:#ff79c6">=</span> stdout_err<span style="color:#ff79c6">.</span>gets
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">puts</span> line
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  exit_status <span style="color:#ff79c6">=</span> wait_thr<span style="color:#ff79c6">.</span>value
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">unless</span> exit_status<span style="color:#ff79c6">.</span>success?
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">abort</span> <span style="color:#f1fa8c">&#34;FAILED !!! </span><span style="color:#f1fa8c">#{</span>cmd<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>在所有其他领域，此方法与popen3类似。</p>
 <h3 id="processspawn">Process.spawn</h3>
 <p>Kernel.spawn在子shell中执行给定的命令。它会立即返回进程ID。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb(main)<span style="color:#ff79c6">&gt;</span> pid <span style="color:#ff79c6">=</span> Process<span style="color:#ff79c6">.</span>spawn(<span style="color:#f1fa8c">&#34;ls -al&#34;</span>)
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">81001</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>irb(main)<span style="color:#ff79c6">&gt;</span> pid <span style="color:#ff79c6">=</span> Process<span style="color:#ff79c6">.</span>spawn(<span style="color:#f1fa8c">&#34;ls -al&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">81001</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -295,7 +295,7 @@ Open3<span style="color:#ff79c6">.</span>popen2e(cmd) <span style="color:#ff79c6
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                     </a>
                 </li>
                 

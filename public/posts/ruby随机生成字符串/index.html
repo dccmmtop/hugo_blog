@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ruby%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/ruby%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,15 +109,15 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h3 id="shuffle">shuffle</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span> (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>shuffle<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">6</span><span style="color:#ff79c6">].</span>to_a<span style="color:#ff79c6">.</span>join
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span> (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>shuffle<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">..</span><span style="color:#bd93f9">6</span><span style="color:#ff79c6">].</span>to_a<span style="color:#ff79c6">.</span>join
+</span></span></code></pre></div><blockquote>
 <p>shuffle: 随机排列，中文名称是洗牌</p>
 </blockquote>
 <h3 id="sample">sample</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span>  (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
-</code></pre></div><h3 id="heading">*</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">[*</span><span style="color:#f1fa8c">&#39;0&#39;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#39;9&#39;</span>,<span style="color:#ff79c6">*</span><span style="color:#f1fa8c">&#39;A&#39;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#39;Z&#39;</span><span style="color:#ff79c6">].</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
-</code></pre></div><p>*的意思是将范围展开</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span>  (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
+</span></span></code></pre></div><h3 id="heading">*</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">[*</span><span style="color:#f1fa8c">&#39;0&#39;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#39;9&#39;</span>,<span style="color:#ff79c6">*</span><span style="color:#f1fa8c">&#39;A&#39;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#39;Z&#39;</span><span style="color:#ff79c6">].</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
+</span></span></code></pre></div><p>*的意思是将范围展开</p>
 
         </div>
 
@@ -148,7 +148,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails_%E5%A4%9A%E6%80%81%E5%85%B3%E8%81%94/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails_%E5%A4%9A%E6%80%81%E5%85%B3%E8%81%94/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -112,32 +112,32 @@
 <p>假如有三个模型，分别是 用户， 产品， 图片。图片为用户所有，也为产品所有。我们可以创建两个 picture 的模型，如下</p>
 <p><code>rails g modle picture_user user_id:integer name:string url:string</code></p>
 <p><code>rails g modle picture_product product_id:integer name:string url:string</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">PictureUser</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-  belongs_to <span style="color:#f1fa8c">:user</span>
-<span style="color:#ff79c6">end</span>
-
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">PictureProduct</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-  belongs_to <span style="color:#f1fa8c">:product</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这样我们就可以使用<code>user.prictures</code> 和 <code>product.pictures</code>来分别获得用户下和产品下的图片了。但是我们发现，两个图片模型除了外键不一样，其他字段都是一样的，那么有没有一种办法只创建一个 picture 模型，同时属于 user 和 product 呢，这种既属于一个模型又属于另外一个模型（可以是很多个）的关联就是多态关联。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">PictureUser</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#f1fa8c">:user</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">PictureProduct</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#f1fa8c">:product</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这样我们就可以使用<code>user.prictures</code> 和 <code>product.pictures</code>来分别获得用户下和产品下的图片了。但是我们发现，两个图片模型除了外键不一样，其他字段都是一样的，那么有没有一种办法只创建一个 picture 模型，同时属于 user 和 product 呢，这种既属于一个模型又属于另外一个模型（可以是很多个）的关联就是多态关联。</p>
 <h3 id="多态关联的实现">多态关联的实现</h3>
 <p>为了能同时使用 <code>user.pictures</code> 和 <code>product.pictures</code> 来获得各自的图片，我们就需要对 picture 模型做一些修改，使其能够标识一张图片是属于 user 还是属于 product ，当然外键是必不可少的。我们还需要一个外键对应类的名称，如下：</p>
 <p><code>rails g modle picture pictureable_id:integer pictureable_type:string name:string url:string</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Picture</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-  belongs_to <span style="color:#f1fa8c">:pictureable</span>, <span style="color:#f1fa8c">polymorphic</span>: <span style="color:#ff79c6">true</span>
-<span style="color:#ff79c6">end</span>
-
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-  has_many <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">:pictureable</span>
-<span style="color:#ff79c6">end</span>
-
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Product</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-  has_many <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">:pictureable</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>pictureable 相当于一个接口，凡是拥有图片的模型都可以像 User 那样使用关联。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Picture</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#f1fa8c">:pictureable</span>, <span style="color:#f1fa8c">polymorphic</span>: <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>  has_many <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">:pictureable</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Product</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>  has_many <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">as</span>: <span style="color:#f1fa8c">:pictureable</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>pictureable 相当于一个接口，凡是拥有图片的模型都可以像 User 那样使用关联。</p>
 <p>可以使用<code>user.pictures.create(name: 'user_0', url: 'https://dcc.com')</code>来创建一条关联对象，创建之后我们发现在 picture 表中多了一条记录：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">id: 1, pictureable_type: &#39;User&#39;, pictureable_id: 1, name:&#34;user_0&#34;, url:&#39;https://dcc.com&#39;
-</code></pre></div><p>pictureable_type: &lsquo;User&rsquo; 就是所属对象的标识，这样才可以使用 user.pictures 进行查询。由此我们知道，多态关联中，<code>xxxable_type, xxxable_id</code>字段是必不可少的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>id: 1, pictureable_type: &#39;User&#39;, pictureable_id: 1, name:&#34;user_0&#34;, url:&#39;https://dcc.com&#39;
+</span></span></code></pre></div><p>pictureable_type: &lsquo;User&rsquo; 就是所属对象的标识，这样才可以使用 user.pictures 进行查询。由此我们知道，多态关联中，<code>xxxable_type, xxxable_id</code>字段是必不可少的。</p>
 <p>-&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</p>
 <p>下面是关于多态 view 页面使用的讲解<a href="https://blog.csdn.net/qwbtc/article/details/52035603">原文</a></p>
 <h3 id="什么是多态">什么是多态</h3>
@@ -147,27 +147,27 @@
 <p>这里我们通过将 Rails Guides 中给出的例子线性化(转化为详细步骤)来说明这个问题。</p>
 <h4 id="step-1-通过-migration-创建表">Step 1： 通过 Migration 创建表</h4>
 <p>执行下面命令来生成 Migration 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#ff79c6">rails</span> <span style="color:#ff79c6">g</span> <span style="color:#ff79c6">model</span> <span style="color:#ff79c6">picture</span> <span style="color:#ff79c6">name</span>:string <span style="color:#ff79c6">imageable_id</span>:integer  <span style="color:#ff79c6">imageable_type</span>:string
-</code></pre></div><p>生成的 Migration 文件如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreatePictures</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
-    create_table <span style="color:#f1fa8c">:pictures</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
-      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:name</span>
-      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:imageable_id</span>
-      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:imageable_type</span>
-      t<span style="color:#ff79c6">.</span>timestamps <span style="color:#f1fa8c">null</span>: <span style="color:#ff79c6">false</span>
-    <span style="color:#ff79c6">end</span>
-
-    add_index <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">:imageable_id</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>其中需要特别关注， <code>imageable_id</code> 与 <code>imageable_type</code> 两个字段，前者用来存储相关联内容的外键键值，后者则用来存储相关联内容的类型名。后面在通过模型查找关联内容的时候，可以通过这两个值来定位到要找到的内容。特别是后者 <code>imageable_type</code> 的存在是多态实现的关键。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#ff79c6">rails</span> <span style="color:#ff79c6">g</span> <span style="color:#ff79c6">model</span> <span style="color:#ff79c6">picture</span> <span style="color:#ff79c6">name</span>:string <span style="color:#ff79c6">imageable_id</span>:integer  <span style="color:#ff79c6">imageable_type</span>:string
+</span></span></code></pre></div><p>生成的 Migration 文件如下:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreatePictures</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
+</span></span><span style="display:flex;"><span>    create_table <span style="color:#f1fa8c">:pictures</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:name</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:imageable_id</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:imageable_type</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>timestamps <span style="color:#f1fa8c">null</span>: <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    add_index <span style="color:#f1fa8c">:pictures</span>, <span style="color:#f1fa8c">:imageable_id</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>其中需要特别关注， <code>imageable_id</code> 与 <code>imageable_type</code> 两个字段，前者用来存储相关联内容的外键键值，后者则用来存储相关联内容的类型名。后面在通过模型查找关联内容的时候，可以通过这两个值来定位到要找到的内容。特别是后者 <code>imageable_type</code> 的存在是多态实现的关键。</p>
 <h4 id="step-2-修改各-model-得关联关系">Step 2: 修改各 Model 得关联关系</h4>
 <p><img src="https://i.loli.net/2018/11/21/5bf5282bce812.png?filename=/home/mc/%E5%9B%BE%E7%89%87/1542793224.png" alt=""></p>
 <p>按照上面 E-R 图和代码修改模型结构，因为 Employee，Product 分别与 Picture 是一对多的关系，所以用到了 has_many 与 belongs_to 方法，再使用 polymorphic 与 as 来指明是多态关联。</p>
 <h4 id="step-3-controller-中应用">Step 3: Controller 中应用</h4>
 <p>上面的两步完成后就能在 Controller 中通过多态关联关系进行相互访问了，并且通过关联关系创建的新评论 Rails 也会自动帮你设置 commentable_id 与 commentable_type 两个字段的值。</p>
-<pre><code>event = Event.create name: &quot;event1&quot;
+<pre tabindex="0"><code>event = Event.create name: &#34;event1&#34;
 event1= event.comments.create content: “comment1”
 event1.commentable_type #=&gt; “Event”
 </code></pre><p>Done！到此就算完整应用到了多态关联关系，后续需要处理的就是如何来组织代码让多态关系更加灵活便捷的被你操作，不过这个就应该是另一篇文章的内容了。:)</p>
@@ -176,71 +176,71 @@ event1.commentable_type #=&gt; “Event”
 <p>一般表的关联有一对一，一对多，多对多，这些都是非常好理解的，然后对于多态的表关联可能稍微有点不好理解。其实多态关键就是一个表关联到多个表上。就如 Comment（评论）表吧，一个 Topic 应该有 Comment（一个帖子应该有许多的评论），除此之外 Micropost（微博）也可能有很多的 Comment。然后一个网站中既有 Topic 的论坛功能，又有 Micropost 的功能，我们怎么处理 Comment 表呢？当然我们可以建两个独立的表比如 TopicComment 和 MicropostComment，再分别关联到 Topic 和 Micropost 上，但这不是一种好的选择，我们可以只建一个表，然后去关联这两个表，甚至多个表。这也就实现了多态的能力。</p>
 <h4 id="一个例子">一个例子</h4>
 <p>1.首先我们先生成一个 Comment 的 model，假设已经有 Topic 和 Micropost 这两个 model 了</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#ff79c6">rails</span> <span style="color:#ff79c6">g</span> <span style="color:#ff79c6">model</span> <span style="color:#ff79c6">comment</span> <span style="color:#ff79c6">content</span>:text <span style="color:#ff79c6">commentable_id</span>:integer <span style="color:#ff79c6">comment_type</span>:string
-</code></pre></div><p>2.然后我们 会得到一个 migration</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateComments</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
-    create_table <span style="color:#f1fa8c">:comments</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
-      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:content</span>
-      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:commentable_id</span>
-      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:commentable_type</span>
-      t<span style="color:#ff79c6">.</span>timestamps
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>也可以通过 t.references 来简化上面的</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateComments</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
-    create_table <span style="color:#f1fa8c">:comments</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
-      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:content</span>
-      t<span style="color:#ff79c6">.</span>references <span style="color:#f1fa8c">:commentable</span>, <span style="color:#f1fa8c">:polymorphic</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">true</span> <span style="color:#6272a4">#这里指明了多态，这样会生成comment_id和comment_type这两个字段的，如上</span>
-      t<span style="color:#ff79c6">.</span>timestamps
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>多态魔法就在这里，commentable_typle 字段用于指明 comment 所关联的表的类型，如 topic 或 micropost 等，而 comment_id 用于指定那个关联表的类型对象的 id。如：可以把一个 comment 关联到第一篇 topic 上，那么 comment_type 字段为 topic，而 comment_id 为对应 topic 对象的 id 1,同理这样就可以关联到不同表了，从而实现多态的关联。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#ff79c6">rails</span> <span style="color:#ff79c6">g</span> <span style="color:#ff79c6">model</span> <span style="color:#ff79c6">comment</span> <span style="color:#ff79c6">content</span>:text <span style="color:#ff79c6">commentable_id</span>:integer <span style="color:#ff79c6">comment_type</span>:string
+</span></span></code></pre></div><p>2.然后我们 会得到一个 migration</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateComments</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
+</span></span><span style="display:flex;"><span>    create_table <span style="color:#f1fa8c">:comments</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:content</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:commentable_id</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>string  <span style="color:#f1fa8c">:commentable_type</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>timestamps
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>也可以通过 t.references 来简化上面的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreateComments</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
+</span></span><span style="display:flex;"><span>    create_table <span style="color:#f1fa8c">:comments</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:content</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>references <span style="color:#f1fa8c">:commentable</span>, <span style="color:#f1fa8c">:polymorphic</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">true</span> <span style="color:#6272a4">#这里指明了多态，这样会生成comment_id和comment_type这两个字段的，如上</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>timestamps
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>多态魔法就在这里，commentable_typle 字段用于指明 comment 所关联的表的类型，如 topic 或 micropost 等，而 comment_id 用于指定那个关联表的类型对象的 id。如：可以把一个 comment 关联到第一篇 topic 上，那么 comment_type 字段为 topic，而 comment_id 为对应 topic 对象的 id 1,同理这样就可以关联到不同表了，从而实现多态的关联。</p>
 <p>3,数据迁移 <code>rake db:migrate</code> 就能生成我们要的表了</p>
 <p>4,对 model 进行操作从而现实表的关联</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4">####comment model</span>
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Comment</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
-  belongs_to <span style="color:#f1fa8c">:commentable</span>, <span style="color:#f1fa8c">:polymorphic</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">true</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>看到没有，这里的 comment belongs_to 没有写 topic，micropost 等，而写了 commentable,因为 commentable 中有 type 和 id 两个字段，可以指定任何其他 model 对象的，从而才能实现多态，如果这里写 belongs_to topic 的话就没办法实现多态了。然后我们看看 topic 和 mocropost 的 model 该如何写。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Topic</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
-  has_many <span style="color:#f1fa8c">:comments</span>, <span style="color:#f1fa8c">:as</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:commentable</span>
-<span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Micropost</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
-  has_many <span style="color:#f1fa8c">:comments</span>, <span style="color:#f1fa8c">:as</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:commentable</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>看到这里的 as 了吗？as 在这我们可以解释为：作为（我的理解，可能这种理解补科学，哈哈），也就是说 Topic 有许多的 comments，但是它是通过将自己作为 commentable，实现的。Micropost 同理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4">####comment model</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Comment</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
+</span></span><span style="display:flex;"><span>  belongs_to <span style="color:#f1fa8c">:commentable</span>, <span style="color:#f1fa8c">:polymorphic</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>看到没有，这里的 comment belongs_to 没有写 topic，micropost 等，而写了 commentable,因为 commentable 中有 type 和 id 两个字段，可以指定任何其他 model 对象的，从而才能实现多态，如果这里写 belongs_to topic 的话就没办法实现多态了。然后我们看看 topic 和 mocropost 的 model 该如何写。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Topic</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
+</span></span><span style="display:flex;"><span>  has_many <span style="color:#f1fa8c">:comments</span>, <span style="color:#f1fa8c">:as</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:commentable</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Micropost</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Base
+</span></span><span style="display:flex;"><span>  has_many <span style="color:#f1fa8c">:comments</span>, <span style="color:#f1fa8c">:as</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:commentable</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>看到这里的 as 了吗？as 在这我们可以解释为：作为（我的理解，可能这种理解补科学，哈哈），也就是说 Topic 有许多的 comments，但是它是通过将自己作为 commentable，实现的。Micropost 同理。</p>
 <p>然后就是 controller 和 views 中（如 form 表单）的设计了，这也是我刚学的时候，最头疼这个了，因为对 params 参数通过表单到 controller 的传递没掌握好。</p>
 <p>在写这些之前，我们先看看如何写路由吧，因为一个 topic 有多个 comments，Micropost 同理。所以我们可以这样写</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">resources <span style="color:#f1fa8c">:topics</span> <span style="color:#ff79c6">do</span>
-  resources <span style="color:#f1fa8c">:comments</span>
-<span style="color:#ff79c6">end</span>
-
-resources <span style="color:#f1fa8c">:microposts</span> <span style="color:#ff79c6">do</span>
-  resources <span style="color:#f1fa8c">:comments</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>然后我们通过命令 <code>rake routes</code> 就可以得到相应的路由了如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">          topic_comments GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)          comments<span style="color:#6272a4">#index</span>
-                                    POST   <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)          comments<span style="color:#6272a4">#create</span>
-       new_topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#ff79c6">new</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#new</span>
-      edit_topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">/</span>edit(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>) comments<span style="color:#6272a4">#edit</span>
-           topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#show</span>
-                                    PUT    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#update</span>
-                                   DELETE <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#destroy</span>
-</code></pre></div><p>这些待会我们会用到。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>resources <span style="color:#f1fa8c">:topics</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  resources <span style="color:#f1fa8c">:comments</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>resources <span style="color:#f1fa8c">:microposts</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  resources <span style="color:#f1fa8c">:comments</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>然后我们通过命令 <code>rake routes</code> 就可以得到相应的路由了如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>          topic_comments GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)          comments<span style="color:#6272a4">#index</span>
+</span></span><span style="display:flex;"><span>                                    POST   <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)          comments<span style="color:#6272a4">#create</span>
+</span></span><span style="display:flex;"><span>       new_topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#ff79c6">new</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#new</span>
+</span></span><span style="display:flex;"><span>      edit_topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">/</span>edit(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>) comments<span style="color:#6272a4">#edit</span>
+</span></span><span style="display:flex;"><span>           topic_comment GET    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#show</span>
+</span></span><span style="display:flex;"><span>                                    PUT    <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#update</span>
+</span></span><span style="display:flex;"><span>                                   DELETE <span style="color:#f1fa8c">/topics/</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">/</span>comments<span style="color:#ff79c6">/</span><span style="color:#f1fa8c">:id</span>(<span style="color:#ff79c6">.</span><span style="color:#f1fa8c">:format</span>)      comments<span style="color:#6272a4">#destroy</span>
+</span></span></code></pre></div><p>这些待会我们会用到。</p>
 <p>然后我们再来分析 controller 和 views 之间的参数传递。我们通过完整的创建 comment 的过程进行说明</p>
 <p>(1)首先页面上肯定有一个创建 comment 的连接或按钮（假设创建 comment 的表单和 topic show 页面不在统一页面上），代码应该是这样的：</p>
-<pre><code>&lt;%= link_to &quot;发表评论&quot;, new_topic_comment_path%&gt;
+<pre tabindex="0"><code>&lt;%= link_to &#34;发表评论&#34;, new_topic_comment_path%&gt;
 </code></pre><p>(2)点击这个链接后，通过路由来到 controller 中的 new 方法(同时会将对应的 topic 相关的参数传给 controller)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">new</span>
-  <span style="color:#8be9fd;font-style:italic">@topic</span> <span style="color:#ff79c6">=</span> Topic<span style="color:#ff79c6">.</span>find(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">]</span>) <span style="color:#6272a4">#找到comment属于的topic</span>
-  <span style="color:#8be9fd;font-style:italic">@comment</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@topic</span><span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>build <span style="color:#6272a4">#建立这个关系</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>(3)经过这个方法（action）后，页面来到了 comments/new.html.erb,在这个页面中有一个评论的表单，大概是这样的</p>
-<pre><code> &lt;%= form_for([@comment.commentable, @comment]) do |f| %&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">new</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">@topic</span> <span style="color:#ff79c6">=</span> Topic<span style="color:#ff79c6">.</span>find(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:id</span><span style="color:#ff79c6">]</span>) <span style="color:#6272a4">#找到comment属于的topic</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">@comment</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@topic</span><span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>build <span style="color:#6272a4">#建立这个关系</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>(3)经过这个方法（action）后，页面来到了 comments/new.html.erb,在这个页面中有一个评论的表单，大概是这样的</p>
+<pre tabindex="0"><code> &lt;%= form_for([@comment.commentable, @comment]) do |f| %&gt;
   ......
 &lt;%end%&gt;
 </code></pre><p>这个表的参数是一个数组，[email protected]</p>
@@ -250,17 +250,17 @@ resources <span style="color:#f1fa8c">:microposts</span> <span style="color:#ff7
 <p>还记得 new 中的 <code>@comment = @topic.comments.build</code> 的吗，这里就暂时将对应的 topic 对象写入 commentable（注意：只是暂时建立关系，还没有写入数据库），[email protected]</p>
 <p>@topic。</p>
 <p>(4)然后你填完表单后，按提交按钮后，表单中的参数（包括 commentable，@post 的 id 等信息），一起来到 controller 的 create 方法中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">create</span>
-  Topic<span style="color:#ff79c6">.</span>find(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">]</span>)<span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>create(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:comment</span><span style="color:#ff79c6">]</span>)
-  <span style="color:#ff79c6">......</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这样就真正创建了一个新的 comment。micropost 同理。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">create</span>
+</span></span><span style="display:flex;"><span>  Topic<span style="color:#ff79c6">.</span>find(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:topic_id</span><span style="color:#ff79c6">]</span>)<span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>create(parmas<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:comment</span><span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">......</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这样就真正创建了一个新的 comment。micropost 同理。</p>
 <p>其实多态讲的也差不多了，但在提一个地方</p>
 <p>**重要知识点:**假设一个 comment 已经建立了，它的 commentable_type 是:topic.comment_id 是 1。如果我们得到了这个 id 为 1 的 topic，@topic，那么我们怎么得到它的 comments 呢？是的很简单，直接 <code>@topic.comments</code> 就 ok 了。但是反过来呢，我们得到了这个 comment，@comment，我们如何得到对应的 topic 的信息呢？我以前刚学的时候，就用了<code>@comment.topic</code> ，呵呵，没错，得到的是一串错误，正确一概是 <code>@comment.commentable</code></p>
 <p>关于多态我们已经讲的差不多了。</p>
 <p>补充：上面的例子 comment 的表单是独立在 comments/new.html.erb 中的，但是一般的应用 comment 的表单是在 topics/show.html.erb 中，也就是上面一个 topic，topic 下有一个 comment 表单。这样的话在 controller 中我们就不需要 new 这个方法了，那么我们在哪建立关系呢？</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">@comment</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@topic</span><span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>build <span style="color:#6272a4">#建立这个关系</span>
-</code></pre></div><p>我们就在表单的 <code>&lt;%= form_for ...%&gt;</code> 前面写 <code>&lt;@comment = @topic.comments.build&gt;</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">@comment</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@topic</span><span style="color:#ff79c6">.</span>comments<span style="color:#ff79c6">.</span>build <span style="color:#6272a4">#建立这个关系</span>
+</span></span></code></pre></div><p>我们就在表单的 <code>&lt;%= form_for ...%&gt;</code> 前面写 <code>&lt;@comment = @topic.comments.build&gt;</code></p>
 
         </div>
 
@@ -292,7 +292,7 @@ resources <span style="color:#f1fa8c">:microposts</span> <span style="color:#ff7
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%89%A9%E5%B1%95git%E5%8A%9F%E8%83%BD%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E6%89%A9%E5%B1%95git%E5%8A%9F%E8%83%BD%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -117,16 +117,16 @@
 <p>下面是两个例子：</p>
 <h3 id="给每个分支编码">给每个分支编码</h3>
 <p>在 /usr/lcoal/bin 先新建 <code>git-brr</code> 文件,输入下面脚本：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">#!/bin/bash
-</span><span style="color:#ff79c6"></span>git branch --no-color | cat -n | sed <span style="color:#f1fa8c">&#39;s/*/ /&#39;</span> | awk <span style="color:#f1fa8c">&#39;{print $2 &#34; (&#34;$1&#34;)&#34;}&#39;</span>
-</code></pre></div><p><code>sudo chomd +x ./git-brr</code> 赋予可执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>git branch --no-color | cat -n | sed <span style="color:#f1fa8c">&#39;s/*/ /&#39;</span> | awk <span style="color:#f1fa8c">&#39;{print $2 &#34; (&#34;$1&#34;)&#34;}&#39;</span>
+</span></span></code></pre></div><p><code>sudo chomd +x ./git-brr</code> 赋予可执行权限</p>
 <p>然后到一个项目下执行  <code>git brr</code>
 <img src="../../images/20201116231333195_2502.png" alt=""></p>
 <h3 id="指定编号切换分支">指定编号切换分支</h3>
 <p>在 /usr/lcoal/bin 先新建 <code>git-coo</code> 文件,输入下面脚本</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">#!/bin/bash
-</span><span style="color:#ff79c6"></span>git checkout <span style="color:#ff79c6">$(</span> git brr | egrep <span style="color:#f1fa8c">&#34;\(</span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">)</span>$<span style="color:#f1fa8c">&#34;</span> |  egrep -o <span style="color:#f1fa8c">&#39;.+ &#39;</span><span style="color:#ff79c6">)</span>
-</code></pre></div><p>然后 <code>sudo chomd +x ./git-coo</code> 赋予可执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">#!/bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>git checkout <span style="color:#ff79c6">$(</span> git brr | egrep <span style="color:#f1fa8c">&#34;\(</span><span style="color:#8be9fd;font-style:italic">$1</span><span style="color:#f1fa8c">)</span>$<span style="color:#f1fa8c">&#34;</span> |  egrep -o <span style="color:#f1fa8c">&#39;.+ &#39;</span><span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><p>然后 <code>sudo chomd +x ./git-coo</code> 赋予可执行权限</p>
 <p>此时就可已通过  git coo 4 切换对应的分支了</p>
 
         </div>
@@ -157,7 +157,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/git">git
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/git">git
                     </a>
                 </li>
                 

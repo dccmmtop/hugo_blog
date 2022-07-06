@@ -14,9 +14,9 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/" />
     
-<link href="https://dccmmtop.gitee.io/index.xml" rel="alternate" type="application/rss+xml" title="超的博客" />
+<link href="https://dccmmtop.github.io/index.xml" rel="alternate" type="application/rss+xml" title="超的博客" />
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 <body>
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -98,6 +98,47 @@
                 
                 
                 <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/rails%E8%BF%9E%E6%8E%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/">Rails连接多个数据库</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/rails%E8%BF%9E%E6%8E%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+                        <time datetime='2019-04-03T11:48:31.000&#43;00:00' itemprop="datePublished">2019-04-03</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    假如已经连接的的数据库名是 word_development, 现在需要添加一个名为 trademark_development 和 trademark_test 的本地数据库 步骤如下: 添加配置信息 在 config/database.yml 添加如下信息 trademark_default: &amp;trademark_default adapter: postgresql encoding: unicode pool: &lt;%= ENV.fetch(&#34;RAILS_MAX_THREADS&#34;) { 5 } %&gt; trademark_development: &lt;&lt;: *trademark_default database: trademark_development # 如果是远程的数据库添加如下信息 #username: username #password: 123456 #host: xxxx #port: xxx trademark_test: &lt;&lt;: *trademark_default database: trademark_test 关
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/rails%E8%BF%9E%E6%8E%A5%E5%A4%9A%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
                     <h1 itemprop="name"><a class="article-title" href="../../posts/%E8%A7%A6%E5%8F%91%E5%99%A8%E5%88%9B%E5%BB%BA%E7%A4%BA%E4%BE%8B/">触发器创建示例</a></h1>
                 </header>
                 
@@ -124,12 +165,12 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/sql">SQL
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/sql">SQL
                             </a>
                         </li>
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E8%A7%A6%E5%8F%91%E5%99%A8">触发器
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E8%A7%A6%E5%8F%91%E5%99%A8">触发器
                             </a>
                         </li>
                         
@@ -170,7 +211,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                             </a>
                         </li>
                         
@@ -211,7 +252,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                             </a>
                         </li>
                         
@@ -252,7 +293,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                             </a>
                         </li>
                         
@@ -293,7 +334,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                             </a>
                         </li>
                         
@@ -334,7 +375,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/xpath">xpath
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/xpath">xpath
                             </a>
                         </li>
                         
@@ -375,12 +416,12 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/yakuake">yakuake
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/yakuake">yakuake
                             </a>
                         </li>
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/color">color
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/color">color
                             </a>
                         </li>
                         
@@ -421,7 +462,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                             </a>
                         </li>
                         
@@ -462,7 +503,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/database">database
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/database">database
                             </a>
                         </li>
                         
@@ -503,7 +544,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                             </a>
                         </li>
                         
@@ -544,7 +585,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                             </a>
                         </li>
                         
@@ -585,7 +626,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                             </a>
                         </li>
                         
@@ -626,7 +667,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                             </a>
                         </li>
                         
@@ -667,48 +708,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7/">自动添加序号</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="../../posts/%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7/" class="article-date">
-                        <time datetime='2018-10-23T12:58:16.000&#43;00:00' itemprop="datePublished">2018-10-23</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    需求 给一段文字自动添加序号，要求本行的序号可以根据上一行的序号自动增一，若上一行没有序号，则从 1 开始 实现 用 ruby 编写 vim 脚本非常容易实现 &#34; 每行的前面添加序号，根据上一行序号自动递增，若上一行没有序号，则从1
-                    </p>
-                    <p class="article-more-link">
-                        <a href="../../posts/%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%BA%8F%E5%8F%B7/"></a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                             </a>
                         </li>
                         

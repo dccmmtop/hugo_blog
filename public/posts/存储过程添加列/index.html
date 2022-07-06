@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%B7%BB%E5%8A%A0%E5%88%97/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%B7%BB%E5%8A%A0%E5%88%97/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,28 +109,27 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h1 id="存储过程添加列">存储过程添加列</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">create</span>  <span style="color:#ff79c6">procedure</span> add_col(
-    <span style="color:#ff79c6">in</span> model_name <span style="color:#8be9fd;font-style:italic">text</span>,
-    <span style="color:#ff79c6">in</span> col_name <span style="color:#8be9fd;font-style:italic">text</span>,
-    <span style="color:#ff79c6">in</span> col_info <span style="color:#8be9fd;font-style:italic">text</span>,
-    <span style="color:#ff79c6">out</span> <span style="color:#ff79c6">result</span> <span style="color:#8be9fd;font-style:italic">text</span>
-)
-<span style="color:#ff79c6">begin</span>
-    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">exists</span>( <span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> information_schema.COLUMNS <span style="color:#ff79c6">where</span> <span style="color:#ff79c6">TABLE_NAME</span> <span style="color:#ff79c6">=</span> model_name <span style="color:#ff79c6">and</span> <span style="color:#ff79c6">COLUMN_NAME</span> <span style="color:#ff79c6">=</span> col_name) <span style="color:#ff79c6">then</span>
-        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">@</span>ddl<span style="color:#ff79c6">=</span>CONCAT(<span style="color:#f1fa8c">&#39;alter table &#39;</span>, model_name, <span style="color:#f1fa8c">&#39; add column &#39;</span>, col_name, col_info);
-        <span style="color:#ff79c6">prepare</span> stmt <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">@</span>ddl;
-        <span style="color:#ff79c6">execute</span> stmt;
-        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;success&#39;</span>;
-    <span style="color:#ff79c6">else</span>
-        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;exists&#39;</span>;
-    <span style="color:#ff79c6">end</span> <span style="color:#ff79c6">if</span>;
-<span style="color:#ff79c6">end</span>;
-
-<span style="color:#ff79c6">set</span> <span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>;
-<span style="color:#ff79c6">call</span> add_col(<span style="color:#f1fa8c">&#39;zyb_employee&#39;</span>,<span style="color:#f1fa8c">&#39;senior_1 &#39;</span>,<span style="color:#f1fa8c">&#39;tinyint(1) NULL DEFAULT 0 COMMENT &#34;是否是高级用户，0 不是  1 是&#34;&#39;</span>,<span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span>);
-<span style="color:#ff79c6">select</span> <span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span>;
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">create</span>  <span style="color:#ff79c6">procedure</span> add_col(
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">in</span> model_name <span style="color:#8be9fd;font-style:italic">text</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">in</span> col_name <span style="color:#8be9fd;font-style:italic">text</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">in</span> col_info <span style="color:#8be9fd;font-style:italic">text</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">out</span> <span style="color:#ff79c6">result</span> <span style="color:#8be9fd;font-style:italic">text</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">begin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">exists</span>( <span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> information_schema.COLUMNS <span style="color:#ff79c6">where</span> <span style="color:#ff79c6">TABLE_NAME</span> <span style="color:#ff79c6">=</span> model_name <span style="color:#ff79c6">and</span> <span style="color:#ff79c6">COLUMN_NAME</span> <span style="color:#ff79c6">=</span> col_name) <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">@</span>ddl<span style="color:#ff79c6">=</span>CONCAT(<span style="color:#f1fa8c">&#39;alter table &#39;</span>, model_name, <span style="color:#f1fa8c">&#39; add column &#39;</span>, col_name, col_info);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">prepare</span> stmt <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">@</span>ddl;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">execute</span> stmt;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;success&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">set</span> <span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;exists&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span> <span style="color:#ff79c6">if</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">set</span> <span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">call</span> add_col(<span style="color:#f1fa8c">&#39;zyb_employee&#39;</span>,<span style="color:#f1fa8c">&#39;senior_1 &#39;</span>,<span style="color:#f1fa8c">&#39;tinyint(1) NULL DEFAULT 0 COMMENT &#34;是否是高级用户，0 不是  1 是&#34;&#39;</span>,<span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span>);
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">@</span><span style="color:#ff79c6">result</span>;
+</span></span></code></pre></div>
         </div>
 
         
@@ -150,7 +149,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mysql">mysql
                     </a>
                 </li>
                 

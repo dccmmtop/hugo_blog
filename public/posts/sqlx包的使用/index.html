@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/sqlx%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/sqlx%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -115,75 +115,75 @@
 <li>为预处理语句提供具名参数支持。</li>
 </ul>
 <h2 id="表结构">表结构</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">create</span> <span style="color:#ff79c6">table</span> blog
-(
-    id         <span style="color:#8be9fd;font-style:italic">int</span> auto_increment
-        <span style="color:#ff79c6">primary</span> <span style="color:#ff79c6">key</span>,
-    title      <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
-    content    <span style="color:#8be9fd;font-style:italic">text</span>         <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
-    creator_id <span style="color:#8be9fd;font-style:italic">int</span>          <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>
-);
-</code></pre></div><h2 id="示例">示例</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-    _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
-    <span style="color:#f1fa8c">&#34;github.com/jmoiron/sqlx&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
-    Id        <span style="color:#8be9fd">int</span>
-    Title     <span style="color:#8be9fd">string</span>
-    Content <span style="color:#8be9fd">string</span>
-    <span style="color:#6272a4">// 当属性与字段名不一致时，使用 struct_tag 进行映射
-</span><span style="color:#6272a4"></span>    Creator <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`db:&#34;creator_id&#34;`</span>
-}
-
-<span style="color:#8be9fd;font-style:italic">var</span> db <span style="color:#ff79c6">*</span>sqlx.DB
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>(){
-    <span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
-    db, err = sqlx.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>,<span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat?parseTime=true&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> (blog <span style="color:#ff79c6">*</span>Blog)<span style="color:#50fa7b">save</span>(){
-    result, err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">&#34;insert into blog(title, content, creator_id) values (?,?,?)&#34;</span>,blog.Title,blog.Content, blog.Creator)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    <span style="color:#6272a4">// mysql 不支持返回插入后的自增Id,需要额外处理
-</span><span style="color:#6272a4"></span>    id, err <span style="color:#ff79c6">:=</span> result.<span style="color:#50fa7b">LastInsertId</span>()
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    blog.Id =  <span style="color:#8be9fd;font-style:italic">int</span>(id)
-    <span style="color:#ff79c6">return</span>
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">findById</span>(id <span style="color:#8be9fd">int</span>)(blog Blog){
-    blog = Blog{}
-    <span style="color:#6272a4">// StructScan 会自动赋值属性
-</span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">QueryRowx</span>(<span style="color:#f1fa8c">&#34;select id, title, content, creator_id from blog where id = ?&#34;</span>, id).<span style="color:#50fa7b">StructScan</span>(<span style="color:#ff79c6">&amp;</span>blog)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    <span style="color:#ff79c6">return</span>
-}
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    blog <span style="color:#ff79c6">:=</span> Blog{
-        Title:     <span style="color:#f1fa8c">&#34;go语言学习&#34;</span>,
-        Content:   <span style="color:#f1fa8c">&#34;开启go编程之旅吧&#34;</span>,
-        Creator: <span style="color:#bd93f9">1</span>,
-    }
-    blog.<span style="color:#50fa7b">save</span>()
-    blog = <span style="color:#50fa7b">findById</span>(blog.Id)
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;blog: %v\n&#34;</span>, blog)
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">create</span> <span style="color:#ff79c6">table</span> blog
+</span></span><span style="display:flex;"><span>(
+</span></span><span style="display:flex;"><span>    id         <span style="color:#8be9fd;font-style:italic">int</span> auto_increment
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">primary</span> <span style="color:#ff79c6">key</span>,
+</span></span><span style="display:flex;"><span>    title      <span style="color:#8be9fd;font-style:italic">varchar</span>(<span style="color:#bd93f9">255</span>) <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
+</span></span><span style="display:flex;"><span>    content    <span style="color:#8be9fd;font-style:italic">text</span>         <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>,
+</span></span><span style="display:flex;"><span>    creator_id <span style="color:#8be9fd;font-style:italic">int</span>          <span style="color:#ff79c6">not</span> <span style="color:#ff79c6">null</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><h2 id="示例">示例</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;github.com/jmoiron/sqlx&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Blog <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>    Id        <span style="color:#8be9fd">int</span>
+</span></span><span style="display:flex;"><span>    Title     <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>    Content <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 当属性与字段名不一致时，使用 struct_tag 进行映射
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    Creator <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`db:&#34;creator_id&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> db <span style="color:#ff79c6">*</span>sqlx.DB
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+</span></span><span style="display:flex;"><span>    db, err = sqlx.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>,<span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat?parseTime=true&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> (blog <span style="color:#ff79c6">*</span>Blog)<span style="color:#50fa7b">save</span>(){
+</span></span><span style="display:flex;"><span>    result, err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">Exec</span>(<span style="color:#f1fa8c">&#34;insert into blog(title, content, creator_id) values (?,?,?)&#34;</span>,blog.Title,blog.Content, blog.Creator)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// mysql 不支持返回插入后的自增Id,需要额外处理
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    id, err <span style="color:#ff79c6">:=</span> result.<span style="color:#50fa7b">LastInsertId</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    blog.Id =  <span style="color:#8be9fd;font-style:italic">int</span>(id)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">findById</span>(id <span style="color:#8be9fd">int</span>)(blog Blog){
+</span></span><span style="display:flex;"><span>    blog = Blog{}
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// StructScan 会自动赋值属性
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    err <span style="color:#ff79c6">:=</span> db.<span style="color:#50fa7b">QueryRowx</span>(<span style="color:#f1fa8c">&#34;select id, title, content, creator_id from blog where id = ?&#34;</span>, id).<span style="color:#50fa7b">StructScan</span>(<span style="color:#ff79c6">&amp;</span>blog)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    blog <span style="color:#ff79c6">:=</span> Blog{
+</span></span><span style="display:flex;"><span>        Title:     <span style="color:#f1fa8c">&#34;go语言学习&#34;</span>,
+</span></span><span style="display:flex;"><span>        Content:   <span style="color:#f1fa8c">&#34;开启go编程之旅吧&#34;</span>,
+</span></span><span style="display:flex;"><span>        Creator: <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    blog.<span style="color:#50fa7b">save</span>()
+</span></span><span style="display:flex;"><span>    blog = <span style="color:#50fa7b">findById</span>(blog.Id)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;blog: %v\n&#34;</span>, blog)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -208,7 +208,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

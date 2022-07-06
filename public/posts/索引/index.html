@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E7%B4%A2%E5%BC%95/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E7%B4%A2%E5%BC%95/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,9 +110,9 @@
         <div class="article-entry" itemprop="articleBody">
             <h2 id="唯一索引">唯一索引</h2>
 <p>唯一索引是索引具有的一种属性，让索引具备唯一性，确保这张表中，该条索引数据不会重复出现。在每一次insert和update操作时，都会进行索引的唯一性校验，保证该索引的字段组合在表中唯一。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.containers.createIndex<span style="color:#ff79c6">({</span>name: 1<span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
-db.packages.createIndex<span style="color:#ff79c6">({</span> appId: 1, version: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
-</code></pre></div><p>知识点一：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>db.containers.createIndex<span style="color:#ff79c6">({</span>name: 1<span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
+</span></span><span style="display:flex;"><span>db.packages.createIndex<span style="color:#ff79c6">({</span> appId: 1, version: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>unique:true, background: true<span style="color:#ff79c6">})</span>
+</span></span></code></pre></div><p>知识点一：</p>
 <blockquote>
 <p>创建索引时,1表示按升序存储,-1表示按降序存储。</p>
 </blockquote>
@@ -127,12 +127,12 @@ db.packages.createIndex<span style="color:#ff79c6">({</span> appId: 1, version: 
 </blockquote>
 <h2 id="复合索引">复合索引</h2>
 <p>概念：指的是将多个键组合到一起创建索引，终极目的是加速匹配多个键的查询。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.flights.createIndex<span style="color:#ff79c6">({</span> flight: 1, price: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>background: true<span style="color:#ff79c6">})</span>
-</code></pre></div><h2 id="内嵌索引">内嵌索引</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>db.flights.createIndex<span style="color:#ff79c6">({</span> flight: 1, price: <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">}</span>,<span style="color:#ff79c6">{</span>background: true<span style="color:#ff79c6">})</span>
+</span></span></code></pre></div><h2 id="内嵌索引">内嵌索引</h2>
 <p>可以在嵌套的文档上建立索引，方式与建立正常索引完全一致。</p>
 <p>个人信息表结构如下,包含了省市区三级的地址信息，如果想要给城市（city）添加索引，其实就和正常添索引一样</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">db.personInfos.createIndex<span style="color:#ff79c6">({</span>“address.city”:1<span style="color:#ff79c6">})</span>
-</code></pre></div><h2 id="数组索引">数组索引</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>db.personInfos.createIndex<span style="color:#ff79c6">({</span>“address.city”:1<span style="color:#ff79c6">})</span>
+</span></span></code></pre></div><h2 id="数组索引">数组索引</h2>
 <p>MongoDB支持对数组建立索引，这样就可以高效的搜索数组中的特定元素。</p>
 <p>知识点四：</p>
 <blockquote>
@@ -149,37 +149,37 @@ db.packages.createIndex<span style="color:#ff79c6">({</span> appId: 1, version: 
 <p>能解决快速文本查找的需求，比如，日志平台，相对日志关键词查找，如果通过正则来查找的话效率极低，这时就可以通过文本索引的形式来进行查找</p>
 <h1 id="explain查询计划">Explain查询计划</h1>
 <p>提到查的慢，二话不说直接看查询计划好么？具体每一个字段的含义我就不做赘述了很容易查到，我截取winningPlan的部分和大家一起看一下。WinningPlan就是在查询计划中胜出的方案，那肯定就有被淘汰的方案，是在rejectPlan里。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">// 查询计划中的winningPlan部分
-<span style="color:#f1fa8c">&#34;winningPlan&#34;</span>: {
-	<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;FETCH&#34;</span>,
-	<span style="color:#ff79c6">&#34;filter&#34;</span>: {
-		<span style="color:#ff79c6">&#34;createdAt&#34;</span>: {
-			<span style="color:#ff79c6">&#34;$gte&#34;</span>: ISODate(<span style="color:#f1fa8c">&#34;2019-07-22T12:00:44.000Z&#34;</span>)
-		}
-	},
-	<span style="color:#ff79c6">&#34;inputStage&#34;</span>: {
-		<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;IXSCAN&#34;</span>,
-		<span style="color:#ff79c6">&#34;keyPattern&#34;</span>: {
-			<span style="color:#ff79c6">&#34;load&#34;</span>: <span style="color:#bd93f9">1</span>
-		},
-		<span style="color:#ff79c6">&#34;indexName&#34;</span>: <span style="color:#f1fa8c">&#34;load_1&#34;</span>,
-		<span style="color:#ff79c6">&#34;isMultiKey&#34;</span>: <span style="color:#ff79c6">false</span>,
-		<span style="color:#ff79c6">&#34;multiKeyPaths&#34;</span>: {
-			<span style="color:#ff79c6">&#34;load&#34;</span>: []
-		},
-		<span style="color:#ff79c6">&#34;isUnique&#34;</span>: <span style="color:#ff79c6">false</span>,
-		<span style="color:#ff79c6">&#34;isSparse&#34;</span>: <span style="color:#ff79c6">false</span>,
-		<span style="color:#ff79c6">&#34;isPartial&#34;</span>: <span style="color:#ff79c6">false</span>,
-		<span style="color:#ff79c6">&#34;indexVersion&#34;</span>: <span style="color:#bd93f9">2</span>,
-		<span style="color:#ff79c6">&#34;direction&#34;</span>: <span style="color:#f1fa8c">&#34;backward&#34;</span>,
-		<span style="color:#ff79c6">&#34;indexBounds&#34;</span>: {
-			<span style="color:#ff79c6">&#34;load&#34;</span>: [
-				<span style="color:#f1fa8c">&#34;[MaxKey, MinKey]&#34;</span>
-			]
-		}
-	}
-},
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#6272a4">// 查询计划中的winningPlan部分
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#f1fa8c">&#34;winningPlan&#34;</span>: {
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;FETCH&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">&#34;filter&#34;</span>: {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;createdAt&#34;</span>: {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">&#34;$gte&#34;</span>: ISODate(<span style="color:#f1fa8c">&#34;2019-07-22T12:00:44.000Z&#34;</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	},
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">&#34;inputStage&#34;</span>: {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;stage&#34;</span>: <span style="color:#f1fa8c">&#34;IXSCAN&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;keyPattern&#34;</span>: {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">&#34;load&#34;</span>: <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;indexName&#34;</span>: <span style="color:#f1fa8c">&#34;load_1&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;isMultiKey&#34;</span>: <span style="color:#ff79c6">false</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;multiKeyPaths&#34;</span>: {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">&#34;load&#34;</span>: []
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;isUnique&#34;</span>: <span style="color:#ff79c6">false</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;isSparse&#34;</span>: <span style="color:#ff79c6">false</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;isPartial&#34;</span>: <span style="color:#ff79c6">false</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;indexVersion&#34;</span>: <span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;direction&#34;</span>: <span style="color:#f1fa8c">&#34;backward&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">&#34;indexBounds&#34;</span>: {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">&#34;load&#34;</span>: [
+</span></span><span style="display:flex;"><span>				<span style="color:#f1fa8c">&#34;[MaxKey, MinKey]&#34;</span>
+</span></span><span style="display:flex;"><span>			]
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>},
+</span></span></code></pre></div><ul>
 <li>知识点六：</li>
 </ul>
 <blockquote>
@@ -217,16 +217,16 @@ SORT（使用sort但是无index）
 COUNTSCAN（不使用索引进行count）</p>
 <h2 id="最左前缀原则">最左前缀原则</h2>
 <p>假定索引(a，b，c) 它可能满足的查询如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">1. a
-
-2. a，b
-
-3. a，b，c
-
-4. a，c [该组合只能用a部分]
-
-5. a, c, b [cb在查询时会被优化换位置]
-</code></pre></div><p><strong>显然，最左前缀的核心是查询条件字段必须含有索引第一个字段</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>1. a
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. a，b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. a，b，c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4. a，c [该组合只能用a部分]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>5. a, c, b [cb在查询时会被优化换位置]
+</span></span></code></pre></div><p><strong>显然，最左前缀的核心是查询条件字段必须含有索引第一个字段</strong></p>
 <p>最左值尽可能用最精确过滤性最好的值，不要用那种可能会用于范围模糊查询，用于排序的字段</p>
 <h2 id="效率极低的操作符">效率极低的操作符</h2>
 <p>$where和$exists：这两个操作符，完全不能使用索引。
@@ -324,7 +324,7 @@ $nin:不包含，这个操作符也总是会全表扫描
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mongo">mongo
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mongo">mongo
                     </a>
                 </li>
                 

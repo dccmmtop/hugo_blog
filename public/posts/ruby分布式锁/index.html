@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ruby%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/ruby%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -108,129 +108,128 @@
             
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4">#ruby的分布式锁实现，基于redis</span>
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Redlock</span>
-  DefaultRetryCount<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3</span>
-  DefaultRetryDelay<span style="color:#ff79c6">=</span><span style="color:#bd93f9">200</span>
-  ClockDriftFactor <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">01</span>
-  UnlockScript<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;
-</span><span style="color:#f1fa8c">    if redis.call(&#34;get&#34;,KEYS[1]) == ARGV[1] then
-</span><span style="color:#f1fa8c">        return redis.call(&#34;del&#34;,KEYS[1])
-</span><span style="color:#f1fa8c">    else
-</span><span style="color:#f1fa8c">        return 0
-</span><span style="color:#f1fa8c">    end&#39;</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">initialize</span>(<span style="color:#ff79c6">*</span>server_urls)
-    <span style="color:#8be9fd;font-style:italic">@servers</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[]</span>
-    server_urls<span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>url<span style="color:#ff79c6">|</span>
-      <span style="color:#8be9fd;font-style:italic">@servers</span> <span style="color:#ff79c6">&lt;&lt;</span> Redis<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">:url</span> <span style="color:#ff79c6">=&gt;</span> url)
-    }
-    <span style="color:#8be9fd;font-style:italic">@quorum</span> <span style="color:#ff79c6">=</span> server_urls<span style="color:#ff79c6">.</span>length <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
-    <span style="color:#8be9fd;font-style:italic">@retry_count</span> <span style="color:#ff79c6">=</span> DefaultRetryCount
-    <span style="color:#8be9fd;font-style:italic">@retry_delay</span> <span style="color:#ff79c6">=</span> DefaultRetryDelay
-    <span style="color:#8be9fd;font-style:italic">@urandom</span> <span style="color:#ff79c6">=</span> File<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">&#34;/dev/urandom&#34;</span>)
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">set_retry</span>(count,delay)
-    <span style="color:#8be9fd;font-style:italic">@retry_count</span> <span style="color:#ff79c6">=</span> count
-    <span style="color:#8be9fd;font-style:italic">@retry_delay</span> <span style="color:#ff79c6">=</span> delay
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">lock_instance</span>(redis,resource,val,ttl)
-    <span style="color:#ff79c6">begin</span>
-      <span style="color:#ff79c6">return</span> redis<span style="color:#ff79c6">.</span>client<span style="color:#ff79c6">.</span>call(<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:set</span>,resource,val,<span style="color:#f1fa8c">:nx</span>,<span style="color:#f1fa8c">:px</span>,ttl<span style="color:#ff79c6">]</span>)
-    <span style="color:#ff79c6">rescue</span>
-      <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unlock_instance</span>(redis,resource,val)
-    <span style="color:#ff79c6">begin</span>
-      redis<span style="color:#ff79c6">.</span>client<span style="color:#ff79c6">.</span>call(<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:eval</span>,UnlockScript,<span style="color:#bd93f9">1</span>,resource,val<span style="color:#ff79c6">]</span>)
-    <span style="color:#ff79c6">rescue</span>
-      <span style="color:#6272a4"># Nothing to do, unlocking is just a best-effort attempt.</span>
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_unique_lock_id</span>
-    val <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
-    bytes <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@urandom</span><span style="color:#ff79c6">.</span>read(<span style="color:#bd93f9">20</span>)
-    bytes<span style="color:#ff79c6">.</span>each_byte{<span style="color:#ff79c6">|</span>b<span style="color:#ff79c6">|</span>
-      val <span style="color:#ff79c6">&lt;&lt;</span> b<span style="color:#ff79c6">.</span>to_s(<span style="color:#bd93f9">32</span>)
-    }
-    val
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">lock</span>(resource,ttl)
-    val <span style="color:#ff79c6">=</span> get_unique_lock_id
-    <span style="color:#8be9fd;font-style:italic">@retry_count</span><span style="color:#ff79c6">.</span>times {
-      n <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-      start_time <span style="color:#ff79c6">=</span> (Time<span style="color:#ff79c6">.</span>now<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">*</span><span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>to_i
-      <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
-        n <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">if</span> lock_instance(s,resource,val,ttl)
-      }
-      <span style="color:#6272a4"># Add 2 milliseconds to the drift to account for Redis expires</span>
-      <span style="color:#6272a4"># precision, which is 1 milliescond, plus 1 millisecond min drift</span>
-      <span style="color:#6272a4"># for small TTLs.</span>
-      drift <span style="color:#ff79c6">=</span> (ttl<span style="color:#ff79c6">*</span>ClockDriftFactor)<span style="color:#ff79c6">.</span>to_i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">2</span>
-      validity_time <span style="color:#ff79c6">=</span> ttl<span style="color:#ff79c6">-</span>((Time<span style="color:#ff79c6">.</span>now<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">*</span><span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>to_i <span style="color:#ff79c6">-</span> start_time)<span style="color:#ff79c6">-</span>drift
-      <span style="color:#ff79c6">if</span> n <span style="color:#ff79c6">&gt;=</span> <span style="color:#8be9fd;font-style:italic">@quorum</span> <span style="color:#ff79c6">&amp;&amp;</span> validity_time <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>
-        <span style="color:#ff79c6">return</span> {
-            <span style="color:#f1fa8c">:validity</span> <span style="color:#ff79c6">=&gt;</span> validity_time,
-            <span style="color:#f1fa8c">:resource</span> <span style="color:#ff79c6">=&gt;</span> resource,
-            <span style="color:#f1fa8c">:val</span> <span style="color:#ff79c6">=&gt;</span> val
-        }
-      <span style="color:#ff79c6">else</span>
-        <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
-          unlock_instance(s,resource,val)
-        }
-      <span style="color:#ff79c6">end</span>
-      <span style="color:#6272a4"># Wait a random delay before to retry</span>
-      <span style="color:#8be9fd;font-style:italic">sleep</span>(<span style="color:#8be9fd;font-style:italic">rand</span>(<span style="color:#8be9fd;font-style:italic">@retry_delay</span>)<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1000</span>)
-    }
-    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
-  <span style="color:#ff79c6">end</span>
-
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unlock</span>(lock)
-
-    <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
-      unlock_instance(s,lock<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:resource</span><span style="color:#ff79c6">]</span>,lock<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:val</span><span style="color:#ff79c6">]</span>)
-    }
-  <span style="color:#ff79c6">rescue</span> <span style="color:#ff79c6">=&gt;</span>e
-    <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;RedLock err:&#34;</span> <span style="color:#ff79c6">+</span> e<span style="color:#ff79c6">.</span>to_s
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-
-</code></pre></div><p>#初始化分布式锁（一般在初始化程序中 config/initializers/xxx.rb）
+            <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4">#ruby的分布式锁实现，基于redis</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Redlock</span>
+</span></span><span style="display:flex;"><span>  DefaultRetryCount<span style="color:#ff79c6">=</span><span style="color:#bd93f9">3</span>
+</span></span><span style="display:flex;"><span>  DefaultRetryDelay<span style="color:#ff79c6">=</span><span style="color:#bd93f9">200</span>
+</span></span><span style="display:flex;"><span>  ClockDriftFactor <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">01</span>
+</span></span><span style="display:flex;"><span>  UnlockScript<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    if redis.call(&#34;get&#34;,KEYS[1]) == ARGV[1] then
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        return redis.call(&#34;del&#34;,KEYS[1])
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    else
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        return 0
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">    end&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">initialize</span>(<span style="color:#ff79c6">*</span>server_urls)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@servers</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">[]</span>
+</span></span><span style="display:flex;"><span>    server_urls<span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>url<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">@servers</span> <span style="color:#ff79c6">&lt;&lt;</span> Redis<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">:url</span> <span style="color:#ff79c6">=&gt;</span> url)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@quorum</span> <span style="color:#ff79c6">=</span> server_urls<span style="color:#ff79c6">.</span>length <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">2</span> <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@retry_count</span> <span style="color:#ff79c6">=</span> DefaultRetryCount
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@retry_delay</span> <span style="color:#ff79c6">=</span> DefaultRetryDelay
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@urandom</span> <span style="color:#ff79c6">=</span> File<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">&#34;/dev/urandom&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">set_retry</span>(count,delay)
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@retry_count</span> <span style="color:#ff79c6">=</span> count
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@retry_delay</span> <span style="color:#ff79c6">=</span> delay
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">lock_instance</span>(redis,resource,val,ttl)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">begin</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">return</span> redis<span style="color:#ff79c6">.</span>client<span style="color:#ff79c6">.</span>call(<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:set</span>,resource,val,<span style="color:#f1fa8c">:nx</span>,<span style="color:#f1fa8c">:px</span>,ttl<span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rescue</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unlock_instance</span>(redis,resource,val)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">begin</span>
+</span></span><span style="display:flex;"><span>      redis<span style="color:#ff79c6">.</span>client<span style="color:#ff79c6">.</span>call(<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:eval</span>,UnlockScript,<span style="color:#bd93f9">1</span>,resource,val<span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rescue</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># Nothing to do, unlocking is just a best-effort attempt.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">get_unique_lock_id</span>
+</span></span><span style="display:flex;"><span>    val <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    bytes <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">@urandom</span><span style="color:#ff79c6">.</span>read(<span style="color:#bd93f9">20</span>)
+</span></span><span style="display:flex;"><span>    bytes<span style="color:#ff79c6">.</span>each_byte{<span style="color:#ff79c6">|</span>b<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      val <span style="color:#ff79c6">&lt;&lt;</span> b<span style="color:#ff79c6">.</span>to_s(<span style="color:#bd93f9">32</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    val
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">lock</span>(resource,ttl)
+</span></span><span style="display:flex;"><span>    val <span style="color:#ff79c6">=</span> get_unique_lock_id
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@retry_count</span><span style="color:#ff79c6">.</span>times {
+</span></span><span style="display:flex;"><span>      n <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>      start_time <span style="color:#ff79c6">=</span> (Time<span style="color:#ff79c6">.</span>now<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">*</span><span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>to_i
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">if</span> lock_instance(s,resource,val,ttl)
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># Add 2 milliseconds to the drift to account for Redis expires</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># precision, which is 1 milliescond, plus 1 millisecond min drift</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># for small TTLs.</span>
+</span></span><span style="display:flex;"><span>      drift <span style="color:#ff79c6">=</span> (ttl<span style="color:#ff79c6">*</span>ClockDriftFactor)<span style="color:#ff79c6">.</span>to_i <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">2</span>
+</span></span><span style="display:flex;"><span>      validity_time <span style="color:#ff79c6">=</span> ttl<span style="color:#ff79c6">-</span>((Time<span style="color:#ff79c6">.</span>now<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">*</span><span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>to_i <span style="color:#ff79c6">-</span> start_time)<span style="color:#ff79c6">-</span>drift
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> n <span style="color:#ff79c6">&gt;=</span> <span style="color:#8be9fd;font-style:italic">@quorum</span> <span style="color:#ff79c6">&amp;&amp;</span> validity_time <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">:validity</span> <span style="color:#ff79c6">=&gt;</span> validity_time,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">:resource</span> <span style="color:#ff79c6">=&gt;</span> resource,
+</span></span><span style="display:flex;"><span>            <span style="color:#f1fa8c">:val</span> <span style="color:#ff79c6">=&gt;</span> val
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>          unlock_instance(s,resource,val)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># Wait a random delay before to retry</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">sleep</span>(<span style="color:#8be9fd;font-style:italic">rand</span>(<span style="color:#8be9fd;font-style:italic">@retry_delay</span>)<span style="color:#ff79c6">.</span>to_f<span style="color:#ff79c6">/</span><span style="color:#bd93f9">1000</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">unlock</span>(lock)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">@servers</span><span style="color:#ff79c6">.</span>each{<span style="color:#ff79c6">|</span>s<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      unlock_instance(s,lock<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:resource</span><span style="color:#ff79c6">]</span>,lock<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:val</span><span style="color:#ff79c6">]</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">rescue</span> <span style="color:#ff79c6">=&gt;</span>e
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;RedLock err:&#34;</span> <span style="color:#ff79c6">+</span> e<span style="color:#ff79c6">.</span>to_s
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>#初始化分布式锁（一般在初始化程序中 config/initializers/xxx.rb）
 $distributed_locks = Redlock.new(&ldquo;redis://#{REDIS_HOST}:6379&rdquo;)</p>
 <p>使用示例</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">self</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">apply_join</span>(user_id, tag_info_id)
-    <span style="color:#6272a4"># 设置重试次数和每次重试的间隔时间</span>
-    <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>set_retry(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">100</span>)
-    <span style="color:#6272a4"># 持有锁的时间</span>
-    tag_user_lock <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>lock(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">#{</span>user_id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">_</span><span style="color:#f1fa8c">#{</span>tag_info_id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#bd93f9">60</span> <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1000</span>)
-    result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-    <span style="color:#ff79c6">begin</span>
-      <span style="color:#ff79c6">if</span> tag_user_lock
-        <span style="color:#ff79c6">unless</span> TagUserTag<span style="color:#ff79c6">.</span>where(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id)<span style="color:#ff79c6">.</span>first
-          <span style="color:#6272a4"># 并发导致创建多条相同记录</span>
-          TagUserTag<span style="color:#ff79c6">.</span>where(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id, <span style="color:#f1fa8c">status</span>: <span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>delete_all
-          TagUserTag<span style="color:#ff79c6">.</span>create(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id, <span style="color:#f1fa8c">status</span>: <span style="color:#bd93f9">1</span>)
-          update_user_tag_cache_status(user_id, tag_info_id, <span style="color:#bd93f9">1</span>)
-          result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-        <span style="color:#ff79c6">else</span>
-          Rails<span style="color:#ff79c6">.</span>logger<span style="color:#ff79c6">.</span>info(<span style="color:#f1fa8c">&#34;该用户已经在本系统标签下，或 已提出申请&#34;</span>)
-        <span style="color:#ff79c6">end</span>
-      <span style="color:#ff79c6">end</span>
-      <span style="color:#6272a4"># 释放锁</span>
-      <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>unlock(tag_user_lock)
-    <span style="color:#ff79c6">rescue</span> <span style="color:#ff79c6">=&gt;</span> e
-      <span style="color:#6272a4"># 释放锁</span>
-      <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>unlock(tag_user_lock)
-    <span style="color:#ff79c6">end</span>
-    result
-  <span style="color:#ff79c6">end</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">self</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">apply_join</span>(user_id, tag_info_id)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 设置重试次数和每次重试的间隔时间</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>set_retry(<span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">100</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4"># 持有锁的时间</span>
+</span></span><span style="display:flex;"><span>    tag_user_lock <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>lock(<span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">#{</span>user_id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">_</span><span style="color:#f1fa8c">#{</span>tag_info_id<span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span>, <span style="color:#bd93f9">60</span> <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">1000</span>)
+</span></span><span style="display:flex;"><span>    result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">begin</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> tag_user_lock
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">unless</span> TagUserTag<span style="color:#ff79c6">.</span>where(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id)<span style="color:#ff79c6">.</span>first
+</span></span><span style="display:flex;"><span>          <span style="color:#6272a4"># 并发导致创建多条相同记录</span>
+</span></span><span style="display:flex;"><span>          TagUserTag<span style="color:#ff79c6">.</span>where(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id, <span style="color:#f1fa8c">status</span>: <span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">.</span>delete_all
+</span></span><span style="display:flex;"><span>          TagUserTag<span style="color:#ff79c6">.</span>create(<span style="color:#f1fa8c">user_id</span>: user_id, <span style="color:#f1fa8c">tag_id</span>: tag_info_id, <span style="color:#f1fa8c">status</span>: <span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>          update_user_tag_cache_status(user_id, tag_info_id, <span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span>          result <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>          Rails<span style="color:#ff79c6">.</span>logger<span style="color:#ff79c6">.</span>info(<span style="color:#f1fa8c">&#34;该用户已经在本系统标签下，或 已提出申请&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># 释放锁</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>unlock(tag_user_lock)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">rescue</span> <span style="color:#ff79c6">=&gt;</span> e
+</span></span><span style="display:flex;"><span>      <span style="color:#6272a4"># 释放锁</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">$distributed_locks</span><span style="color:#ff79c6">.</span>unlock(tag_user_lock)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>    result
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -250,7 +249,7 @@ $distributed_locks = Redlock.new(&ldquo;redis://#{REDIS_HOST}:6379&rdquo;)</p>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                     </a>
                 </li>
                 

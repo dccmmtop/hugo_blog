@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/vim%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/vim%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -113,60 +113,60 @@
 <h2 id="自定义命令"><strong>自定义命令</strong></h2>
 <p>Vim 编辑器允许定义自己的命令，我们可以像执行内置命令一样来执行我们自己定义的命令。</p>
 <p>使用以下:command 命令自定义命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:command Delete_first :<span style="color:#bd93f9">1</span>delete
-</code></pre></div><p>注意自定义命令的名称，必须以大写字母开头，而且不能包含下划线；如果我们执行:Delete_first 自定义命令，那么 Vim 就会执行:1delete 命令，从而删除第一行。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:command Delete_first :<span style="color:#bd93f9">1</span>delete
+</span></span></code></pre></div><p>注意自定义命令的名称，必须以大写字母开头，而且不能包含下划线；如果我们执行:Delete_first 自定义命令，那么 Vim 就会执行:1delete 命令，从而删除第一行。</p>
 <p>可以使用!来强制重新定义同名的自定义命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">:command! -nargs=+ Say :echo &lt;args&gt;
-</code></pre></div><p>用户定义的命令可以指定一系列的参数，参数的个数由-nargs 选项在命令行中指定。例如定义 Delete_one 命令没有参数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:command Delete_one -nargs=<span style="color:#bd93f9">0</span> <span style="color:#bd93f9">1</span>delete
-</code></pre></div><p>默认情况下-nargs=0，所以可以省略。其他-nargs 选项值如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>:command! -nargs=+ Say :echo &lt;args&gt;
+</span></span></code></pre></div><p>用户定义的命令可以指定一系列的参数，参数的个数由-nargs 选项在命令行中指定。例如定义 Delete_one 命令没有参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:command Delete_one -nargs=<span style="color:#bd93f9">0</span> <span style="color:#bd93f9">1</span>delete
+</span></span></code></pre></div><p>默认情况下-nargs=0，所以可以省略。其他-nargs 选项值如下：</p>
 <p>-nargs=0 没有参数</p>
 <p>-nargs=1 1 个参数</p>
 <p>-nargs=* 任何个数的参数</p>
 <p>-nargs=? 零个或是一个参数</p>
 <p>-nargs=+ 一个或是更多个参数</p>
 <p>在命令定义中，参数是由关键字<args>指定的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">:command -nargs=+ Say :echo &#34;&lt;args&gt;&#34;
-</code></pre></div><p>输入以下自定义命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:Say Hello World
-</code></pre></div><p>命令的执行结果显示：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Hello World
-</code></pre></div><p>使用-range 选项，可以指定一个范围作为自定义命令的参数。-range 选项值如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>:command -nargs=+ Say :echo &#34;&lt;args&gt;&#34;
+</span></span></code></pre></div><p>输入以下自定义命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:Say Hello World
+</span></span></code></pre></div><p>命令的执行结果显示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Hello World
+</span></span></code></pre></div><p>使用-range 选项，可以指定一个范围作为自定义命令的参数。-range 选项值如下：</p>
 <p>-range 允许范围，默认为当前行</p>
 <p>-range=%允许范围，默认为当前文件(while file)</p>
 <p>-range=count 允许范围，单一的数字</p>
 <p>当指定范围之后，就可以用关键字<line1>和<line2>得到这个范围的第一行和最后一行。</p>
 <p>例如以下定义了 SaveIt 命令，用于将指定范围的文件写入文件 save_file：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:command -range=% SaveIt :&lt;line1&gt;,&lt;line2&gt;write! save_file
-</code></pre></div><p>关键字<f-args>含有与关键字<args>相同的信息，所不同的是它用于调用函数。例如以下自定义命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">:command -nargs=* DoIt :call AFunction(&lt;f-args&gt;)
-</code></pre></div><p>执行自定义命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:DoIt a b c
-</code></pre></div><p>将会传递参数给调用的函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:call AFunction(<span style="color:#f1fa8c">&#34;a&#34;</span>,<span style="color:#f1fa8c">&#34;b&#34;</span>,<span style="color:#f1fa8c">&#34;c&#34;</span>)
-</code></pre></div><p>其他选项和关键字包括：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:command -range=% SaveIt :&lt;line1&gt;,&lt;line2&gt;write! save_file
+</span></span></code></pre></div><p>关键字<f-args>含有与关键字<args>相同的信息，所不同的是它用于调用函数。例如以下自定义命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>:command -nargs=* DoIt :call AFunction(&lt;f-args&gt;)
+</span></span></code></pre></div><p>执行自定义命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:DoIt a b c
+</span></span></code></pre></div><p>将会传递参数给调用的函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:call AFunction(<span style="color:#f1fa8c">&#34;a&#34;</span>,<span style="color:#f1fa8c">&#34;b&#34;</span>,<span style="color:#f1fa8c">&#34;c&#34;</span>)
+</span></span></code></pre></div><p>其他选项和关键字包括：</p>
 <p>-count=number 指定数量保存在关键字<count>中</p>
 <p>-bang 指定!修饰符存放在关键字<bang>中</p>
 <p>-register 指定寄存器，默认为未命名寄存器，寄存器的定义保存在关键字<register>中</p>
 <p>-bar 其他命令可以用|跟随在此命令之后</p>
 <p>-buffer 命令仅对当前缓冲区有效</p>
 <p>使用以下命令，首先分别创建一个用户自定义命令，然后再将两个命令组合起来。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">command! -bar DelTab %s<span style="color:#f1fa8c">/	/</span>/
-command! DelLF %s<span style="color:#f1fa8c">/\n/</span>/
-command! FmtCode DelTab|DelLF
-</code></pre></div><p>view raw</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>command! -bar DelTab %s<span style="color:#f1fa8c">/	/</span>/
+</span></span><span style="display:flex;"><span>command! DelLF %s<span style="color:#f1fa8c">/\n/</span>/
+</span></span><span style="display:flex;"><span>command! FmtCode DelTab|DelLF
+</span></span></code></pre></div><p>view raw</p>
 <p>ScriptCommandMulti.vim</p>
 <p>hosted with ❤ by</p>
 <p>GitHub</p>
 <h2 id="列示自定义命令"><strong>列示自定义命令</strong></h2>
 <p>使用以下命令，可以列出用户定义的命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:command
-</code></pre></div><h2 id="删除自定义命令"><strong>删除自定义命令</strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:command
+</span></span></code></pre></div><h2 id="删除自定义命令"><strong>删除自定义命令</strong></h2>
 <p>使用以下:delcommand 命令，可以删除用户定义的命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:delcommand Delete_one
-</code></pre></div><p>使用以下命令，清除所有的用户定义的命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:comclear
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:delcommand Delete_one
+</span></span></code></pre></div><p>使用以下命令，清除所有的用户定义的命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:comclear
+</span></span></code></pre></div>
         </div>
 
         
@@ -192,7 +192,7 @@ command! FmtCode DelTab|DelLF
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                     </a>
                 </li>
                 

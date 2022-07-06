@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/activerecord_store%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/activerecord_store%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -113,53 +113,53 @@
 <p>阅读 <a href="http://api.rubyonrails.org/">http://api.rubyonrails.org</a> 相关的笔记</p>
 <p>使用 Model 里面的一个字段作为一个序列化的封装，用来存储一个 key/value</p>
 <p>文档里面提到，对应的存储字段的类型最好是 <strong>text</strong>， 以便确保有足够的存储空间</p>
-<pre><code>Make sure that you declare the database column used for the serialized store as a text, so there's plenty of room.
+<pre tabindex="0"><code>Make sure that you declare the database column used for the serialized store as a text, so there&#39;s plenty of room.
 </code></pre><p>假设 Model 里面有一个字段 body</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreatePosts</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration<span style="color:#ff79c6">[</span><span style="color:#bd93f9">5</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">]</span>
-  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
-    create_table <span style="color:#f1fa8c">:posts</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
-      t<span style="color:#ff79c6">.</span>string <span style="color:#f1fa8c">:title</span>
-      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:body</span>  <span style="color:#6272a4"># 作为store序列化的字段</span>
-      t<span style="color:#ff79c6">.</span>boolean <span style="color:#f1fa8c">:published</span>
-      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:status</span>
-
-      t<span style="color:#ff79c6">.</span>timestamps
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>接着设置对应的序列化属性</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Post</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-
-  <span style="color:#6272a4"># enum status: [ :active, :archived ] # 这里使用数组 与之对应的数字从0依次增加</span>
-  enum <span style="color:#f1fa8c">status</span>: { <span style="color:#f1fa8c">active</span>: <span style="color:#bd93f9">10</span>, <span style="color:#f1fa8c">archived</span>: <span style="color:#bd93f9">20</span> } <span style="color:#6272a4"># 明确指定对应的数字</span>
-
-  store <span style="color:#f1fa8c">:body</span>, <span style="color:#f1fa8c">accessors</span>: <span style="color:#ff79c6">[</span> <span style="color:#f1fa8c">:color</span>, <span style="color:#f1fa8c">:homepage</span>, <span style="color:#f1fa8c">:email</span> <span style="color:#ff79c6">]</span>, <span style="color:#f1fa8c">coder</span>: JSON <span style="color:#6272a4"># 序列化属性</span>
-
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这样设置后，在 body 这一个字段上就可以存储多个 key/value 了</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb(main):<span style="color:#bd93f9">001</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span> <span style="color:#ff79c6">=</span> Post<span style="color:#ff79c6">.</span>create
-   (<span style="color:#bd93f9">0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">1</span>ms)  <span style="color:#ff79c6">begin</span> transaction
-  SQL (<span style="color:#bd93f9">1</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">2</span>ms)  INSERT INTO <span style="color:#f1fa8c">&#34;posts&#34;</span> (<span style="color:#f1fa8c">&#34;created_at&#34;</span>, <span style="color:#f1fa8c">&#34;updated_at&#34;</span>) VALUES (<span style="color:#f1fa8c">?,</span> <span style="color:#f1fa8c">?)</span>  <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">&#34;created_at&#34;</span>, <span style="color:#bd93f9">2017</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">16</span> <span style="color:#bd93f9">07</span>:<span style="color:#bd93f9">32</span>:<span style="color:#bd93f9">44</span> UTC<span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;updated_at&#34;</span>, <span style="color:#bd93f9">2017</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">16</span> <span style="color:#bd93f9">07</span>:<span style="color:#bd93f9">32</span>:<span style="color:#bd93f9">44</span> UTC<span style="color:#ff79c6">]]</span>
-   (<span style="color:#bd93f9">1</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">9</span>ms)  commit transaction
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#6272a4">#&lt;Post id: 4, title: nil, body: {}, published: nil, status: nil, created_at: &#34;2017-02-16 07:32:44&#34;, updated_at: &#34;2017-02-16 07:32:44&#34;&gt;</span>
-irb(main):<span style="color:#bd93f9">002</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body
-<span style="color:#ff79c6">=&gt;</span> {}
-irb(main):<span style="color:#bd93f9">003</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">.</span>class
-<span style="color:#ff79c6">=&gt;</span> ActiveSupport<span style="color:#ff79c6">::</span>HashWithIndifferentAccess
-irb(main):<span style="color:#bd93f9">004</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:color</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
-irb(main):<span style="color:#bd93f9">005</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:email</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
-irb(main):<span style="color:#bd93f9">006</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>color
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
-irb(main):<span style="color:#bd93f9">007</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>email
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
-irb(main):<span style="color:#bd93f9">00</span><span style="color:#bd93f9">8</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:no_set</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
-irb(main):<span style="color:#bd93f9">00</span><span style="color:#bd93f9">9</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:no_set</span><span style="color:#ff79c6">]</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
-irb(main):<span style="color:#bd93f9">010</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>no_set <span style="color:#6272a4">#这个会报错</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">CreatePosts</span> <span style="color:#ff79c6">&lt;</span> ActiveRecord<span style="color:#ff79c6">::</span>Migration<span style="color:#ff79c6">[</span><span style="color:#bd93f9">5</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">change</span>
+</span></span><span style="display:flex;"><span>    create_table <span style="color:#f1fa8c">:posts</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>t<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>string <span style="color:#f1fa8c">:title</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>text <span style="color:#f1fa8c">:body</span>  <span style="color:#6272a4"># 作为store序列化的字段</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>boolean <span style="color:#f1fa8c">:published</span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>integer <span style="color:#f1fa8c">:status</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      t<span style="color:#ff79c6">.</span>timestamps
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>接着设置对应的序列化属性</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Post</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4"># enum status: [ :active, :archived ] # 这里使用数组 与之对应的数字从0依次增加</span>
+</span></span><span style="display:flex;"><span>  enum <span style="color:#f1fa8c">status</span>: { <span style="color:#f1fa8c">active</span>: <span style="color:#bd93f9">10</span>, <span style="color:#f1fa8c">archived</span>: <span style="color:#bd93f9">20</span> } <span style="color:#6272a4"># 明确指定对应的数字</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  store <span style="color:#f1fa8c">:body</span>, <span style="color:#f1fa8c">accessors</span>: <span style="color:#ff79c6">[</span> <span style="color:#f1fa8c">:color</span>, <span style="color:#f1fa8c">:homepage</span>, <span style="color:#f1fa8c">:email</span> <span style="color:#ff79c6">]</span>, <span style="color:#f1fa8c">coder</span>: JSON <span style="color:#6272a4"># 序列化属性</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这样设置后，在 body 这一个字段上就可以存储多个 key/value 了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">001</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span> <span style="color:#ff79c6">=</span> Post<span style="color:#ff79c6">.</span>create
+</span></span><span style="display:flex;"><span>   (<span style="color:#bd93f9">0</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">1</span>ms)  <span style="color:#ff79c6">begin</span> transaction
+</span></span><span style="display:flex;"><span>  SQL (<span style="color:#bd93f9">1</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">2</span>ms)  INSERT INTO <span style="color:#f1fa8c">&#34;posts&#34;</span> (<span style="color:#f1fa8c">&#34;created_at&#34;</span>, <span style="color:#f1fa8c">&#34;updated_at&#34;</span>) VALUES (<span style="color:#f1fa8c">?,</span> <span style="color:#f1fa8c">?)</span>  <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">&#34;created_at&#34;</span>, <span style="color:#bd93f9">2017</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">16</span> <span style="color:#bd93f9">07</span>:<span style="color:#bd93f9">32</span>:<span style="color:#bd93f9">44</span> UTC<span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;updated_at&#34;</span>, <span style="color:#bd93f9">2017</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">02</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">16</span> <span style="color:#bd93f9">07</span>:<span style="color:#bd93f9">32</span>:<span style="color:#bd93f9">44</span> UTC<span style="color:#ff79c6">]]</span>
+</span></span><span style="display:flex;"><span>   (<span style="color:#bd93f9">1</span><span style="color:#ff79c6">.</span><span style="color:#bd93f9">9</span>ms)  commit transaction
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#6272a4">#&lt;Post id: 4, title: nil, body: {}, published: nil, status: nil, created_at: &#34;2017-02-16 07:32:44&#34;, updated_at: &#34;2017-02-16 07:32:44&#34;&gt;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">002</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> {}
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">003</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">.</span>class
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> ActiveSupport<span style="color:#ff79c6">::</span>HashWithIndifferentAccess
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">004</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:color</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">005</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:email</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">006</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>color
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;red&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">007</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>email
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;hello@126.com&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">00</span><span style="color:#bd93f9">8</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:no_set</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">00</span><span style="color:#bd93f9">9</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>body<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:no_set</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;这个属性没有在model声明&#34;</span>
+</span></span><span style="display:flex;"><span>irb(main):<span style="color:#bd93f9">010</span>:<span style="color:#bd93f9">0</span><span style="color:#ff79c6">&gt;</span> <span style="color:#8be9fd;font-style:italic">p</span><span style="color:#ff79c6">.</span>no_set <span style="color:#6272a4">#这个会报错</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -187,7 +187,7 @@ irb(main):<span style="color:#bd93f9">010</span>:<span style="color:#bd93f9">0</
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

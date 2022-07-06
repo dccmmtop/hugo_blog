@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2logrotate%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E6%97%A5%E5%BF%97%E5%88%87%E5%89%B2logrotate%E5%8E%9F%E7%90%86%E5%92%8C%E9%85%8D%E7%BD%AE/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,18 +110,18 @@
         <div class="article-entry" itemprop="articleBody">
             <p>logrotate 在很多 Linux 发行版上都是默认安装的。系统会定时运行 logrotate，一般是每天一次。系统是这么实现按天执行的。crontab 会每天定时执行 <code>/etc/cron.daily</code> 目录下的脚本，而这个目录下有个文件叫 logrotate。在 centos 上脚本内容是这样的：</p>
 <p>系统自带 cron task：<code>/etc/cron.daily/logrotate</code>，每天运行一次。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@gop-sg-192-168-56-103 logrotate.d<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /etc/cron.daily/logrotate</span>
-<span style="color:#6272a4">#!/bin/sh</span>
-
-/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf
-<span style="color:#8be9fd;font-style:italic">EXITVALUE</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">$?</span>
-<span style="color:#ff79c6">if</span> <span style="color:#ff79c6">[</span> <span style="color:#8be9fd;font-style:italic">$EXITVALUE</span> !<span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">]</span>; <span style="color:#ff79c6">then</span>
-    /usr/bin/logger -t logrotate <span style="color:#f1fa8c">&#34;ALERT exited abnormally with [</span><span style="color:#8be9fd;font-style:italic">$EXITVALUE</span><span style="color:#f1fa8c">]&#34;</span>
-<span style="color:#ff79c6">fi</span>
-<span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#bd93f9">0</span>
-</code></pre></div><p>可以看到这个脚本主要做的事就是以 /etc/logrotate.conf 为配置文件执行了 logrotate。就是这样实现了每天执行一次 logrotate。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ff79c6">[</span>root@gop-sg-192-168-56-103 logrotate.d<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /etc/cron.daily/logrotate</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#!/bin/sh</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">EXITVALUE</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">$?</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> <span style="color:#ff79c6">[</span> <span style="color:#8be9fd;font-style:italic">$EXITVALUE</span> !<span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">]</span>; <span style="color:#ff79c6">then</span>
+</span></span><span style="display:flex;"><span>    /usr/bin/logger -t logrotate <span style="color:#f1fa8c">&#34;ALERT exited abnormally with [</span><span style="color:#8be9fd;font-style:italic">$EXITVALUE</span><span style="color:#f1fa8c">]&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">exit</span> <span style="color:#bd93f9">0</span>
+</span></span></code></pre></div><p>可以看到这个脚本主要做的事就是以 /etc/logrotate.conf 为配置文件执行了 logrotate。就是这样实现了每天执行一次 logrotate。</p>
 <p>很多程序的会用到 logrotate 滚动日志，比如 nginx。它们安装后，会在 /etc/logrotate.d 这个目录下增加自己的 logrotate 的配置文件。logrotate 什么时候执行 /etc/logrotate.d 下的配置呢？看到 /etc/logrotate.conf 里这行，一切就不言而喻了。</p>
-<pre><code class="language-conf" data-lang="conf">include /etc/logrotate.d
+<pre tabindex="0"><code class="language-conf" data-lang="conf">include /etc/logrotate.d
 </code></pre><h2 id="logrotate-原理">logrotate 原理</h2>
 <p>ogrotate 是怎么做到滚动日志时不影响程序正常的日志输出呢？logrotate 提供了两种解决方案。</p>
 <ol>
@@ -157,17 +157,17 @@
 <p>修改配置文件后，并不需要重启服务。
 由于 logrotate 实际上只是一个可执行文件，不是以 daemon 运行。</p>
 <h2 id="运行-logrotate">运行 logrotate</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">logrotate <span style="color:#ff79c6">[</span>OPTION...<span style="color:#ff79c6">]</span> &lt;configfile&gt;
--d, --debug ：debug 模式，测试配置文件是否有错误。
--f, --force ：强制转储文件。
--m, --mail<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">command</span> ：压缩日志后，发送日志到指定邮箱。
--s, --state<span style="color:#ff79c6">=</span>statefile ：使用指定的状态文件。
--v, --verbose ：显示转储过程
-</code></pre></div><h3 id="crontab-定时">crontab 定时</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>logrotate <span style="color:#ff79c6">[</span>OPTION...<span style="color:#ff79c6">]</span> &lt;configfile&gt;
+</span></span><span style="display:flex;"><span>-d, --debug ：debug 模式，测试配置文件是否有错误。
+</span></span><span style="display:flex;"><span>-f, --force ：强制转储文件。
+</span></span><span style="display:flex;"><span>-m, --mail<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">command</span> ：压缩日志后，发送日志到指定邮箱。
+</span></span><span style="display:flex;"><span>-s, --state<span style="color:#ff79c6">=</span>statefile ：使用指定的状态文件。
+</span></span><span style="display:flex;"><span>-v, --verbose ：显示转储过程
+</span></span></code></pre></div><h3 id="crontab-定时">crontab 定时</h3>
 <p>通常惯用的做法是配合 crontab 来定时调用。默认是一天执行一次，可以自己添加 crontab 规则</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">crontab -e
-*/30 * * * * /usr/sbin/logrotate /etc/logrotate.d/rsyslog &gt; /dev/null 2&gt;&amp;<span style="color:#bd93f9">1</span> &amp;
-</code></pre></div><h3 id="手动运行">手动运行</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>crontab -e
+</span></span><span style="display:flex;"><span>*/30 * * * * /usr/sbin/logrotate /etc/logrotate.d/rsyslog &gt; /dev/null 2&gt;&amp;<span style="color:#bd93f9">1</span> &amp;
+</span></span></code></pre></div><h3 id="手动运行">手动运行</h3>
 <p>debug 模式：指定 [-d|&ndash;debug]</p>
 <p>logrotate -d <configfile>
 并不会真正进行 rotate 或者 compress 操作，但是会打印出整个执行的流程，和调用的脚本等详细信息。</p>
@@ -178,22 +178,22 @@
 <p>详细介绍请自行 man logrotate</p>
 <p>主要介绍下完成常用需求会用到的一些参数。</p>
 <p>一个典型的配置文件如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@localhost ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># vim /etc/logrotate.d/log_file </span>
-
-/var/log/log_file <span style="color:#ff79c6">{</span>
-
-    monthly
-    rotate <span style="color:#bd93f9">5</span>
-    compress
-    delaycompress
-    missingok
-    notifempty
-    create <span style="color:#bd93f9">644</span> root root
-    postrotate
-        /usr/bin/killall -HUP rsyslogd
-    endscript
-<span style="color:#ff79c6">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ff79c6">[</span>root@localhost ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># vim /etc/logrotate.d/log_file </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>/var/log/log_file <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    monthly
+</span></span><span style="display:flex;"><span>    rotate <span style="color:#bd93f9">5</span>
+</span></span><span style="display:flex;"><span>    compress
+</span></span><span style="display:flex;"><span>    delaycompress
+</span></span><span style="display:flex;"><span>    missingok
+</span></span><span style="display:flex;"><span>    notifempty
+</span></span><span style="display:flex;"><span>    create <span style="color:#bd93f9">644</span> root root
+</span></span><span style="display:flex;"><span>    postrotate
+</span></span><span style="display:flex;"><span>        /usr/bin/killall -HUP rsyslogd
+</span></span><span style="display:flex;"><span>    endscript
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><ul>
 <li>monthly: 日志文件将按月轮循。其它可用值为 daily，weekly 或者 yearly。</li>
 <li>rotate 5: 一次将存储 5 个归档日志。对于第六个归档，时间最久的归档将被删除。</li>
 <li>compress: 在轮循任务完成后，已轮循的归档将使用 gzip 进行压缩。</li>
@@ -204,7 +204,7 @@
 <li>postrotate/endscript: 在所有其它指令完成后，postrotate 和 endscript 里面指定的命令将被执行。在这种情况下，rsyslogd 进程将立即再次读取其配置并继续运行。</li>
 </ul>
 <p>上面的模板是通用的，而配置参数则根据你的需求进行调整，不是所有的参数都是必要的。</p>
-<pre><code class="language-conf" data-lang="conf">/var/log/log_file {
+<pre tabindex="0"><code class="language-conf" data-lang="conf">/var/log/log_file {
     size=50M
     rotate 5
     dateext
@@ -242,7 +242,7 @@ dateext 指示让旧日志文件以创建日期命名。</p>
 <li>prerotate/endscript： 在转储以前需要执行的命令可以放入这个对，这两个关键字必须单独成行</li>
 </ul>
 <h2 id="nginx-日志轮换示例">nginx 日志轮换示例</h2>
-<pre><code class="language-conf" data-lang="conf">/var/log/nginx/*.log /var/log/nginx/*/*.log{
+<pre tabindex="0"><code class="language-conf" data-lang="conf">/var/log/nginx/*.log /var/log/nginx/*/*.log{
 	daily
 	missingok
 	rotate 14

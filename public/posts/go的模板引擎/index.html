@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -117,69 +117,68 @@
 示例:
 tmp.html:</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
-&lt;<span style="color:#ff79c6">head</span>&gt;
-    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
-    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
-&lt;/<span style="color:#ff79c6">head</span>&gt;
-&lt;<span style="color:#ff79c6">body</span>&gt;
-{{.}}
-&lt;/<span style="color:#ff79c6">body</span>&gt;
-&lt;/<span style="color:#ff79c6">html</span>&gt;
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;html/template&#34;</span>
-    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    server <span style="color:#ff79c6">:=</span> http.Server{
-        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
-    }
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/process&#34;</span>,process)
-    server.<span style="color:#50fa7b">ListenAndServe</span>()
-
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">process</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./tmpl.html&#34;</span>)
-    t.<span style="color:#50fa7b">Execute</span>(w, <span style="color:#f1fa8c">&#34;你好哇！李银河&#34;</span>)
-
-    <span style="color:#6272a4">// 第二种方式
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">/**
-</span><span style="color:#6272a4">        t = template.New(&#34;tmpl.html&#34;)
-</span><span style="color:#6272a4">        t.ParseFiles(&#34;./tmpl.html&#34;)
-</span><span style="color:#6272a4">        t.Execute(w,&#34;hello&#34;)
-</span><span style="color:#6272a4">    */</span>
-}
-
-</code></pre></div><h2 id="对模板进行语法分析">对模板进行语法分析</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>{{.}}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">html</span>&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;html/template&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    server <span style="color:#ff79c6">:=</span> http.Server{
+</span></span><span style="display:flex;"><span>        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/process&#34;</span>,process)
+</span></span><span style="display:flex;"><span>    server.<span style="color:#50fa7b">ListenAndServe</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">process</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./tmpl.html&#34;</span>)
+</span></span><span style="display:flex;"><span>    t.<span style="color:#50fa7b">Execute</span>(w, <span style="color:#f1fa8c">&#34;你好哇！李银河&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 第二种方式
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">        t = template.New(&#34;tmpl.html&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">        t.ParseFiles(&#34;./tmpl.html&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">        t.Execute(w,&#34;hello&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">    */</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="对模板进行语法分析">对模板进行语法分析</h2>
 <p>ParseFiles是一个独立的（standalone）函数，它可以对模板文件进行语法分析，并创建出一个经过语法分析的模板结构以供Execute方法执行。实际上，ParseFiles函数只是为了方便地调用Template结构的ParseFiles方法而设置的一个函数-当用户调用Parseriles函数的时候，Go会创建一个新的模板，并将用户给定的<strong>模板文件的名字用作这个新模板的名字</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
-</code></pre></div><p>这相当于创建一个新模板，然后调用它的ParseFiles方法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
-t, _ <span style="color:#ff79c6">:=</span> t.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
-</code></pre></div><p>上面两种方式都可以接受多个模板参数，<strong>但只返回第一个参数对应的模板结构</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
+</span></span></code></pre></div><p>这相当于创建一个新模板，然后调用它的ParseFiles方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">New</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
+</span></span><span style="display:flex;"><span>t, _ <span style="color:#ff79c6">:=</span> t.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;tmpl.html&#34;</span>)
+</span></span></code></pre></div><p>上面两种方式都可以接受多个模板参数，<strong>但只返回第一个参数对应的模板结构</strong>
 当用户向ParseFiles函数或Parseriles方法传入多个文件时，ParseFiles只会返回用户传入的第一个文件的已分析模板，并且这个模板也会根据用户传入的第一个文件的名字进行命名；至于其他传入文件的已分析模板则会被放置到一个映射里面，这个映射可以在之后执行模板时使用。
 换句话说，我们可以这样认为：在向Parseriles传入单个文件时，Parseriles返回的是一个模板；而在向ParseFiles传入多个文件时，ParseFiles返回的则是一个模板集合，理解这一点能够帮助我们更好地学习嵌套模板技术。</p>
 <h3 id="对字符串分析">对字符串分析</h3>
 <p>在绝大多数情况下，程序都是对模板文件进行语法分析，但是在需要时，程序也可以直接对字符串形式的模板进行语法分析。实际上，所有对模板进行语法分析的手段最终都需要调用Parse方法来执行实际的语法分析操作。比如说，在模板内容相同的情况下，语句</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./tmpl.html&#34;</span>)
-</code></pre></div><p>和代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">tmpl <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`&lt;! DOCTYPE html&gt;
-</span><span style="color:#f1fa8c">&lt;html&gt;&lt;head&gt;
-</span><span style="color:#f1fa8c">&lt;meta http-equiv=&#34;Content-Type&#34;content=&#34;text/html; charset=utf-8&#34;&gt;
-</span><span style="color:#f1fa8c">&lt;title&gt;Go Web programming&lt;/title&gt;
-</span><span style="color:#f1fa8c">&lt;/head&gt;
-</span><span style="color:#f1fa8c">&lt;body&gt;
-</span><span style="color:#f1fa8c">{.}}
-</span><span style="color:#f1fa8c">&lt;/body&gt;&lt;/html&gt;`</span>
-t <span style="color:#ff79c6">:=</span> template. <span style="color:#50fa7b">New</span> (<span style="color:#f1fa8c">&#34;tmpl. html&#34;</span>)
-t, = t. <span style="color:#50fa7b">Parse</span> (tmpl).
-t. <span style="color:#50fa7b">Execute</span> (w, <span style="color:#f1fa8c">&#34;Hello world!&#34;</span>)
-</code></pre></div><p>将产生相同的效果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t, _ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./tmpl.html&#34;</span>)
+</span></span></code></pre></div><p>和代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>tmpl <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`&lt;! DOCTYPE html&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;html&gt;&lt;head&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;meta http-equiv=&#34;Content-Type&#34;content=&#34;text/html; charset=utf-8&#34;&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;title&gt;Go Web programming&lt;/title&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;/head&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;body&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">{.}}
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">&lt;/body&gt;&lt;/html&gt;`</span>
+</span></span><span style="display:flex;"><span>t <span style="color:#ff79c6">:=</span> template. <span style="color:#50fa7b">New</span> (<span style="color:#f1fa8c">&#34;tmpl. html&#34;</span>)
+</span></span><span style="display:flex;"><span>t, = t. <span style="color:#50fa7b">Parse</span> (tmpl).
+</span></span><span style="display:flex;"><span>t. <span style="color:#50fa7b">Execute</span> (w, <span style="color:#f1fa8c">&#34;Hello world!&#34;</span>)
+</span></span></code></pre></div><p>将产生相同的效果</p>
 <h3 id="对错误的处理">对错误的处理</h3>
 <p>一直都没有处理分析模板时可能会产生的错误。虽然Go语言的一般做法是手动地处理错误，但Go也提供了另外一种机制，专门用于处理分析模板时出现的错误：
 <code> t := template.Must(template.ParseFiles(&quot;tmpl.html&quot;))</code>
@@ -189,13 +188,14 @@ Must函数可以包裹起一个函数，被包裹的函数会返回一个指向�
 </blockquote>
 <h2 id="执行模板">执行模板</h2>
 <p>执行模板最常用的方法就是调用模板的Execute方法，并向它传递Responsewriter以及模板所需的数据。在只有一个模板的情况下，上面提到的这种方法总是可行的，但如果模板不止一个，那么当对模板集合调用Execute方法的时候，Execute方法只会执行模板集合中的第一个模板。如果想要执行的不是模板集合中的第一个模板而是其他模板，就需要使用ExecuteTemplate 方法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t,_ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;t1. html&#34;</span>, <span style="color:#f1fa8c">&#34;t2. html&#34;</span>)
-</code></pre></div><p>变量t就是一个包含了两个模板的模板集合，其中第一个模板名为t1.html，而第二个模板则名为t2.html
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t,_ <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;t1. html&#34;</span>, <span style="color:#f1fa8c">&#34;t2. html&#34;</span>)
+</span></span></code></pre></div><p>变量t就是一个包含了两个模板的模板集合，其中第一个模板名为t1.html，而第二个模板则名为t2.html
 （正如前面所说，除非显式地对模板名进行修改，否则模板的名字和后缀名将由传入的模板文件决定），如果对这个模板集合调用Execute方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t.<span style="color:#50fa7b">Execute</span>(w,<span style="color:#f1fa8c">&#34;你好哇！&#34;</span>)
-</code></pre></div><p>就只有模板t1.html会被执行。如果想要执行的是模板t2.html而不是t1.html，则需要执行以下语句：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">t.<span style="color:#50fa7b">ExecuteTemplate</span>(w,<span style="color:#f1fa8c">&#34;t2.html&#34;</span>,<span style="color:#f1fa8c">&#34;你好哇!&#34;</span>)
-<span style="color:#f1fa8c">``</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t.<span style="color:#50fa7b">Execute</span>(w,<span style="color:#f1fa8c">&#34;你好哇！&#34;</span>)
+</span></span></code></pre></div><p>就只有模板t1.html会被执行。如果想要执行的是模板t2.html而不是t1.html，则需要执行以下语句：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>t.<span style="color:#50fa7b">ExecuteTemplate</span>(w,<span style="color:#f1fa8c">&#34;t2.html&#34;</span>,<span style="color:#f1fa8c">&#34;你好哇!&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">``</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -226,7 +226,7 @@ Must函数可以包裹起一个函数，被包裹的函数会返回一个指向�
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

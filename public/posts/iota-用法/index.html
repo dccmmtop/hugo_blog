@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/iota-%E7%94%A8%E6%B3%95/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/iota-%E7%94%A8%E6%B3%95/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,18 +110,18 @@
         <div class="article-entry" itemprop="articleBody">
             <p>用在常量声明中，初始值为0，一组常量同时声明时，其值逐行增加</p>
 <h3 id="类似枚举">类似枚举</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">const</span> (
-  c0 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c0 == 0
-</span><span style="color:#6272a4"></span>  c1 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c1 == 1
-</span><span style="color:#6272a4"></span>  c2 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c2 == 2
-</span><span style="color:#6272a4"></span>)
-</code></pre></div><p>简写模式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">const</span> (
-  c0 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">// c0 == 0
-</span><span style="color:#6272a4"></span>  c1        <span style="color:#6272a4">// c1 == 1
-</span><span style="color:#6272a4"></span>  c2        <span style="color:#6272a4">// c2 == 2
-</span><span style="color:#6272a4"></span>)
-</code></pre></div><h3 id="分开的const">分开的const</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">const</span> (
+</span></span><span style="display:flex;"><span>  c0 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c0 == 0
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  c1 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c1 == 1
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  c2 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">//c2 == 2
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>)
+</span></span></code></pre></div><p>简写模式</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">const</span> (
+</span></span><span style="display:flex;"><span>  c0 = <span style="color:#ff79c6">iota</span> <span style="color:#6272a4">// c0 == 0
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  c1        <span style="color:#6272a4">// c1 == 1
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  c2        <span style="color:#6272a4">// c2 == 2
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>)
+</span></span></code></pre></div><h3 id="分开的const">分开的const</h3>
 <p>分开的const语句， iota 的值每次都是从0开始</p>
 <p><code>const c0 = iota // c0 == 0</code>
 <code>const c1 = iota // c1 == 0</code></p>

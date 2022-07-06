@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/whenever%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/whenever%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -136,20 +136,20 @@
 <p><code>wheneverize</code></p>
 <p>3.添加自己的周期性任务</p>
 <p>在<code>config/schedule.rb</code>文件中添加：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">set <span style="color:#f1fa8c">:environment</span>, <span style="color:#f1fa8c">:development</span>
-every <span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>minutes <span style="color:#ff79c6">do</span>  
-  runner <span style="color:#f1fa8c">&#34;Timetest.mytime&#34;</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>其中，<code>set :environment, :development</code>是设置执行任务时的环境，默认情况下环境为<code>production</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>set <span style="color:#f1fa8c">:environment</span>, <span style="color:#f1fa8c">:development</span>
+</span></span><span style="display:flex;"><span>every <span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>minutes <span style="color:#ff79c6">do</span>  
+</span></span><span style="display:flex;"><span>  runner <span style="color:#f1fa8c">&#34;Timetest.mytime&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>其中，<code>set :environment, :development</code>是设置执行任务时的环境，默认情况下环境为<code>production</code></p>
 <p>上述代码实现的是每两分钟读取当前时间并存入到数据库的功能。其中，runner方法执行的方法如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">classTimetest <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">self</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">mytime</span>
-  a <span style="color:#ff79c6">=</span> Timetest<span style="color:#ff79c6">.</span>new
-  a<span style="color:#ff79c6">.</span>time_now <span style="color:#ff79c6">=</span> Time<span style="color:#ff79c6">.</span>now
-  a<span style="color:#ff79c6">.</span>save
- <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这样，在rails中实现whenever的代码就算是写完了，真的是简单到不行啊！（实在忍不住感慨一句）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>classTimetest <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">self</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">mytime</span>
+</span></span><span style="display:flex;"><span>  a <span style="color:#ff79c6">=</span> Timetest<span style="color:#ff79c6">.</span>new
+</span></span><span style="display:flex;"><span>  a<span style="color:#ff79c6">.</span>time_now <span style="color:#ff79c6">=</span> Time<span style="color:#ff79c6">.</span>now
+</span></span><span style="display:flex;"><span>  a<span style="color:#ff79c6">.</span>save
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这样，在rails中实现whenever的代码就算是写完了，真的是简单到不行啊！（实在忍不住感慨一句）</p>
 <p>下面就要执行周期性任务了。</p>
 <p>4.执行周期性任务</p>
 <p>在rails工程文件夹下进行一下操作</p>
@@ -169,8 +169,8 @@ every <span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>mi
 <p><code>crontab -l</code></p>
 <p>可以看到以下打印：</p>
 <p># Begin Whenever generated tasks for:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/home/vito/rails/test_of_rails/test_rails/config/schedule.rb0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58 * * * * /bin/bash -l -c <span style="color:#f1fa8c">&#39;cd /home/vito/rails/test_of_rails/test_rails &amp;&amp; bundle exec bin/rails runner -e development &#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;Timetest.mytime&#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;&#39;</span><span style="color:#6272a4"># End Whenever generated tasks for: /home/vito/rails/test_of_rails/test_rails/config/schedule.rb</span>
-</code></pre></div><p>这样，我们的周期性任务就算是在顺利执行了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/home/vito/rails/test_of_rails/test_rails/config/schedule.rb0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58 * * * * /bin/bash -l -c <span style="color:#f1fa8c">&#39;cd /home/vito/rails/test_of_rails/test_rails &amp;&amp; bundle exec bin/rails runner -e development &#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;Timetest.mytime&#39;</span><span style="color:#f1fa8c">\&#39;</span><span style="color:#f1fa8c">&#39;&#39;</span><span style="color:#6272a4"># End Whenever generated tasks for: /home/vito/rails/test_of_rails/test_rails/config/schedule.rb</span>
+</span></span></code></pre></div><p>这样，我们的周期性任务就算是在顺利执行了。</p>
 <p>需要注意的一点是运行时crontab的环境（rails和crontab环境不匹配时whenever无法执行），一般调试时多使用的是development环境，而不设置时默认的是production环境，如果你使用<code>crontab -l</code>发现是production环境，可以使用</p>
 <p><code>crontab -e</code></p>
 <p>直接修改为development，或者直接将-e production删掉即可。</p>
@@ -202,7 +202,7 @@ every <span style="color:#bd93f9">2</span><span style="color:#ff79c6">.</span>mi
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                     </a>
                 </li>
                 

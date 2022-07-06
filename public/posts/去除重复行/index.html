@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%8E%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E8%A1%8C/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,11 +109,11 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h3 id="先sort排序再去重">先sort排序，再去重</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">:sort  //直接排序
-:g/^<span style="color:#f1fa8c">\(</span>.*<span style="color:#f1fa8c">\)</span>$<span style="color:#f1fa8c">\n\1</span>$/d                      //去除重复行
-:g/<span style="color:#f1fa8c">\%</span><span style="color:#ff79c6">(</span>^<span style="color:#f1fa8c">\1</span>$<span style="color:#f1fa8c">\n\)\@</span>&lt;<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">\(</span>.*<span style="color:#f1fa8c">\)</span>$/d    //功能同上，也是去除重复行
-:g/<span style="color:#f1fa8c">\%</span><span style="color:#ff79c6">(</span>^<span style="color:#f1fa8c">\1\&gt;</span>.*$<span style="color:#f1fa8c">\n\)\@</span>&lt;<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">\(\k\+\)</span>.*$/d  //功能同上，也是去除重复行
-</code></pre></div><h3 id="使用awk">使用awk</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>:sort  //直接排序
+</span></span><span style="display:flex;"><span>:g/^<span style="color:#f1fa8c">\(</span>.*<span style="color:#f1fa8c">\)</span>$<span style="color:#f1fa8c">\n\1</span>$/d                      //去除重复行
+</span></span><span style="display:flex;"><span>:g/<span style="color:#f1fa8c">\%</span><span style="color:#ff79c6">(</span>^<span style="color:#f1fa8c">\1</span>$<span style="color:#f1fa8c">\n\)\@</span>&lt;<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">\(</span>.*<span style="color:#f1fa8c">\)</span>$/d    //功能同上，也是去除重复行
+</span></span><span style="display:flex;"><span>:g/<span style="color:#f1fa8c">\%</span><span style="color:#ff79c6">(</span>^<span style="color:#f1fa8c">\1\&gt;</span>.*$<span style="color:#f1fa8c">\n\)\@</span>&lt;<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">\(\k\+\)</span>.*$/d  //功能同上，也是去除重复行
+</span></span></code></pre></div><h3 id="使用awk">使用awk</h3>
 <p><code>awk '!a[$0]++' file</code></p>
 <p>解析：</p>
 <p>awk流程是逐行处理的，默认从文件的第一行一直处理到文件最后一行
@@ -128,47 +128,47 @@ pattern命中则为判断值为真（非0）就去处理{action}。
 <code>a[$0]</code> 这个非常好理解，建立数组a，其变量是文本中的每一行，awk里<code>$1</code>是第一列，<code>$2</code>是第二列，以此类推<code>$NF</code>是最后一列，而<code>$0</code>是代表所有列及分隔符，也就是一整行，这样如果pattern是真的那就打印一整行
 ++的意思是a数组取变量完毕后，对该数组值+1
 找个最简单的文档来解释一下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat file
-xxx
-yyy
-xxx
-zzz
-</code></pre></div><p>这个文件有4行，其中第一、三行是重复的。套用这个命令处理流程如下：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cat file
+</span></span><span style="display:flex;"><span>xxx
+</span></span><span style="display:flex;"><span>yyy
+</span></span><span style="display:flex;"><span>xxx
+</span></span><span style="display:flex;"><span>zzz
+</span></span></code></pre></div><p>这个文件有4行，其中第一、三行是重复的。套用这个命令处理流程如下：
 获取第一行a[xxx]，因为这是第一行，数组a里从没见过xxx这个变量，那么自然他的值就是假（0）也就是说a[xxx]=0，这个时候！就有大作用了，他把a[xxx]假（0）变成了a[xxx]为真（!0）这个时候原本不该打印的第一行就变成了应该打印了，取逻辑反后对a[xxx]的值+1然后处理第二行
 第二行a[yyy]这个情况跟刚才第一行的a[xxx]一样，也应该打印他
 到第三行的时候情况变了，因为第一行已经出现过a[xxx]并且已经++过了，他的值已经是非0而不是前两行的0了，本应打印但这时候再由！取逻辑反就不必打印了
 第四行a[zzz]就又和第一、二两行一样了。
 所以执行完就是这个结果</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#f1fa8c">&#39;!a[$0]++&#39;</span> file
-xxx
-yyy
-zzz
-</code></pre></div><p>再把file搞稍微复杂点</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#f1fa8c">&#39;{print NR,$0}&#39;</span> file
-<span style="color:#bd93f9">1</span> xxx
-<span style="color:#bd93f9">2</span> yyy
-<span style="color:#bd93f9">3</span> zzz
-<span style="color:#bd93f9">4</span> xxx
-<span style="color:#bd93f9">5</span> yyy
-<span style="color:#bd93f9">6</span> zzz
-<span style="color:#bd93f9">7</span> xxx
-<span style="color:#bd93f9">8</span> yyy
-<span style="color:#bd93f9">9</span> zzz
-</code></pre></div><p>一共9行文本，3行一次重复。为了看得更清楚，本来默认的<code>{print $0}</code>稍微改下，变成<code>{print NR,$0}</code> NR表示行号。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#f1fa8c">&#39;!a[$0]++&#39;</span> file
+</span></span><span style="display:flex;"><span>xxx
+</span></span><span style="display:flex;"><span>yyy
+</span></span><span style="display:flex;"><span>zzz
+</span></span></code></pre></div><p>再把file搞稍微复杂点</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#f1fa8c">&#39;{print NR,$0}&#39;</span> file
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">1</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">3</span> zzz
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">4</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">5</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">6</span> zzz
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">7</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">8</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">9</span> zzz
+</span></span></code></pre></div><p>一共9行文本，3行一次重复。为了看得更清楚，本来默认的<code>{print $0}</code>稍微改下，变成<code>{print NR,$0}</code> NR表示行号。
 那么现在来执行下刚才讲的试试看</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">awk <span style="color:#f1fa8c">&#39;!a[$0]++{print NR,$0}&#39;</span> file
-<span style="color:#bd93f9">1</span> xxx
-<span style="color:#bd93f9">2</span> yyy
-<span style="color:#bd93f9">3</span> zzz
-
-awk <span style="color:#f1fa8c">&#39;a[$0]++{print NR,$0}&#39;</span> file
-<span style="color:#bd93f9">4</span> xxx
-<span style="color:#bd93f9">5</span> yyy
-<span style="color:#bd93f9">6</span> zzz
-<span style="color:#bd93f9">7</span> xxx
-<span style="color:#bd93f9">8</span> yyy
-<span style="color:#bd93f9">9</span> zzz
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>awk <span style="color:#f1fa8c">&#39;!a[$0]++{print NR,$0}&#39;</span> file
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">1</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">2</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">3</span> zzz
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>awk <span style="color:#f1fa8c">&#39;a[$0]++{print NR,$0}&#39;</span> file
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">4</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">5</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">6</span> zzz
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">7</span> xxx
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">8</span> yyy
+</span></span><span style="display:flex;"><span><span style="color:#bd93f9">9</span> zzz
+</span></span></code></pre></div>
         </div>
 
         
@@ -197,7 +197,7 @@ awk <span style="color:#f1fa8c">&#39;a[$0]++{print NR,$0}&#39;</span> file
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
                     </a>
                 </li>
                 

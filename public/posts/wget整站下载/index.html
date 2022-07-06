@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/wget%E6%95%B4%E7%AB%99%E4%B8%8B%E8%BD%BD/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/wget%E6%95%B4%E7%AB%99%E4%B8%8B%E8%BD%BD/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,8 +110,8 @@
         <div class="article-entry" itemprop="articleBody">
             <p>这个命令可以以递归的方式下载整站，并可以将下载的页面中的链接转换为本地链接。</p>
 <p>wget 加上参数之后，即可成为相当强大的下载工具。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget -r -p -np -k http://xxx.com/abc/
-</code></pre></div><p>-r, &ndash;recursive（递归） specify recursive download.（指定递归下载） -k, &ndash;convert-links（转换链接） make links in downloaded HTML point to local files.（将下载的 HTML 页面中的链接转换为相对链接即本地链接） -p, &ndash;page-requisites（页面必需元素） get all images, etc. needed to display HTML page.（下载所有的图片等页面显示所需的内容） -np, &ndash;no-parent（不追溯至父级） don&rsquo;t ascend to the parent directory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget -r -p -np -k http://xxx.com/abc/
+</span></span></code></pre></div><p>-r, &ndash;recursive（递归） specify recursive download.（指定递归下载） -k, &ndash;convert-links（转换链接） make links in downloaded HTML point to local files.（将下载的 HTML 页面中的链接转换为相对链接即本地链接） -p, &ndash;page-requisites（页面必需元素） get all images, etc. needed to display HTML page.（下载所有的图片等页面显示所需的内容） -np, &ndash;no-parent（不追溯至父级） don&rsquo;t ascend to the parent directory.</p>
 <p>另外断点续传用-nc 参数 日志 用-o 参数 ​ 熟练掌握 wget 命令，可以帮助你方便的使用 linux。</p>
 <h2 id="命令用法详解">命令用法详解</h2>
 <blockquote>
@@ -279,7 +279,7 @@
 <p>当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加–spider 参数进行检查。</p>
 <p>wget &ndash;spider URL</p>
 <p>如果下载链接正确，将会显示</p>
-<pre><code>wget --spider URL
+<pre tabindex="0"><code>wget --spider URL
 
 Spider mode enabled. Check if remote file exists.
 
@@ -364,12 +364,12 @@ wget &ndash;reject=gif ur</p>
 <p>wget &ndash;ftp-user=USERNAME &ndash;ftp-password=PASSWORD url</p>
 <p>备注：编译安装</p>
 <p>使用如下命令编译安装：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">tar zxvf wget-1.9.1.tar.gz
-<span style="color:#8be9fd;font-style:italic">cd</span> wget-1.9.1
-./configure
-make
-make install
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar zxvf wget-1.9.1.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> wget-1.9.1
+</span></span><span style="display:flex;"><span>./configure
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>make install
+</span></span></code></pre></div>
         </div>
 
         
@@ -393,7 +393,7 @@ make install
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
                     </a>
                 </li>
                 

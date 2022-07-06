@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ubuntu%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E4%BB%A5%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/ubuntu%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E4%BB%A5%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,34 +110,34 @@
         <div class="article-entry" itemprop="articleBody">
             <h3 id="自定义脚本">自定义脚本</h3>
 <p>编写自己的需要开启自启的脚本，如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4">#!/usr/bin/env ruby</span>
-<span style="color:#f1fa8c">`cd /home/mc/code/rails_app/master_crawler_trm &amp;&amp;  nohup rake real_time_extract_word  &gt; /dev/null 2&amp;&gt;1`</span>
-</code></pre></div><h3 id="启动脚本">启动脚本</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4">#!/usr/bin/env ruby</span>
-start <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34; sudo -u mc  /home/mc/bin/real_time_extract_words &#34;</span>
-stop <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ps -ef | grep real_time_extract_word | grep -v grep | cut -c 9-15 | xargs kill -9&#34;</span>
-action <span style="color:#ff79c6">=</span> ARGV<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">]</span>
-<span style="color:#ff79c6">if</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;start&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">system</span>(start)
-  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;启动成功&#34;</span>
-<span style="color:#ff79c6">elsif</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;stop&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">system</span>(stop)
-  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;已停止&#34;</span>
-<span style="color:#ff79c6">elsif</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;restart&#39;</span>
-  <span style="color:#8be9fd;font-style:italic">system</span>(stop)
-  <span style="color:#8be9fd;font-style:italic">system</span>(start)
-  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;已重启&#34;</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>这个文件可以被 ubuntu 下的服务读取并执行，保存该文件为 <code>custom_sh</code> 然后 <code>sudo chmod +x custom_sh</code>赋予可执行权限</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4">#!/usr/bin/env ruby</span>
+</span></span><span style="display:flex;"><span><span style="color:#f1fa8c">`cd /home/mc/code/rails_app/master_crawler_trm &amp;&amp;  nohup rake real_time_extract_word  &gt; /dev/null 2&amp;&gt;1`</span>
+</span></span></code></pre></div><h3 id="启动脚本">启动脚本</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#6272a4">#!/usr/bin/env ruby</span>
+</span></span><span style="display:flex;"><span>start <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34; sudo -u mc  /home/mc/bin/real_time_extract_words &#34;</span>
+</span></span><span style="display:flex;"><span>stop <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;ps -ef | grep real_time_extract_word | grep -v grep | cut -c 9-15 | xargs kill -9&#34;</span>
+</span></span><span style="display:flex;"><span>action <span style="color:#ff79c6">=</span> ARGV<span style="color:#ff79c6">[</span><span style="color:#bd93f9">0</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;start&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">system</span>(start)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;启动成功&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">elsif</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;stop&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">system</span>(stop)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;已停止&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">elsif</span> action <span style="color:#ff79c6">==</span> <span style="color:#f1fa8c">&#39;restart&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">system</span>(stop)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">system</span>(start)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">puts</span> <span style="color:#f1fa8c">&#34;已重启&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>这个文件可以被 ubuntu 下的服务读取并执行，保存该文件为 <code>custom_sh</code> 然后 <code>sudo chmod +x custom_sh</code>赋予可执行权限</p>
 <p>要注意自己的脚本需要在哪个用户下执行</p>
 <h3 id="操作该服务">操作该服务</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl daemon-reload <span style="color:#6272a4"># 添加新的 或者改动 服务之后要刷新</span>
-sudo service custom_sh start <span style="color:#6272a4"># 启动</span>
-sudo service custom_sh stop <span style="color:#6272a4"># 停止</span>
-sudo service custom_sh status <span style="color:#6272a4"># 查看状态</span>
-</code></pre></div><h3 id="开启自启">开启自启</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo update-rc.d custom_sh defaults
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl daemon-reload <span style="color:#6272a4"># 添加新的 或者改动 服务之后要刷新</span>
+</span></span><span style="display:flex;"><span>sudo service custom_sh start <span style="color:#6272a4"># 启动</span>
+</span></span><span style="display:flex;"><span>sudo service custom_sh stop <span style="color:#6272a4"># 停止</span>
+</span></span><span style="display:flex;"><span>sudo service custom_sh status <span style="color:#6272a4"># 查看状态</span>
+</span></span></code></pre></div><h3 id="开启自启">开启自启</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo update-rc.d custom_sh defaults
+</span></span></code></pre></div>
         </div>
 
         
@@ -168,7 +168,7 @@ sudo service custom_sh status <span style="color:#6272a4"># 查看状态</span>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
                     </a>
                 </li>
                 

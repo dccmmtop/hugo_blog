@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%B9%82%E7%AD%89%E8%AE%BE%E8%AE%A1/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%B9%82%E7%AD%89%E8%AE%BE%E8%AE%A1/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -122,21 +122,21 @@
 <h2 id="数据库操作分析">数据库操作分析</h2>
 <p>通过上面的分析，得出幂等需要在DAO层来处理，再进一步分析，得出DAO层的操作主要就是CRUD。下面逐一对每一种操作分析是否需要做幂等，以及怎么做。</p>
 <p>R（read）：对应的操作SQL语句为select。只要查询条件不变，在一定的时间内，执行一次和执行多次返回的结果肯定是相同的，所以其本身是幂等的，不需要再做处理。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
-</code></pre></div><p>查询一次或多次结果是一致的，所以是幂等的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span></code></pre></div><p>查询一次或多次结果是一致的，所以是幂等的。</p>
 <p>C（create）：对应的操作SQL语句为insert。此时，需要分情况，如果用到的数据库主键为数据库自增，不考虑业务主键防重的情况下，每一次写入数据库就不是幂等的，所以为了保证幂等，需要在数据insert前做业务防重或是在数据库表上对业务主键加唯一索引。如果数据库主键不是自增，是由业务系统写入的，需要在业务系统里把数据库主键和业务主键做一对一映射，或是由独立服务提供数据库主键和业务主键的映射关系，保证多次请求获取到的数据库主键和业务主键是一致的，确保写入数据库操作是幂等的。综合来说，就是相同的数据多次写入数据库后，能否保证只有一条数据。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">insert</span> <span style="color:#ff79c6">into</span> <span style="color:#ff79c6">user</span> (id,age,sex,ts) <span style="color:#ff79c6">values</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">10</span>,‘male’,<span style="color:#bd93f9">2021</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">07</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">20</span> <span style="color:#bd93f9">10</span>:<span style="color:#bd93f9">22</span>:<span style="color:#bd93f9">23</span>);
-</code></pre></div><p>U（update）：对应的操作SQL语句为update。更新操作时，一定是要用绝对值进行更新操作，而不要用相对值进行更新，相对值更新可能导致更新操作不幂等。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">insert</span> <span style="color:#ff79c6">into</span> <span style="color:#ff79c6">user</span> (id,age,sex,ts) <span style="color:#ff79c6">values</span>(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">10</span>,‘male’,<span style="color:#bd93f9">2021</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">07</span><span style="color:#ff79c6">-</span><span style="color:#bd93f9">20</span> <span style="color:#bd93f9">10</span>:<span style="color:#bd93f9">22</span>:<span style="color:#bd93f9">23</span>);
+</span></span></code></pre></div><p>U（update）：对应的操作SQL语句为update。更新操作时，一定是要用绝对值进行更新操作，而不要用相对值进行更新，相对值更新可能导致更新操作不幂等。</p>
 <p>幂等：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">update</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">set</span> age <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
-</code></pre></div><p>非幂等：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">update</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">set</span> age<span style="color:#ff79c6">++</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
-</code></pre></div><p>D（delete）：对应的操作SQL语句为delete。删除操作时，如果删除的是一个范围，生产上最好是禁止该类操作；比较推荐的做法是把按范围操作删除转换为先按范围查询，再按查询的主键进行删除。而且按范围删除的操作不是幂等的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">update</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">set</span> age <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span></code></pre></div><p>非幂等：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">update</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">set</span> age<span style="color:#ff79c6">++</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span></code></pre></div><p>D（delete）：对应的操作SQL语句为delete。删除操作时，如果删除的是一个范围，生产上最好是禁止该类操作；比较推荐的做法是把按范围操作删除转换为先按范围查询，再按查询的主键进行删除。而且按范围删除的操作不是幂等的。</p>
 <p>幂等：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">delete</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
-</code></pre></div><p>非幂等：该类操作要禁止。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">delete</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">in</span> （<span style="color:#ff79c6">select</span> id <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span> <span style="color:#ff79c6">limit</span> <span style="color:#bd93f9">10</span>);
-</code></pre></div><h2 id="常见业务场景">常见业务场景</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">delete</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>;
+</span></span></code></pre></div><p>非幂等：该类操作要禁止。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">delete</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">where</span> id <span style="color:#ff79c6">in</span> （<span style="color:#ff79c6">select</span> id <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">user</span> <span style="color:#ff79c6">order</span> <span style="color:#ff79c6">by</span> id <span style="color:#ff79c6">desc</span> <span style="color:#ff79c6">limit</span> <span style="color:#bd93f9">10</span>);
+</span></span></code></pre></div><h2 id="常见业务场景">常见业务场景</h2>
 <p>保证幂等的实现方式有多种，此处例举几类常见的业务场景，在实际应用中，根据业务场景进行选用。</p>
 <h3 id="页面token机制">页面token机制</h3>
 <p>进入页面时，从服务器获取token，在服务器端把token进行存储，提交时把token带到服务器端进行验证,这里的token相当于业务ID
@@ -148,8 +148,8 @@
 <p>数据写入前，先查询数据是否存在，存在直接返回，不存在则写入数据，保证写入数据库的数据正确性；常用于并发不高的一些后台系统或是防止任务的重复执行；</p>
 <h3 id="悲观锁机制">悲观锁机制</h3>
 <p>一般id为主键或唯一索引，仅锁定当前记录；</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">table</span> <span style="color:#ff79c6">where</span>  id <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;1234&#39;</span> <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">update</span>;
-</code></pre></div><h3 id="去重表">去重表</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">from</span> <span style="color:#ff79c6">table</span> <span style="color:#ff79c6">where</span>  id <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;1234&#39;</span> <span style="color:#ff79c6">for</span> <span style="color:#ff79c6">update</span>;
+</span></span></code></pre></div><h3 id="去重表">去重表</h3>
 <p>每一次写入或更新业务表时，先查询去重表是否已经存在记录，再操作业务表。</p>
 <h3 id="数据库唯一索引">数据库唯一索引</h3>
 <p>为业务表建立唯一索引，避免业务数据多次写入；</p>
@@ -199,7 +199,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E6%9E%B6%E6%9E%84">架构
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E6%9E%B6%E6%9E%84">架构
                     </a>
                 </li>
                 

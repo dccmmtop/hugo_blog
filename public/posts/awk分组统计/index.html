@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/awk%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/awk%E5%88%86%E7%BB%84%E7%BB%9F%E8%AE%A1/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -112,72 +112,72 @@
 日常部分数据以 txt 的文件格式提供，为避免入库之后再进行统计的麻烦，故学习 shell 进行处理，减少工作量。</p>
 <p>1.样例数据</p>
 <h1 id="testtxt">test.txt</h1>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">YD5Gxxx|6618151|6825449073|6476534190|36251|超级会员|0
-YD5Gxxx|8968336|1445546463|6476534190|36251|超级会员|0
-YD5Gxxx|2545939|6904742993|0858636804|36251|超级会员|80%以上
-YD5Gxxx|3200810|6896525523|6501574903|36251|普通|0
-YD5Gxxx|3378244|6926264463|6519442719|36251|超级会员|80%以上
-YD5Gxxx|8075700|6854827783|0858523344|36251|普通|80%以上
-YD5Gxxx|3368804|6934387193|0000487348|36251|超级会员|(0，50%]
-YD5Gxxx|2865288|6865082233|0859114957|36251|普通|(0，50%]
-YD5Gxxx|6655543|6930124273|6521876215|36251|超级会员|(0，50%]
-YD5Gxxx|2952781|6820973583|0858704189|36251|超级会员|0
-</code></pre></div><h3 id="每5行切分为一个文件">每5行切分为一个文件</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>YD5Gxxx|6618151|6825449073|6476534190|36251|超级会员|0
+</span></span><span style="display:flex;"><span>YD5Gxxx|8968336|1445546463|6476534190|36251|超级会员|0
+</span></span><span style="display:flex;"><span>YD5Gxxx|2545939|6904742993|0858636804|36251|超级会员|80%以上
+</span></span><span style="display:flex;"><span>YD5Gxxx|3200810|6896525523|6501574903|36251|普通|0
+</span></span><span style="display:flex;"><span>YD5Gxxx|3378244|6926264463|6519442719|36251|超级会员|80%以上
+</span></span><span style="display:flex;"><span>YD5Gxxx|8075700|6854827783|0858523344|36251|普通|80%以上
+</span></span><span style="display:flex;"><span>YD5Gxxx|3368804|6934387193|0000487348|36251|超级会员|(0，50%]
+</span></span><span style="display:flex;"><span>YD5Gxxx|2865288|6865082233|0859114957|36251|普通|(0，50%]
+</span></span><span style="display:flex;"><span>YD5Gxxx|6655543|6930124273|6521876215|36251|超级会员|(0，50%]
+</span></span><span style="display:flex;"><span>YD5Gxxx|2952781|6820973583|0858704189|36251|超级会员|0
+</span></span></code></pre></div><h3 id="每5行切分为一个文件">每5行切分为一个文件</h3>
 <p>通过 split -l 对文件进行切分。</p>
 <p><code>split -l 5 super_user.txt</code></p>
 <h3 id="分组统计">分组统计</h3>
 <p>实现分组，count[$6]++ 实现计数。</p>
 <p><code>awk -F '|' '{count[$6]++;} END {for(i in count) {print i count[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通3
-超级会员7
-</code></pre></div><p>根据第7列进行筛选之后，再按第6列进行分组统计。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通3
+</span></span><span style="display:flex;"><span>超级会员7
+</span></span></code></pre></div><p>根据第7列进行筛选之后，再按第6列进行分组统计。</p>
 <p><code>awk -F '|' '{if($7==&quot;0&quot;) {count[$6]++;}} END {for(i in count) {print i count[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通1
-超级会员3
-</code></pre></div><h3 id="分组求和">分组求和</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通1
+</span></span><span style="display:flex;"><span>超级会员3
+</span></span></code></pre></div><h3 id="分组求和">分组求和</h3>
 <p>对所有进行求和。</p>
 <p><code>awk -F '|' '{sum += $2} END {print sum}' test.txt</code></p>
 <p>分组一般使用x[$2]=x[$3]的方式来实现，其中x[$2]中的$2为要分的组，可以多个分组，x[$3]为要处理的值。</p>
 <h4 id="一次分组">一次分组</h4>
 <p><code>awk -F '|' '{x[$6] += $2} END {for(i in x){print i, x[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 14141798
-超级会员 34487798
-</code></pre></div><h4 id="二次分组">二次分组</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通 14141798
+</span></span><span style="display:flex;"><span>超级会员 34487798
+</span></span></code></pre></div><h4 id="二次分组">二次分组</h4>
 <p><code>awk -F '|' '{x[$6&quot;-&quot;$7] += $2} END {for(i in x){print i, x[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">超级会员-80%以上 5924183
-超级会员-0 18539268
-普通-(0，50%] 2865288
-超级会员-(0，50%] 10024347
-普通-0 3200810
-普通-80%以上 8075700
-格式化处理
-</code></pre></div><h3 id="分组求平均值">分组求平均值</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>超级会员-80%以上 5924183
+</span></span><span style="display:flex;"><span>超级会员-0 18539268
+</span></span><span style="display:flex;"><span>普通-(0，50%] 2865288
+</span></span><span style="display:flex;"><span>超级会员-(0，50%] 10024347
+</span></span><span style="display:flex;"><span>普通-0 3200810
+</span></span><span style="display:flex;"><span>普通-80%以上 8075700
+</span></span><span style="display:flex;"><span>格式化处理
+</span></span></code></pre></div><h3 id="分组求平均值">分组求平均值</h3>
 <p><code>awk -F '|' '{sum += $2} END {print &quot;Average = &quot;, sum/NR}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Average =  4.86296e+06
-</code></pre></div><p><code>awk -F '|' '{a[$6] += $2; ca[$6]++} END {for(i in a){print(i,a[i]/ca[i])}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 4.71393e+06
-超级会员 4.92683e+06
-</code></pre></div><h3 id="分组求最大最小">分组求最大最小</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Average =  4.86296e+06
+</span></span></code></pre></div><p><code>awk -F '|' '{a[$6] += $2; ca[$6]++} END {for(i in a){print(i,a[i]/ca[i])}}' test.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通 4.71393e+06
+</span></span><span style="display:flex;"><span>超级会员 4.92683e+06
+</span></span></code></pre></div><h3 id="分组求最大最小">分组求最大最小</h3>
 <p><code>awk -F '|' 'BEGIN {max=0} {if($2&gt;max){max=$2}} END {print max}' test.txt</code></p>
 <h3 id="最大值">最大值</h3>
 <p><code>awk -F '|' '{if($2&gt;x[$6]){x[$6]=$2}} END {for(i in x) {print i, x[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通 8075700
-超级会员 8968336
-</code></pre></div><h3 id="分组整理字符">分组整理字符</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通 8075700
+</span></span><span style="display:flex;"><span>超级会员 8968336
+</span></span></code></pre></div><h3 id="分组整理字符">分组整理字符</h3>
 <p><code>awk -F '|' '{x[$6]=x[$6]&quot;\n&quot;$2} END {for(i in x){print i &quot;:&quot; x[i]}}' test.txt</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">普通:
-3200810
-8075700
-2865288
-超级会员:
-6618151
-8968336
-2545939
-3378244
-3368804
-6655543
-2952781
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>普通:
+</span></span><span style="display:flex;"><span>3200810
+</span></span><span style="display:flex;"><span>8075700
+</span></span><span style="display:flex;"><span>2865288
+</span></span><span style="display:flex;"><span>超级会员:
+</span></span><span style="display:flex;"><span>6618151
+</span></span><span style="display:flex;"><span>8968336
+</span></span><span style="display:flex;"><span>2545939
+</span></span><span style="display:flex;"><span>3378244
+</span></span><span style="display:flex;"><span>3368804
+</span></span><span style="display:flex;"><span>6655543
+</span></span><span style="display:flex;"><span>2952781
+</span></span></code></pre></div>
         </div>
 
         

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go_mod%E7%9A%84%E4%BD%BF%E7%94%A8/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go_mod%E7%9A%84%E4%BD%BF%E7%94%A8/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -115,134 +115,134 @@
 <p>Hello,World
 Go 维护者 Russ Cox 写一个简单的库，用于说明 gomod 的使用，下文我将使用这个库开始介绍。</p>
 <p>首先在个人包命名空间目录新建一个文件夹，然后直接使用 go mod init 即可。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/github.com/islishude/gomodtest
-<span style="color:#8be9fd;font-style:italic">cd</span> <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/github.com/islishude/gomodtest
-go mod init
-</code></pre></div><p><strong>更新</strong>：现在不允许在 GOPATH 下使用 gomod，需要更改成以下命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p ~/gopher/gomodtest
-<span style="color:#8be9fd;font-style:italic">cd</span> ~/gopher/gomodtest
-go mod init github.com/islishude/gomodtest
-</code></pre></div><p>这时可看到目录内多了 go.mod 文件，内容很简单只有两行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/github.com/islishude/gomodtest
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/github.com/islishude/gomodtest
+</span></span><span style="display:flex;"><span>go mod init
+</span></span></code></pre></div><p><strong>更新</strong>：现在不允许在 GOPATH 下使用 gomod，需要更改成以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir -p ~/gopher/gomodtest
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">cd</span> ~/gopher/gomodtest
+</span></span><span style="display:flex;"><span>go mod init github.com/islishude/gomodtest
+</span></span></code></pre></div><p>这时可看到目录内多了 go.mod 文件，内容很简单只有两行：</p>
 <p><code>module github.com/islishude/gomodtest</code></p>
 <p>go 1.12
 首行为当前的模块名称，接下来是 go 的使用版本。这两行和 npm package.json 的 name 和 engine 字段的功能很类似。</p>
 <p>然后新建一个 main.go 写入以下内容，这里我们引用了 rsc.io/quote 包，注意我们现在还没有下载这个包。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
-
-	<span style="color:#f1fa8c">&#34;rsc.io/quote&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-	fmt.<span style="color:#50fa7b">Println</span>(quote.<span style="color:#50fa7b">Hello</span>())
-}
-</code></pre></div><p>如果是默认情况下，使用 go run main.go 肯定会提示找不到这个包的错误，但是当前 gomod 模式，如果没有此依赖回先下载这个依赖。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go run main.go
-go: finding rsc.io/quote v1.5.2
-go: finding rsc.io/sampler v1.3.0
-go: finding golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
-go: downloading rsc.io/quote v1.5.2
-go: extracting rsc.io/quote v1.5.2
-go: downloading rsc.io/sampler v1.3.0
-go: extracting rsc.io/sampler v1.3.0
-go: downloading golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
-go: extracting golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
-Hello, world.
-</code></pre></div><p>因为包含 <a href="http://golang.org">http://golang.org</a> 下的包，记得设置代理。这个时候当前包目录除了 go.mod 还有一个 go.sum 的文件，这个类似 npm package-lock.json。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f1fa8c">&#34;rsc.io/quote&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#50fa7b">Println</span>(quote.<span style="color:#50fa7b">Hello</span>())
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果是默认情况下，使用 go run main.go 肯定会提示找不到这个包的错误，但是当前 gomod 模式，如果没有此依赖回先下载这个依赖。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ go run main.go
+</span></span><span style="display:flex;"><span>go: finding rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span>go: finding rsc.io/sampler v1.3.0
+</span></span><span style="display:flex;"><span>go: finding golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
+</span></span><span style="display:flex;"><span>go: downloading rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span>go: extracting rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span>go: downloading rsc.io/sampler v1.3.0
+</span></span><span style="display:flex;"><span>go: extracting rsc.io/sampler v1.3.0
+</span></span><span style="display:flex;"><span>go: downloading golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
+</span></span><span style="display:flex;"><span>go: extracting golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c
+</span></span><span style="display:flex;"><span>Hello, world.
+</span></span></code></pre></div><p>因为包含 <a href="http://golang.org">http://golang.org</a> 下的包，记得设置代理。这个时候当前包目录除了 go.mod 还有一个 go.sum 的文件，这个类似 npm package-lock.json。</p>
 <p>gomod 不会在 $GOPATH/src 目录下保存 rsc.io 包的源码，而是包源码和链接库保存在 <strong>$GOPATH/pkg/mod</strong> 目录下。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ls <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/pkg/mod
-cache      golang.org rsc.io
-</code></pre></div><p>除了 go run 命令以外，go build、go test 等命令也能自动下载相关依赖包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ ls <span style="color:#8be9fd;font-style:italic">$GOPATH</span>/pkg/mod
+</span></span><span style="display:flex;"><span>cache      golang.org rsc.io
+</span></span></code></pre></div><p>除了 go run 命令以外，go build、go test 等命令也能自动下载相关依赖包。</p>
 <p>包管理命令
 当然我们平常都不会直接先写代码，写上引入的依赖名称和路径，然后在 build 的时候在下载。</p>
 <h3 id="安装依赖">安装依赖</h3>
 <p>如果要想先下载依赖，那么可以直接像以前那样 go get 即可，不过 gomod 下可以跟语义化版本号，比如 go get <a href="mailto:foo@v1.2.3">foo@v1.2.3</a>，也可以跟 git 的分支或 tag，比如go get foo@master，当然也可以跟 git 提交哈希，比如 go get foo@e3702bed2。需要特别注意的是，gomod 除了遵循语义化版本原则外，还遵循最小版本选择原则，也就是说如果当前版本是 v1.1.0，只会下载不超过这个最大版本号。如果使用 go get foo@master，下次在下载只会和第一次的一样，无论 master 分支是否更新了代码，如下所示，使用包含当前最新提交哈希的虚拟版本号替代直接的 master 版本号。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go get golang.org/x/crypto/sha3@master
-go: finding golang.org/x/crypto/sha3 latest
-go: finding golang.org/x/crypto latest
-$ cat go.mod
-module github.com/adesight/test
-
-go 1.12
-
-require <span style="color:#ff79c6">(</span>
-	golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a // indirect
-	rsc.io/quote v1.5.2
-<span style="color:#ff79c6">)</span>
-</code></pre></div><p>如果下载所有依赖可以使用 go mod download 命令。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ go get golang.org/x/crypto/sha3@master
+</span></span><span style="display:flex;"><span>go: finding golang.org/x/crypto/sha3 latest
+</span></span><span style="display:flex;"><span>go: finding golang.org/x/crypto latest
+</span></span><span style="display:flex;"><span>$ cat go.mod
+</span></span><span style="display:flex;"><span>module github.com/adesight/test
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>go 1.12
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>require <span style="color:#ff79c6">(</span>
+</span></span><span style="display:flex;"><span>	golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a // indirect
+</span></span><span style="display:flex;"><span>	rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><p>如果下载所有依赖可以使用 go mod download 命令。</p>
 <h2 id="升级依赖">升级依赖</h2>
 <p>查看所有以升级依赖版本：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go list -u -m all
-go: finding golang.org/x/sys latest
-go: finding golang.org/x/crypto latest
-github.com/adesight/test
-golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a
-golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a <span style="color:#ff79c6">[</span>v0.0.0-20190316082340-a2f829d7f35f<span style="color:#ff79c6">]</span>
-golang.org/x/text v0.3.0
-rsc.io/quote v1.5.2
-rsc.io/sampler v1.99.99
-</code></pre></div><p>###升级次级或补丁版本号：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go get -u rsc.io/quote
-</code></pre></div><h3 id="仅升级补丁版本号">仅升级补丁版本号：</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go get -u<span style="color:#ff79c6">=</span>patch rscio/quote
-</code></pre></div><p>升降级版本号，可以使用比较运算符控制：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go get foo@<span style="color:#f1fa8c">&#39;&lt;v1.6.2&#39;</span>
-</code></pre></div><h2 id="移除依赖">移除依赖</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ go list -u -m all
+</span></span><span style="display:flex;"><span>go: finding golang.org/x/sys latest
+</span></span><span style="display:flex;"><span>go: finding golang.org/x/crypto latest
+</span></span><span style="display:flex;"><span>github.com/adesight/test
+</span></span><span style="display:flex;"><span>golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a
+</span></span><span style="display:flex;"><span>golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a <span style="color:#ff79c6">[</span>v0.0.0-20190316082340-a2f829d7f35f<span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>golang.org/x/text v0.3.0
+</span></span><span style="display:flex;"><span>rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span>rsc.io/sampler v1.99.99
+</span></span></code></pre></div><p>###升级次级或补丁版本号：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go get -u rsc.io/quote
+</span></span></code></pre></div><h3 id="仅升级补丁版本号">仅升级补丁版本号：</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go get -u<span style="color:#ff79c6">=</span>patch rscio/quote
+</span></span></code></pre></div><p>升降级版本号，可以使用比较运算符控制：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go get foo@<span style="color:#f1fa8c">&#39;&lt;v1.6.2&#39;</span>
+</span></span></code></pre></div><h2 id="移除依赖">移除依赖</h2>
 <p>当前代码中不需要了某些包，删除相关代码片段后并没有在 go.mod 文件中自动移出。
 运行下面命令可以移出所有代码中不需要的包：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go mod tidy
-</code></pre></div><p>如果仅仅修改 go.mod 配置文件的内容，那么可以运行 <code>go mod edit --droprequire=path</code>，比如要移出 golang.org/x/crypto 包</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go mod tidy
+</span></span></code></pre></div><p>如果仅仅修改 go.mod 配置文件的内容，那么可以运行 <code>go mod edit --droprequire=path</code>，比如要移出 golang.org/x/crypto 包</p>
 <p><code>go mod edit --droprequire=golang.org/x/crypto</code></p>
 <h2 id="查看依赖包">查看依赖包</h2>
 <p>可以直接查看 go.mod 文件，或者使用命令行：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go list -m all
-github.com/adesight/test
-golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a
-golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
-golang.org/x/text v0.3.0
-rsc.io/quote v1.5.2
-rsc.io/sampler v1.99.99
-$ go list -m -json all <span style="color:#6272a4"># json 格式输出</span>
-<span style="color:#ff79c6">{</span>
-        <span style="color:#f1fa8c">&#34;Path&#34;</span>: <span style="color:#f1fa8c">&#34;golang.org/x/text&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Version&#34;</span>: <span style="color:#f1fa8c">&#34;v0.3.0&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Time&#34;</span>: <span style="color:#f1fa8c">&#34;2017-12-14T13:08:43Z&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Indirect&#34;</span>: true,
-        <span style="color:#f1fa8c">&#34;Dir&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/golang.org/x/text@v0.3.0&#34;</span>,
-        <span style="color:#f1fa8c">&#34;GoMod&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/cache/download/golang.org/x/text/@v/v0.3.0.mod&#34;</span>
-<span style="color:#ff79c6">}</span>
-<span style="color:#ff79c6">{</span>
-        <span style="color:#f1fa8c">&#34;Path&#34;</span>: <span style="color:#f1fa8c">&#34;rsc.io/quote&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Version&#34;</span>: <span style="color:#f1fa8c">&#34;v1.5.2&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Time&#34;</span>: <span style="color:#f1fa8c">&#34;2018-02-14T15:44:20Z&#34;</span>,
-        <span style="color:#f1fa8c">&#34;Dir&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/rsc.io/quote@v1.5.2&#34;</span>,
-        <span style="color:#f1fa8c">&#34;GoMod&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/cache/download/rsc.io/quote/@v/v1.5.2.mod&#34;</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></div><h2 id="模块配置文本格式化">模块配置文本格式化</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ go list -m all
+</span></span><span style="display:flex;"><span>github.com/adesight/test
+</span></span><span style="display:flex;"><span>golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a
+</span></span><span style="display:flex;"><span>golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
+</span></span><span style="display:flex;"><span>golang.org/x/text v0.3.0
+</span></span><span style="display:flex;"><span>rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span>rsc.io/sampler v1.99.99
+</span></span><span style="display:flex;"><span>$ go list -m -json all <span style="color:#6272a4"># json 格式输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Path&#34;</span>: <span style="color:#f1fa8c">&#34;golang.org/x/text&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Version&#34;</span>: <span style="color:#f1fa8c">&#34;v0.3.0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Time&#34;</span>: <span style="color:#f1fa8c">&#34;2017-12-14T13:08:43Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Indirect&#34;</span>: true,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Dir&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/golang.org/x/text@v0.3.0&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;GoMod&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/cache/download/golang.org/x/text/@v/v0.3.0.mod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Path&#34;</span>: <span style="color:#f1fa8c">&#34;rsc.io/quote&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Version&#34;</span>: <span style="color:#f1fa8c">&#34;v1.5.2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Time&#34;</span>: <span style="color:#f1fa8c">&#34;2018-02-14T15:44:20Z&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;Dir&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/rsc.io/quote@v1.5.2&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f1fa8c">&#34;GoMod&#34;</span>: <span style="color:#f1fa8c">&#34;/Users/lishude/go/pkg/mod/cache/download/rsc.io/quote/@v/v1.5.2.mod&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></div><h2 id="模块配置文本格式化">模块配置文本格式化</h2>
 <p>由于可手动修改 go.mod 文件，所以可能此文件并没有被格式化，使用下面命令进行文本格式化。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go mod edit -fmt
-</code></pre></div><h2 id="发布版本">发布版本</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go mod edit -fmt
+</span></span></code></pre></div><h2 id="发布版本">发布版本</h2>
 <p>发布包新版本和其它包管理工具基本一致，可以直接打标签，不过打标签之前需要在 go.mod 中写入相应的版本号：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go mod edit --module<span style="color:#ff79c6">=</span>github.com/islishude/gomodtest/v2
-$ cat go.mod
-module github.com/islishude/gomodtest/v2
-
-go 1.12
-
-require <span style="color:#ff79c6">(</span>
-	golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a // indirect
-	rsc.io/quote v1.5.2
-<span style="color:#ff79c6">)</span>
-</code></pre></div><p>官方推荐将上述过程在一个新分支来避免混淆，那么类如上述例子可以创建一个 v2 分支，但这个不是强制要求的。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ go mod edit --module<span style="color:#ff79c6">=</span>github.com/islishude/gomodtest/v2
+</span></span><span style="display:flex;"><span>$ cat go.mod
+</span></span><span style="display:flex;"><span>module github.com/islishude/gomodtest/v2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>go 1.12
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>require <span style="color:#ff79c6">(</span>
+</span></span><span style="display:flex;"><span>	golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a // indirect
+</span></span><span style="display:flex;"><span>	rsc.io/quote v1.5.2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">)</span>
+</span></span></code></pre></div><p>官方推荐将上述过程在一个新分支来避免混淆，那么类如上述例子可以创建一个 v2 分支，但这个不是强制要求的。</p>
 <p>还有一种方式发布新版本，那就是在主线版本种加入 v2 文件夹，相应的也需要内置 go.mod 这个文件。</p>
 <h2 id="从老项目迁移">从老项目迁移</h2>
 <p>从很多第三方的包管理工具迁移到 gomod 特别简单，直接运行 go mod init 即可。</p>
 <p>如果没有使用任何第三方包管理工具，除了运行 go mod init 初始化以外，还要使用 go get ./&hellip; 下载安装所有依赖包，并更新 go.mod 和 go.sum 文件。</p>
 <p>默认情况下，go get 命令使用 @latest 版本控制符对所有依赖进行下载，如果想要更改某一个包的版本，可以使用 go mod edit &ndash;require 命令，比如要更新 rsc.io/quote 到 v3.1.0 版本。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go mod edit --require<span style="color:#ff79c6">=</span>rsc.io/quote@v3.1.0
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>go mod edit --require<span style="color:#ff79c6">=</span>rsc.io/quote@v3.1.0
+</span></span></code></pre></div>
         </div>
 
         
@@ -280,7 +280,7 @@ require <span style="color:#ff79c6">(</span>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

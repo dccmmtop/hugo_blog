@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E4%B8%8Esql/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E4%B8%8Esql/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -113,102 +113,102 @@
 <p>比如，在下面展示的例子中，程序使用的是mysql驱动。数据源名字是一个特定于数据库驱动的字符串，它会告诉驱动应该如何与数据库进行连接。</p>
 <p>Open函数在执行之后会返回一个指向sq1.DB结构的指针作为结果。Open函数在执行时，不会真正的与数据库连接，甚至不会检查参数.</p>
 <p>Open函数真正的作用是设置好连接数据库所需要的结构，并以惰性的方式，等真正需要的时候才建立与数据库连接</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">var</span> Db <span style="color:#ff79c6">*</span>sql.DB
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>() {
-	<span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
-	Db, err = sql.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>, <span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat&#34;</span>)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		log.<span style="color:#50fa7b">Fatal</span>(err)
-	}
-	<span style="color:#ff79c6">return</span>
-}
-</code></pre></div><h2 id="创建用户">创建用户</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> User <span style="color:#8be9fd;font-style:italic">struct</span> {
-	Id <span style="color:#8be9fd">int64</span>
-	Uuid <span style="color:#8be9fd">string</span>
-	Name <span style="color:#8be9fd">string</span>
-	Email <span style="color:#8be9fd">string</span>
-	Password <span style="color:#8be9fd">string</span>
-	CreatedAt time.Time
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> (u <span style="color:#ff79c6">*</span>User) <span style="color:#50fa7b">Create</span>() (err <span style="color:#8be9fd">error</span>) {
-	statement <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;insert into users(uuid,name,email,password, created_at) value(?,?,?,?,?)&#34;</span>
-	<span style="color:#6272a4">// 预编译
-</span><span style="color:#6272a4"></span>	stmt, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Prepare</span>(statement)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span>  err
-	}
-	<span style="color:#ff79c6">defer</span> stmt.<span style="color:#50fa7b">Close</span>()
-	<span style="color:#6272a4">// 加密密码
-</span><span style="color:#6272a4"></span>	u.Password = <span style="color:#50fa7b">Encrypt</span>(u.Password)
-	<span style="color:#6272a4">// 生成UUID
-</span><span style="color:#6272a4"></span>	u.Uuid = <span style="color:#50fa7b">CreateUUID</span>()
-	u.CreatedAt = time.<span style="color:#50fa7b">Now</span>()
-	<span style="color:#6272a4">// 执行
-</span><span style="color:#6272a4"></span>	result, err <span style="color:#ff79c6">:=</span> stmt.<span style="color:#50fa7b">Exec</span>(u.Uuid,u.Name,u.Email,u.Password,u.CreatedAt)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	<span style="color:#6272a4">// 返回插入后的自增ID
-</span><span style="color:#6272a4"></span>	u.Id, err = result.<span style="color:#50fa7b">LastInsertId</span>()
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;创建用户返回Id错误: &#34;</span>,err)
-		<span style="color:#ff79c6">return</span> err
-	}
-	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, fmt.<span style="color:#50fa7b">Sprintf</span>(<span style="color:#f1fa8c">&#34;%v&#34;</span>,<span style="color:#ff79c6">*</span>u))
-	userJson, err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">Marshal</span>(<span style="color:#ff79c6">*</span>u)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		<span style="color:#ff79c6">return</span> err
-	}
-	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(userJson))
-	<span style="color:#ff79c6">return</span>
-}
-</code></pre></div><h2 id="查询用户">查询用户</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 根据ID查询用户
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">FindUserById</span>(id <span style="color:#8be9fd">int64</span>)(u User, err <span style="color:#8be9fd">error</span>) {
-	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, `name`, email, password, created_at from users where id = ?&#34;</span>
-	u = User{}
-  <span style="color:#6272a4">// scan 将查询出来的每一列赋值给对应的属性
-</span><span style="color:#6272a4"></span>	err = Db.<span style="color:#50fa7b">QueryRow</span>(sql, id).<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>u.Id, <span style="color:#ff79c6">&amp;</span>u.Uuid, <span style="color:#ff79c6">&amp;</span>u.Name, <span style="color:#ff79c6">&amp;</span>u.Email, <span style="color:#ff79c6">&amp;</span>u.Password, <span style="color:#ff79c6">&amp;</span>u.CreatedAt)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询用户错误: &#34;</span>, err)
-		<span style="color:#ff79c6">return</span>
-	}
-	<span style="color:#ff79c6">return</span>
-}
-</code></pre></div><h2 id="获取多个对象">获取多个对象</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">type</span> Thread <span style="color:#8be9fd;font-style:italic">struct</span> {
-	Id <span style="color:#8be9fd">int64</span>
-	Uuid   <span style="color:#8be9fd">string</span>
-	UserId <span style="color:#8be9fd">int64</span>
-	Topic <span style="color:#8be9fd">string</span>
-	CreatedAt time.Time
-}
-
-<span style="color:#6272a4">// 获取用户发布多个帖子
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ThreadsList</span>(userId <span style="color:#8be9fd">int64</span>)(threads []Thread){
-	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, user_id, topic,created_at from threads where user_id = ? order by created_at desc&#34;</span>
-	rows, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Query</span>(sql,userId)
-	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询 threads 错误, 返回空数据,err:&#34;</span>, err)
-		<span style="color:#ff79c6">return</span>
-	}
-	<span style="color:#ff79c6">defer</span> rows.<span style="color:#50fa7b">Close</span>()
-	<span style="color:#ff79c6">for</span> rows.<span style="color:#50fa7b">Next</span>() {
-		thread <span style="color:#ff79c6">:=</span> Thread{}
-		err <span style="color:#ff79c6">:=</span> rows.<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>thread.Id,<span style="color:#ff79c6">&amp;</span>thread.Uuid,<span style="color:#ff79c6">&amp;</span>thread.UserId,<span style="color:#ff79c6">&amp;</span>thread.Topic,<span style="color:#ff79c6">&amp;</span>thread.CreatedAt)
-		<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-			util.Danger.<span style="color:#50fa7b">Println</span>(err)
-			<span style="color:#ff79c6">continue</span>
-		}
-		threads = <span style="color:#8be9fd;font-style:italic">append</span>(threads,thread)
-	}
-
-	<span style="color:#ff79c6">return</span>
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> Db <span style="color:#ff79c6">*</span>sql.DB
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+</span></span><span style="display:flex;"><span>	Db, err = sql.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>, <span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#50fa7b">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="创建用户">创建用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> User <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>	Id <span style="color:#8be9fd">int64</span>
+</span></span><span style="display:flex;"><span>	Uuid <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	Name <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	Email <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	Password <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> (u <span style="color:#ff79c6">*</span>User) <span style="color:#50fa7b">Create</span>() (err <span style="color:#8be9fd">error</span>) {
+</span></span><span style="display:flex;"><span>	statement <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;insert into users(uuid,name,email,password, created_at) value(?,?,?,?,?)&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 预编译
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	stmt, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Prepare</span>(statement)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>  err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">defer</span> stmt.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 加密密码
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	u.Password = <span style="color:#50fa7b">Encrypt</span>(u.Password)
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 生成UUID
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	u.Uuid = <span style="color:#50fa7b">CreateUUID</span>()
+</span></span><span style="display:flex;"><span>	u.CreatedAt = time.<span style="color:#50fa7b">Now</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 执行
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	result, err <span style="color:#ff79c6">:=</span> stmt.<span style="color:#50fa7b">Exec</span>(u.Uuid,u.Name,u.Email,u.Password,u.CreatedAt)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// 返回插入后的自增ID
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	u.Id, err = result.<span style="color:#50fa7b">LastInsertId</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;创建用户返回Id错误: &#34;</span>,err)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, fmt.<span style="color:#50fa7b">Sprintf</span>(<span style="color:#f1fa8c">&#34;%v&#34;</span>,<span style="color:#ff79c6">*</span>u))
+</span></span><span style="display:flex;"><span>	userJson, err <span style="color:#ff79c6">:=</span> json.<span style="color:#50fa7b">Marshal</span>(<span style="color:#ff79c6">*</span>u)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	util.Info.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;新增用户: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(userJson))
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="查询用户">查询用户</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 根据ID查询用户
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">FindUserById</span>(id <span style="color:#8be9fd">int64</span>)(u User, err <span style="color:#8be9fd">error</span>) {
+</span></span><span style="display:flex;"><span>	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, `name`, email, password, created_at from users where id = ?&#34;</span>
+</span></span><span style="display:flex;"><span>	u = User{}
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// scan 将查询出来的每一列赋值给对应的属性
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	err = Db.<span style="color:#50fa7b">QueryRow</span>(sql, id).<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>u.Id, <span style="color:#ff79c6">&amp;</span>u.Uuid, <span style="color:#ff79c6">&amp;</span>u.Name, <span style="color:#ff79c6">&amp;</span>u.Email, <span style="color:#ff79c6">&amp;</span>u.Password, <span style="color:#ff79c6">&amp;</span>u.CreatedAt)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询用户错误: &#34;</span>, err)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="获取多个对象">获取多个对象</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Thread <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>	Id <span style="color:#8be9fd">int64</span>
+</span></span><span style="display:flex;"><span>	Uuid   <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	UserId <span style="color:#8be9fd">int64</span>
+</span></span><span style="display:flex;"><span>	Topic <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>	CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 获取用户发布多个帖子
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">ThreadsList</span>(userId <span style="color:#8be9fd">int64</span>)(threads []Thread){
+</span></span><span style="display:flex;"><span>	sql <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">&#34;select id, uuid, user_id, topic,created_at from threads where user_id = ? order by created_at desc&#34;</span>
+</span></span><span style="display:flex;"><span>	rows, err <span style="color:#ff79c6">:=</span> Db.<span style="color:#50fa7b">Query</span>(sql,userId)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>		util.Danger.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;查询 threads 错误, 返回空数据,err:&#34;</span>, err)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">defer</span> rows.<span style="color:#50fa7b">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> rows.<span style="color:#50fa7b">Next</span>() {
+</span></span><span style="display:flex;"><span>		thread <span style="color:#ff79c6">:=</span> Thread{}
+</span></span><span style="display:flex;"><span>		err <span style="color:#ff79c6">:=</span> rows.<span style="color:#50fa7b">Scan</span>(<span style="color:#ff79c6">&amp;</span>thread.Id,<span style="color:#ff79c6">&amp;</span>thread.Uuid,<span style="color:#ff79c6">&amp;</span>thread.UserId,<span style="color:#ff79c6">&amp;</span>thread.Topic,<span style="color:#ff79c6">&amp;</span>thread.CreatedAt)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>			util.Danger.<span style="color:#50fa7b">Println</span>(err)
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">continue</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		threads = <span style="color:#8be9fd;font-style:italic">append</span>(threads,thread)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -235,7 +235,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

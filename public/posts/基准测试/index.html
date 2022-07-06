@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,7 +114,7 @@
 也可以定制 axtp_1oad，使其按照时间比率进行测试，而不仅仅是测试最大请求处理</p>
 <p>下面通过一个简单的例子来演示如何使用 http_1oad。首先创建一个 urls.txt文件，输入
 如下的 URL :</p>
-<pre><code>http://ww.mysqlperformanceblog.com/
+<pre tabindex="0"><code>http://ww.mysqlperformanceblog.com/
 
 http: //www.mysqlperformanceblog.com/page/2/
 
@@ -125,7 +125,7 @@ http: //www.mysqlperformanceblog . com/mysql-performance-presentations/
 http: //www.mysqlperformanceblog . com/2006/09/06/slow-query-log-analyzes-tools/
 </code></pre><p>hitp_load 最简单的用法，就是循环请求给定的 URL 列表。测试程序将以最快的速度请
 求这些 URL :</p>
-<pre><code>$ http_load -parallel 1 -seconds 10 urls.txt
+<pre tabindex="0"><code>$ http_load -parallel 1 -seconds 10 urls.txt
 19 fetches, 1 max parallel, 837929 bytes, in 10.0003 seconds
 44101.5 mean bytes/connection
 1.89995 fetches/sec, 83790.7 bytes/sec
@@ -137,7 +137,7 @@ code 200 - 19
 </code></pre><p>测试的结果很容易理解，只是简单地输出了请求的统计信息。下面是另外一个稍微复杂
 的测试，还是尽可能快地循环请求给定的 URL 列表，不过模拟同时有五个并发用户在
 进行请求 ;</p>
-<pre><code>$ http_load -parallel 5 -seconds 10 urls.txt
+<pre tabindex="0"><code>$ http_load -parallel 5 -seconds 10 urls.txt
 94 fetches, 5 max parallel, 4.75565e+06 bytes, in 10.0005 seconds
 50592 mean bytes/connection
 9.39953 fetches/sec, 475541 bytes/sec
@@ -147,7 +147,7 @@ HTTP response codes:
 code 200 - 94
 </code></pre><p>另外，除了测试最快的速度，也可以根据预估的访问请求率 〈比如每秒 5 次) 来做压力
 模拟测试。</p>
-<pre><code>$ http_load -rate 5 -seconds 10 urls.txt
+<pre tabindex="0"><code>$ http_load -rate 5 -seconds 10 urls.txt
 48 fetches, 4 max parallel, 2.50104e+06 bytes, in 10 seconds
 52105 mean bytes/connection
 4.8 fetches/sec, 250104 bytes/sec
@@ -158,7 +158,7 @@ HTTP response codes:
 code 200 - 48
 </code></pre><p>最后，还可以模拟更大的负载，可以将访问请求率提高到每秒 20 次请求。请注意，连
 接和请求响应时间都会随着负载的提高而增加。</p>
-<pre><code>$ http_load -rate 20 -seconds 10 urls.txt
+<pre tabindex="0"><code>$ http_load -rate 20 -seconds 10 urls.txt
 111 fetches, 89 max parallel, 5.91142e+06 bytes, in 10.0001 seconds
 53256.1 mean bytes/connection
 11.0998 fetches/sec, 591134 bytes/sec
@@ -171,7 +171,7 @@ code 200 -- 111
 <p>最典型的子系统测试就是 CPU 基准测试。该测试使用 64 位整数，测试计算素数直到某
 个最大值所需要的时间。 下面的例子将比较两台不同的GNU/Linux 服务器上的测试结果。
 第一台机器的 CPU 配置如下 :</p>
-<pre><code>[servert ~]$ cat /proc/cpuinfo
+<pre tabindex="0"><code>[servert ~]$ cat /proc/cpuinfo
 
 model nane + AMD Opteron(tm) Processor 246
 stepping        a
@@ -179,18 +179,18 @@ cpu Miz       + 192.857
 
 cache size: 1024 KB
 </code></pre><p>这台服务器上运行如下的测试 :</p>
-<pre><code>[serverl ~]$ sysbench -testccpu -cpu-max-prime=20000 run
+<pre tabindex="0"><code>[serverl ~]$ sysbench -testccpu -cpu-max-prime=20000 run
 sysbench v0.4.8: multithreaded system evaluation benchnark
 
 Test execution summary: total tine:                    121.74048
 </code></pre><p>第二台服务器配置了不同的 CPU ，</p>
-<pre><code>[server2 ~]$ cat /proc/cpuinfo
+<pre tabindex="0"><code>[server2 ~]$ cat /proc/cpuinfo
 
 model name: Intel(R) Xeon(R) CPU         5130 @ 2.00GH2
 stepping
 cpu Miz
 </code></pre><p>测试结果如下 :</p>
-<pre><code>
+<pre tabindex="0"><code>
 [serverl ~]$ sysbench --test=cpu --cpu-max-prime=20000 run
 sysbench v0.4.8: multithreaded system evaluation benchnark
 
@@ -222,7 +222,7 @@ Test execution summary: total time:                     6.85965
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mysql">mysql
                     </a>
                 </li>
                 

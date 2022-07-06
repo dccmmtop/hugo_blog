@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails%E9%87%8D%E5%86%99%E5%AD%97%E6%AE%B5/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails%E9%87%8D%E5%86%99%E5%AD%97%E6%AE%B5/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -111,27 +111,27 @@
             <p>在 rails 中,model 的属性是默认的可读可写的，有时我们需要重写某个字段的访问器。当查询某个字段的值时，需要进行其他操作；</p>
 <p>如： 当查询<code>recommand_code</code>的值时，若存在，则返回，若不存在则创建一个包含大写字母和数字的 6 为随机字符串</p>
 <p>主要是 <code>read_attribute()</code> 和 <code>write_attribute()</code> 的用法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span>
-  <span style="color:#6272a4">#  重写 recommand_code 字段</span>
-  _code <span style="color:#ff79c6">=</span> read_attribute(<span style="color:#f1fa8c">:recommand_code</span>)
-   <span style="color:#6272a4"># _code  = self.recommand_code   错误，会引起无限递归</span>
-  <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>block<span style="color:#ff79c6">.</span>empty?
-    <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code<span style="color:#ff79c6">=</span><span style="color:#ff79c6">nil</span>;
-    <span style="color:#ff79c6">return</span>
-  <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">return</span> _code <span style="color:#ff79c6">if</span> _code
-  <span style="color:#ff79c6">loop</span> <span style="color:#ff79c6">do</span>
-    _code <span style="color:#ff79c6">=</span>  ((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span>  (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
-    <span style="color:#ff79c6">break</span> <span style="color:#ff79c6">if</span> User<span style="color:#ff79c6">.</span>find_by_recommand_code(_code)<span style="color:#ff79c6">.</span>nil?
-  <span style="color:#ff79c6">end</span>
-  <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">nil</span>;
-  <span style="color:#ff79c6">return</span> _code
-<span style="color:#ff79c6">end</span>
-
-<span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span><span style="color:#ff79c6">=</span>(value)
-  write_attribute(<span style="color:#f1fa8c">:recommand_code</span>,value)
-<span style="color:#ff79c6">end</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">#  重写 recommand_code 字段</span>
+</span></span><span style="display:flex;"><span>  _code <span style="color:#ff79c6">=</span> read_attribute(<span style="color:#f1fa8c">:recommand_code</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#6272a4"># _code  = self.recommand_code   错误，会引起无限递归</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>block<span style="color:#ff79c6">.</span>empty?
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code<span style="color:#ff79c6">=</span><span style="color:#ff79c6">nil</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> _code <span style="color:#ff79c6">if</span> _code
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">loop</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    _code <span style="color:#ff79c6">=</span>  ((<span style="color:#f1fa8c">&#34;0&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;9&#34;</span>)<span style="color:#ff79c6">.</span>to_a <span style="color:#ff79c6">+</span>  (<span style="color:#f1fa8c">&#34;A&#34;</span><span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;Z&#34;</span>)<span style="color:#ff79c6">.</span>to_a)<span style="color:#ff79c6">.</span>sample(<span style="color:#bd93f9">6</span>)<span style="color:#ff79c6">.</span>join
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">break</span> <span style="color:#ff79c6">if</span> User<span style="color:#ff79c6">.</span>find_by_recommand_code(_code)<span style="color:#ff79c6">.</span>nil?
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">self</span><span style="color:#ff79c6">.</span>recommand_code <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">nil</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> _code
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">recommand_code</span><span style="color:#ff79c6">=</span>(value)
+</span></span><span style="display:flex;"><span>  write_attribute(<span style="color:#f1fa8c">:recommand_code</span>,value)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -151,7 +151,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

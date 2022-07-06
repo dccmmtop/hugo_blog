@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E7%94%A8ruby%E7%BC%96%E5%86%99vim%E8%84%9A%E6%9C%AC/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E7%94%A8ruby%E7%BC%96%E5%86%99vim%E8%84%9A%E6%9C%AC/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,35 +109,35 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <p>在开始编写插件之前，你需要确认 Vim 是否支持 Ruby，通过以下命令来判别：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ vim --version | grep +ruby
-</code></pre></div><p>如果输出为空，则表示你当前的 vim 不支持 Ruby，需要重新编译一下，并启用对 Ruby 的支持。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ vim --version | grep +ruby
+</span></span></code></pre></div><p>如果输出为空，则表示你当前的 vim 不支持 Ruby，需要重新编译一下，并启用对 Ruby 的支持。
 如果没有问题那就开始吧！</p>
 <p>下面的示例是我用来把本地图片上传到七牛云图床。</p>
 <h3 id="新建">新建</h3>
 <p>在<code>.vim/autoload</code>中新建<code>test.vim</code>,复制以下代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#ff79c6">function</span>! qiniu#get_picture_url()
-ruby &lt;&lt; EOF
-class Qiniu
-  def initialize
-    @buffer = Vim::Buffer.current
-  end
-
-  def get_current_line
-    s = @buffer.line       # gets the current line
-    # qiniu 是七牛云的一个gem，修改了部分代码，并重命名。
-    real_link = `qiniu #{s}`
-    real_link = real_link.split(<span style="color:#f1fa8c">/\n/</span>).last
-    Vim::Buffer.current.line = <span style="color:#f1fa8c">&#34;![](#{real_link})&#34;</span>     # sets the current line number
-  end
-end
-gem = Qiniu.new
-gem.get_current_line
-EOF
-<span style="color:#ff79c6">endfunction</span>
-</code></pre></div><h3 id="绑定快捷键">绑定快捷键</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#ff79c6">function</span>! qiniu#get_picture_url()
+</span></span><span style="display:flex;"><span>ruby &lt;&lt; EOF
+</span></span><span style="display:flex;"><span>class Qiniu
+</span></span><span style="display:flex;"><span>  def initialize
+</span></span><span style="display:flex;"><span>    @buffer = Vim::Buffer.current
+</span></span><span style="display:flex;"><span>  end
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  def get_current_line
+</span></span><span style="display:flex;"><span>    s = @buffer.line       # gets the current line
+</span></span><span style="display:flex;"><span>    # qiniu 是七牛云的一个gem，修改了部分代码，并重命名。
+</span></span><span style="display:flex;"><span>    real_link = `qiniu #{s}`
+</span></span><span style="display:flex;"><span>    real_link = real_link.split(<span style="color:#f1fa8c">/\n/</span>).last
+</span></span><span style="display:flex;"><span>    Vim::Buffer.current.line = <span style="color:#f1fa8c">&#34;![](#{real_link})&#34;</span>     # sets the current line number
+</span></span><span style="display:flex;"><span>  end
+</span></span><span style="display:flex;"><span>end
+</span></span><span style="display:flex;"><span>gem = Qiniu.new
+</span></span><span style="display:flex;"><span>gem.get_current_line
+</span></span><span style="display:flex;"><span>EOF
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">endfunction</span>
+</span></span></code></pre></div><h3 id="绑定快捷键">绑定快捷键</h3>
 <p>在<code>.vimrc</code>中，映射快捷键</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">noremap &lt;leader&gt;qn :cal qiniu#get_picture_url()&lt;cr&gt;&lt;CR&gt;
-</code></pre></div><p>[&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;]</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>noremap &lt;leader&gt;qn :cal qiniu#get_picture_url()&lt;cr&gt;&lt;CR&gt;
+</span></span></code></pre></div><p>[&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;]</p>
 <p>我把图片的本地地址粘贴到 vim 中，然后使用<code>qn</code>快捷键，本地地址就会被修改成该图片在七牛云的外链，经常写博客用到</p>
 <h3 id="vim-api">vim API</h3>
 <p>在 vim 中执行<code>:h ruby</code> 查看 vim 提供 ruby 的 API</p>
@@ -174,7 +174,7 @@ EOF
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                     </a>
                 </li>
                 

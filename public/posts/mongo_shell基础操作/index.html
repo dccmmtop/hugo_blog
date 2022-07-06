@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mongo_shell%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/mongo_shell%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -139,8 +139,8 @@ shell是一个功能完备的JavaScript解释器，可运行任意JavaScript程�
 <p><img src="../../images/20210905173128485_21127.png" alt=""></p>
 <h3 id="编辑复合变量">编辑复合变量</h3>
 <p>shell的多行支持是非常有限的：不可以编辑之前的行。如果编辑到第15行时发现第1行有个错误，那会让人非常懊恼。因此，对于大块的代码或者是对象，你可能更愿意在编辑器中编辑。为了方便地调用编辑器，可以在shell中设置EDITOR变量（也可以在环境变量中设置）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">EDITOR</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/usr/bin/vim&#34;</span>
-</code></pre></div><p>现在，如果想要编辑一个变量，可以使用&quot;edit变量名&quot;这个命令，比如：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">EDITOR</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/usr/bin/vim&#34;</span>
+</span></span></code></pre></div><p>现在，如果想要编辑一个变量，可以使用&quot;edit变量名&quot;这个命令，比如：
 <img src="../../images/20210905174006655_8272.png" alt=""></p>
 <p>用户主目录下创建一个名为.mongorc.js的文件,在.mongorc.js文件中添加一行内容，EDITOR=&ldquo;编辑器路径&rdquo;;，以后就不必单独设置EDITOR变量了。</p>
 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E6%A8%A1%E6%9D%BF%E4%B9%8B%E4%B8%8A%E4%B8%8B%E6%84%9F%E7%9F%A5/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E6%A8%A1%E6%9D%BF%E4%B9%8B%E4%B8%8A%E4%B8%8B%E6%84%9F%E7%9F%A5/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -112,88 +112,88 @@
 <p>Go语言的模板引擎可以根据内容所处的上下文改变其显示.
 上下文感知的一个显而易见的用途就是对被显示的内容实施正确的转义（escape）：这意味着，如果模板显示的是HTML格式的内容，那么模板将对其实施HTML转义；如果模板显示的是JavaScript格式的内容，那么模板将对其实施JavaScript转义；诸如此类。除此之外，Go模板引擎还可以识别出内容中的URL或者css样式。</p>
 <h2 id="示例">示例</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;html/template&#34;</span>
-    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>()  {
-    server <span style="color:#ff79c6">:=</span> http.Server{
-        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
-    }
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/testContextAware&#34;</span>, testContextAware)
-    server.<span style="color:#50fa7b">ListenAndServe</span>()
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">testContextAware</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    t, err <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./testContextAware.tmpl&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    content <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`我问: &lt;i&gt; &#34;发生了什么&#34; &lt;/i&gt;`</span>
-    err = t.<span style="color:#50fa7b">Execute</span>(w,content)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;html/template&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>()  {
+</span></span><span style="display:flex;"><span>    server <span style="color:#ff79c6">:=</span> http.Server{
+</span></span><span style="display:flex;"><span>        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/testContextAware&#34;</span>, testContextAware)
+</span></span><span style="display:flex;"><span>    server.<span style="color:#50fa7b">ListenAndServe</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">testContextAware</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    t, err <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./testContextAware.tmpl&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    content <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`我问: &lt;i&gt; &#34;发生了什么&#34; &lt;/i&gt;`</span>
+</span></span><span style="display:flex;"><span>    err = t.<span style="color:#50fa7b">Execute</span>(w,content)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>上下文感知模板</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
-&lt;<span style="color:#ff79c6">head</span>&gt;
-    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
-    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
-&lt;/<span style="color:#ff79c6">head</span>&gt;
-&lt;<span style="color:#ff79c6">body</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;{{ . }}&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/{{ . }}&#34;</span>&gt;Path&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/?q={{ . }}&#34;</span>&gt;Query&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">onclick</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;f (&#39;{{ .}}&#39;) &#34;</span>&gt;Onclick&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;/<span style="color:#ff79c6">body</span>&gt;
-&lt;/<span style="color:#ff79c6">html</span>&gt;
-``
-## 结果
-```txt
-HTTP/1.1 200 OK
-Date: Mon, 08 Nov 2021 13:52:59 GMT
-Content-Length: 569
-Content-Type: text/html; charset=utf-8
-
-<span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
-&lt;<span style="color:#ff79c6">head</span>&gt;
-    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
-    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
-&lt;/<span style="color:#ff79c6">head</span>&gt;
-&lt;<span style="color:#ff79c6">body</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;我问: &amp;lt;i&amp;gt; &amp;#34;发生了什么&amp;#34; &amp;lt;/i&amp;gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/%e6%88%91%e9%97%ae:%20%3ci%3e%20%22%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88%22%20%3c/i%3e&#34;</span>&gt;Path&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/?q=%e6%88%91%e9%97%ae%3a%20%3ci%3e%20%22%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88%22%20%3c%2fi%3e&#34;</span>&gt;Query&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">onclick</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;f (&#39;我问: \u003ci\u003e \u0022发生了什么\u0022 \u003c\/i\u003e&#39;) &#34;</span>&gt;Onclick&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
-&lt;/<span style="color:#ff79c6">body</span>&gt;
-&lt;/<span style="color:#ff79c6">html</span>&gt;
-</code></pre></div><p>原本有可能会被浏览器执行的js已经被转义了，原样展示</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;{{ . }}&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/{{ . }}&#34;</span>&gt;Path&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/?q={{ . }}&#34;</span>&gt;Query&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">onclick</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;f (&#39;{{ .}}&#39;) &#34;</span>&gt;Onclick&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">html</span>&gt;
+</span></span><span style="display:flex;"><span>``
+</span></span><span style="display:flex;"><span>## 结果
+</span></span><span style="display:flex;"><span>```txt
+</span></span><span style="display:flex;"><span>HTTP/1.1 200 OK
+</span></span><span style="display:flex;"><span>Date: Mon, 08 Nov 2021 13:52:59 GMT
+</span></span><span style="display:flex;"><span>Content-Length: 569
+</span></span><span style="display:flex;"><span>Content-Type: text/html; charset=utf-8
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">html</span> <span style="color:#50fa7b">lang</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">meta</span> <span style="color:#50fa7b">charset</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#ff79c6">title</span>&gt;Title&lt;/<span style="color:#ff79c6">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;我问: &amp;lt;i&amp;gt; &amp;#34;发生了什么&amp;#34; &amp;lt;/i&amp;gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/%e6%88%91%e9%97%ae:%20%3ci%3e%20%22%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88%22%20%3c/i%3e&#34;</span>&gt;Path&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;/?q=%e6%88%91%e9%97%ae%3a%20%3ci%3e%20%22%e5%8f%91%e7%94%9f%e4%ba%86%e4%bb%80%e4%b9%88%22%20%3c%2fi%3e&#34;</span>&gt;Query&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#ff79c6">div</span>&gt;&lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">onclick</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;f (&#39;我问: \u003ci\u003e \u0022发生了什么\u0022 \u003c\/i\u003e&#39;) &#34;</span>&gt;Onclick&lt;/<span style="color:#ff79c6">a</span>&gt;&lt;/<span style="color:#ff79c6">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#ff79c6">html</span>&gt;
+</span></span></code></pre></div><p>原本有可能会被浏览器执行的js已经被转义了，原样展示</p>
 <h2 id="应用场景">应用场景</h2>
 <p>由上可见，上下文感知特性可以很方便的避免XSS攻击
 上下文感知功能不仅能够自动对HTML进行转义，它还能够防止基于JavaScript，Css甚至URL的XSS攻击。那么这是否意味着我们只要使用Go的模板引擎就可以无忧无虑地进行开发了呢？并非如此，上下文感知虽然很方便，但它并非灵丹妙药，而且有不少方法可以绕开上下文感知。</p>
 <p>实际上，如果需要，用可以完全不使用上下文感知特性的。</p>
 <h2 id="不使用上下文感知">不使用上下文感知</h2>
 <p>可以使用类型转换，把内容转换成html</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">testContextAware</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
-    t, err <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./testContextAware.tmpl&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-    content <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`我问: &lt;i&gt; &#34;发生了什么&#34; &lt;/i&gt;`</span>
-    err = t.<span style="color:#50fa7b">Execute</span>(w,template.<span style="color:#50fa7b">HTML</span>(content))
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-    }
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">testContextAware</span>(w http.ResponseWriter, r <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    t, err <span style="color:#ff79c6">:=</span> template.<span style="color:#50fa7b">ParseFiles</span>(<span style="color:#f1fa8c">&#34;./testContextAware.tmpl&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    content <span style="color:#ff79c6">:=</span> <span style="color:#f1fa8c">`我问: &lt;i&gt; &#34;发生了什么&#34; &lt;/i&gt;`</span>
+</span></span><span style="display:flex;"><span>    err = t.<span style="color:#50fa7b">Execute</span>(w,template.<span style="color:#50fa7b">HTML</span>(content))
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -220,7 +220,7 @@ Content-Type: text/html; charset=utf-8
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

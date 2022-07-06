@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%92%8C%E8%AF%B7%E6%B1%82%E4%BD%93/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,197 +109,196 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h2 id="解析请求头">解析请求头</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 解析请求头
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">headers</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 获取所欲请求头，Header 是个 map, key 是字符串，value 是字符串切片
-</span><span style="color:#6272a4"></span>    headers <span style="color:#ff79c6">:=</span> request.Header
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;所有请求头headers: %v\n&#34;</span>, headers)
-    <span style="color:#6272a4">// 获取单个请求头,返回的是字符串切片
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// [gzip, deflate]
-</span><span style="color:#6272a4"></span>    coding <span style="color:#ff79c6">:=</span> headers[<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>]
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding: %v\n&#34;</span>, coding)
-
-    <span style="color:#6272a4">// 获取单个请求头,如果请求头的值是多个，用逗号拼接
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// gzip, deflate
-</span><span style="color:#6272a4"></span>    coding1 <span style="color:#ff79c6">:=</span> headers.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>)
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding1: %v\n&#34;</span>, coding1)
-
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w, headers)
-}
-</code></pre></div><h2 id="从流中解析请求体">从流中解析请求体</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 解析请求头
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">headers</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取所欲请求头，Header 是个 map, key 是字符串，value 是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    headers <span style="color:#ff79c6">:=</span> request.Header
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;所有请求头headers: %v\n&#34;</span>, headers)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取单个请求头,返回的是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// [gzip, deflate]
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    coding <span style="color:#ff79c6">:=</span> headers[<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>]
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding: %v\n&#34;</span>, coding)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取单个请求头,如果请求头的值是多个，用逗号拼接
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// gzip, deflate
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    coding1 <span style="color:#ff79c6">:=</span> headers.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding1: %v\n&#34;</span>, coding1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w, headers)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="从流中解析请求体">从流中解析请求体</h2>
 <p>直接读取 body 字节流，再转换成自己想要的格式，比较麻烦，但可以处理任何请求类型的参数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 接请求体-原始
-</span><span style="color:#6272a4">// 可以处理 application/json 类型的参数
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">body</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 获取请求体的长度
-</span><span style="color:#6272a4"></span>    len <span style="color:#ff79c6">:=</span> request.ContentLength
-    body <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">byte</span>, len)
-    <span style="color:#6272a4">//　将数据读取到字节数组中
-</span><span style="color:#6272a4"></span>    request.Body.<span style="color:#50fa7b">Read</span>(body)
-
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w,<span style="color:#8be9fd;font-style:italic">string</span>(body))
-
-}
-</code></pre></div><h2 id="解析表单">解析表单</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 接请求体-原始
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// 可以处理 application/json 类型的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">body</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取请求体的长度
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    len <span style="color:#ff79c6">:=</span> request.ContentLength
+</span></span><span style="display:flex;"><span>    body <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">byte</span>, len)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">//　将数据读取到字节数组中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.Body.<span style="color:#50fa7b">Read</span>(body)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w,<span style="color:#8be9fd;font-style:italic">string</span>(body))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="解析表单">解析表单</h2>
 <ol>
 <li>调用ParseForm方法或者ParseMultipartForm方法，对请求进行语法分析。</li>
 <li>根据步骤1调用的方法，访问相应的Form字段、PostForm字段或MultipartForm字段</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 解析表单-手动解析语法
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">form</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 手动先进行语法分析
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseForm</span>()
-    <span style="color:#6272a4">// 再访问Form 或PostForm 字段
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Form 会同时返回 URL 上的参数值 和 form 表单中的参数值，如果两处有相同的参数，值是字符串切片
-</span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Form: %v\n&#34;</span>,request.Form)
-    <span style="color:#6272a4">// PostForm 只会包含表单中的参数
-</span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;PostForm: %v\n&#34;</span>,request.PostForm)
-
-    <span style="color:#6272a4">// multipart/form-data 类型参数
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 取出1024字节数据
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;multipart: %v\n&#34;</span>,request.MultipartForm)
-}
-</code></pre></div><h2 id="直接获取表单值">直接获取表单值</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 解析表单-手动解析语法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">form</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 手动先进行语法分析
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseForm</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 再访问Form 或PostForm 字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Form 会同时返回 URL 上的参数值 和 form 表单中的参数值，如果两处有相同的参数，值是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Form: %v\n&#34;</span>,request.Form)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// PostForm 只会包含表单中的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;PostForm: %v\n&#34;</span>,request.PostForm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// multipart/form-data 类型参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 取出1024字节数据
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;multipart: %v\n&#34;</span>,request.MultipartForm)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="直接获取表单值">直接获取表单值</h2>
 <p>因为Formvalue方法即使在给定键拥有多个值的情况下，也只会从Form结构中取出给定键的第一个值，所以如果想要获取给定键包含的所有值，那么就需要直接访问Form结构</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 解析表单-自动解析语法
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">formValue</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// FormValue 方法会自动调用 ParseForm 或 ParseMultipartForm 方法
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果参数有多个值，只会取第一个, 如果需要获取全部值，用Form字段
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;userId&#34;</span>)
-    <span style="color:#6272a4">// PostFormValue 同上，但只包含表单中的参数，包含URl中参数
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">PostFormValue</span>(<span style="color:#f1fa8c">&#34;name&#34;</span>)
-}
-</code></pre></div><h2 id="获取文件">获取文件</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">uploadFile</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 第一种方法，解析文件流
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
-    <span style="color:#6272a4">// 取出文件头
-</span><span style="color:#6272a4"></span>    fileHeader <span style="color:#ff79c6">:=</span> request.MultipartForm.File[<span style="color:#f1fa8c">&#34;uploaded&#34;</span>][<span style="color:#bd93f9">0</span>]
-    <span style="color:#6272a4">// 打开文件
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> fileHeader.<span style="color:#50fa7b">Open</span>()
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        data ,err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            <span style="color:#6272a4">// 将文件写入响应体
-</span><span style="color:#6272a4"></span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
-        }
-    }
-
-    <span style="color:#6272a4">// 第二种，FormFile 方法
-</span><span style="color:#6272a4"></span>
-    file1,_, err <span style="color:#ff79c6">:=</span> request.<span style="color:#50fa7b">FormFile</span>(<span style="color:#f1fa8c">&#34;uploaded1&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        data, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file1)
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file1: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
-        }
-    }
-}
-</code></pre></div><h2 id="完整代码">完整代码</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-    <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
-    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
-    server <span style="color:#ff79c6">:=</span> http.Server{
-        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
-    }
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/header&#34;</span>,headers)
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/body&#34;</span>,body)
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/form&#34;</span>,form)
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/formValue&#34;</span>,formValue)
-    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/uploadFile&#34;</span>,uploadFile)
-    server.<span style="color:#50fa7b">ListenAndServe</span>()
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">uploadFile</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 第一种方法，解析文件流
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
-    <span style="color:#6272a4">// 取出文件头
-</span><span style="color:#6272a4"></span>    fileHeader <span style="color:#ff79c6">:=</span> request.MultipartForm.File[<span style="color:#f1fa8c">&#34;uploaded&#34;</span>][<span style="color:#bd93f9">0</span>]
-    <span style="color:#6272a4">// 打开文件
-</span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> fileHeader.<span style="color:#50fa7b">Open</span>()
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        data ,err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            <span style="color:#6272a4">// 将文件写入响应体
-</span><span style="color:#6272a4"></span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
-        }
-    }
-
-    <span style="color:#6272a4">// 第二种，FormFile 方法
-</span><span style="color:#6272a4"></span>
-    file1,_, err <span style="color:#ff79c6">:=</span> request.<span style="color:#50fa7b">FormFile</span>(<span style="color:#f1fa8c">&#34;uploaded1&#34;</span>)
-    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-        data, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file1)
-        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file1: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
-        }
-    }
-}
-
-<span style="color:#6272a4">// 解析表单-自动解析语法
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">formValue</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// FormValue 方法会自动调用 ParseForm 或 ParseMultipartForm 方法
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果参数有多个值，只会取第一个, 如果需要获取全部值，用Form字段
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;userId&#34;</span>)
-    <span style="color:#6272a4">// PostFormValue 同上，但只包含表单中的参数，包含URl中参数
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">PostFormValue</span>(<span style="color:#f1fa8c">&#34;name&#34;</span>)
-}
-
-<span style="color:#6272a4">// 解析表单-手动解析语法
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">form</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 手动先进行语法分析
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseForm</span>()
-    <span style="color:#6272a4">// 再访问Form 或PostForm 字段
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Form 会同时返回 URL 上的参数值 和 form 表单中的参数值，如果两处有相同的参数，值是字符串切片
-</span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Form: %v\n&#34;</span>,request.Form)
-    <span style="color:#6272a4">// PostForm 只会包含表单中的参数
-</span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;PostForm: %v\n&#34;</span>,request.PostForm)
-
-    <span style="color:#6272a4">// multipart/form-data 类型参数
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 取出1024字节数据
-</span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;multipart: %v\n&#34;</span>,request.MultipartForm)
-}
-
-<span style="color:#6272a4">// 接请求体-原始
-</span><span style="color:#6272a4">// 可以处理 application/json 类型的参数
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">body</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 获取请求体的长度
-</span><span style="color:#6272a4"></span>    len <span style="color:#ff79c6">:=</span> request.ContentLength
-    body <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">byte</span>, len)
-    <span style="color:#6272a4">//　将数据读取到字节数组中
-</span><span style="color:#6272a4"></span>    request.Body.<span style="color:#50fa7b">Read</span>(body)
-
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w,<span style="color:#8be9fd;font-style:italic">string</span>(body))
-
-}
-
-<span style="color:#6272a4">// 解析请求头
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">headers</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
-    <span style="color:#6272a4">// 获取所欲请求头，Header 是个 map, key 是字符串，value 是字符串切片
-</span><span style="color:#6272a4"></span>    headers <span style="color:#ff79c6">:=</span> request.Header
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;所有请求头headers: %v\n&#34;</span>, headers)
-    <span style="color:#6272a4">// 获取单个请求头,返回的是字符串切片
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// [gzip, deflate]
-</span><span style="color:#6272a4"></span>    coding <span style="color:#ff79c6">:=</span> headers[<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>]
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding: %v\n&#34;</span>, coding)
-
-    <span style="color:#6272a4">// 获取单个请求头,如果请求头的值是多个，用逗号拼接
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// gzip, deflate
-</span><span style="color:#6272a4"></span>    coding1 <span style="color:#ff79c6">:=</span> headers.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>)
-    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding1: %v\n&#34;</span>, coding1)
-
-    fmt.<span style="color:#50fa7b">Fprintln</span>(w, headers)
-}
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 解析表单-自动解析语法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">formValue</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// FormValue 方法会自动调用 ParseForm 或 ParseMultipartForm 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果参数有多个值，只会取第一个, 如果需要获取全部值，用Form字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;userId&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// PostFormValue 同上，但只包含表单中的参数，包含URl中参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">PostFormValue</span>(<span style="color:#f1fa8c">&#34;name&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="获取文件">获取文件</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">uploadFile</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 第一种方法，解析文件流
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 取出文件头
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fileHeader <span style="color:#ff79c6">:=</span> request.MultipartForm.File[<span style="color:#f1fa8c">&#34;uploaded&#34;</span>][<span style="color:#bd93f9">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 打开文件
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> fileHeader.<span style="color:#50fa7b">Open</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        data ,err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">// 将文件写入响应体
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 第二种，FormFile 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    file1,_, err <span style="color:#ff79c6">:=</span> request.<span style="color:#50fa7b">FormFile</span>(<span style="color:#f1fa8c">&#34;uploaded1&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        data, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file1)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file1: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="完整代码">完整代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;io/ioutil&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>(){
+</span></span><span style="display:flex;"><span>    server <span style="color:#ff79c6">:=</span> http.Server{
+</span></span><span style="display:flex;"><span>        Addr: <span style="color:#f1fa8c">&#34;127.0.0.1:8080&#34;</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/header&#34;</span>,headers)
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/body&#34;</span>,body)
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/form&#34;</span>,form)
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/formValue&#34;</span>,formValue)
+</span></span><span style="display:flex;"><span>    http.<span style="color:#50fa7b">HandleFunc</span>(<span style="color:#f1fa8c">&#34;/uploadFile&#34;</span>,uploadFile)
+</span></span><span style="display:flex;"><span>    server.<span style="color:#50fa7b">ListenAndServe</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">uploadFile</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 第一种方法，解析文件流
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 取出文件头
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fileHeader <span style="color:#ff79c6">:=</span> request.MultipartForm.File[<span style="color:#f1fa8c">&#34;uploaded&#34;</span>][<span style="color:#bd93f9">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 打开文件
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    file, err <span style="color:#ff79c6">:=</span> fileHeader.<span style="color:#50fa7b">Open</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        data ,err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">// 将文件写入响应体
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 第二种，FormFile 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    file1,_, err <span style="color:#ff79c6">:=</span> request.<span style="color:#50fa7b">FormFile</span>(<span style="color:#f1fa8c">&#34;uploaded1&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>        data, err <span style="color:#ff79c6">:=</span> ioutil.<span style="color:#50fa7b">ReadAll</span>(file1)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>            fmt.<span style="color:#50fa7b">Println</span>(<span style="color:#f1fa8c">&#34;file1: &#34;</span>, <span style="color:#8be9fd;font-style:italic">string</span>(data))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 解析表单-自动解析语法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">formValue</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// FormValue 方法会自动调用 ParseForm 或 ParseMultipartForm 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 如果参数有多个值，只会取第一个, 如果需要获取全部值，用Form字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">FormValue</span>(<span style="color:#f1fa8c">&#34;userId&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// PostFormValue 同上，但只包含表单中的参数，包含URl中参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">PostFormValue</span>(<span style="color:#f1fa8c">&#34;name&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 解析表单-手动解析语法
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">form</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 手动先进行语法分析
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseForm</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 再访问Form 或PostForm 字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Form 会同时返回 URL 上的参数值 和 form 表单中的参数值，如果两处有相同的参数，值是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Form: %v\n&#34;</span>,request.Form)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// PostForm 只会包含表单中的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;PostForm: %v\n&#34;</span>,request.PostForm)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// multipart/form-data 类型参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 取出1024字节数据
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.<span style="color:#50fa7b">ParseMultipartForm</span>(<span style="color:#bd93f9">1024</span>)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;multipart: %v\n&#34;</span>,request.MultipartForm)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 接请求体-原始
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// 可以处理 application/json 类型的参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">body</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取请求体的长度
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    len <span style="color:#ff79c6">:=</span> request.ContentLength
+</span></span><span style="display:flex;"><span>    body <span style="color:#ff79c6">:=</span> <span style="color:#8be9fd;font-style:italic">make</span>([]<span style="color:#8be9fd">byte</span>, len)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">//　将数据读取到字节数组中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    request.Body.<span style="color:#50fa7b">Read</span>(body)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w,<span style="color:#8be9fd;font-style:italic">string</span>(body))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 解析请求头
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">headers</span>(w http.ResponseWriter, request <span style="color:#ff79c6">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取所欲请求头，Header 是个 map, key 是字符串，value 是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    headers <span style="color:#ff79c6">:=</span> request.Header
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;所有请求头headers: %v\n&#34;</span>, headers)
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取单个请求头,返回的是字符串切片
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// [gzip, deflate]
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    coding <span style="color:#ff79c6">:=</span> headers[<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>]
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding: %v\n&#34;</span>, coding)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取单个请求头,如果请求头的值是多个，用逗号拼接
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// gzip, deflate
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    coding1 <span style="color:#ff79c6">:=</span> headers.<span style="color:#50fa7b">Get</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding&#34;</span>)
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;Accept-Encoding1: %v\n&#34;</span>, coding1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fmt.<span style="color:#50fa7b">Fprintln</span>(w, headers)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -328,7 +327,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

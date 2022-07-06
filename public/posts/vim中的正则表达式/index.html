@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/vim%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/vim%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -110,10 +110,10 @@
         <div class="article-entry" itemprop="articleBody">
             <p>首先，在哪些情况下会用到正则表达式？</p>
 <p>使用正则表达式的命令最常见的就是 <code>/</code> 和 <code>?</code> 命令。其格式如下：</p>
-<pre><code>/正则表达式
+<pre tabindex="0"><code>/正则表达式
 ?正则表达式
 </code></pre><p>另一个很有用的命令就是 <code>:s</code>（替换）命令，将第一个<code>//</code>之间的正则表达式替换成第二个<code>//</code>之间的字符串。</p>
-<pre><code>:s/正则表达式/替换字符串/选项
+<pre tabindex="0"><code>:s/正则表达式/替换字符串/选项
 </code></pre><p>在学习正则表达式时可以利用 / 命令来练习。</p>
 <h3 id="元字符">元字符</h3>
 <table>
@@ -299,12 +299,12 @@
 </table>
 <h3 id="函数式">函数式</h3>
 <p>在替换命令 <code>:s/{pattern}/{string}/[flags]</code> 中可以使用函数表达式来书写替换内容，格式为</p>
-<pre><code>:s/替换字符串/\=函数式
+<pre tabindex="0"><code>:s/替换字符串/\=函数式
 </code></pre><p>在函数式中可以使用 <code>submatch(1)</code>、<code>submatch(2)</code> 等来引用 <code>\1</code>、<code>\2</code> 等的内容，而<code>submatch(0)</code>可以引用匹配的整个内容。</p>
 <p><strong>使用例</strong></p>
-<pre><code>:%s/\&lt;id\&gt;/\=line(&quot;.&quot;)
+<pre tabindex="0"><code>:%s/\&lt;id\&gt;/\=line(&#34;.&#34;)
 </code></pre><p>将各行的 id 字符串替换为行号</p>
-<pre><code>:%s/^\&lt;\w\+\&gt;/\=(line(&quot;.&quot;)-10) .&quot;.&quot;. submatch(1)
+<pre tabindex="0"><code>:%s/^\&lt;\w\+\&gt;/\=(line(&#34;.&#34;)-10) .&#34;.&#34;. submatch(1)
 </code></pre><p>将每行开头的单词替换为 (行号-10).单词 的格式，如第 11 行的 word 替换成 1. word</p>
 <h3 id="与-perl-正则表达式的区别">与 Perl 正则表达式的区别</h3>
 <table>
@@ -341,11 +341,11 @@
 <h3 id="贪婪模式和非贪婪模式">贪婪模式和非贪婪模式</h3>
 <p>在 Vim 里，默认是贪婪模式，即 <code>a.*b</code> 会尽可能多滴匹配字符，在 <code>ahdbjkbkls</code> 中匹配 <code>ahdbjkb</code> 而不是 <code>ahdb</code>。
 如果是非贪婪的，可以使用 <code>\{-}</code> 代替 <code>*</code>，即 <code>a.\{-}b</code> 匹配 <code>ahdb</code> 而不是 <code>ahdbjkb</code>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">作者：SpaceVim
-链接：https://www.jianshu.com/p/03770041397c
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>作者：SpaceVim
+</span></span><span style="display:flex;"><span>链接：https://www.jianshu.com/p/03770041397c
+</span></span><span style="display:flex;"><span>來源：简书
+</span></span><span style="display:flex;"><span>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+</span></span></code></pre></div>
         </div>
 
         
@@ -377,7 +377,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/vim">vim
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/vim">vim
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rack-cors%E8%A7%A3%E5%86%B3ajax%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-cors/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rack-cors%E8%A7%A3%E5%86%B3ajax%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98-cors/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -164,41 +164,41 @@ CORS 与 JSONP 相比，更为先进、方便和可靠。</p>
 <p>Rack
 In config.ru, configure Rack::Cors by passing a block to the use command:</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">use Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
-  allow <span style="color:#ff79c6">do</span>
-    origins <span style="color:#f1fa8c">&#39;localhost:3000&#39;</span>, <span style="color:#f1fa8c">&#39;127.0.0.1:3000&#39;</span>,
-      <span style="color:#f1fa8c">/\Ahttp:\/\/192\.168\.0\.\d{1,3}(:\d+)?\z/</span> <span style="color:#6272a4"># regular expressions can be used here</span>
-    resource <span style="color:#f1fa8c">&#39;/file/list_all/&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;x-domain-token&#39;</span>
-    resource <span style="color:#f1fa8c">&#39;/file/at/_&#39;</span>,
-      <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:delete</span>, <span style="color:#f1fa8c">:put</span>, <span style="color:#f1fa8c">:patch</span>, <span style="color:#f1fa8c">:options</span>, <span style="color:#f1fa8c">:head</span><span style="color:#ff79c6">]</span>,
-      <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;x-domain-token&#39;</span>,
-      <span style="color:#f1fa8c">:expose</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;Some-Custom-Response-Header&#39;</span><span style="color:#ff79c6">]</span>,
-      <span style="color:#f1fa8c">:max_age</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">600</span> <span style="color:#6272a4"># headers to expose</span>
-  <span style="color:#ff79c6">end</span>
-  allow <span style="color:#ff79c6">do</span>
-    origins <span style="color:#f1fa8c">&#39;_&#39;</span>
-    resource <span style="color:#f1fa8c">&#39;/public/\*&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:get</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>Rails</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>use Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  allow <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    origins <span style="color:#f1fa8c">&#39;localhost:3000&#39;</span>, <span style="color:#f1fa8c">&#39;127.0.0.1:3000&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">/\Ahttp:\/\/192\.168\.0\.\d{1,3}(:\d+)?\z/</span> <span style="color:#6272a4"># regular expressions can be used here</span>
+</span></span><span style="display:flex;"><span>    resource <span style="color:#f1fa8c">&#39;/file/list_all/&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;x-domain-token&#39;</span>
+</span></span><span style="display:flex;"><span>    resource <span style="color:#f1fa8c">&#39;/file/at/_&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:delete</span>, <span style="color:#f1fa8c">:put</span>, <span style="color:#f1fa8c">:patch</span>, <span style="color:#f1fa8c">:options</span>, <span style="color:#f1fa8c">:head</span><span style="color:#ff79c6">]</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#39;x-domain-token&#39;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">:expose</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;Some-Custom-Response-Header&#39;</span><span style="color:#ff79c6">]</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f1fa8c">:max_age</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">600</span> <span style="color:#6272a4"># headers to expose</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  allow <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    origins <span style="color:#f1fa8c">&#39;_&#39;</span>
+</span></span><span style="display:flex;"><span>    resource <span style="color:#f1fa8c">&#39;/public/\*&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:get</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>Rails</p>
 <p>Put something like the code below in config/application.rb of your Rails application. For example, this will allow GET, POST or OPTIONS requests from any origin on any resource.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">module</span> YourApp
-  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Application</span> <span style="color:#ff79c6">&lt;</span> Rails<span style="color:#ff79c6">::</span>Application <span style="color:#6272a4"># ... # Rails 3/4</span>
-    config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert_before <span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;Rack::Cors&#34;</span> <span style="color:#ff79c6">do</span>
-      allow <span style="color:#ff79c6">do</span>
-        origins <span style="color:#f1fa8c">&#39;_&#39;</span>
-        resource <span style="color:#f1fa8c">&#39;_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
-      <span style="color:#ff79c6">end</span>
-    <span style="color:#ff79c6">end</span> <span style="color:#6272a4"># Rails 5</span>
-    config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert_before <span style="color:#bd93f9">0</span>, Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
-      allow <span style="color:#ff79c6">do</span>
-        origins <span style="color:#f1fa8c">&#39;_&#39;</span>
-        resource <span style="color:#f1fa8c">&#39;_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
-      <span style="color:#ff79c6">end</span>
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>可以看出，rack-cors 实际上直接给出了借口，我们在 bundle 这个 gem 后，直接在 <code>config/application.rb</code> 文件中添加配置信息即可，而无需自己在代码中添加有关跨域资源的策略信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#ff79c6">module</span> YourApp
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Application</span> <span style="color:#ff79c6">&lt;</span> Rails<span style="color:#ff79c6">::</span>Application <span style="color:#6272a4"># ... # Rails 3/4</span>
+</span></span><span style="display:flex;"><span>    config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert_before <span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;Rack::Cors&#34;</span> <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>      allow <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>        origins <span style="color:#f1fa8c">&#39;_&#39;</span>
+</span></span><span style="display:flex;"><span>        resource <span style="color:#f1fa8c">&#39;_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span> <span style="color:#6272a4"># Rails 5</span>
+</span></span><span style="display:flex;"><span>    config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert_before <span style="color:#bd93f9">0</span>, Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>      allow <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>        origins <span style="color:#f1fa8c">&#39;_&#39;</span>
+</span></span><span style="display:flex;"><span>        resource <span style="color:#f1fa8c">&#39;_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>可以看出，rack-cors 实际上直接给出了借口，我们在 bundle 这个 gem 后，直接在 <code>config/application.rb</code> 文件中添加配置信息即可，而无需自己在代码中添加有关跨域资源的策略信息。</p>
 <h3 id="实际应用">实际应用</h3>
 <p>这个 gem 是用在被访问的资源服务器上的，用来定义哪些域可以访问资源以及可以访问自己的哪些资源等策略信息。这个 gem 可以很轻松很方便地解决 ajax 跨域问题。</p>
 <ul>
@@ -207,24 +207,24 @@ In config.ru, configure Rack::Cors by passing a block to the use command:</p>
 修改 <code>config/application.rb</code>
 我们使用的是 rails，因此只需要做以下修改即可：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert<span style="color:#ff79c6">*</span>before <span style="color:#bd93f9">0</span>, Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
-  allow <span style="color:#ff79c6">do</span>
-    origins <span style="color:#f1fa8c">&#39;*&#39;</span>
-    resource <span style="color:#f1fa8c">&#39;\_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
-  <span style="color:#ff79c6">end</span>
-<span style="color:#ff79c6">end</span>
-</code></pre></div><p>其中，origins 用来配置可以请求自己资源的域，*表示任何域都可以请求；resource 用来配置自己的哪些资源可以被请求，*代表所有资源都可以被请求，methods 代表可以被请求的方法。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>config<span style="color:#ff79c6">.</span>middleware<span style="color:#ff79c6">.</span>insert<span style="color:#ff79c6">*</span>before <span style="color:#bd93f9">0</span>, Rack<span style="color:#ff79c6">::</span>Cors <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>  allow <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>    origins <span style="color:#f1fa8c">&#39;*&#39;</span>
+</span></span><span style="display:flex;"><span>    resource <span style="color:#f1fa8c">&#39;\_&#39;</span>, <span style="color:#f1fa8c">:headers</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">:any</span>, <span style="color:#f1fa8c">:methods</span> <span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:get</span>, <span style="color:#f1fa8c">:post</span>, <span style="color:#f1fa8c">:options</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><p>其中，origins 用来配置可以请求自己资源的域，*表示任何域都可以请求；resource 用来配置自己的哪些资源可以被请求，*代表所有资源都可以被请求，methods 代表可以被请求的方法。</p>
 <p>做完这两部，我们就可以实现跨域请求资源了。此时重启服务器，本地再次请求资源就会成功，同时我们可以看到自己的请求中多了类似下面的一些信息：</p>
-<pre><code>Access-Control-Allow-Origin: http://localhost:3000
+<pre tabindex="0"><code>Access-Control-Allow-Origin: http://localhost:3000
 Access-Control-Allow-Methods: GET, POST, OPTIONS
 Access-Control-Max-Age: 1728000
 Access-Control-Allow-Credentials: true
 </code></pre><p>这样，我们便在 rails 中解决了 Ajax 的跨域请求资源的问题，项目也可以继续向前开发了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt"> 作者：vito1994
- 链接：https://www.jianshu.com/p/c54a1dbaab24
- 來源：简书
- 简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span> 作者：vito1994
+</span></span><span style="display:flex;"><span> 链接：https://www.jianshu.com/p/c54a1dbaab24
+</span></span><span style="display:flex;"><span> 來源：简书
+</span></span><span style="display:flex;"><span> 简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+</span></span></code></pre></div>
         </div>
 
         
@@ -255,7 +255,7 @@ Access-Control-Allow-Credentials: true
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

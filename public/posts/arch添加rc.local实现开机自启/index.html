@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/arch%E6%B7%BB%E5%8A%A0rc.local%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -114,16 +114,16 @@
 先谈桌面级的，比如 gnome，启动 gnome-tweak 工具就可以看到开机启动项目，添加进去即可。</p>
 <p>系统级别的，我觉得最简单的方式就是创建 systemctl 的 service 脚本。这个脚本放什么位置呢？
 我们运行一个命令就看到了：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ systemctl <span style="color:#8be9fd;font-style:italic">enable</span> sshd 
-Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
-</code></pre></div><p>我们开起来 sshd 服务，显示出来 service 的位置，我们模仿这个做一个开机启动出来。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ systemctl <span style="color:#8be9fd;font-style:italic">enable</span> sshd 
+</span></span><span style="display:flex;"><span>Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+</span></span></code></pre></div><p>我们开起来 sshd 服务，显示出来 service 的位置，我们模仿这个做一个开机启动出来。
 还记得很早的 linux 中有一个 rc.local 么？有什么需要开机启动的脚本直接丢进去就行了。
 升级到了systemd 之后，这个玩意就消失了，我们尝试恢复他。</p>
 <h3 id="先建立一个-rc-localservice">先建立一个 rc-local.service，</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo vim /usr/lib/systemd/system/rc-local.service
-</code></pre></div><p>然后，我们模仿其他的 service ，来写一下：</p>
-<pre><code class="language-conf" data-lang="conf">[Unit]
-Description=&quot;/etc/rc.local Compatibility&quot; 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim /usr/lib/systemd/system/rc-local.service
+</span></span></code></pre></div><p>然后，我们模仿其他的 service ，来写一下：</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">[Unit]
+Description=&#34;/etc/rc.local Compatibility&#34; 
 #Wants=sshdgenkeys.service
 #After=sshdgenkeys.service
 #After=network.target
@@ -139,11 +139,11 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 </code></pre><h3 id="然后我们创建-etcrclocal-文件">然后，我们创建 /etc/rc.local 文件：</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo touch /etc/rc.local
-sudo chmod +x /etc/rc.local
-</code></pre></div><h3 id="设置-rclocal-开机自启">设置 rc.local 开机自启</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> rc-local.service
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo touch /etc/rc.local
+</span></span><span style="display:flex;"><span>sudo chmod +x /etc/rc.local
+</span></span></code></pre></div><h3 id="设置-rclocal-开机自启">设置 rc.local 开机自启</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo systemctl <span style="color:#8be9fd;font-style:italic">enable</span> rc-local.service
+</span></span></code></pre></div>
         </div>
 
         
@@ -173,7 +173,7 @@ sudo chmod +x /etc/rc.local
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/linux">linux
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
                     </a>
                 </li>
                 

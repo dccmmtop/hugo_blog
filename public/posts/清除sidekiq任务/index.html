@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%B8%85%E9%99%A4sidekiq%E4%BB%BB%E5%8A%A1/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E6%B8%85%E9%99%A4sidekiq%E4%BB%BB%E5%8A%A1/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -117,21 +117,21 @@
 <p>按名称获取队列：Sidekiq::Queue.new(&ldquo;mailer&rdquo;)</p>
 <p>清空队列的所有任务：Sidekiq::Queue.new.clear</p>
 <p>按条件来删除队列的任务：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">  queue<span style="color:#ff79c6">=</span>Sidekiq<span style="color:#ff79c6">::</span>Queue<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">&#34;mailer&#34;</span>)
-
-  queue<span style="color:#ff79c6">.</span>eachdo <span style="color:#ff79c6">|</span>job<span style="color:#ff79c6">|</span>
-
-      job<span style="color:#ff79c6">.</span>klass<span style="color:#6272a4"># =&gt; &#39;MyWorker&#39;  job.args# =&gt; [1, 2, 3]</span>
-
-      job<span style="color:#ff79c6">.</span>delete <span style="color:#ff79c6">if</span>    job<span style="color:#ff79c6">.</span>jid<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#39;abcdef1234567890&#39;</span>
-
-  <span style="color:#ff79c6">end</span>
-</code></pre></div><h2 id="二直接操作redis来删除队列里的任务">二、直接操作redis来删除队列里的任务</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>  queue<span style="color:#ff79c6">=</span>Sidekiq<span style="color:#ff79c6">::</span>Queue<span style="color:#ff79c6">.</span>new(<span style="color:#f1fa8c">&#34;mailer&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  queue<span style="color:#ff79c6">.</span>eachdo <span style="color:#ff79c6">|</span>job<span style="color:#ff79c6">|</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      job<span style="color:#ff79c6">.</span>klass<span style="color:#6272a4"># =&gt; &#39;MyWorker&#39;  job.args# =&gt; [1, 2, 3]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      job<span style="color:#ff79c6">.</span>delete <span style="color:#ff79c6">if</span>    job<span style="color:#ff79c6">.</span>jid<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#39;abcdef1234567890&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
+</span></span></code></pre></div><h2 id="二直接操作redis来删除队列里的任务">二、直接操作redis来删除队列里的任务</h2>
 <p>首先获取配置文件config，再连接redis，这里使用了redis的Gem包
 　　redis= Redis.new(:host =&gt; config[&lsquo;host&rsquo;], :port =&gt; config[&lsquo;port&rsquo;], :db=&gt; config[&lsquo;db&rsquo;], :password =&gt; config[&lsquo;password&rsquo;])
 由于queues用的是set类型的数据，所以要用srem来删除相应的数据</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">redis<span style="color:#ff79c6">.</span>srem(‘queues’, ‘队列的名称’)  <span style="color:#6272a4"># 这种情况会直接删除该名称的队列</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>redis<span style="color:#ff79c6">.</span>srem(‘queues’, ‘队列的名称’)  <span style="color:#6272a4"># 这种情况会直接删除该名称的队列</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -156,7 +156,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

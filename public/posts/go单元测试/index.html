@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/go%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -119,18 +119,18 @@
 <p>在测试函数的内部，用户可以使用Error，Fail等一系列方法表示测试失败。当用户在终端里面执行go test命令的时候，所有符合上述格式的测试函数就会被执行。如果一个测试在执行的时候没有任何失败，就认为通过了测试</p>
 <p>一般来说，一个单元通常会与程序中的一个函数或者一个方法相对应，但这并不是必须的。程序中的一个部分能否独立地进行测试，是评判这个部分能否被归纳为“单元”的一个重要指标。</p>
 <h3 id="检测错误">检测错误</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
-    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
-    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
-        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
-    }
-
-    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
-        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
-    }
-
-}
-</code></pre></div><p>testing.T 有几个常用的方法:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+</span></span><span style="display:flex;"><span>    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
+</span></span><span style="display:flex;"><span>        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
+</span></span><span style="display:flex;"><span>        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>testing.T 有几个常用的方法:</p>
 <ul>
 <li>Log 将给定的文本记录到错误日志里， 与 <code>fmt.Println</code> 类似</li>
 <li>Logf 根据给定的格式,将文本记录到错误日志，与 <code>fmt.Printf</code> 类似</li>
@@ -151,43 +151,43 @@ Error 先执行 Log 函数，再执行 Fail 函数, 其他3个类似</p>
 <p>但是，为了避免测试用例在函数尚未实现之前一直打印烦人的失败信息，用户也可以使用testing.T 结构提供的skip函数，暂时跳过指定的测试用例。</p>
 <p>此外，如果某个测试用例的执行时间非常长，我们也可以在实施完整性检查（sanity check）的时候，使用Skip函数跳过该测试用例。</p>
 <p>示例代码:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
-   <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
-</span><span style="color:#6272a4"></span>   t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
-}
-</code></pre></div><p>再次执行测试：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+</span></span><span style="display:flex;"><span>   <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>   t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>再次执行测试：
 <img src="../../images/20211124000145307_29055.png" alt=""></p>
 <h4 id="short">Short</h4>
 <p>除了可以直接跳过整个测试用例，用户还可以通过向go test命令传入短暂标志 <code>-short</code>，并在测试用例中使用某些条件逻辑来跳过测试中的指定部分。
 注意，这种做法跟在go test命令中通过选项来选择性地执行指定的测试不一样：选择性执行只会执行指定的测试，并跳过其他所有测试，而<code>-short</code>标志则会根据用户编写测试代码的方式，跳过测试中的指定部分或者跳过整个测试用例。</p>
 <p>示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-    <span style="color:#6272a4">// 如果带有 -short 参数
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
-        t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
-    }
-    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-</code></pre></div><p><img src="../../images/20211124000620614_4789.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 如果带有 -short 参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
+</span></span><span style="display:flex;"><span>        t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="../../images/20211124000620614_4789.png" alt=""></p>
 <h3 id="并行测试">并行测试</h3>
 <p>正如之前所说，单元测试的目的是独立地进行测试。尽管有些时候，测试套件会因为内部存在依赖关系而无法独立地进行单元测试，但是只要单元测试可以独立地进行，用户就可以通过并行地运行测试用例来提升测试的速度了</p>
 <p>testing 通过 Parallel 方法实现并行</p>
 <p>示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-    t.<span style="color:#50fa7b">Parallel</span>()
-    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-    t.<span style="color:#50fa7b">Parallel</span>()
-    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-    t.<span style="color:#50fa7b">Parallel</span>()
-    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
-    }
-</code></pre></div><p>通过 -parallel n 控制可以同时运行几个单元测试
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>    t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>    t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>    t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>    time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>通过 -parallel n 控制可以同时运行几个单元测试
 <img src="../../images/20211124221111564_7362.png" alt=""></p>
 <h3 id="基准测试">基准测试</h3>
 <p>Go 的 testing 包支持两种测试，一种是上面的功能测试，还一种就是检验程序的性能的基准测试</p>
@@ -198,91 +198,90 @@ Error 先执行 Log 函数，再执行 Fail 函数, 其他3个类似</p>
 <li>使用 go test -bench . 执行本目录下的所有基准测试</li>
 </ul>
 <p>示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#6272a4">// 基准测试
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
-    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
-        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
-    }
-
-</code></pre></div><p>结果:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#6272a4">// 基准测试
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>结果:
 <img src="../../images/20211125232832543_24448.png" alt="">
 执行了 21745 次。花费了 55310 纳秒，即 55 毫秒</p>
 <h3 id="完整代码">完整代码</h3>
 <p>json文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">1</span>,
-  <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Hello world!&#34;</span>,
-  <span style="color:#ff79c6">&#34;author&#34;</span>:{
-    <span style="color:#ff79c6">&#34;id&#34;</span>:<span style="color:#bd93f9">2</span>,
-    <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Sau Sheong&#34;</span>
-  },
-  <span style="color:#ff79c6">&#34;comments&#34;</span>: [
-    {
-      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">3</span>,
-      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Have a great day!&#34;</span>,
-      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Adam&#34;</span>
-    },
-    {
-      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">4</span>,
-      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;How are you today?&#34;</span>,
-      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Betty&#34;</span>
-    }
-  ]
-}
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-
-<span style="color:#ff79c6">import</span> (
-    <span style="color:#f1fa8c">&#34;testing&#34;</span>
-    <span style="color:#f1fa8c">&#34;time&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
-    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
-    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
-        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
-    }
-
-    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
-        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
-    }
-
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-   t.<span style="color:#50fa7b">Parallel</span>()
-   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-   t.<span style="color:#50fa7b">Parallel</span>()
-   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-   t.<span style="color:#50fa7b">Parallel</span>()
-   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
- <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
-</span><span style="color:#6272a4"></span> t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
-}
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
-   <span style="color:#6272a4">// 如果带有 -short 参数
-</span><span style="color:#6272a4"></span>   <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
-       t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
-   }
-   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
-}
-
-<span style="color:#6272a4">// 基准测试
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
-    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
-        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
-    }
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Hello world!&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;author&#34;</span>:{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;id&#34;</span>:<span style="color:#bd93f9">2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">&#34;name&#34;</span>: <span style="color:#f1fa8c">&#34;Sau Sheong&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">&#34;comments&#34;</span>: [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">3</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;Have a great day!&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Adam&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;id&#34;</span>: <span style="color:#bd93f9">4</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;content&#34;</span>: <span style="color:#f1fa8c">&#34;How are you today?&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&#34;author&#34;</span>: <span style="color:#f1fa8c">&#34;Betty&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;testing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f1fa8c">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestDecode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+</span></span><span style="display:flex;"><span>    post <span style="color:#ff79c6">:=</span> <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> post.Id <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">1</span>{
+</span></span><span style="display:flex;"><span>        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的postId, 期望得到1，实际是: &#34;</span>, post.Id)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> post.Content <span style="color:#ff79c6">!=</span> <span style="color:#f1fa8c">&#34;Hello world!&#34;</span> {
+</span></span><span style="display:flex;"><span>        t.<span style="color:#50fa7b">Error</span>(<span style="color:#f1fa8c">&#34;错误的post content, 期望得到&#39;Hello world&#39;，实际是: &#34;</span>, post.Content)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep5</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>   t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep3</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>   t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestSleep1</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>   t.<span style="color:#50fa7b">Parallel</span>()
+</span></span><span style="display:flex;"><span>   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">3</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestEncode</span>(t <span style="color:#ff79c6">*</span>testing.T){
+</span></span><span style="display:flex;"><span> <span style="color:#6272a4">// Skip 暂时跳过对某个方法的测试
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span> t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;暂时跳过对Encode方法的测试&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">TestLongTime</span>(t <span style="color:#ff79c6">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>   <span style="color:#6272a4">// 如果带有 -short 参数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>   <span style="color:#ff79c6">if</span> testing.<span style="color:#50fa7b">Short</span>() {
+</span></span><span style="display:flex;"><span>       t.<span style="color:#50fa7b">Skip</span>(<span style="color:#f1fa8c">&#34;跳过长时间的测试&#34;</span>)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   time.<span style="color:#50fa7b">Sleep</span>(<span style="color:#bd93f9">10</span> <span style="color:#ff79c6">*</span> time.Second)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 基准测试
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">BenchmarkDecode</span>(b <span style="color:#ff79c6">*</span>testing.B) {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">:=</span> <span style="color:#bd93f9">0</span>; i &lt; b.N; i<span style="color:#ff79c6">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">Decode</span>(<span style="color:#f1fa8c">&#34;./tsconfig.json&#34;</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
         </div>
 
         
@@ -316,12 +315,12 @@ Error 先执行 Log 函数，再执行 Fail 函数, 其他3个类似</p>
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95">单元测试
                     </a>
                 </li>
                 

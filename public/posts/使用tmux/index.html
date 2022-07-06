@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E4%BD%BF%E7%94%A8tmux/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E4%BD%BF%E7%94%A8tmux/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -124,84 +124,84 @@
 </ol>
 <h2 id="配置及安装插件">配置及安装插件</h2>
 <p>下面是我的配置文件,以及说明</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">##-- bindkeys --#</span>
-<span style="color:#6272a4">### 修改前缀键为  ctrl a</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g prefix ^a
-unbind ^b
-<span style="color:#8be9fd;font-style:italic">bind</span> a send-prefix
-
-<span style="color:#6272a4"># 窗口切换 我设置的键位和 vim 相通 </span>
-<span style="color:#6272a4"># ctrl + j 上一个窗口</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> -n C-j previous-window
-<span style="color:#6272a4"># ctrl + k 下一个窗口</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> -n C-k next-window
-
-
-
-
-<span style="color:#6272a4"># 设置松开鼠标不会自动跳到屏幕底部，这个特性需要稍微高一点的版本才支持</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g mouse on
-unbind -T copy-mode-vi MouseDragEnd1Pane
-
-
-
-<span style="color:#6272a4"># 快速加载配置文件，不用重启 tmux</span>
-bind-key r source-file ~/.tmux.conf <span style="color:#f1fa8c">\;</span> display-message <span style="color:#f1fa8c">&#34;tmux.conf reloaded&#34;</span>
-
-<span style="color:#6272a4"># 下面是底部状态栏的配置，个人不喜欢花里胡哨，简单够用即可</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g message-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>        <span style="color:#6272a4"># tomorrow night blue, base3</span>
-
-<span style="color:#8be9fd;font-style:italic">set</span> -g status-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>   <span style="color:#6272a4"># tomorrow night blue, base3</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g status-left <span style="color:#f1fa8c">&#34;#[bg=#0087ff] ❐ Hi!&#34;</span>       <span style="color:#6272a4"># blue</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g status-left-length <span style="color:#bd93f9">400</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g status-right <span style="color:#f1fa8c">&#34;&#34;</span>
-<span style="color:#6272a4">#set -g status-right &#34;#[bg=red] %Y-%m-%d %H:%M &#34;</span>
-<span style="color:#6272a4">#set -g status-right-length 600</span>
-
-<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-separator <span style="color:#f1fa8c">&#34;|&#34;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-style <span style="color:#f1fa8c">&#34;bg=red&#34;</span> <span style="color:#6272a4"># red</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-last-style <span style="color:#f1fa8c">&#34;fg=red&#34;</span>
-
-
-<span style="color:#6272a4"># split window</span>
-unbind %
-<span style="color:#6272a4"># 水平分隔窗口 快捷键是 prefix \ (我的前缀是 ctrl + A)</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> <span style="color:#f1fa8c">\\</span> split-window -h
-unbind <span style="color:#f1fa8c">&#39;&#34;&#39;</span>
-<span style="color:#6272a4"># 垂直分隔窗口 快捷键是 prefix -</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> - split-window -v
-
-<span style="color:#6272a4"># select pane 面板之间跳转</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> k selectp -U <span style="color:#6272a4"># above (prefix k)</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> j selectp -D <span style="color:#6272a4"># below (prefix j)</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> h selectp -L <span style="color:#6272a4"># left (prefix h)</span>
-<span style="color:#8be9fd;font-style:italic">bind</span> l selectp -R <span style="color:#6272a4"># right (prefix l)</span>
-
-
-<span style="color:#6272a4"># 下面是插件部分</span>
-<span style="color:#6272a4"># 用来保存会话 和 回复会话的 </span>
-<span style="color:#6272a4"># 保存会话快捷键是 prefix + ctrl + s (对应我的就是   ctrl + A ctrl + s 中间不要松开 ctrl 键)</span>
-<span style="color:#6272a4"># 恢复会话： prefix + ctrl + r</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-resurrect&#39;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-restore <span style="color:#f1fa8c">&#39;on&#39;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-save-bash-history <span style="color:#f1fa8c">&#39;on&#39;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-capture-pane-contents <span style="color:#f1fa8c">&#39;on&#39;</span>
-<span style="color:#6272a4"># 设置保存 vim 的工作状态</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-strategy-vim <span style="color:#f1fa8c">&#39;session&#39;</span>
-<span style="color:#6272a4"># 每隔60秒自动保存一次</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-save-interval <span style="color:#f1fa8c">&#39;60&#39;</span>
-
-<span style="color:#6272a4"># 鼠标选中即复制的插件</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-yank&#39;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @yank_action <span style="color:#f1fa8c">&#39;copy-pipe&#39;</span>
-<span style="color:#8be9fd;font-style:italic">set</span> -g @yank_with_mouse on
-
-<span style="color:#6272a4">#  安装插件的插件</span>
-<span style="color:#6272a4"># ctrl + I   即自动下载插件安装。</span>
-run <span style="color:#f1fa8c">&#39;~/.tmux/plugins/tpm/tpm&#39;</span> 
-</code></pre></div><h3 id="结束">结束！</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4">##-- bindkeys --#</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">### 修改前缀键为  ctrl a</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g prefix ^a
+</span></span><span style="display:flex;"><span>unbind ^b
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> a send-prefix
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 窗口切换 我设置的键位和 vim 相通 </span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ctrl + j 上一个窗口</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> -n C-j previous-window
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ctrl + k 下一个窗口</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> -n C-k next-window
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置松开鼠标不会自动跳到屏幕底部，这个特性需要稍微高一点的版本才支持</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g mouse on
+</span></span><span style="display:flex;"><span>unbind -T copy-mode-vi MouseDragEnd1Pane
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 快速加载配置文件，不用重启 tmux</span>
+</span></span><span style="display:flex;"><span>bind-key r source-file ~/.tmux.conf <span style="color:#f1fa8c">\;</span> display-message <span style="color:#f1fa8c">&#34;tmux.conf reloaded&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 下面是底部状态栏的配置，个人不喜欢花里胡哨，简单够用即可</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g message-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>        <span style="color:#6272a4"># tomorrow night blue, base3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g status-style <span style="color:#f1fa8c">&#34;bg=#00346e, fg=#ffffd7&#34;</span>   <span style="color:#6272a4"># tomorrow night blue, base3</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g status-left <span style="color:#f1fa8c">&#34;#[bg=#0087ff] ❐ Hi!&#34;</span>       <span style="color:#6272a4"># blue</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g status-left-length <span style="color:#bd93f9">400</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g status-right <span style="color:#f1fa8c">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#set -g status-right &#34;#[bg=red] %Y-%m-%d %H:%M &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#set -g status-right-length 600</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-format <span style="color:#f1fa8c">&#34; #I #W &#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-separator <span style="color:#f1fa8c">&#34;|&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-current-style <span style="color:#f1fa8c">&#34;bg=red&#34;</span> <span style="color:#6272a4"># red</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -wg window-status-last-style <span style="color:#f1fa8c">&#34;fg=red&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># split window</span>
+</span></span><span style="display:flex;"><span>unbind %
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 水平分隔窗口 快捷键是 prefix \ (我的前缀是 ctrl + A)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> <span style="color:#f1fa8c">\\</span> split-window -h
+</span></span><span style="display:flex;"><span>unbind <span style="color:#f1fa8c">&#39;&#34;&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 垂直分隔窗口 快捷键是 prefix -</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> - split-window -v
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># select pane 面板之间跳转</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> k selectp -U <span style="color:#6272a4"># above (prefix k)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> j selectp -D <span style="color:#6272a4"># below (prefix j)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> h selectp -L <span style="color:#6272a4"># left (prefix h)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">bind</span> l selectp -R <span style="color:#6272a4"># right (prefix l)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 下面是插件部分</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 用来保存会话 和 回复会话的 </span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 保存会话快捷键是 prefix + ctrl + s (对应我的就是   ctrl + A ctrl + s 中间不要松开 ctrl 键)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 恢复会话： prefix + ctrl + r</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-resurrect&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-restore <span style="color:#f1fa8c">&#39;on&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-save-bash-history <span style="color:#f1fa8c">&#39;on&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-capture-pane-contents <span style="color:#f1fa8c">&#39;on&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 设置保存 vim 的工作状态</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @resurrect-strategy-vim <span style="color:#f1fa8c">&#39;session&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 每隔60秒自动保存一次</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @continuum-save-interval <span style="color:#f1fa8c">&#39;60&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 鼠标选中即复制的插件</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @plugin <span style="color:#f1fa8c">&#39;tmux-plugins/tmux-yank&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @yank_action <span style="color:#f1fa8c">&#39;copy-pipe&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">set</span> -g @yank_with_mouse on
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#  安装插件的插件</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># ctrl + I   即自动下载插件安装。</span>
+</span></span><span style="display:flex;"><span>run <span style="color:#f1fa8c">&#39;~/.tmux/plugins/tpm/tpm&#39;</span> 
+</span></span></code></pre></div><h3 id="结束">结束！</h3>
 <p>有任何问题，欢迎下面留言，或者加我好友讨论哟！或者请我吃个糖果 (<em>^_^</em>)
 <img src="https://img2020.cnblogs.com/blog/732353/202011/732353-20201116004141080-394973585.png" alt="">
 <img src="https://img2020.cnblogs.com/blog/732353/202011/732353-20201116004339596-1722299368.png" alt=""></p>

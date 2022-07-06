@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails_console%E5%A5%BD%E7%94%A8%E7%9A%84%E6%8A%80%E5%B7%A7/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails_console%E5%A5%BD%E7%94%A8%E7%9A%84%E6%8A%80%E5%B7%A7/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -109,22 +109,22 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <p>用 app 来调用 routes，比如 app.posts_path, app.topic_path(1)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>topics_path
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;/topics&#34;</span>
-irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>get(app<span style="color:#ff79c6">.</span>root_path)
-<span style="color:#ff79c6">......</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">200</span>
-</code></pre></div><p>用 helper 来调用 Helper 方法，比如:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>link_to(<span style="color:#f1fa8c">&#34;Ruby China&#34;</span>, <span style="color:#f1fa8c">&#34;http://ruby-china.org&#34;</span>)
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;&lt;a href=</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">http://ruby-china.org</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">&gt;Ruby China&lt;/a&gt;&#34;</span>
-irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>truncate(<span style="color:#f1fa8c">&#34;Here is Ruby China.&#34;</span>, <span style="color:#f1fa8c">length</span>: <span style="color:#bd93f9">15</span>)
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;Here is Ruby...&#34;</span>
-</code></pre></div><p>使用 source_location 方法查看方法在那里定义的, 比如:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>instance_method(<span style="color:#f1fa8c">:destroy</span>)<span style="color:#ff79c6">.</span>source_location
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">30</span><span style="color:#ff79c6">]</span>
-irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>method(<span style="color:#f1fa8c">:destroy_all</span>)<span style="color:#ff79c6">.</span>source_location
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">239</span><span style="color:#ff79c6">]</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>topics_path
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;/topics&#34;</span>
+</span></span><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span> app<span style="color:#ff79c6">.</span>get(app<span style="color:#ff79c6">.</span>root_path)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">......</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#bd93f9">200</span>
+</span></span></code></pre></div><p>用 helper 来调用 Helper 方法，比如:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>link_to(<span style="color:#f1fa8c">&#34;Ruby China&#34;</span>, <span style="color:#f1fa8c">&#34;http://ruby-china.org&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;&lt;a href=</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">http://ruby-china.org</span><span style="color:#f1fa8c">\&#34;</span><span style="color:#f1fa8c">&gt;Ruby China&lt;/a&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span> helper<span style="color:#ff79c6">.</span>truncate(<span style="color:#f1fa8c">&#34;Here is Ruby China.&#34;</span>, <span style="color:#f1fa8c">length</span>: <span style="color:#bd93f9">15</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#f1fa8c">&#34;Here is Ruby...&#34;</span>
+</span></span></code></pre></div><p>使用 source_location 方法查看方法在那里定义的, 比如:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>instance_method(<span style="color:#f1fa8c">:destroy</span>)<span style="color:#ff79c6">.</span>source_location
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">30</span><span style="color:#ff79c6">]</span>
+</span></span><span style="display:flex;"><span>irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</span>method(<span style="color:#f1fa8c">:destroy_all</span>)<span style="color:#ff79c6">.</span>source_location
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/Users/jason/.rvm/gems/ruby-1.9.3-p0/gems/mongoid-2.4.8/lib/mongoid/persistence.rb&#34;</span>, <span style="color:#bd93f9">239</span><span style="color:#ff79c6">]</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -144,7 +144,7 @@ irb <span style="color:#ff79c6">&gt;</span>Topic<span style="color:#ff79c6">.</s
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

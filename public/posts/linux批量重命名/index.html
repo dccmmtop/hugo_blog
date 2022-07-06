@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/linux%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/linux%E6%89%B9%E9%87%8F%E9%87%8D%E5%91%BD%E5%90%8D/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -118,8 +118,8 @@
 </ol>
 <p>通过rename命令批量重命名文件
 基本语法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rename <span style="color:#ff79c6">[</span>-n -v -f<span style="color:#ff79c6">]</span> &lt;pcre&gt; &lt;files&gt;
-</code></pre></div><p>&lsquo;pcre’是Perl兼容正则表达式，它表示的是要重命名的文件和该怎么做。正则表达式的形式是‘s/old-name/new-name/’。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rename <span style="color:#ff79c6">[</span>-n -v -f<span style="color:#ff79c6">]</span> &lt;pcre&gt; &lt;files&gt;
+</span></span></code></pre></div><p>&lsquo;pcre’是Perl兼容正则表达式，它表示的是要重命名的文件和该怎么做。正则表达式的形式是‘s/old-name/new-name/’。
 ‘-v’选项会显示文件名改变的细节（比如：XXX重命名成YYY）。
 ‘-n’选项告诉rename命令在不实际改变名称的情况下显示文件将会重命名的情况。这个选项在你想要在不改变文件名的情况下模拟改变文件名的情况下很有用。
 ‘-f’选项强制覆盖存在的文件。
@@ -138,22 +138,22 @@
 现在让我们考虑更复杂的包含子模式的正则表达式。在PCRE中，子模式包含在圆括号中，符后接上数字（比如1，$2）。</li>
 </ol>
 <p>下面的命令会将‘imgNNNN.jpeg’变成‘danNNNN.jpg’。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@root:~$ rename -v <span style="color:#f1fa8c">&#39;s/img_(\d{4})\.jpeg/dan_$1.jpg/&#39;</span> *.jpeg
-img_5417.jpeg renamed as dan_5417.jpg
-img_5418.jpeg renamed as dan_5418.jpg
-img_5419.jpeg renamed as dan_5419.jpg
-img_5420.jpeg renamed as dan_5420.jpg
-img_5421.jpeg renamed as dan_5421.jpg
-img_5422.jpeg renamed as dan_5422.jpg
-</code></pre></div><p>下面的命令会将‘img_000NNNN.jpeg’变成‘dan_NNNN.jpg’。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@root:~$ rename -v <span style="color:#f1fa8c">&#39;s/img_\d{3}(\d{4})\.jpeg/dan_$1.jpg/&#39;</span> *.jpeg
-img_0005417.jpeg renamed as dan_5417.jpg
-img_0005418.jpeg renamed as dan_5418.jpg
-img_0005419.jpeg renamed as dan_5419.jpg
-img_0005420.jpeg renamed as dan_5420.jpg
-img_0005421.jpeg renamed as dan_5421.jpg
-img_0005422.jpeg renamed as dan_5422.jpg
-</code></pre></div><p>上面的例子中，子模式‘\d{4}’会捕捉4个连续的数字，捕捉的四个数字匹配模式对应$1, 将会用于新的文件名。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>root@root:~$ rename -v <span style="color:#f1fa8c">&#39;s/img_(\d{4})\.jpeg/dan_$1.jpg/&#39;</span> *.jpeg
+</span></span><span style="display:flex;"><span>img_5417.jpeg renamed as dan_5417.jpg
+</span></span><span style="display:flex;"><span>img_5418.jpeg renamed as dan_5418.jpg
+</span></span><span style="display:flex;"><span>img_5419.jpeg renamed as dan_5419.jpg
+</span></span><span style="display:flex;"><span>img_5420.jpeg renamed as dan_5420.jpg
+</span></span><span style="display:flex;"><span>img_5421.jpeg renamed as dan_5421.jpg
+</span></span><span style="display:flex;"><span>img_5422.jpeg renamed as dan_5422.jpg
+</span></span></code></pre></div><p>下面的命令会将‘img_000NNNN.jpeg’变成‘dan_NNNN.jpg’。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>root@root:~$ rename -v <span style="color:#f1fa8c">&#39;s/img_\d{3}(\d{4})\.jpeg/dan_$1.jpg/&#39;</span> *.jpeg
+</span></span><span style="display:flex;"><span>img_0005417.jpeg renamed as dan_5417.jpg
+</span></span><span style="display:flex;"><span>img_0005418.jpeg renamed as dan_5418.jpg
+</span></span><span style="display:flex;"><span>img_0005419.jpeg renamed as dan_5419.jpg
+</span></span><span style="display:flex;"><span>img_0005420.jpeg renamed as dan_5420.jpg
+</span></span><span style="display:flex;"><span>img_0005421.jpeg renamed as dan_5421.jpg
+</span></span><span style="display:flex;"><span>img_0005422.jpeg renamed as dan_5422.jpg
+</span></span></code></pre></div><p>上面的例子中，子模式‘\d{4}’会捕捉4个连续的数字，捕捉的四个数字匹配模式对应$1, 将会用于新的文件名。</p>
 
         </div>
 

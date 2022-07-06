@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/mysql%E5%92%8Credis%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/mysql%E5%92%8Credis%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -241,11 +241,11 @@
 <p>通过设置缓存过期时间，若发生上述淘汰缓存失败的情况，则在缓存过期后，读请求仍然可以从 DB 中读取最新数据并更新缓存，可减小数据不一致的影响范围。虽然在<strong>一定时间范围内数据有差异</strong>，但可以保证数据的<strong>最终一致性</strong>。</p>
 <p>此外，还可以通过延时双删进行保障：在线程 A 更新完数据库值以后，让它先 sleep 一小段时间，确保线程 B 能够先从数据库读取数据，再把缺失的数据写入缓存（此时有可能写入的是旧值），然后，线程 A 再进行删除，确保缓存中最终会将是最新的值。后续，其它线程读取数据时，发现缓存缺失，会从数据库中读取最新值</p>
 <p><strong>延时删除只是确保最终缓存中的值与数据库保持一致。不能防止中间的不一致</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">redis<span style="color:#ff79c6">.</span>delKey(X)
-db<span style="color:#ff79c6">.</span>update(X)
-Thread<span style="color:#ff79c6">.</span>sleep(N)
-redis<span style="color:#ff79c6">.</span>delKey(X)
-</code></pre></div><p>sleep 时间：在业务程序运行的时候，统计下线程读数据和写缓存的操作时间，以此为基础来进行估算(较难)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>redis<span style="color:#ff79c6">.</span>delKey(X)
+</span></span><span style="display:flex;"><span>db<span style="color:#ff79c6">.</span>update(X)
+</span></span><span style="display:flex;"><span>Thread<span style="color:#ff79c6">.</span>sleep(N)
+</span></span><span style="display:flex;"><span>redis<span style="color:#ff79c6">.</span>delKey(X)
+</span></span></code></pre></div><p>sleep 时间：在业务程序运行的时候，统计下线程读数据和写缓存的操作时间，以此为基础来进行估算(较难)</p>
 <p>注意：如果难以接受 sleep 这种写法，可以使用<strong>延时队列进行替代</strong>。</p>
 <p>先删除缓存值再更新数据库，有可能导致请求因缓存缺失而访问数据库，给数据库带来压力，也就是缓存穿透的问题。针对缓存穿透问题，可以用<strong>缓存空结果</strong>、<strong>布隆过滤器</strong>进行解决。</p>
 <p><strong>(2) 先更新数据库，再删除缓存</strong></p>
@@ -532,7 +532,7 @@ Redis key 大小设计：由于网络的一次传输 MTU 最大为 1500 字节�
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/%E6%9E%B6%E6%9E%84">架构
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/%E6%9E%B6%E6%9E%84">架构
                     </a>
                 </li>
                 

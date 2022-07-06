@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/rails5%E4%B8%AD%E7%9A%84autoload%E5%92%8Ceager_load/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/rails5%E4%B8%AD%E7%9A%84autoload%E5%92%8Ceager_load/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -120,11 +120,11 @@
 <h3 id="添加路径到-eager_load_paths">添加路径到 eager_load_paths</h3>
 <p>假如自己写的类在lib下</p>
 <p>在 <code>config/application.rb</code> 中</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">config<span style="color:#ff79c6">.</span>eager_load_paths <span style="color:#ff79c6">&lt;&lt;</span> Rails<span style="color:#ff79c6">.</span>root<span style="color:#ff79c6">.</span>join(<span style="color:#f1fa8c">&#39;lib&#39;</span>)
-</code></pre></div><h3 id="重新启用-autoload">重新启用 autoload</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>config<span style="color:#ff79c6">.</span>eager_load_paths <span style="color:#ff79c6">&lt;&lt;</span> Rails<span style="color:#ff79c6">.</span>root<span style="color:#ff79c6">.</span>join(<span style="color:#f1fa8c">&#39;lib&#39;</span>)
+</span></span></code></pre></div><h3 id="重新启用-autoload">重新启用 autoload</h3>
 <p>你可以在任何环境中重新启用 autoload, 但是这种方法在高版本中可能被弃用</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">config<span style="color:#ff79c6">.</span>enable_dependency_loading <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</code></pre></div><h3 id="把代码移动到-app-目录下">把代码移动到 app/ 目录下</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>config<span style="color:#ff79c6">.</span>enable_dependency_loading <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
+</span></span></code></pre></div><h3 id="把代码移动到-app-目录下">把代码移动到 app/ 目录下</h3>
 <p>Rails 在默认的情况下会 autolaod 和 eager_load app/ 目录下的所有内容。这样可以减少你额外的配置。例如把 lib 目录 移动到 app/lib/</p>
 <blockquote>
 <p>译注： 这种方式使 rails 的目录变得混乱， 不建议</p>
@@ -161,7 +161,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/rails">rails
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/rails">rails
                     </a>
                 </li>
                 

@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/ruby%E4%B8%ADhash%E7%9A%84%E6%8E%92%E5%BA%8F/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/ruby%E4%B8%ADhash%E7%9A%84%E6%8E%92%E5%BA%8F/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -115,22 +115,22 @@
 <h4 id="返回数组">返回数组</h4>
 <p>首先要知道的是 Hash 对象调用 sort 或者 sort_by 后，会返回一个数组，而不是Hash。如果想得到 Hash，需要使用 <code>to_h</code> 方法</p>
 <p>假如有下面的 Hash</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">hash</span> <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">a</span>:<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">b</span>:<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">c</span>:<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">d</span>:<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">e</span>:<span style="color:#bd93f9">2</span>}
-</code></pre></div><p>调用sort方法，将会返回一个嵌套数组</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort <span style="color:#6272a4"># 没有指定按什么值进行排序，所顺序不会发生变化</span>
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span> <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]]</span>
-</code></pre></div><h4 id="按照-hash-的值排序">按照 hash 的值排序</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> v}
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]]</span>
-</code></pre></div><h4 id="按照-hash-的值倒序">按照 hash 的值倒序</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> <span style="color:#ff79c6">-</span>v}
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]]</span>
-</code></pre></div><h4 id="先按值倒序再按-key-正序">先按值倒序再按 key 正序</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#8be9fd;font-style:italic">hash</span> <span style="color:#ff79c6">=</span> {“w”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “k”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “l”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “v”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">5</span>, “d”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “h”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">4</span>, “f”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “u”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “<span style="color:#8be9fd;font-style:italic">p</span>”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “j”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>}
-
-<span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> <span style="color:#ff79c6">[-</span>v, k<span style="color:#ff79c6">]</span>}
-<span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span>“v”, <span style="color:#bd93f9">5</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“h”, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“d”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“l”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“w”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“f”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“j”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“k”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“<span style="color:#8be9fd;font-style:italic">p</span>”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“u”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]]</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span> <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">a</span>:<span style="color:#bd93f9">1</span>, <span style="color:#f1fa8c">b</span>:<span style="color:#bd93f9">2</span>, <span style="color:#f1fa8c">c</span>:<span style="color:#bd93f9">4</span>, <span style="color:#f1fa8c">d</span>:<span style="color:#bd93f9">3</span>, <span style="color:#f1fa8c">e</span>:<span style="color:#bd93f9">2</span>}
+</span></span></code></pre></div><p>调用sort方法，将会返回一个嵌套数组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort <span style="color:#6272a4"># 没有指定按什么值进行排序，所顺序不会发生变化</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span> <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div><h4 id="按照-hash-的值排序">按照 hash 的值排序</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> v}
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div><h4 id="按照-hash-的值倒序">按照 hash 的值倒序</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> <span style="color:#ff79c6">-</span>v}
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span><span style="color:#f1fa8c">:c</span>, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:d</span>, <span style="color:#bd93f9">3</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:b</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:e</span>, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:a</span>, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div><h4 id="先按值倒序再按-key-正序">先按值倒序再按 key 正序</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span> <span style="color:#ff79c6">=</span> {“w”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “k”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “l”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “v”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">5</span>, “d”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">2</span>, “h”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">4</span>, “f”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “u”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “<span style="color:#8be9fd;font-style:italic">p</span>”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>, “j”<span style="color:#ff79c6">=&gt;</span><span style="color:#bd93f9">1</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">hash</span><span style="color:#ff79c6">.</span>sort_by {<span style="color:#ff79c6">|</span>k, v<span style="color:#ff79c6">|</span> <span style="color:#ff79c6">[-</span>v, k<span style="color:#ff79c6">]</span>}
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">=&gt;</span> <span style="color:#ff79c6">[[</span>“v”, <span style="color:#bd93f9">5</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“h”, <span style="color:#bd93f9">4</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“d”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“l”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“w”, <span style="color:#bd93f9">2</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“f”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“j”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“k”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“<span style="color:#8be9fd;font-style:italic">p</span>”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]</span>, <span style="color:#ff79c6">[</span>“u”, <span style="color:#bd93f9">1</span><span style="color:#ff79c6">]]</span>
+</span></span></code></pre></div>
         </div>
 
         
@@ -158,7 +158,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/ruby">ruby
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
                     </a>
                 </li>
                 

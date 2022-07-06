@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/gorm%E5%8C%85%E4%BD%BF%E7%94%A8/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/gorm%E5%8C%85%E4%BD%BF%E7%94%A8/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -118,73 +118,72 @@
 <h2 id="处理映射关系">处理映射关系</h2>
 <p>在Comment结构里设置了一个PostId字段。Gorm会自动把这种格式的字段看作是外键，并创建所需的关系。</p>
 <h2 id="示例代码">示例代码</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#ff79c6">package</span> main
-<span style="color:#ff79c6">import</span> (
-  <span style="color:#f1fa8c">&#34;fmt&#34;</span>
-  _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
-  <span style="color:#f1fa8c">&#34;github.com/jinzhu/gorm&#34;</span>
-  <span style="color:#f1fa8c">&#34;time&#34;</span>
-)
-
-<span style="color:#8be9fd;font-style:italic">type</span> Post <span style="color:#8be9fd;font-style:italic">struct</span> {
-  <span style="color:#6272a4">// 会被自动设置成主键
-</span><span style="color:#6272a4"></span>  Id <span style="color:#8be9fd">int</span>
-  Content <span style="color:#8be9fd">string</span>
-  <span style="color:#6272a4">// 数据库层面不可以为空约束
-</span><span style="color:#6272a4"></span>  Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`sql:&#34;not null&#34;`</span>
-  Comments []Comment
-  <span style="color:#6272a4">// 约定。 创建时会被自动赋值
-</span><span style="color:#6272a4"></span>  CreatedAt time.Time
-}
-
-<span style="color:#8be9fd;font-style:italic">type</span> Comment <span style="color:#8be9fd;font-style:italic">struct</span> {
-  Id <span style="color:#8be9fd">int</span>
-  Content <span style="color:#8be9fd">string</span>
-  Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`sql:&#34;not null&#34;`</span>
-  <span style="color:#6272a4">// 以Id结尾的字段被视为外键,在关联对象时起作用.  index 会在此字段上创建索引
-</span><span style="color:#6272a4"></span>  PostId <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`sql:&#34;index&#34;`</span>
-  CreatedAt time.Time
-}
-
-<span style="color:#8be9fd;font-style:italic">var</span> Db <span style="color:#ff79c6">*</span>gorm.DB
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>(){
-  <span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
-  Db, err = gorm.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>,<span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat?parseTime=true&#34;</span>)
-  <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
-    <span style="color:#8be9fd;font-style:italic">panic</span>(err)
-  }
-  <span style="color:#6272a4">// 开启详细日志，会把执行的sql打印出来
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">LogMode</span>(<span style="color:#ff79c6">true</span>)
-  <span style="color:#6272a4">// 执行数据库迁移。包括新增表，新增字段，修改字段
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">AutoMigrate</span>(<span style="color:#ff79c6">&amp;</span>Post{},<span style="color:#ff79c6">&amp;</span>Comment{})
-}
-
-
-
-<span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
-  post <span style="color:#ff79c6">:=</span> Post{
-    Content: <span style="color:#f1fa8c">&#34;乱花渐欲迷人眼&#34;</span>,
-    Author: <span style="color:#f1fa8c">&#34;李商隐&#34;</span>,
-  }
-  <span style="color:#6272a4">// 创建post,并映射
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Create</span>(<span style="color:#ff79c6">&amp;</span>post)
-  comment <span style="color:#ff79c6">:=</span> Comment{
-    Content:   <span style="color:#f1fa8c">&#34;太棒了&#34;</span>,
-    Author:    <span style="color:#f1fa8c">&#34;李白&#34;</span>,
-  }
-  <span style="color:#6272a4">// 创建关联的对象。这里通过外键Id 自动查找映射关系
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Model</span>(<span style="color:#ff79c6">&amp;</span>post).<span style="color:#50fa7b">Association</span>(<span style="color:#f1fa8c">&#34;Comments&#34;</span>).<span style="color:#50fa7b">Append</span>(comment)
-  <span style="color:#8be9fd;font-style:italic">var</span> readPost Post
-  <span style="color:#6272a4">// 查询
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Where</span>(<span style="color:#f1fa8c">&#34;id =  ?&#34;</span>, post.Id).<span style="color:#50fa7b">First</span>(<span style="color:#ff79c6">&amp;</span>readPost)
-  <span style="color:#8be9fd;font-style:italic">var</span> comments []Comment
-  <span style="color:#6272a4">// 关联查询
-</span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Model</span>(<span style="color:#ff79c6">&amp;</span>readPost).<span style="color:#50fa7b">Related</span>(<span style="color:#ff79c6">&amp;</span>comments)
-  fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;post: %v\n&#34;</span>,readPost)
-  fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;comments: %v\n&#34;</span>,comments)
-}
-
-</code></pre></div><p>gorm 官方文档有详细的教程 <a href="https://gorm.io/zh_CN/">https://gorm.io/zh_CN/</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#ff79c6">package</span> main
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">import</span> (
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>  _ <span style="color:#f1fa8c">&#34;github.com/go-sql-driver/mysql&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;github.com/jinzhu/gorm&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f1fa8c">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Post <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 会被自动设置成主键
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Id <span style="color:#8be9fd">int</span>
+</span></span><span style="display:flex;"><span>  Content <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 数据库层面不可以为空约束
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`sql:&#34;not null&#34;`</span>
+</span></span><span style="display:flex;"><span>  Comments []Comment
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 约定。 创建时会被自动赋值
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">type</span> Comment <span style="color:#8be9fd;font-style:italic">struct</span> {
+</span></span><span style="display:flex;"><span>  Id <span style="color:#8be9fd">int</span>
+</span></span><span style="display:flex;"><span>  Content <span style="color:#8be9fd">string</span>
+</span></span><span style="display:flex;"><span>  Author <span style="color:#8be9fd">string</span> <span style="color:#f1fa8c">`sql:&#34;not null&#34;`</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 以Id结尾的字段被视为外键,在关联对象时起作用.  index 会在此字段上创建索引
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  PostId <span style="color:#8be9fd">int</span> <span style="color:#f1fa8c">`sql:&#34;index&#34;`</span>
+</span></span><span style="display:flex;"><span>  CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">var</span> Db <span style="color:#ff79c6">*</span>gorm.DB
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">init</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">var</span> err <span style="color:#8be9fd">error</span>
+</span></span><span style="display:flex;"><span>  Db, err = gorm.<span style="color:#50fa7b">Open</span>(<span style="color:#f1fa8c">&#34;mysql&#34;</span>,<span style="color:#f1fa8c">&#34;esns:dccmmtop@tcp(192.168.32.128:3306)/chitchat?parseTime=true&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> err <span style="color:#ff79c6">!=</span> <span style="color:#ff79c6">nil</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">panic</span>(err)
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 开启详细日志，会把执行的sql打印出来
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">LogMode</span>(<span style="color:#ff79c6">true</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 执行数据库迁移。包括新增表，新增字段，修改字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">AutoMigrate</span>(<span style="color:#ff79c6">&amp;</span>Post{},<span style="color:#ff79c6">&amp;</span>Comment{})
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">func</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>  post <span style="color:#ff79c6">:=</span> Post{
+</span></span><span style="display:flex;"><span>    Content: <span style="color:#f1fa8c">&#34;乱花渐欲迷人眼&#34;</span>,
+</span></span><span style="display:flex;"><span>    Author: <span style="color:#f1fa8c">&#34;李商隐&#34;</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 创建post,并映射
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Create</span>(<span style="color:#ff79c6">&amp;</span>post)
+</span></span><span style="display:flex;"><span>  comment <span style="color:#ff79c6">:=</span> Comment{
+</span></span><span style="display:flex;"><span>    Content:   <span style="color:#f1fa8c">&#34;太棒了&#34;</span>,
+</span></span><span style="display:flex;"><span>    Author:    <span style="color:#f1fa8c">&#34;李白&#34;</span>,
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 创建关联的对象。这里通过外键Id 自动查找映射关系
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Model</span>(<span style="color:#ff79c6">&amp;</span>post).<span style="color:#50fa7b">Association</span>(<span style="color:#f1fa8c">&#34;Comments&#34;</span>).<span style="color:#50fa7b">Append</span>(comment)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">var</span> readPost Post
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 查询
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Where</span>(<span style="color:#f1fa8c">&#34;id =  ?&#34;</span>, post.Id).<span style="color:#50fa7b">First</span>(<span style="color:#ff79c6">&amp;</span>readPost)
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">var</span> comments []Comment
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// 关联查询
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Db.<span style="color:#50fa7b">Model</span>(<span style="color:#ff79c6">&amp;</span>readPost).<span style="color:#50fa7b">Related</span>(<span style="color:#ff79c6">&amp;</span>comments)
+</span></span><span style="display:flex;"><span>  fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;post: %v\n&#34;</span>,readPost)
+</span></span><span style="display:flex;"><span>  fmt.<span style="color:#50fa7b">Printf</span>(<span style="color:#f1fa8c">&#34;comments: %v\n&#34;</span>,comments)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>gorm 官方文档有详细的教程 <a href="https://gorm.io/zh_CN/">https://gorm.io/zh_CN/</a></p>
 
         </div>
 
@@ -212,7 +211,7 @@
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/go">go
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/go">go
                     </a>
                 </li>
                 

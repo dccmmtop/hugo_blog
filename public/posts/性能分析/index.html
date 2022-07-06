@@ -14,7 +14,7 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="zh" />
-    <meta property="og:url" content="https://dccmmtop.gitee.io/posts/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" />
+    <meta property="og:url" content="https://dccmmtop.github.io/posts/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" />
     
 
      <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -26,17 +26,17 @@
     
     
 
-    <link href="https://dccmmtop.gitee.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://dccmmtop.gitee.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://dccmmtop.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://dccmmtop.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/style.css">
-    <link rel="stylesheet" href=" https://dccmmtop.gitee.io/css/custom.css">
-    <script src=" https://dccmmtop.gitee.io/js/fastsearch.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/fuse.js"></script>
-    <script src=" https://dccmmtop.gitee.io/js/custom.js"></script>
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/style.css">
+    <link rel="stylesheet" href=" https://dccmmtop.github.io/css/custom.css">
+    <script src=" https://dccmmtop.github.io/js/fastsearch.js"></script>
+    <script src=" https://dccmmtop.github.io/js/fuse.js"></script>
+    <script src=" https://dccmmtop.github.io/js/custom.js"></script>
     
 
-    <meta name="generator" content="Hugo 0.86.1" />
+    <meta name="generator" content="Hugo 0.101.0" />
 </head>
 
 
@@ -46,7 +46,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://dccmmtop.gitee.io/">超的博客</a>
+            <a id="logo" class="logo-text" href="https://dccmmtop.github.io/">超的博客</a>
             <nav id="main-nav">
                 
                 <a class="main-nav-link" href="../../posts/">文章</a>
@@ -117,31 +117,31 @@
 <p>其中<code>slow_query_log_file</code>属性，表示慢查询日志存储位置，其日志默认名称为 host 名称。
 如下所示：
 <code>show variables like &quot;slow_query_log_file&quot;;</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">+---------------------+----------------------------------------------+
-| Variable_name       | Value                                        |
-+---------------------+----------------------------------------------+                                     |
-| slow_query_log_file | /usr/local/mysql/data/hostname.log |
-+---------------------+----------------------------------------------+
-2 rows in set (0.01 sec)
-</code></pre></div><p>也可使用 以下命令进行修改：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>+---------------------+----------------------------------------------+
+</span></span><span style="display:flex;"><span>| Variable_name       | Value                                        |
+</span></span><span style="display:flex;"><span>+---------------------+----------------------------------------------+                                     |
+</span></span><span style="display:flex;"><span>| slow_query_log_file | /usr/local/mysql/data/hostname.log |
+</span></span><span style="display:flex;"><span>+---------------------+----------------------------------------------+
+</span></span><span style="display:flex;"><span>2 rows in set (0.01 sec)
+</span></span></code></pre></div><p>也可使用 以下命令进行修改：</p>
 <p><code>set global slow_query_log_file = ${path}/${filename}.log;</code></p>
 <h2 id="设置阀值">设置阀值</h2>
 <p>慢查询 查询时间，当SQL执行时间超过该值时，则会记录在slow_query_log_file 文件中，其默认为 10 ，最小值为 0，(单位：
 秒)。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">mysql&gt; show variables like &#34;long_query_time&#34;;
-+-----------------+-----------+
-| Variable_name | Value |
-+-----------------+-----------+
-| long_query_time | 10.000000 |
-+-----------------+-----------+
-1 row in set (0.00 sec)
-</code></pre></div><p>可通过以下命令进行修改：</p>
-<pre><code>mysql&gt; set global long_query_time = 5;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>mysql&gt; show variables like &#34;long_query_time&#34;;
+</span></span><span style="display:flex;"><span>+-----------------+-----------+
+</span></span><span style="display:flex;"><span>| Variable_name | Value |
+</span></span><span style="display:flex;"><span>+-----------------+-----------+
+</span></span><span style="display:flex;"><span>| long_query_time | 10.000000 |
+</span></span><span style="display:flex;"><span>+-----------------+-----------+
+</span></span><span style="display:flex;"><span>1 row in set (0.00 sec)
+</span></span></code></pre></div><p>可通过以下命令进行修改：</p>
+<pre tabindex="0"><code>mysql&gt; set global long_query_time = 5;
 </code></pre><h2 id="记录为走索引的sql">记录为走索引的sql</h2>
 <p>在 MySQL 中，还可以设置将未走索引的SQL语句记录在慢日志查询文件中(默认为关闭状态)。通过下述属性即可进行设置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">mysql&gt; set global log_queries_not_using_indexes = &#34;ON&#34;;
-Query OK, 0 rows affected (0.00 sec)
-</code></pre></div><h3 id="注意事项">注意事项</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>mysql&gt; set global log_queries_not_using_indexes = &#34;ON&#34;;
+</span></span><span style="display:flex;"><span>Query OK, 0 rows affected (0.00 sec)
+</span></span></code></pre></div><h3 id="注意事项">注意事项</h3>
 <ol>
 <li>设置该属性后，只要SQL未走索引，即使查询时间小于long_query_time值，也会记录在慢SQL日志文件中。</li>
 <li>该设置会导致慢日志快速增长，开启前建议检查慢查询日志文件所在磁盘空间是否充足。</li>
@@ -160,52 +160,52 @@ Query OK, 0 rows affected (0.00 sec)
 </ol>
 <h1 id="慢sql日志分析工具pt-query-digest">慢sql日志分析工具pt-query-digest</h1>
 <h2 id="下载安装">下载安装</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yum install percona-toolkit-3.0.3-1.el7.x86_64.rpm
-</code></pre></div><p>下载地址：<code>https://www.percona.com/downloads/percona-toolkit/3.0.3/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yum install percona-toolkit-3.0.3-1.el7.x86_64.rpm
+</span></span></code></pre></div><p>下载地址：<code>https://www.percona.com/downloads/percona-toolkit/3.0.3/</code></p>
 <h2 id="推荐用法">推荐用法</h2>
 <p>查询保存到query_history表查看慢sql，数据结构清晰，方便分析，方便与其他系统集成。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pt-query-digest --user=root --password=epPfPHxY --history h=10.8.8.66,D=testDb,t=query_review--create-history-table  mysql_slow.log  --since &#39;2020-10-01 09:30:00&#39; --until &#39;2020-10-21 18:30:00&#39;
-</code></pre></div><h2 id="常见用法">常见用法</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>pt-query-digest --user=root --password=epPfPHxY --history h=10.8.8.66,D=testDb,t=query_review--create-history-table  mysql_slow.log  --since &#39;2020-10-01 09:30:00&#39; --until &#39;2020-10-21 18:30:00&#39;
+</span></span></code></pre></div><h2 id="常见用法">常见用法</h2>
 <p>直接分析慢查询文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pt-query-digest  slow.log &gt; slow_report.log
-</code></pre></div><p>分析某个用户的慢sql</p>
-<p>pt-query-digest &ndash;filter &lsquo;($event-&gt;{user} || &ldquo;&quot;) =~ m/^root/i&rsquo; slow.log
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>pt-query-digest  slow.log &gt; slow_report.log
+</span></span></code></pre></div><p>分析某个用户的慢sql</p>
+<p>pt-query-digest &ndash;filter &lsquo;($event-&gt;{user} || &ldquo;&rdquo;) =~ m/^root/i&rsquo; slow.log
 分析某个数据库的慢sql</p>
-<p>pt-query-digest &ndash;filter &lsquo;($event-&gt;{db} || &ldquo;&quot;) =~ m/^sonar/i&rsquo; slow.log</p>
+<p>pt-query-digest &ndash;filter &lsquo;($event-&gt;{db} || &ldquo;&rdquo;) =~ m/^sonar/i&rsquo; slow.log</p>
 <h3 id="分析某段时间内的慢sql">分析某段时间内的慢sql</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">pt-query-digest mysql_slow.log --since &#39;2020-09-21 09:30:00&#39; --until &#39;2020-09-21 18:30:00&#39;
-</code></pre></div><p>输出结果说明</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>pt-query-digest mysql_slow.log --since &#39;2020-09-21 09:30:00&#39; --until &#39;2020-09-21 18:30:00&#39;
+</span></span></code></pre></div><p>输出结果说明</p>
 <h3 id="第一部分总体统计结果">第一部分：总体统计结果</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Overall：总共有多少条查询  
-Time range：查询执行的时间范围  
-unique：唯一查询数量，即对查询条件进行参数化以后，总共有多少个不同的查询
-total：总计   min：最小   max：最大  avg：平均
-95%：把所有值从小到大排列，位置位于95%的那个数，这个数一般最具有参考价值
-median：中位数，把所有值从小到大排列，位置位于中间那个数
-</code></pre></div><p>&hellip;&hellip;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Overall：总共有多少条查询  
+</span></span><span style="display:flex;"><span>Time range：查询执行的时间范围  
+</span></span><span style="display:flex;"><span>unique：唯一查询数量，即对查询条件进行参数化以后，总共有多少个不同的查询
+</span></span><span style="display:flex;"><span>total：总计   min：最小   max：最大  avg：平均
+</span></span><span style="display:flex;"><span>95%：把所有值从小到大排列，位置位于95%的那个数，这个数一般最具有参考价值
+</span></span><span style="display:flex;"><span>median：中位数，把所有值从小到大排列，位置位于中间那个数
+</span></span></code></pre></div><p>&hellip;&hellip;
 #语句执行时间
 #锁占用时间
 #发送到客户端的行数
 #select语句扫描行数
 #查询的字符数</p>
 <h3 id="第二部分查询分组统计结果">第二部分：查询分组统计结果</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Rank：所有语句的排名，默认按查询时间降序排列，通过--order-by指定
-Query ID：语句的ID，（去掉多余空格和文本字符，计算hash值）
-Response：总的响应时间
-time：该查询在本次分析中总的时间占比
-calls：执行次数，即本次分析总共有多少条这种类型的查询语句
-R/Call：平均每次执行的响应时间
-V/M：响应时间Variance-to-mean的比率
-Item：查询对象
-</code></pre></div><h3 id="第三部分每一种查询的详细统计结果">第三部分：每一种查询的详细统计结果</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">由下面查询的详细统计结果，最上面的表格列出了执行次数、最大、最小、平均、95%等各项目的统计。
-ID：查询的ID号，和上图的Query ID对应
-Databases：数据库名
-Users：各个用户执行的次数（占比）
-Query_time distribution ：查询时间分布, 长短体现区间占比，本例中1s-10s之间查询数量是10s以上的两倍。
-Tables：查询中涉及到的表
-Explain：SQL语句
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Rank：所有语句的排名，默认按查询时间降序排列，通过--order-by指定
+</span></span><span style="display:flex;"><span>Query ID：语句的ID，（去掉多余空格和文本字符，计算hash值）
+</span></span><span style="display:flex;"><span>Response：总的响应时间
+</span></span><span style="display:flex;"><span>time：该查询在本次分析中总的时间占比
+</span></span><span style="display:flex;"><span>calls：执行次数，即本次分析总共有多少条这种类型的查询语句
+</span></span><span style="display:flex;"><span>R/Call：平均每次执行的响应时间
+</span></span><span style="display:flex;"><span>V/M：响应时间Variance-to-mean的比率
+</span></span><span style="display:flex;"><span>Item：查询对象
+</span></span></code></pre></div><h3 id="第三部分每一种查询的详细统计结果">第三部分：每一种查询的详细统计结果</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>由下面查询的详细统计结果，最上面的表格列出了执行次数、最大、最小、平均、95%等各项目的统计。
+</span></span><span style="display:flex;"><span>ID：查询的ID号，和上图的Query ID对应
+</span></span><span style="display:flex;"><span>Databases：数据库名
+</span></span><span style="display:flex;"><span>Users：各个用户执行的次数（占比）
+</span></span><span style="display:flex;"><span>Query_time distribution ：查询时间分布, 长短体现区间占比，本例中1s-10s之间查询数量是10s以上的两倍。
+</span></span><span style="display:flex;"><span>Tables：查询中涉及到的表
+</span></span><span style="display:flex;"><span>Explain：SQL语句
+</span></span></code></pre></div>
         </div>
 
         
@@ -250,7 +250,7 @@ Explain：SQL语句
             <ul class="article-tag-list">
                 
                 <li class="article-tag-list-item">
-                    <a class="article-tag-list-link" href="https://dccmmtop.gitee.io/tags/mysql">mysql
+                    <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mysql">mysql
                     </a>
                 </li>
                 
