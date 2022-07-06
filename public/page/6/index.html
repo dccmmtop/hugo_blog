@@ -98,6 +98,36 @@
                 
                 
                 <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/">修改时区</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/" class="article-date">
+                        <time datetime='2021-08-10T11:18:51.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    Linux修改时区的正确方法 CentOS和Ubuntu的时区文件是/etc/localtime，但是在CentOS7以后localtime以及变成了一个链接文件 [root@centos7 ~]# ll /etc/localtime lrwxrwxrwx 1 root root 33 Oct 12 11:01 /etc/localtime -&gt; /usr/share/zoneinfo/Asia/Shanghai 如果采用直
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA/"></a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
                     <h1 itemprop="name"><a class="article-title" href="../../posts/ssh%E6%85%A2/">ssh慢</a></h1>
                 </header>
                 
@@ -612,47 +642,6 @@
             </div>
         </article>
         
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="../../posts/ubuntu%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E4%BB%A5%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/">ubuntu中添加服务以及开机自启</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="../../posts/ubuntu%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E4%BB%A5%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" class="article-date">
-                        <time datetime='2019-04-28T17:59:37.000&#43;00:00' itemprop="datePublished">2019-04-28</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    自定义脚本 编写自己的需要开启自启的脚本，如下： #!/usr/bin/env ruby `cd /home/mc/code/rails_app/master_crawler_trm &amp;&amp; nohup rake real_time_extract_word &gt; /dev/null 2&amp;&gt;1` 启动脚本 #!/usr/bin/env ruby start = &#34; sudo -u mc /home/mc/bin/real_time_extract_words &#34; stop = &#34;ps -ef | grep real_time_extract_word | grep -v grep | cut -c 9-15 | xargs kill -9&#34; action = ARGV[0] if action == &#39;start&#39; system(start) puts &#34;启动成功&#34; elsif action == &#39;stop&#39; system(stop) puts &#34
-                    </p>
-                    <p class="article-more-link">
-                        <a href="../../posts/ubuntu%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E4%BB%A5%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/"></a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/linux">linux
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
 
         
 
@@ -691,6 +680,10 @@
     
     
     <a href="../../page/8/">8</a>
+    
+    
+    
+    <a href="../../page/9/">9</a>
     
     
 
