@@ -98,6 +98,88 @@
                 
                 
                 <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%BC%80%E5%90%AF%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97/">开启查询日志</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E5%BC%80%E5%90%AF%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97/" class="article-date">
+                        <time datetime='2021-08-12T23:13:15.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    开启查询日志 方法一：执行MongoDB命令 这个命令只能设置单个组件的日志等级，如果想要一次性设置多个组件的日志等级，可以使用下面的方法： 新建 start_log.js， 内容如下 db.adminCommand( { setParameter: 1, logComponentVerbosity: { verbosity: 1, query: { verbosity: 2 },
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E5%BC%80%E5%90%AF%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/mongodb">mongoDB
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E8%8E%B7%E5%8F%96%E6%9C%AC%E6%9C%BAip%E5%9C%B0%E5%9D%80/">获取本机ip地址</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="../../posts/%E8%8E%B7%E5%8F%96%E6%9C%AC%E6%9C%BAip%E5%9C%B0%E5%9D%80/" class="article-date">
+                        <time datetime='2021-08-12T23:12:27.000&#43;00:00' itemprop="datePublished">2021-08-12</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    require &#34;socket&#34; local_ip = UDPSocket.open {|s| s.connect(&#34;1.1.1.1&#34;, 1);s.addr.last}
+                    </p>
+                    <p class="article-more-link">
+                        <a href="../../posts/%E8%8E%B7%E5%8F%96%E6%9C%AC%E6%9C%BAip%E5%9C%B0%E5%9D%80/"></a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/ruby">ruby
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
                     <h1 itemprop="name"><a class="article-title" href="../../posts/%E6%B8%85%E9%99%A4sidekiq%E4%BB%BB%E5%8A%A1/">清除sidekiq任务</a></h1>
                 </header>
                 
@@ -622,77 +704,6 @@
                         
                     </ul>
                 </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/">忽略改动</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/" class="article-date">
-                        <time datetime='2021-08-10T17:10:57.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    git 库中已经有文件被跟踪，如何忽略本地改动后的跟踪 放入到.gitinore 并没有什么用，还是会显示改动，是否要提交，看着很烦 忽略本地文件，且不会对线上库里的文件造成影响，执行此命令: git update-index --assume-unchanged filename 如果想撤销忽
-                    </p>
-                    <p class="article-more-link">
-                        <a href="../../posts/%E5%BF%BD%E7%95%A5%E6%94%B9%E5%8A%A8/"></a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://dccmmtop.github.io/tags/git">git
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="../../posts/%E4%BD%BF%E7%94%A8tmux/">Linux tmux 安装及配置</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="../../posts/%E4%BD%BF%E7%94%A8tmux/" class="article-date">
-                        <time datetime='2021-08-10T11:21:12.000&#43;00:00' itemprop="datePublished">2021-08-10</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    为什么要使用tmux? 对我个人而言，tmux 对我最大的吸引力就是 多窗口，以及会话的保持与恢复，我可以很方便的切换窗口，以及快速恢复工作环境 安装 我使用的是源码安装， 下载源码 下载链接 解压 进入到解压目录，执
-                    </p>
-                    <p class="article-more-link">
-                        <a href="../../posts/%E4%BD%BF%E7%94%A8tmux/"></a>
-                    </p>
-                </div>
-
                 
             </div>
         </article>
